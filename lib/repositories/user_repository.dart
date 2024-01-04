@@ -33,20 +33,10 @@ class UserRepository {
     required String password,
     required String name,
     required String surname,
-    required String username,
-    required String birth,
-    required List<String> roles,
-    required UserDetail userDetail,
   }) async {
     try {
       RegistrationRequest request = RegistrationRequest(
-        username: username,
-        email: email,
-        password: password,
-        roles: roles,
-        linkConfirmEmail: 'http://127.0.0.1:7000/api/User/ConfirmEmail',
-        userDetail: userDetail,
-      );
+          email: email, password: password, surname: surname, name: name);
 
       final response = await userService.registration(request);
 

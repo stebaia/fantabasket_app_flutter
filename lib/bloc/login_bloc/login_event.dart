@@ -26,21 +26,13 @@ class RegistrationEvent extends AuthEvent {
   final String email;
   final String password;
   final String name;
-  final String username;
   final String surname;
-  final String birth;
-  final List<String> roles;
-  final UserDetail userDetail; // Aggiunta di userDetail come parametro
 
   const RegistrationEvent({
     required this.email,
     required this.password,
     required this.name,
-    required this.birth,
     required this.surname,
-    required this.username,
-    required this.roles,
-    required this.userDetail, // Aggiunta del parametro userDetail
   });
 
   @override
@@ -48,10 +40,6 @@ class RegistrationEvent extends AuthEvent {
         email,
         password,
         name,
-        username,
         surname,
-        birth,
-        roles,
-        userDetail, // Aggiunta di userDetail alla lista di props
       ];
 }

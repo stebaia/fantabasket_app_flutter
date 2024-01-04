@@ -44,22 +44,14 @@ class LoginBloc extends Bloc<AuthEvent, LoginInState> {
     required String email,
     required String password,
     required String name,
-    required String username,
-    required String birth,
     required String surname,
-    required List<String> roles,
-    required UserDetail userDetail, // Aggiunta del parametro userDetail
+    l, // Aggiunta del parametro userDetail
   }) =>
       add(RegistrationEvent(
         email: email,
         password: password,
         name: name,
         surname: surname,
-        birth: birth,
-        username: username,
-        roles: roles,
-        userDetail:
-            userDetail, // Passaggio di userDetail all'evento di registrazione
       ));
 
   FutureOr<void> _registration(
@@ -72,12 +64,7 @@ class LoginBloc extends Bloc<AuthEvent, LoginInState> {
         email: event.email,
         password: event.password,
         name: event.name,
-        username: event.username,
-        birth: event.birth,
         surname: event.surname,
-        roles: event.roles,
-        userDetail: event
-            .userDetail, // Passaggio di userDetail al metodo di registrazione
       );
       emit(RegistrationDoneState(registrationResponse));
     } catch (e) {

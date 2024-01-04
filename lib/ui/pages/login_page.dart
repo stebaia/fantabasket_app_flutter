@@ -85,11 +85,6 @@ class _LoginPageState extends State<LoginPage> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Image.asset(
-                              'assets/app_logo.png',
-                              width: 100,
-                              height: 100,
-                            ),
                             EmailFormField(
                               AppLocalizations.of(context)!.email_address,
                               textEditingController: _singUpEmailController,

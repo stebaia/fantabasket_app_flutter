@@ -30,46 +30,15 @@ class _RegistrationPageState extends State<RegistrationPage> {
   final _focusNodePassword = FocusNode();
   final _focusNodeConfirmPassword = FocusNode();
   final _focusNodeSurname = FocusNode();
-  final _focusNodeUsername = FocusNode();
-  final _focusNodeBirth = FocusNode();
-  final _focusNodeNation = FocusNode();
-  final _focusNodeCity = FocusNode();
-  final _focusNodeCap = FocusNode();
-  final _focusNodeAddress = FocusNode();
-  final _focusNodeBirthPlace = FocusNode();
+
   final _registrationNameController = TextEditingController();
   final _registrationEmailController = TextEditingController();
-  final _registrationBirthPlaceController = TextEditingController();
-  final _registrationNationController = TextEditingController();
-  final _registrationCityController = TextEditingController();
-  final _registrationCapController = TextEditingController();
-  final _registrationAddressController = TextEditingController();
   final _registrationPasswordController = TextEditingController();
   final _registrationPasswordConfirmController = TextEditingController();
   final _registrationSurnameController = TextEditingController();
-  final _registrationUsernameController = TextEditingController();
-  final _registrationBirthController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    Future<void> _selectDate(BuildContext context) async {
-      final DateTime? picked = await showDatePicker(
-          locale: Locale("it", "IT"),
-          fieldHintText: "gg/mm/aaaa",
-          fieldLabelText: "gg/mm/aaaa",
-          context: context,
-          initialDate: selectedDate,
-          firstDate: DateTime(1900),
-          lastDate: DateTime(2101));
-      if (picked != null && picked != selectedDate) {
-        setState(() {
-          selectedDate = picked;
-          _registrationBirthController.text =
-              DateConverter.convertDateToISO(selectedDate.toString());
-        });
-      }
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -131,89 +100,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     const SizedBox(
                       height: 10,
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    EmailFormField(
-                      'Luogo di nascita',
-                      iconCustom: CupertinoIcons.mail,
-                      textEditingController: _registrationBirthPlaceController,
-                      focusNode: _focusNodeBirthPlace,
-                      color: const Color.fromARGB(255, 208, 208, 212),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      children: [
-                        Flexible(
-                          child: EmailFormField(
-                            'Nazione',
-                            iconCustom: CupertinoIcons.mail,
-                            textEditingController:
-                                _registrationNationController,
-                            focusNode: _focusNodeNation,
-                            color: const Color.fromARGB(255, 208, 208, 212),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Flexible(
-                          child: EmailFormField(
-                            'Città',
-                            iconCustom: CupertinoIcons.mail,
-                            textEditingController: _registrationCityController,
-                            focusNode: _focusNodeCity,
-                            color: const Color.fromARGB(255, 208, 208, 212),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Flexible(
-                          child: EmailFormField(
-                            'Cap',
-                            iconCustom: CupertinoIcons.mail,
-                            textEditingController: _registrationCapController,
-                            focusNode: _focusNodeCap,
-                            color: const Color.fromARGB(255, 208, 208, 212),
-                          ),
-                        )
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    EmailFormField(
-                      'Indirizzo',
-                      iconCustom: CupertinoIcons.mail,
-                      textEditingController: _registrationAddressController,
-                      focusNode: _focusNodeAddress,
-                      color: const Color.fromARGB(255, 208, 208, 212),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    DateFormField(
-                      'birth',
-                      gestureTapCallback: () => _selectDate(context),
-                      iconCustom: CupertinoIcons.calendar,
-                      textEditingController: _registrationBirthController,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    EmailFormField(
-                      'username',
-                      iconCustom: CupertinoIcons.mail,
-                      textEditingController: _registrationUsernameController,
-                      focusNode: _focusNodeUsername,
-                      color: const Color.fromARGB(255, 208, 208, 212),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
                     EmailFormField(
                       'email',
                       iconCustom: CupertinoIcons.mail,
@@ -254,19 +140,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                 _registrationNameController.text;
                             final String surname =
                                 _registrationSurnameController.text;
-                            final String birthPlace =
-                                _registrationBirthPlaceController.text;
-                            final String nation =
-                                _registrationNationController.text;
-                            final String city =
-                                _registrationCityController.text;
-                            final String cap = _registrationCapController.text;
-                            final String address =
-                                _registrationAddressController.text;
-                            final String birth =
-                                _registrationBirthController.text;
-                            final String username =
-                                _registrationUsernameController.text;
+
                             final String email =
                                 _registrationEmailController.text;
                             final String password =
@@ -276,17 +150,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             UserDetail userDetail = UserDetail(
                               firstname: name,
                               lastname: surname,
-                              professional:
-                                  '0', // Aggiungi eventuali dati mancanti
-                              birthplace: birthPlace,
-                              birthdate: birth,
-                              city: city,
-                              country: nation,
-                              address: address,
-                              cap: cap,
-                              iban: '', // Aggiungi eventuali dati mancanti
-                              description:
-                                  '', // Aggiungi eventuali dati mancanti
                             );
 
                             // Chiamata al metodo registration nel bloc con i dati raccolti
@@ -294,12 +157,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                   email: email,
                                   password: password,
                                   name: name,
-                                  username: username,
-                                  birth: birth,
                                   surname: surname,
-                                  roles: ["Conducente"],
-                                  userDetail:
-                                      userDetail, // Passaggio dell'oggetto UserDetail
                                 );
                             context.popRoute();
                           } else {
