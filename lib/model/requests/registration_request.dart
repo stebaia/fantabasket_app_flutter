@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:fantabasket_app_flutter/model/user.dart';
 
 class RegistrationRequest extends Equatable {
   final String name;
@@ -15,10 +14,10 @@ class RegistrationRequest extends Equatable {
 
   Map<String, dynamic> toJson() {
     return {
-      'surname': surname,
+      'cognome': surname,
       'email': email,
       'password': password,
-      'name': name,
+      'nome': name,
     };
   }
 

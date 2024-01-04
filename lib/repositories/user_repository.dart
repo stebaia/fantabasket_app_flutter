@@ -9,6 +9,7 @@ import 'package:fantabasket_app_flutter/services/dto/user_dto.dart';
 import 'package:fantabasket_app_flutter/utils/constants.dart';
 import 'package:fantabasket_app_flutter/utils/date_converter.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:crypto/crypto.dart';
 import 'package:logger/logger.dart';
 import 'package:pine/utils/dto_mapper.dart';
 import 'package:pine/utils/mapper.dart';
@@ -36,7 +37,10 @@ class UserRepository {
   }) async {
     try {
       RegistrationRequest request = RegistrationRequest(
-          email: email, password: password, surname: surname, name: name);
+          email: email,
+          password: md5.convert(utf8.encode(password)).toString(),
+          surname: surname,
+          name: name);
 
       final response = await userService.registration(request);
 
@@ -55,7 +59,7 @@ class UserRepository {
     try {
       final response = await userService.login(LoginRequest(
           email: email,
-          password: password,
+          password: md5.convert(utf8.encode(password)).toString(),
           timestamp: DateConverter.getDateNowWithFormat()));
 
       User user = userDTOMapper.fromDTO(response);

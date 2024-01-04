@@ -33,7 +33,7 @@ class _UserService implements UserService {
     )
             .compose(
               _dio.options,
-              'auth/login',
+              'api/takeToken',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -61,7 +61,7 @@ class _UserService implements UserService {
     )
             .compose(
               _dio.options,
-              'user/selfcreate',
+              'api/regUser',
               queryParameters: queryParameters,
               data: _data,
             )

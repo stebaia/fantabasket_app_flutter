@@ -11,10 +11,10 @@ part 'user_service.g.dart';
 abstract class UserService {
   factory UserService(Dio dio, {String baseUrl}) = _UserService;
 
-  @POST('auth/login')
+  @POST('api/takeToken')
   Future<UserDTO> login(@Body() LoginRequest request);
 
-  @POST('user/selfcreate')
+  @POST('api/regUser')
   Future<RegistrationResponse> registration(
       @Body() RegistrationRequest request);
 }
