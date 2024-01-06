@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:fantabasket_app_flutter/model/requests/login_request.dart';
 import 'package:fantabasket_app_flutter/model/requests/registration_request.dart';
+import 'package:fantabasket_app_flutter/model/responses/login_response.dart';
 import 'package:fantabasket_app_flutter/model/responses/registration_response.dart';
 import 'package:fantabasket_app_flutter/model/user.dart';
 import 'package:fantabasket_app_flutter/network/user_service/user_service.dart';
@@ -62,15 +63,39 @@ class UserRepository {
           password: md5.convert(utf8.encode(password)).toString(),
           timestamp: DateConverter.getDateNowWithFormat()));
 
-      User user = userDTOMapper.fromDTO(response);
+      LoginResponse loginResponse =
+          LoginResponse.fromJson(jsonDecode(response.toString()));
+      User user = User(
+          userId: 0,
+          firstName: '',
+          email: email,
+          lastName: '',
+          token: loginResponse.token!,
+          tokenExpiration: '');
       await flutterSecureStorage.write(
           key: Constants.userKey, value: userMapper.from(user));
+      takeUser(email: email, password: password, loginResponse: loginResponse);
       return user;
     } catch (error, stackTrace) {
       logger.e('Error sing in with email $email',
           error: error, stackTrace: stackTrace);
       rethrow;
     }
+  }
+
+  Future<User> takeUser(
+      {required String email,
+      required String password,
+      required LoginResponse loginResponse}) async {
+    final response = await userService.login(LoginRequest(
+        email: email,
+        password: password,
+        timestamp: DateConverter.getDateNowWithFormat()));
+    User user = userDTOMapper.fromDTO(response);
+    user.token = loginResponse.token!;
+    await flutterSecureStorage.write(
+        key: Constants.userKey, value: userMapper.from(user));
+    return user;
   }
 
   /*Future<User> fakeLogin({

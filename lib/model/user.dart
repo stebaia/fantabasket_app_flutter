@@ -5,7 +5,7 @@ class User extends Equatable {
   final String firstName;
   final String lastName;
   final String email;
-  final String token;
+  String token;
   final String tokenExpiration;
 
   User(
