@@ -11,7 +11,11 @@ final List<RepositoryProvider> _repositories = [
         userService: context.read(),
         userMapper: context.read(),
         logger: context.read());
-
+    context.read<Dio>().interceptors.insert(
+        0,
+        AuthInterceptor(
+            repository: userRepository,
+            ));
     return userRepository;
   })),
 

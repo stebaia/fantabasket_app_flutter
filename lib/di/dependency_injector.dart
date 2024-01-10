@@ -3,6 +3,7 @@ import 'package:fantabasket_app_flutter/bloc/cubit/auth_cubit/auth_cubit.dart';
 import 'package:fantabasket_app_flutter/mappers/dto_mappers/user_dto_mapper.dart';
 import 'package:fantabasket_app_flutter/mappers/string_mappers/user_to_string_mapper.dart';
 import 'package:fantabasket_app_flutter/model/user.dart';
+import 'package:fantabasket_app_flutter/network/interceptors/auth_interceptors.dart';
 import 'package:fantabasket_app_flutter/network/user_service/user_service.dart';
 import 'package:fantabasket_app_flutter/repositories/user_repository.dart';
 import 'package:fantabasket_app_flutter/services/dto/user_dto.dart';

@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:fantabasket_app_flutter/routes/app_router.gr.dart';
 import 'package:fantabasket_app_flutter/utils/theme_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,11 @@ class _CorePageState extends State<CorePage> {
     return AutoTabsScaffold(
       backgroundColor: Colors.white,
       //darkMode.darkTheme ? ThemeHelper.backgroundColorDark : Colors.white,
-      routes: [],
+      routes: [
+        CreatTeamRoute(),
+        RankRoute(),
+        ProfileRoute()
+      ],
       bottomNavigationBuilder: (context, tabsRouter) {
         return BottomNavigationBar(
             elevation: 0,

@@ -3,15 +3,15 @@ import 'package:pine/pine.dart';
 
 class UserDTO extends DTO with EquatableMixin {
   UserDetailDTO? data;
-  String? result;
-  dynamic message;
+  int? code;
+  bool? status;
 
-  UserDTO({this.data, this.result, this.message});
+  UserDTO({this.data, this.code, this.status});
 
   UserDTO.fromJson(Map<String, dynamic> json) {
     data = json['data'] != null ? UserDetailDTO.fromJson(json['data']) : null;
-    result = json['result'];
-    message = json['message'];
+    code = json['code'];
+    status = json['status'];
   }
 
   Map<String, dynamic> toJson() {
@@ -19,17 +19,17 @@ class UserDTO extends DTO with EquatableMixin {
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }
-    data['result'] = result;
-    data['message'] = message;
+    data['code'] = code;
+    data['message'] = status;
     return data;
   }
 
   @override
-  List<Object?> get props => [data, result, message];
+  List<Object?> get props => [data, code, status];
 }
 
 class UserDetailDTO extends DTO with EquatableMixin {
-  final int? userId;
+  final String? userId;
   final String? userName;
   final String? firstName;
   final String? lastName;
@@ -51,13 +51,13 @@ class UserDetailDTO extends DTO with EquatableMixin {
 
   factory UserDetailDTO.fromJson(Map<String, dynamic> json) {
     return UserDetailDTO(
-      userId: json['userId'],
-      userName: json['userName'],
-      firstName: json['firstName'],
-      lastName: json['lastName'],
+      userId: json['uid'],
+      userName: json['username'],
+      firstName: json['nome'],
+      lastName: json['cognome'],
       email: json['email'],
       roles: List<String>.from(json['roles'] ?? <String>[]),
-      token: json['token'],
+      token: json['access_token'],
       tokenExpiration: json['tokenExpiration'],
     );
   }

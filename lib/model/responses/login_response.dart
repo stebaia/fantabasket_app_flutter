@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 class LoginResponse extends Equatable {
   int? code;
-  String? status;
+  bool? status;
   String? msg;
   String? token;
 
@@ -12,7 +12,7 @@ class LoginResponse extends Equatable {
     code = json['code'];
     status = json['status'];
     msg = json['msg'];
-    token = json['token'];
+    token = json['access_token'];
   }
 
   Map<String, dynamic> toJson() {
@@ -20,7 +20,7 @@ class LoginResponse extends Equatable {
     data['code'] = this.code;
     data['status'] = this.status;
     data['msg'] = this.msg;
-    data['token'] = this.token;
+    data['access_token'] = this.token;
     return data;
   }
 

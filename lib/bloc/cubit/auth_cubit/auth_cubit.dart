@@ -15,10 +15,15 @@ class AuthCubit extends Cubit<AuthState> {
   void checkAuthenticationState() async {
     try {
       final user = await userRepository.currentUser;
-
-      emit(user != null
-          ? AuthenticatedState(user)
-          : const NotAuthenticatedState());
+      if(user != null) {
+        if(user.userId > 0){
+          emit(AuthenticatedState(user));
+        }else {
+          emit(CheckAuthenticationState());
+        }
+      }else {
+        emit(const NotAuthenticatedState());
+      }
     } catch (ex) {
       emit(const NotAuthenticatedState());
     }

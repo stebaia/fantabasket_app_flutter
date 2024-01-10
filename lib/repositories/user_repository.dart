@@ -58,23 +58,22 @@ class UserRepository {
     required String password,
   }) async {
     try {
-      final response = await userService.login(LoginRequest(
+      LoginResponse response = await userService.login(LoginRequest(
           email: email,
           password: md5.convert(utf8.encode(password)).toString(),
           timestamp: DateConverter.getDateNowWithFormat()));
 
-      LoginResponse loginResponse =
-          LoginResponse.fromJson(jsonDecode(response.toString()));
+      
       User user = User(
           userId: 0,
           firstName: '',
           email: email,
           lastName: '',
-          token: loginResponse.token!,
+          token: response.token!,
           tokenExpiration: '');
       await flutterSecureStorage.write(
           key: Constants.userKey, value: userMapper.from(user));
-      takeUser(email: email, password: password, loginResponse: loginResponse);
+      user = await takeUser(email: email, password: password, loginResponse: response);
       return user;
     } catch (error, stackTrace) {
       logger.e('Error sing in with email $email',
@@ -87,9 +86,9 @@ class UserRepository {
       {required String email,
       required String password,
       required LoginResponse loginResponse}) async {
-    final response = await userService.login(LoginRequest(
+    final response = await userService.takeToken(LoginRequest(
         email: email,
-        password: password,
+        password: md5.convert(utf8.encode(password)).toString(),
         timestamp: DateConverter.getDateNowWithFormat()));
     User user = userDTOMapper.fromDTO(response);
     user.token = loginResponse.token!;
