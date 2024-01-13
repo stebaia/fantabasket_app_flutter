@@ -61,3 +61,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   generate: true
+  assets:
+    - assets/images/user.png
+    - assets/images/basketball.png
+    - assets/images/ranking.png

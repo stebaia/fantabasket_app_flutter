@@ -30,13 +30,31 @@ class _CorePageState extends State<CorePage> {
             unselectedItemColor: ThemeHelper.backgroundColorDark,
             currentIndex: tabsRouter.activeIndex,
             onTap: tabsRouter.setActiveIndex,
-            items: const [
+            items: [
               BottomNavigationBarItem(
-                  icon: Icon(CupertinoIcons.search), label: 'Ranking'),
+                icon: Image.asset(
+                  "assets/images/ranking.png",
+                  height: 20,
+                  width: 20,
+                ),
+                label: 'Ranking',
+              ),
               BottomNavigationBarItem(
-                  icon: Icon(CupertinoIcons.house), label: 'My Team'),
+                icon: Image.asset(
+                  'assets/images/basketball.png',
+                  height: 20,
+                  width: 20,
+                ),
+                label: 'My Team',
+              ),
               BottomNavigationBarItem(
-                  icon: Icon(CupertinoIcons.person), label: 'Profile'),
+                icon: Image.asset(
+                  "assets/images/user.png",
+                  height: 20,
+                  width: 20,
+                ),
+                label: 'Profile',
+              ),
             ]);
       },
     );
