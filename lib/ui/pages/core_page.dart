@@ -25,8 +25,8 @@ class _CorePageState extends State<CorePage> {
         return BottomNavigationBar(
             elevation: 0,
             type: BottomNavigationBarType.fixed,
-            backgroundColor: Colors.white,
-            selectedItemColor: ThemeHelper.enabledPrimaryColor,
+            backgroundColor: const Color.fromARGB(255, 212, 131, 9),
+            selectedItemColor: Colors.white,
             unselectedItemColor: ThemeHelper.backgroundColorDark,
             currentIndex: tabsRouter.activeIndex,
             onTap: tabsRouter.setActiveIndex,
@@ -37,6 +37,12 @@ class _CorePageState extends State<CorePage> {
                   height: 20,
                   width: 20,
                 ),
+                activeIcon: Image.asset(
+                  "assets/images/ranking.png",
+                  height: 20,
+                  width: 20,
+                  color: Colors.white,
+                ),
                 label: 'Ranking',
               ),
               BottomNavigationBarItem(
@@ -45,6 +51,12 @@ class _CorePageState extends State<CorePage> {
                   height: 20,
                   width: 20,
                 ),
+                activeIcon: Image.asset(
+                  'assets/images/basketball.png',
+                  height: 20,
+                  width: 20,
+                  color: Colors.white,
+                ),
                 label: 'My Team',
               ),
               BottomNavigationBarItem(
@@ -52,6 +64,12 @@ class _CorePageState extends State<CorePage> {
                   "assets/images/user.png",
                   height: 20,
                   width: 20,
+                ),
+                activeIcon: Image.asset(
+                  "assets/images/user.png",
+                  height: 20,
+                  width: 20,
+                  color: Colors.white,
                 ),
                 label: 'Profile',
               ),
