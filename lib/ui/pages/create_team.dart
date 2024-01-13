@@ -2,8 +2,8 @@ import 'package:fantabasket_app_flutter/bloc/cubit/auth_cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CreatTeamPage extends StatelessWidget {
-  const CreatTeamPage({Key? key}) : super(key: key);
+class CreateTeamPage extends StatelessWidget {
+  const CreateTeamPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,14 +11,17 @@ class CreatTeamPage extends StatelessWidget {
 
     return Container(
       child: Center(
-        child: Column(
-          children: [
-            SizedBox(height: 60,),
-            Text('Benvenuto ${user.firstName} ${user.lastName}'),
-            TextButton(child: Text('Logout'), onPressed: ()=> context.read<AuthCubit>().manualLogout()),
-          ],
-        )
-      ),
+          child: Column(
+        children: [
+          SizedBox(
+            height: 60,
+          ),
+          Text('Benvenuto ${user.firstName} ${user.lastName}'),
+          TextButton(
+              child: Text('Logout'),
+              onPressed: () => context.read<AuthCubit>().manualLogout()),
+        ],
+      )),
     );
   }
 }

@@ -69,7 +69,7 @@ class AppRouter extends _i10.RootStackRouter {
     CreatTeamRoute.name: (routeData) {
       return _i10.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i6.CreatTeamPage(),
+        child: const _i6.CreateTeamPage(),
       );
     },
     RankRoute.name: (routeData) {
@@ -228,7 +228,7 @@ class TopBarContainerRouter extends _i10.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i6.CreatTeamPage]
+/// [_i6.CreateTeamPage]
 class CreatTeamRoute extends _i10.PageRouteInfo<void> {
   const CreatTeamRoute()
       : super(
