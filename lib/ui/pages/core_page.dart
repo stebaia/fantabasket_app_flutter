@@ -20,7 +20,7 @@ class _CorePageState extends State<CorePage> {
     return AutoTabsScaffold(
       backgroundColor: Colors.white,
       //darkMode.darkTheme ? ThemeHelper.backgroundColorDark : Colors.white,
-      routes: [RankRoute(), CreatTeamRoute(), ProfileRoute()],
+      routes: [RankRoute(), CreateTeamRoute(), ProfileRoute()],
       bottomNavigationBuilder: (context, tabsRouter) {
         return BottomNavigationBar(
             elevation: 0,
