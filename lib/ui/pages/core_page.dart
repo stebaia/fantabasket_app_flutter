@@ -20,11 +20,7 @@ class _CorePageState extends State<CorePage> {
     return AutoTabsScaffold(
       backgroundColor: Colors.white,
       //darkMode.darkTheme ? ThemeHelper.backgroundColorDark : Colors.white,
-      routes: [
-        CreatTeamRoute(),
-        RankRoute(),
-        ProfileRoute()
-      ],
+      routes: [RankRoute(), CreatTeamRoute(), ProfileRoute()],
       bottomNavigationBuilder: (context, tabsRouter) {
         return BottomNavigationBar(
             elevation: 0,
@@ -36,9 +32,9 @@ class _CorePageState extends State<CorePage> {
             onTap: tabsRouter.setActiveIndex,
             items: const [
               BottomNavigationBarItem(
-                  icon: Icon(CupertinoIcons.house), label: 'My Team'),
-              BottomNavigationBarItem(
                   icon: Icon(CupertinoIcons.search), label: 'Ranking'),
+              BottomNavigationBarItem(
+                  icon: Icon(CupertinoIcons.house), label: 'My Team'),
               BottomNavigationBarItem(
                   icon: Icon(CupertinoIcons.person), label: 'Profile'),
             ]);
