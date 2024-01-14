@@ -25,7 +25,7 @@ class _CorePageState extends State<CorePage> {
         return BottomNavigationBar(
             elevation: 0,
             type: BottomNavigationBarType.fixed,
-            backgroundColor: const Color.fromARGB(255, 212, 131, 9),
+            backgroundColor: const Color.fromARGB(255, 225, 135, 57),
             selectedItemColor: Colors.white,
             unselectedItemColor: ThemeHelper.backgroundColorDark,
             currentIndex: tabsRouter.activeIndex,
