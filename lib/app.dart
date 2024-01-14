@@ -39,24 +39,26 @@ class _AppState extends State<App> {
     ]);
     return DependencyInjector(
         child: DismissKeyboard(
-            child: MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        fontFamily: GoogleFonts.nunitoSans().fontFamily,
-        useMaterial3: true,
+            child: SafeArea(
+      child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          fontFamily: GoogleFonts.nunitoSans().fontFamily,
+          useMaterial3: true,
+        ),
+        localizationsDelegates: [
+          AppLocalizations.delegate, // Add this line
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: [
+          Locale('en'), // English
+          Locale('it'), // Italian
+        ],
+        routeInformationParser: _router.defaultRouteParser(),
+        routerDelegate: _router.delegate(),
       ),
-      localizationsDelegates: [
-        AppLocalizations.delegate, // Add this line
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: [
-        Locale('en'), // English
-        Locale('it'), // Italian
-      ],
-      routeInformationParser: _router.defaultRouteParser(),
-      routerDelegate: _router.delegate(),
     )));
   }
 }
