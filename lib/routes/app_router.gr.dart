@@ -66,10 +66,10 @@ class AppRouter extends _i10.RootStackRouter {
         child: const _i1.EmptyRouterScreen(),
       );
     },
-    CreatTeamRoute.name: (routeData) {
+    CreateTeamRoute.name: (routeData) {
       return _i10.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i6.CreatTeamPage(),
+        child: const _i6.CreateTeamPage(),
       );
     },
     RankRoute.name: (routeData) {
@@ -131,7 +131,7 @@ class AppRouter extends _i10.RootStackRouter {
                   ],
                 ),
                 _i10.RouteConfig(
-                  CreatTeamRoute.name,
+                  CreateTeamRoute.name,
                   path: 'create_team_page',
                   parent: CoreRoute.name,
                 ),
@@ -228,15 +228,15 @@ class TopBarContainerRouter extends _i10.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i6.CreatTeamPage]
-class CreatTeamRoute extends _i10.PageRouteInfo<void> {
-  const CreatTeamRoute()
+/// [_i6.CreateTeamPage]
+class CreateTeamRoute extends _i10.PageRouteInfo<void> {
+  const CreateTeamRoute()
       : super(
-          CreatTeamRoute.name,
+          CreateTeamRoute.name,
           path: 'create_team_page',
         );
 
-  static const String name = 'CreatTeamRoute';
+  static const String name = 'CreateTeamRoute';
 }
 
 /// generated route for

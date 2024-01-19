@@ -29,7 +29,7 @@ import 'package:fantabasket_app_flutter/ui/pages/registration_page.dart';
               path: '',
             ),
           ]),
-      AutoRoute(page: CreatTeamPage, path: 'create_team_page'),
+      AutoRoute(page: CreateTeamPage, path: 'create_team_page'),
       AutoRoute(page: RankPage, path: 'rank_page'),
       AutoRoute(page: ProfilePage, path: 'profile_page'),
     ]),
