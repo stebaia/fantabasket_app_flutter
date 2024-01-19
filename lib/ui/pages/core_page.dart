@@ -3,6 +3,7 @@ import 'package:fantabasket_app_flutter/routes/app_router.gr.dart';
 import 'package:fantabasket_app_flutter/utils/theme_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 class CorePage extends StatefulWidget {
@@ -25,52 +26,25 @@ class _CorePageState extends State<CorePage> {
         return BottomNavigationBar(
             elevation: 0,
             type: BottomNavigationBarType.fixed,
-            backgroundColor: const Color.fromARGB(255, 225, 135, 57),
-            selectedItemColor: Colors.white,
-            unselectedItemColor: ThemeHelper.backgroundColorDark,
+            backgroundColor: ThemeHelper.backgroundColorDark,
+            selectedItemColor: const Color.fromARGB(255, 225, 135, 57),
+            unselectedItemColor: Colors.white,
             currentIndex: tabsRouter.activeIndex,
             onTap: tabsRouter.setActiveIndex,
-            items: [
+            items: const [
               BottomNavigationBarItem(
-                icon: Image.asset(
-                  "assets/images/ranking.png",
-                  height: 20,
-                  width: 20,
-                ),
-                activeIcon: Image.asset(
-                  "assets/images/ranking.png",
-                  height: 20,
-                  width: 20,
-                  color: Colors.white,
-                ),
+                icon: FaIcon(FontAwesomeIcons.rankingStar),
+                activeIcon: FaIcon(FontAwesomeIcons.rankingStar),
                 label: 'Ranking',
               ),
               BottomNavigationBarItem(
-                icon: Image.asset(
-                  'assets/images/basketball.png',
-                  height: 20,
-                  width: 20,
-                ),
-                activeIcon: Image.asset(
-                  'assets/images/basketball.png',
-                  height: 20,
-                  width: 20,
-                  color: Colors.white,
-                ),
+                icon: FaIcon(FontAwesomeIcons.basketball),
+                activeIcon: FaIcon(FontAwesomeIcons.basketball),
                 label: 'My Team',
               ),
               BottomNavigationBarItem(
-                icon: Image.asset(
-                  "assets/images/user.png",
-                  height: 20,
-                  width: 20,
-                ),
-                activeIcon: Image.asset(
-                  "assets/images/user.png",
-                  height: 20,
-                  width: 20,
-                  color: Colors.white,
-                ),
+                icon: FaIcon(FontAwesomeIcons.user),
+                activeIcon: FaIcon(FontAwesomeIcons.user),
                 label: 'Profile',
               ),
             ]);
