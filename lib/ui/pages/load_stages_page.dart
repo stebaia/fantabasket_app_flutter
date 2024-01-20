@@ -76,13 +76,10 @@ class _LoadStagesPageState extends State<LoadStagesPage> {
               child: Text("Errore nel caricamento delle tappe"),
             );
           } else if (state is EmptyGetStagesState) {
-            return Column(
+            return const Column(
               children: [
-                Container(
-                  color: Colors.grey,
-                  height: MediaQuery.of(context).size.height * 0.09,
-                ),
-                const Center(
+                SponsorsBanner(),
+                Center(
                   child: Text("Nessuna tappa presente"),
                 ),
               ],
