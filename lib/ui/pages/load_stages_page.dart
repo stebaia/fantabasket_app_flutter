@@ -46,9 +46,9 @@ class _LoadStagesPageState extends State<LoadStagesPage> {
           } else {
             return Column(
               children: [
-                Expanded(
-                  flex: 1,
-                  child: Container(color: Colors.grey),
+                Container(
+                  color: Colors.grey,
+                  height: MediaQuery.of(context).size.height * 0.09,
                 ),
                 Expanded(
                   flex: 9,
