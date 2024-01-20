@@ -39,39 +39,7 @@ class _LoadStagesPageState extends State<LoadStagesPage> {
       body: BlocConsumer<CreateTeamBloc, CreateTeamState>(
         listener: (context, state) {},
         builder: (context, state) {
-          if (state is TryGetStagesState) {
-            return Skeletonizer(
-              child: Column(
-                children: [
-                  const SponsorsBanner(),
-                  Expanded(
-                    flex: 9,
-                    child: SingleChildScrollView(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 20),
-                        alignment: Alignment.center,
-                        child: Column(
-                          children: [
-                            ...(List.filled(
-                                6,
-                                LoadStageCard(
-                                    stage: Stage(
-                                  "city",
-                                  "fieldName",
-                                  "address",
-                                  DateTime.now(),
-                                  DateTime.now(),
-                                  DateTime.now(),
-                                ))))
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            );
-          } else if (state is ErrorGetStagesState) {
+          if (state is ErrorGetStagesState) {
             return const Center(
               child: Text("Errore nel caricamento delle tappe"),
             );
@@ -85,28 +53,44 @@ class _LoadStagesPageState extends State<LoadStagesPage> {
               ],
             );
           } else {
-            return Column(
-              children: [
-                const SponsorsBanner(),
-                Expanded(
-                  flex: 9,
-                  child: SingleChildScrollView(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 20),
-                      alignment: Alignment.center,
-                      child: Column(
-                        children: [
-                          ...(context.read<CreateTeamBloc>().state
-                                  as ResultGetStagesState)
-                              .stagesList
-                              .stages!
-                              .map((stage) => LoadStageCard(stage: stage))
-                        ],
+            return Skeletonizer(
+              enabled: state is TryGetStagesState,
+              child: Column(
+                children: [
+                  const SponsorsBanner(),
+                  Expanded(
+                    flex: 9,
+                    child: SingleChildScrollView(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 20),
+                        alignment: Alignment.center,
+                        child: Column(
+                          children: [
+                            if (state is ResultGetStagesState)
+                              ...(context.read<CreateTeamBloc>().state
+                                      as ResultGetStagesState)
+                                  .stagesList
+                                  .stages!
+                                  .map((stage) => LoadStageCard(stage: stage))
+                            else
+                              ...(List.filled(
+                                  6,
+                                  LoadStageCard(
+                                      stage: Stage(
+                                    "city",
+                                    "fieldName",
+                                    "address",
+                                    DateTime.now(),
+                                    DateTime.now(),
+                                    DateTime.now(),
+                                  ))))
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             );
           }
         },
