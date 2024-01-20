@@ -4,6 +4,7 @@ import 'package:auto_route/annotations.dart';
 import 'package:fantabasket_app_flutter/ui/pages/container_page.dart';
 import 'package:fantabasket_app_flutter/ui/pages/core_page.dart';
 import 'package:fantabasket_app_flutter/ui/pages/create_team.dart';
+import 'package:fantabasket_app_flutter/ui/pages/load_stages_page.dart';
 import 'package:fantabasket_app_flutter/ui/pages/login_page.dart';
 import 'package:fantabasket_app_flutter/ui/pages/main_page.dart';
 import 'package:fantabasket_app_flutter/ui/pages/profile_page.dart';
@@ -33,6 +34,7 @@ import 'package:fantabasket_app_flutter/ui/pages/registration_page.dart';
       AutoRoute(page: RankPage, path: 'rank_page'),
       AutoRoute(page: ProfilePage, path: 'profile_page'),
     ]),
+    AutoRoute(page: LoadStagesPage, path: 'load_stages_page'),
   ])
 
   /*
