@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:fantabasket_app_flutter/bloc/create_team_bloc/create_team_bloc.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/load_stage_card.dart';
+import 'package:fantabasket_app_flutter/ui/widgets/sponsors_banner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -43,13 +44,22 @@ class _LoadStagesPageState extends State<LoadStagesPage> {
             return const Center(
               child: Text("Errore nel caricamento delle tappe"),
             );
-          } else {
+          } else if (state is EmptyGetStagesState) {
             return Column(
               children: [
                 Container(
                   color: Colors.grey,
                   height: MediaQuery.of(context).size.height * 0.09,
                 ),
+                const Center(
+                  child: Text("Nessuna tappa presente"),
+                ),
+              ],
+            );
+          } else {
+            return Column(
+              children: [
+                const SponsorsBanner(),
                 Expanded(
                   flex: 9,
                   child: SingleChildScrollView(
