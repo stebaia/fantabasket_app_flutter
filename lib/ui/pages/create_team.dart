@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:fantabasket_app_flutter/bloc/cubit/auth_cubit/auth_cubit.dart';
 import 'package:fantabasket_app_flutter/routes/app_router.gr.dart';
+import 'package:fantabasket_app_flutter/ui/widgets/sponsors_banner.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/wave_clipper.dart';
 import 'package:fantabasket_app_flutter/utils/constants.dart';
 import 'package:flutter/gestures.dart';
@@ -163,18 +164,9 @@ class CreateTeamPage extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(
+          const Positioned(
             bottom: 0,
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.09,
-              width: MediaQuery.of(context).size.width,
-              alignment: Alignment.center,
-              color: Colors.grey,
-              child: const Text(
-                "Sponsors",
-                style: TextStyle(fontSize: 22),
-              ),
-            ),
+            child: SponsorsBanner(),
           ),
         ],
       ),
