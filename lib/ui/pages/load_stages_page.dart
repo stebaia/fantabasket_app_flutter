@@ -1,0 +1,78 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:fantabasket_app_flutter/bloc/create_team_bloc/create_team_bloc.dart';
+import 'package:fantabasket_app_flutter/ui/widgets/load_stage_card.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
+
+class LoadStagesPage extends StatefulWidget with AutoRouteWrapper {
+  const LoadStagesPage({super.key});
+
+  @override
+  State<LoadStagesPage> createState() => _LoadStagesPageState();
+
+  @override
+  Widget wrappedRoute(BuildContext context) => MultiBlocProvider(
+        providers: [
+          BlocProvider<CreateTeamBloc>(
+            create: ((context) =>
+                CreateTeamBloc(stagesRepository: context.read())..getStages()),
+          )
+        ],
+        child: this,
+      );
+}
+
+class _LoadStagesPageState extends State<LoadStagesPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.close))],
+        automaticallyImplyLeading: true,
+      ),
+      body: BlocConsumer<CreateTeamBloc, CreateTeamState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          if (state is TryGetStagesState) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (state is ErrorGetStagesState) {
+            return const Center(
+              child: Text("Errore nel caricamento delle tappe"),
+            );
+          } else {
+            return Column(
+              children: [
+                Container(
+                  color: Colors.grey,
+                  height: MediaQuery.of(context).size.height * 0.09,
+                ),
+                Expanded(
+                  flex: 9,
+                  child: SingleChildScrollView(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      alignment: Alignment.center,
+                      child: Column(
+                        children: [
+                          ...(context.read<CreateTeamBloc>().state
+                                  as ResultGetStagesState)
+                              .stagesList
+                              .stages!
+                              .map((stage) => LoadStageCard(stage: stage))
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          }
+        },
+      ),
+    );
+  }
+}

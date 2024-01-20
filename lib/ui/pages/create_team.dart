@@ -1,4 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:fantabasket_app_flutter/bloc/cubit/auth_cubit/auth_cubit.dart';
+import 'package:fantabasket_app_flutter/routes/app_router.gr.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/wave_clipper.dart';
 import 'package:fantabasket_app_flutter/utils/constants.dart';
 import 'package:flutter/gestures.dart';
@@ -29,7 +31,9 @@ class CreateTeamPage extends StatelessWidget {
                 elevation: 3,
                 foregroundColor: Colors.black,
               ),
-              onPressed: () {},
+              onPressed: () {
+                context.pushRoute(const LoadStagesRoute());
+              },
               child: const Text(
                 "Crea squadra",
                 style: TextStyle(
