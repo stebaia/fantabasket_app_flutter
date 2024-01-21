@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fantabasket_app_flutter/bloc/cubit/auth_cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,16 +11,112 @@ class ProfilePage extends StatelessWidget {
     final user = (context.read<AuthCubit>().state as AuthenticatedState).user;
 
     return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Color.fromARGB(255, 123, 81, 44),
+            Color.fromARGB(255, 225, 132, 50),
+            Color.fromARGB(255, 191, 122, 61),
+            Color.fromARGB(255, 161, 106, 58),
+            Color.fromARGB(255, 123, 81, 44),
+          ],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
+      ),
       child: Center(
           child: Column(
         children: [
-          SizedBox(
-            height: 60,
+          const Expanded(
+            flex: 2,
+            child: SizedBox(),
           ),
-          Text('Benvenuto ${user.firstName} ${user.lastName}'),
-          TextButton(
-              child: Text('Logout'),
-              onPressed: () => context.read<AuthCubit>().manualLogout()),
+          Expanded(
+            flex: 6,
+            child: Column(
+              children: [
+                Expanded(
+                  flex: 10,
+                  child: SizedBox(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(50.0),
+                      child: Image.asset(
+                        'assets/images/campo.png',
+                      ),
+                    ),
+                  ),
+                ),
+                const Expanded(flex: 1, child: SizedBox()),
+                Expanded(
+                  flex: 3,
+                  child: Text(
+                    '${user.firstName} ${user.lastName}',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Expanded(flex: 1, child: SizedBox()),
+          const Expanded(flex: 1, child: Divider(height: 1)),
+          const Expanded(flex: 1, child: SizedBox()),
+          Expanded(
+            flex: 1,
+            child: Container(
+              width: double.infinity,
+              padding: const EdgeInsets.only(left: 20),
+              child: const Text(
+                'Le tue squadre',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          const Expanded(flex: 1, child: SizedBox()),
+          Expanded(
+            flex: 20,
+            child: CarouselSlider(
+              options: CarouselOptions(
+                enableInfiniteScroll: false,
+                enlargeCenterPage: true,
+                aspectRatio: 1,
+              ),
+              items: [1, 2, 3, 4, 5].map((i) {
+                return Builder(
+                  builder: (BuildContext context) {
+                    return SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: Card(
+                        elevation: 2,
+                        child: Text(
+                          'text $i',
+                          style: const TextStyle(fontSize: 16.0),
+                        ),
+                      ),
+                    );
+                  },
+                );
+              }).toList(),
+            ),
+          ),
+          const Expanded(flex: 1, child: SizedBox()),
+          const Expanded(flex: 1, child: Divider(height: 1)),
+          const Expanded(flex: 1, child: SizedBox()),
+          Expanded(
+            flex: 2,
+            child: ElevatedButton(
+                child: const Text(
+                  'Logout',
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                ),
+                onPressed: () => context.read<AuthCubit>().manualLogout()),
+          ),
+          const Expanded(flex: 1, child: SizedBox()),
         ],
       )),
     );
