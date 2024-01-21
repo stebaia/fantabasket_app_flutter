@@ -17,41 +17,55 @@ class ProfilePage extends StatelessWidget {
       child: Center(
           child: Column(
         children: [
-          const Expanded(
-            flex: 2,
-            child: SizedBox(),
-          ),
           Expanded(
-            flex: 6,
-            child: Column(
-              children: [
-                Expanded(
-                  flex: 10,
-                  child: SizedBox(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(50.0),
-                      child: Image.asset(
-                        'assets/images/campo.png',
+            flex: 9,
+            child: Container(
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                  color: Color.fromARGB(255, 225, 135, 57),
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(25),
+                    bottomRight: Radius.circular(25),
+                  )),
+              child: Column(
+                children: [
+                  const Expanded(flex: 3, child: SizedBox()),
+                  Expanded(
+                    flex: 10,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(50.0)),
+                        border: Border.all(
+                          color: Colors.white,
+                          width: 1.0,
+                        ),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(50.0),
+                        child: Image.asset(
+                          'assets/images/player.jpeg',
+                        ),
                       ),
                     ),
                   ),
-                ),
-                const Expanded(flex: 1, child: SizedBox()),
-                Expanded(
-                  flex: 3,
-                  child: Text(
-                    '${user.firstName} ${user.lastName}',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
+                  const Expanded(flex: 1, child: SizedBox()),
+                  Expanded(
+                    flex: 3,
+                    child: Text(
+                      '${user.firstName} ${user.lastName}',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                  const Expanded(flex: 2, child: SizedBox()),
+                ],
+              ),
             ),
           ),
-          const Expanded(flex: 1, child: SizedBox()),
-          const Expanded(flex: 1, child: Divider(height: 1)),
-          const Expanded(flex: 1, child: SizedBox()),
+          const Expanded(flex: 2, child: SizedBox()),
           Expanded(
             flex: 1,
             child: Container(
@@ -98,13 +112,16 @@ class ProfilePage extends StatelessWidget {
           Expanded(
             flex: 2,
             child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 225, 135, 57),
+                ),
+                onPressed: () => context.read<AuthCubit>().manualLogout(),
                 child: const Text(
                   'Logout',
                   style: TextStyle(
-                    color: Colors.black,
+                    color: Colors.white,
                   ),
-                ),
-                onPressed: () => context.read<AuthCubit>().manualLogout()),
+                )),
           ),
           const Expanded(flex: 1, child: SizedBox()),
         ],
