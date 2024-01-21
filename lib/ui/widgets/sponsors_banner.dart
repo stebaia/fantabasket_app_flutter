@@ -10,10 +10,6 @@ class SponsorsBanner extends StatelessWidget {
       height: MediaQuery.of(context).size.height * 0.09,
       alignment: Alignment.center,
       width: MediaQuery.of(context).size.width,
-      child: const Text(
-        "Sponsors",
-        style: TextStyle(fontSize: 22),
-      ),
     );
   }
 }

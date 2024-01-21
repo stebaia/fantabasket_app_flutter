@@ -1,9 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:fantabasket_app_flutter/bloc/create_team_bloc/create_team_bloc.dart';
+import 'package:fantabasket_app_flutter/model/stage.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/load_stage_card.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/sponsors_banner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:skeletonizer/skeletonizer.dart';
+
 import 'package:intl/intl.dart';
 
 class LoadStagesPage extends StatefulWidget with AutoRouteWrapper {
@@ -36,49 +39,58 @@ class _LoadStagesPageState extends State<LoadStagesPage> {
       body: BlocConsumer<CreateTeamBloc, CreateTeamState>(
         listener: (context, state) {},
         builder: (context, state) {
-          if (state is TryGetStagesState) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (state is ErrorGetStagesState) {
+          if (state is ErrorGetStagesState) {
             return const Center(
               child: Text("Errore nel caricamento delle tappe"),
             );
           } else if (state is EmptyGetStagesState) {
-            return Column(
+            return const Column(
               children: [
-                Container(
-                  color: Colors.grey,
-                  height: MediaQuery.of(context).size.height * 0.09,
-                ),
-                const Center(
+                SponsorsBanner(),
+                Center(
                   child: Text("Nessuna tappa presente"),
                 ),
               ],
             );
           } else {
-            return Column(
-              children: [
-                const SponsorsBanner(),
-                Expanded(
-                  flex: 9,
-                  child: SingleChildScrollView(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 20),
-                      alignment: Alignment.center,
-                      child: Column(
-                        children: [
-                          ...(context.read<CreateTeamBloc>().state
-                                  as ResultGetStagesState)
-                              .stagesList
-                              .stages!
-                              .map((stage) => LoadStageCard(stage: stage))
-                        ],
+            return Skeletonizer(
+              enabled: state is TryGetStagesState,
+              child: Column(
+                children: [
+                  const SponsorsBanner(),
+                  Expanded(
+                    flex: 9,
+                    child: SingleChildScrollView(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 20),
+                        alignment: Alignment.center,
+                        child: Column(
+                          children: [
+                            if (state is ResultGetStagesState)
+                              ...(context.read<CreateTeamBloc>().state
+                                      as ResultGetStagesState)
+                                  .stagesList
+                                  .stages!
+                                  .map((stage) => LoadStageCard(stage: stage))
+                            else
+                              ...(List.filled(
+                                  6,
+                                  LoadStageCard(
+                                      stage: Stage(
+                                    "city",
+                                    "fieldName",
+                                    "address",
+                                    DateTime.now(),
+                                    DateTime.now(),
+                                    DateTime.now(),
+                                  ))))
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             );
           }
         },
