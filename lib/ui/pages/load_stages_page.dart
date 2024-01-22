@@ -7,8 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-import 'package:intl/intl.dart';
-
 class LoadStagesPage extends StatefulWidget with AutoRouteWrapper {
   const LoadStagesPage({super.key});
 
@@ -33,7 +31,7 @@ class _LoadStagesPageState extends State<LoadStagesPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.close))],
+        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.close))],
         automaticallyImplyLeading: true,
       ),
       body: BlocConsumer<CreateTeamBloc, CreateTeamState>(
