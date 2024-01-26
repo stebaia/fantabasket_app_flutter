@@ -5,12 +5,16 @@ class Player extends Equatable {
   final String? firstName;
   final String? lastName;
   final int? value;
+  final String? team;
+  final String? image;
 
   const Player(
     this.id,
     this.firstName,
     this.lastName,
     this.value,
+    this.team,
+    this.image,
   );
 
   @override
