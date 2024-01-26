@@ -10,6 +10,7 @@ import 'package:fantabasket_app_flutter/ui/pages/main_page.dart';
 import 'package:fantabasket_app_flutter/ui/pages/profile_page.dart';
 import 'package:fantabasket_app_flutter/ui/pages/rank_page.dart';
 import 'package:fantabasket_app_flutter/ui/pages/registration_page.dart';
+import 'package:fantabasket_app_flutter/ui/pages/select_team_page.dart';
 
 @MaterialAutoRouter(replaceInRouteName: 'Page,Route', routes: [
   AutoRoute(page: EmptyRouterPage, path: '/', children: [
@@ -35,6 +36,7 @@ import 'package:fantabasket_app_flutter/ui/pages/registration_page.dart';
       AutoRoute(page: ProfilePage, path: 'profile_page'),
     ]),
     AutoRoute(page: LoadStagesPage, path: 'load_stages_page'),
+    AutoRoute(page: SelectTeamPage, path: 'select_team_page'),
   ])
 
   /*
