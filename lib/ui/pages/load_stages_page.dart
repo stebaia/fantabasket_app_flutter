@@ -75,6 +75,7 @@ class _LoadStagesPageState extends State<LoadStagesPage> {
                                   6,
                                   LoadStageCard(
                                       stage: Stage(
+                                    0,
                                     "city",
                                     "fieldName",
                                     "address",
