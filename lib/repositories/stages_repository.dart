@@ -1,8 +1,28 @@
+import 'package:fantabasket_app_flutter/model/player.dart';
+import 'package:fantabasket_app_flutter/model/players_list.dart';
 import 'package:fantabasket_app_flutter/model/stage.dart';
 import 'package:fantabasket_app_flutter/model/stages_list.dart';
 
 class StagesRepository {
   StagesRepository();
+
+  Future<PlayersList> getPlayers() async {
+    return const PlayersList(
+      count: 10,
+      players: [
+        Player(1, "Marco", "Rossi", 10),
+        Player(2, "Matteo", "Bianchi", 15),
+        Player(3, "Luca", "Verdi", 20),
+        Player(4, "Giorgio", "Napolitano", 5),
+        Player(5, "Napoleone", "Bonaparte", 5),
+        Player(6, "Filippo", "Benvenuti", 10),
+        Player(7, "Alessandro", "Landi", 15),
+        Player(8, "Filippo", "Barbari", 5),
+        Player(9, "Samuele", "Gramuglia", 20),
+        Player(10, "Stefano", "Accorsi", 10),
+      ],
+    );
+  }
 
   Future<StagesList> getStages() async {
     return StagesList(
