@@ -7,6 +7,11 @@ final List<BlocProvider> _blocs = [
           ..checkAuthenticationState(),
   ),
   BlocProvider<CreateTeamBloc>(
-      create: ((context) =>
-          CreateTeamBloc(stagesRepository: context.read()..getStages())))
+    create: ((context) =>
+        CreateTeamBloc(stagesRepository: context.read()..getStages())),
+  ),
+  BlocProvider<SelectTeamBloc>(
+    create: ((context) =>
+        SelectTeamBloc(stagesRepository: context.read()..getPlayers())),
+  ),
 ];

@@ -63,7 +63,6 @@ class UserRepository {
           password: md5.convert(utf8.encode(password)).toString(),
           timestamp: DateConverter.getDateNowWithFormat()));
 
-      
       User user = User(
           userId: 0,
           firstName: '',
@@ -73,7 +72,8 @@ class UserRepository {
           tokenExpiration: '');
       await flutterSecureStorage.write(
           key: Constants.userKey, value: userMapper.from(user));
-      user = await takeUser(email: email, password: password, loginResponse: response);
+      user = await takeUser(
+          email: email, password: password, loginResponse: response);
       return user;
     } catch (error, stackTrace) {
       logger.e('Error sing in with email $email',
