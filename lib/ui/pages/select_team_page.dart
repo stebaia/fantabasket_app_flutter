@@ -1,9 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:fantabasket_app_flutter/bloc/select_team_bloc/select_team_bloc.dart';
+import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/player_bar.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/player_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
   const SelectTeamPage({super.key});
@@ -41,13 +43,35 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                 alignment: Alignment.center,
                 width: double.infinity,
                 color: const Color.fromARGB(255, 225, 135, 57),
-                child: const Text(
-                  "0/65",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
-                  ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.1,
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.7,
+                      child: const Text(
+                        "0/65",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 22,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.1,
+                      clipBehavior: Clip.antiAlias,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -140,8 +164,26 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                                         );
                                       },
                                     )
-                                  : const Center(
-                                      child: CircularProgressIndicator()),
+                                  : ListView.builder(
+                                      scrollDirection: Axis.vertical,
+                                      itemCount: 10,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        return Skeletonizer(
+                                          enabled: state is TryGetPlayersState,
+                                          child: const PlayerBar(
+                                            player: Player(
+                                              0,
+                                              "Nome",
+                                              "Giocatore",
+                                              1,
+                                              "team",
+                                              "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png",
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
                             ),
                           ],
                         ),
