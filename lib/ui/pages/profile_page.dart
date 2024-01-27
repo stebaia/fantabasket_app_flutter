@@ -97,19 +97,24 @@ class ProfilePage extends StatelessWidget {
           const Expanded(flex: 1, child: SizedBox()),
           Expanded(
             flex: 20,
-            child: CarouselSlider(
-              options: CarouselOptions(
-                enableInfiniteScroll: false,
-                enlargeCenterPage: true,
-                aspectRatio: 1,
+            child: Container(
+              width: double.infinity,
+              child: Container(
+                child: CarouselSlider(
+                  options: CarouselOptions(
+                    enableInfiniteScroll: false,
+                    enlargeCenterPage: true,
+                    aspectRatio: 1,
+                  ),
+                  items: [1, 2, 3, 4, 5].map((i) {
+                    return Builder(
+                      builder: (BuildContext context) {
+                        return TeamCard(team: i);
+                      },
+                    );
+                  }).toList(),
+                ),
               ),
-              items: [1, 2, 3, 4, 5].map((i) {
-                return Builder(
-                  builder: (BuildContext context) {
-                    return TeamCard(team: i);
-                  },
-                );
-              }).toList(),
             ),
           ),
           const Expanded(flex: 1, child: SizedBox()),
