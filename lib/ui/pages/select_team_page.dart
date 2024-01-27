@@ -170,6 +170,7 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                                       itemBuilder:
                                           (BuildContext context, int index) {
                                         return Skeletonizer(
+                                          containersColor: Colors.white,
                                           enabled: state is TryGetPlayersState,
                                           child: const PlayerBar(
                                             player: Player(
