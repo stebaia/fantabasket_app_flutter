@@ -9,12 +9,26 @@ class PlayerBar extends StatelessWidget {
     super.key,
   });
 
+  Color _getColor() {
+    int value = player!.value!;
+    if (value == 0) {
+      return Colors.white;
+    } else if (value <= 5) {
+      return const Color.fromARGB(255, 205, 127, 50);
+    } else if (value > 5 && value <= 15) {
+      return const Color.fromARGB(255, 192, 192, 192);
+    } else {
+      return const Color.fromARGB(255, 229, 184, 11);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
       height: MediaQuery.of(context).size.height * 0.1,
       child: Card(
+        color: _getColor(),
         elevation: 2,
         child: Row(
           children: [
