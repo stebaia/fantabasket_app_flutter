@@ -17,7 +17,17 @@ final List<RepositoryProvider> _repositories = [
         .insert(0, AuthInterceptor(repository: userRepository));
     return userRepository;
   })),
-
+  RepositoryProvider<PlayerRepository>(create: ((context) {
+    final playerRepository = PlayerRepository(
+        playerService: context.read(),
+        playerDTOMapper: context.read(),
+        logger: context.read());
+    context
+        .read<Dio>()
+        .interceptors
+        .insert(0, AuthInterceptor(repository: context.read()));
+    return playerRepository;
+  })),
   //STAGES
   RepositoryProvider<StagesRepository>(create: ((context) {
     final stagesRepository = StagesRepository();

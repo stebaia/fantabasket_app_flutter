@@ -16,4 +16,8 @@ final List<SingleChildWidget> _providers = [
     create: (context) =>
         UserService(context.read<Dio>(), baseUrl: Constants.baseUrl),
   ),
+  Provider<PlayerService>(
+    create: (context) =>
+        PlayerService(context.read<Dio>(), baseUrl: Constants.baseUrl),
+  ),
 ];

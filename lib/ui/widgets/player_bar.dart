@@ -35,22 +35,23 @@ class PlayerBar extends StatelessWidget {
             Expanded(
               flex: 2,
               child: Container(
-                clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.white,
-                    width: 1.0,
+                  clipBehavior: Clip.antiAlias,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.white,
+                      width: 1.0,
+                    ),
+                    shape: BoxShape.circle,
                   ),
-                  shape: BoxShape.circle,
-                ),
-                child: ClipRRect(
+                  child:
+                      Container() /*éClipRRect(
                   borderRadius: BorderRadius.circular(50.0),
                   child: Image.network(
                     player!.image!,
                     fit: BoxFit.fill,
                   ),
-                ),
-              ),
+                ),*/
+                  ),
             ),
             Expanded(
               flex: 5,

@@ -2,26 +2,25 @@ import 'package:equatable/equatable.dart';
 
 class Player extends Equatable {
   final int id;
-  final String? firstName;
-  final String? lastName;
-  final int? value;
-  final String? team;
-  final String? image;
+  final String firstName;
+  final String lastName;
+  final String email;
+  final String phone;
+  final String category;
+  final String team;
+  final int value;
 
   const Player(
-    this.id,
-    this.firstName,
-    this.lastName,
-    this.value,
-    this.team,
-    this.image,
-  );
+      {required this.id,
+      required this.firstName,
+      required this.lastName,
+      required this.value,
+      required this.team,
+      required this.phone,
+      required this.category,
+      required this.email});
 
   @override
-  List<Object?> get props => [
-        id,
-        firstName,
-        lastName,
-        value,
-      ];
+  List<Object?> get props =>
+      [id, firstName, lastName, value, team, phone, category, email];
 }
