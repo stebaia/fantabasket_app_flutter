@@ -17,6 +17,16 @@ class CreateTeamPage extends StatelessWidget {
       color: const Color.fromARGB(255, 225, 135, 57),
       child: Stack(
         children: [
+          Positioned(
+            top: 150,
+            left: 0,
+            child: Image.asset(
+              "assets/images/basketbal_big.png",
+              color: Colors.white.withOpacity(0.6),
+              colorBlendMode: BlendMode.modulate,
+              width: 200,
+            ),
+          ),
           ClipPath(
             clipper: WaveClipper(),
             child: Container(
@@ -27,20 +37,36 @@ class CreateTeamPage extends StatelessWidget {
           Positioned(
             right: 30,
             top: 30,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                elevation: 3,
-                foregroundColor: Colors.black,
-              ),
-              onPressed: () {
-                context.pushRoute(const LoadStagesRoute());
-              },
-              child: const Text(
-                "Crea squadra",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    elevation: 3,
+                    foregroundColor: Colors.black,
+                  ),
+                  onPressed: () {
+                    context.pushRoute(const LoadStagesRoute());
+                  },
+                  child: const Text(
+                    "Crea squadra",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
-              ),
+                Container(
+                  width: 130,
+                  child: Text(
+                    'Hai tempo fino al 15 maggio 2024',
+                    style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  ),
+                )
+              ],
             ),
           ),
           Positioned(
