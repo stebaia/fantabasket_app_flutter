@@ -14,8 +14,10 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
   Widget wrappedRoute(BuildContext context) => MultiBlocProvider(
         providers: [
           BlocProvider<SelectTeamBloc>(
-            create: ((context) =>
-                SelectTeamBloc(stagesRepository: context.read())..getPlayers()),
+            create: ((context) => SelectTeamBloc(
+                stagesRepository: context.read(),
+                playerRepository: context.read())
+              ..getPlayers()),
           )
         ],
         child: this,
@@ -174,13 +176,14 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                                           enabled: state is TryGetPlayersState,
                                           child: const PlayerBar(
                                             player: Player(
-                                              0,
-                                              "Nome",
-                                              "Giocatore",
-                                              1,
-                                              "team",
-                                              "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png",
-                                            ),
+                                                id: 0,
+                                                firstName: '',
+                                                lastName: '',
+                                                phone: '',
+                                                value: 0,
+                                                team: '',
+                                                category: '',
+                                                email: ''),
                                           ),
                                         );
                                       },
