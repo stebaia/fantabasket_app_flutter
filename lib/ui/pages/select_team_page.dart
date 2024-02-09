@@ -154,18 +154,21 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                             Expanded(
                               flex: 7,
                               child: state is ResultGetPlayersState
-                                  ? ListView.builder(
-                                      scrollDirection: Axis.vertical,
-                                      itemCount:
-                                          state.playersList.players!.length,
-                                      itemBuilder:
-                                          (BuildContext context, int index) {
-                                        return PlayerBar(
-                                          player:
-                                              state.playersList.players![index],
-                                        );
-                                      },
-                                    )
+                                  ? state.playersList.players!.isEmpty
+                                      ? const Text(
+                                          "Nessun giocatore disponibile")
+                                      : ListView.builder(
+                                          scrollDirection: Axis.vertical,
+                                          itemCount:
+                                              state.playersList.players!.length,
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
+                                            return PlayerBar(
+                                              player: state
+                                                  .playersList.players![index],
+                                            );
+                                          },
+                                        )
                                   : ListView.builder(
                                       scrollDirection: Axis.vertical,
                                       itemCount: 10,
