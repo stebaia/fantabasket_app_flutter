@@ -13,5 +13,5 @@ class GetPlayersState extends SelectPlayerState {
   const GetPlayersState(this.players);
 
   @override
-  List<Player> get props => [players];
+  List<Player> get props => players;
 }
