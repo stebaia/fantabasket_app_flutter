@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:fantabasket_app_flutter/bloc/select_team_bloc/select_team_bloc.dart';
+import 'package:fantabasket_app_flutter/bloc/cubit/select_player_cubit/select_player_cubit.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/player_bar.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/player_icon.dart';
@@ -18,7 +19,10 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                 stagesRepository: context.read(),
                 playerRepository: context.read())
               ..getPlayers()),
-          )
+          ),
+          BlocProvider<SelectPlayerCubit>(
+            create: ((context) => SelectPlayerCubit()),
+          ),
         ],
         child: this,
       );
@@ -79,40 +83,59 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
             ),
             Expanded(
               flex: 4,
-              child: Container(
-                alignment: Alignment.center,
-                width: double.infinity,
-                child: const Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+              child: BlocConsumer<SelectPlayerCubit, SelectPlayerState>(
+                  listener: (context, state) {},
+                  builder: (context, state) {
+                    var players =
+                        context.read<SelectPlayerCubit>().getCheckedPlayers();
+                    var size = players.length;
+                    print("Lunghezza array SOPRA: $size");
+                    return Container(
+                      alignment: Alignment.center,
+                      width: double.infinity,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          PlayerIcon(),
-                          PlayerIcon(),
-                          PlayerIcon(),
+                          Expanded(
+                            flex: 1,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                PlayerIcon(
+                                  player: size >= 1 ? players[0] : null,
+                                ),
+                                PlayerIcon(
+                                  player: size >= 2 ? players[1] : null,
+                                ),
+                                PlayerIcon(
+                                  player: size >= 3 ? players[2] : null,
+                                ),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: SizedBox(
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  PlayerIcon(
+                                    player: size >= 4 ? players[3] : null,
+                                  ),
+                                  PlayerIcon(
+                                    player: size >= 5 ? players[4] : null,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
                         ],
                       ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: SizedBox(
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            PlayerIcon(),
-                            PlayerIcon(),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+                    );
+                  }),
             ),
             Expanded(
                 flex: 5,
@@ -157,18 +180,46 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                                   ? state.playersList.players!.isEmpty
                                       ? const Text(
                                           "Nessun giocatore disponibile")
-                                      : ListView.builder(
-                                          scrollDirection: Axis.vertical,
-                                          itemCount:
-                                              state.playersList.players!.length,
-                                          itemBuilder: (BuildContext context,
-                                              int index) {
-                                            return PlayerBar(
-                                              player: state
-                                                  .playersList.players![index],
+                                      : BlocConsumer<SelectPlayerCubit,
+                                              SelectPlayerState>(
+                                          listener:
+                                              (cubitContext, cubitState) {},
+                                          builder: (cubitContext, cubitState) {
+                                            var players =
+                                                state.playersList.players!;
+                                            var checked =
+                                                (cubitState as GetPlayersState)
+                                                    .players;
+                                            var totalSize = players.length;
+                                            var checkedSize = checked.length;
+                                            print(
+                                                "Lunghezza array SOTTO: ${totalSize - checkedSize}");
+                                            final List<Player> list = List.from(
+                                                Set.from(players).difference(
+                                                    Set.from(checked)));
+                                            return ListView.builder(
+                                              scrollDirection: Axis.vertical,
+                                              itemCount:
+                                                  totalSize - checkedSize,
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                      int index) {
+                                                return GestureDetector(
+                                                  onTap: () {
+                                                    print("Cliccata row");
+                                                    context
+                                                        .read<
+                                                            SelectPlayerCubit>()
+                                                        .check(state.playersList
+                                                            .players![index]);
+                                                  },
+                                                  child: PlayerBar(
+                                                    player: list[index],
+                                                  ),
+                                                );
+                                              },
                                             );
-                                          },
-                                        )
+                                          })
                                   : ListView.builder(
                                       scrollDirection: Axis.vertical,
                                       itemCount: 10,
