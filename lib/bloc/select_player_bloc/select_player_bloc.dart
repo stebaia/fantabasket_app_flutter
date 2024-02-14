@@ -11,7 +11,7 @@ part 'select_player_event.dart';
 class SelectPlayerBloc extends Bloc<SelectPlayerEvent, SelectPlayerState> {
   final List<Player> checkedPlayers = List.empty(growable: true);
 
-  SelectPlayerBloc() : super(GetPlayersState(List.empty(growable: true))) {
+  SelectPlayerBloc() : super(InitialPlayerState(List.empty(growable: true))) {
     on<AddPlayerEvent>(_addPlayer);
     on<RemovePlayerEvent>(_removePlayer);
   }
@@ -26,7 +26,8 @@ class SelectPlayerBloc extends Bloc<SelectPlayerEvent, SelectPlayerState> {
   ) async {
     checkedPlayers.add(event.player);
     print("ADD -> Checked players: ${checkedPlayers.length}");
-    emit(GetPlayersState(checkedPlayers));
+    emit(AddPlayerState(checkedPlayers));
+    emit(InitialPlayerState(checkedPlayers));
   }
 
   FutureOr<void> _removePlayer(
@@ -35,7 +36,8 @@ class SelectPlayerBloc extends Bloc<SelectPlayerEvent, SelectPlayerState> {
   ) async {
     checkedPlayers.remove(event.player);
     print("REMOVE -> Checked players: ${checkedPlayers.length}");
-    emit(GetPlayersState(checkedPlayers));
+    emit(RemovePlayerState(checkedPlayers));
+    emit(InitialPlayerState(checkedPlayers));
   }
 
   List<Player> getCheckedPlayers() {

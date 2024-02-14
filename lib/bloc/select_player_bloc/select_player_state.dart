@@ -8,9 +8,25 @@ abstract class SelectPlayerState extends Equatable {
   List<Object> get props => [];
 }
 
-class GetPlayersState extends SelectPlayerState {
+class InitialPlayerState extends SelectPlayerState {
   final List<Player> players;
-  const GetPlayersState(this.players);
+  const InitialPlayerState(this.players);
+
+  @override
+  List<Player> get props => players;
+}
+
+class AddPlayerState extends SelectPlayerState {
+  final List<Player> players;
+  const AddPlayerState(this.players);
+
+  @override
+  List<Player> get props => players;
+}
+
+class RemovePlayerState extends SelectPlayerState {
+  final List<Player> players;
+  const RemovePlayerState(this.players);
 
   @override
   List<Player> get props => players;

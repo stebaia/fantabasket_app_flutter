@@ -187,9 +187,8 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                                           builder: (cubitContext, cubitState) {
                                             var players =
                                                 state.playersList.players!;
-                                            var checked =
-                                                (cubitState as GetPlayersState)
-                                                    .players;
+                                            var checked = cubitState.props
+                                                as List<Player>;
                                             var totalSize = players.length;
                                             var checkedSize = checked.length;
                                             print(
