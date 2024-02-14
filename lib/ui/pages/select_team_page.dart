@@ -206,12 +206,13 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                                                 return GestureDetector(
                                                   onTap: () {
                                                     print("Cliccata row");
-                                                    context
-                                                        .read<
-                                                            SelectPlayerBloc>()
-                                                        .addPlayer(state
-                                                            .playersList
-                                                            .players![index]);
+                                                    if (checkedSize < 5) {
+                                                      context
+                                                          .read<
+                                                              SelectPlayerBloc>()
+                                                          .addPlayer(
+                                                              list[index]);
+                                                    }
                                                   },
                                                   child: PlayerBar(
                                                     player: list[index],
