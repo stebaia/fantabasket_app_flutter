@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:fantabasket_app_flutter/bloc/select_team_bloc/select_team_bloc.dart';
-import 'package:fantabasket_app_flutter/bloc/cubit/select_player_bloc/select_player_bloc.dart';
+import 'package:fantabasket_app_flutter/bloc/select_player_bloc/select_player_bloc.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/player_bar.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/player_icon.dart';

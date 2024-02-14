@@ -1,4 +1,4 @@
-import 'package:fantabasket_app_flutter/bloc/cubit/select_player_bloc/select_player_bloc.dart';
+import 'package:fantabasket_app_flutter/bloc/select_player_bloc/select_player_bloc.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
