@@ -1,4 +1,4 @@
-part of 'select_player_cubit.dart';
+part of 'select_player_bloc.dart';
 
 @immutable
 abstract class SelectPlayerState extends Equatable {

@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:fantabasket_app_flutter/bloc/select_team_bloc/select_team_bloc.dart';
-import 'package:fantabasket_app_flutter/bloc/cubit/select_player_cubit/select_player_cubit.dart';
+import 'package:fantabasket_app_flutter/bloc/cubit/select_player_bloc/select_player_bloc.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/player_bar.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/player_icon.dart';
@@ -20,8 +20,8 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                 playerRepository: context.read())
               ..getPlayers()),
           ),
-          BlocProvider<SelectPlayerCubit>(
-            create: ((context) => SelectPlayerCubit()),
+          BlocProvider<SelectPlayerBloc>(
+            create: ((context) => SelectPlayerBloc()),
           ),
         ],
         child: this,
@@ -83,11 +83,11 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
             ),
             Expanded(
               flex: 4,
-              child: BlocConsumer<SelectPlayerCubit, SelectPlayerState>(
+              child: BlocConsumer<SelectPlayerBloc, SelectPlayerState>(
                   listener: (context, state) {},
                   builder: (context, state) {
                     var players =
-                        context.read<SelectPlayerCubit>().getCheckedPlayers();
+                        context.read<SelectPlayerBloc>().getCheckedPlayers();
                     var size = players.length;
                     print("Lunghezza array SOPRA: $size");
                     return Container(
@@ -180,7 +180,7 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                                   ? state.playersList.players!.isEmpty
                                       ? const Text(
                                           "Nessun giocatore disponibile")
-                                      : BlocConsumer<SelectPlayerCubit,
+                                      : BlocConsumer<SelectPlayerBloc,
                                               SelectPlayerState>(
                                           listener:
                                               (cubitContext, cubitState) {},
@@ -209,8 +209,9 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                                                     print("Cliccata row");
                                                     context
                                                         .read<
-                                                            SelectPlayerCubit>()
-                                                        .check(state.playersList
+                                                            SelectPlayerBloc>()
+                                                        .addPlayer(state
+                                                            .playersList
                                                             .players![index]);
                                                   },
                                                   child: PlayerBar(

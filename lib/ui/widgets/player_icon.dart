@@ -1,4 +1,4 @@
-import 'package:fantabasket_app_flutter/bloc/cubit/select_player_cubit/select_player_cubit.dart';
+import 'package:fantabasket_app_flutter/bloc/cubit/select_player_bloc/select_player_bloc.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,7 +16,7 @@ class PlayerIcon extends StatelessWidget {
     return GestureDetector(
       onTap: player == null
           ? null
-          : () => context.read<SelectPlayerCubit>().uncheck(player!),
+          : () => context.read<SelectPlayerBloc>().removePlayer(player!),
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.3,
         child: Column(
