@@ -5,18 +5,19 @@ class Stage extends Equatable {
   final String? city;
   final String? fieldName;
   final String? address;
-  final DateTime? matchDate;
-  final DateTime? openingDate;
-  final DateTime? closingDate;
+  final String? matchDate;
+  final String? openingDate;
+  final String? closingDate;
 
-  const Stage(
-    this.id,
+  const Stage({
+    required this.id,
     this.city,
     this.fieldName,
     this.address,
     this.matchDate,
     this.openingDate,
     this.closingDate,
+  }   
   );
 
   @override

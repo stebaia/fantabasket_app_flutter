@@ -26,10 +26,10 @@ class CreateTeamBloc extends Bloc<CreateTeamEvent, CreateTeamState> {
     Emitter<CreateTeamState> emitter,
   ) async {
     emit(const TryGetStagesState());
-    await Future.delayed(const Duration(seconds: 2));
+    
     try {
       final stages = await stagesRepository.getStages();
-      emit(ResultGetStagesState(stages));
+      emit(ResultGetStagesState(stages.data));
     } catch (e) {
       emit(const ErrorGetStagesState('Tappe non caricate'));
     }

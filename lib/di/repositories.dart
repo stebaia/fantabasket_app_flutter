@@ -30,9 +30,15 @@ final List<RepositoryProvider> _repositories = [
   })),
   //STAGES
   RepositoryProvider<StagesRepository>(create: ((context) {
-    final stagesRepository = StagesRepository();
-
-    return stagesRepository;
+    final playerRepository = StagesRepository(
+        stageService: context.read(),
+        stageDTOMapper: context.read(),
+        logger: context.read());
+    context
+        .read<Dio>()
+        .interceptors
+        .insert(0, AuthInterceptor(repository: context.read()));
+    return playerRepository;
   })),
 
   // VEHICLE
