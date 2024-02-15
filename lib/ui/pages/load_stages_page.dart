@@ -74,14 +74,8 @@ class _LoadStagesPageState extends State<LoadStagesPage> {
                               ...(List.filled(
                                   6,
                                   LoadStageCard(
-                                      stage: Stage(
-                                    0,
-                                    "city",
-                                    "fieldName",
-                                    "address",
-                                    DateTime.now(),
-                                    DateTime.now(),
-                                    DateTime.now(),
+                                      stage: Stage(id: 0
+                                    
                                   ))))
                           ],
                         ),

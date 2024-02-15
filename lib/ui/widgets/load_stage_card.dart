@@ -83,8 +83,8 @@ class LoadStageCard extends StatelessWidget {
                             Expanded(
                               flex: 1,
                               child: Text(
-                                "Da ${DateFormat('dd/MM/yyyy').format(stage.openingDate!)} "
-                                "a ${DateFormat('dd/MM/yyyy').format(stage.closingDate!)}",
+                                "Da ${stage.openingDate} "
+                                "a ${stage.closingDate}",
                                 maxLines: 1,
                                 textAlign: TextAlign.start,
                                 overflow: TextOverflow.ellipsis,
