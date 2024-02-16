@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:fantabasket_app_flutter/model/requests/login_request.dart';
 import 'package:fantabasket_app_flutter/model/requests/registration_request.dart';
+import 'package:fantabasket_app_flutter/model/requests/team_request.dart';
 import 'package:fantabasket_app_flutter/model/responses/login_response.dart';
 import 'package:fantabasket_app_flutter/model/responses/registration_response.dart';
 import 'package:fantabasket_app_flutter/services/dto/empty_response_dto.dart';
@@ -20,9 +21,9 @@ abstract class TeamService {
   Future<HttpResponse<TeamListDTO>> getTeams();
 
   @POST('api/addTeamStage')
-  Future<HttpResponse<ApiEmptyResponseDTO>> addTeamToStage();
+  Future<HttpResponse<ApiEmptyResponseDTO>> addTeamToStage(@Body() AddTeamToStageRequest addTeamToStageRequest );
 
   @POST('api/addPlayerTeam')
-  Future<HttpResponse<ApiEmptyResponseDTO>> addPlayerToTeam();
+  Future<HttpResponse<ApiEmptyResponseDTO>> addPlayerToTeam(@Body() AddPlayerToTeamRequest addPlayerToTeamRequest);
 
 }

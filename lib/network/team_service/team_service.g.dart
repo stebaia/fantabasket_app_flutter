@@ -47,11 +47,13 @@ class _TeamService implements TeamService {
   }
 
   @override
-  Future<HttpResponse<ApiEmptyResponseDTO>> addTeamToStage() async {
+  Future<HttpResponse<ApiEmptyResponseDTO>> addTeamToStage(
+      AddTeamToStageRequest addTeamToStageRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    final _data = <String, dynamic>{};
+    _data.addAll(addTeamToStageRequest.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<ApiEmptyResponseDTO>>(Options(
       method: 'POST',
@@ -75,11 +77,13 @@ class _TeamService implements TeamService {
   }
 
   @override
-  Future<HttpResponse<ApiEmptyResponseDTO>> addPlayerToTeam() async {
+  Future<HttpResponse<ApiEmptyResponseDTO>> addPlayerToTeam(
+      AddPlayerToTeamRequest addPlayerToTeamRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    final _data = <String, dynamic>{};
+    _data.addAll(addPlayerToTeamRequest.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<ApiEmptyResponseDTO>>(Options(
       method: 'POST',
