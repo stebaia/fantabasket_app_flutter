@@ -18,5 +18,11 @@ final List<SingleChildWidget> _mappers = [
   ),
   Provider<DTOMapper<StageDTO, Stage>>(
     create: (_) => StageMapper(),
+  ),
+  Provider<DTOMapper<TeamListDTO, TeamList>>(
+    create: (_) => TeamListMapper(),
+  ),
+  Provider<DTOMapper<TeamDTO, Team>>(
+    create: (_) => TeamMapper(),
   )
 ];
