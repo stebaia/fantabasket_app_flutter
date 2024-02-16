@@ -56,7 +56,7 @@ class CreateTeamPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                Container(
+               Container(
                   width: 130,
                   child: Text(
                     'Hai tempo fino al 15 maggio 2024',
