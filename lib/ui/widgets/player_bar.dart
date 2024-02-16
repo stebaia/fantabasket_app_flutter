@@ -57,7 +57,7 @@ class PlayerBar extends StatelessWidget {
               flex: 5,
               child: Text(
                 "${player?.lastName} ${player?.firstName}",
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.start,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
