@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class Constants {
   const Constants._();
 
@@ -18,4 +20,30 @@ class Constants {
     'Station Wagon',
     'Minivan'
   ];
+
+  static Map<String, Color> categoryColors = {
+    'A': const Color.fromARGB(255, 212, 37, 24),
+    'A2': const Color.fromARGB(255, 244, 197, 45),
+    'B': const Color.fromARGB(255, 189, 145, 3),
+    'CGOLD': const Color.fromARGB(255, 134, 208, 70),
+    'CSILVER': const Color.fromARGB(255, 58, 138, 60),
+    'D': const Color.fromARGB(255, 41, 150, 238),
+    'PROMOZIONE': const Color.fromARGB(255, 9, 92, 159),
+    'CSI': const Color.fromARGB(255, 100, 18, 132),
+    'GIOVANILE': const Color.fromARGB(255, 100, 18, 132),
+    'RITIRATO': const Color.fromARGB(255, 100, 18, 132),
+  };
+
+  static Map<String, int> categoryValues = {
+    'A': 25,
+    'A2': 25,
+    'B': 20,
+    'CGOLD': 15,
+    'CSILVER': 10,
+    'D': 10,
+    'PROMOZIONE': 5,
+    'CSI': 0,
+    'GIOVANILE': 0,
+    'RITIRATO': 0,
+  };
 }
