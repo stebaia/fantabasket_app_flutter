@@ -26,8 +26,9 @@ class PlayerBar extends StatelessWidget {
         elevation: 2,
         child: Row(
           children: [
+            const Expanded(flex: 1, child: SizedBox()),
             Expanded(
-              flex: 2,
+              flex: 4,
               child: Container(
                   clipBehavior: Clip.antiAlias,
                   decoration: BoxDecoration(
@@ -47,8 +48,9 @@ class PlayerBar extends StatelessWidget {
                 ),*/
                   ),
             ),
+            const Expanded(flex: 1, child: SizedBox()),
             Expanded(
-              flex: 5,
+              flex: 14,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Text(
@@ -62,8 +64,9 @@ class PlayerBar extends StatelessWidget {
                 ),
               ),
             ),
+            const Expanded(flex: 1, child: SizedBox()),
             Expanded(
-              flex: 5,
+              flex: 12,
               child: Text(
                 "${player?.team}",
                 textAlign: TextAlign.center,
@@ -74,8 +77,9 @@ class PlayerBar extends StatelessWidget {
                 ),
               ),
             ),
+            const Expanded(flex: 1, child: SizedBox()),
             Expanded(
-              flex: 2,
+              flex: 5,
               child: Text(
                 "${player?.value}",
                 textAlign: TextAlign.center,
