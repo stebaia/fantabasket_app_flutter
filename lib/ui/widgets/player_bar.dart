@@ -56,6 +56,9 @@ class PlayerBar extends StatelessWidget {
                   textAlign: TextAlign.start,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),
@@ -66,6 +69,9 @@ class PlayerBar extends StatelessWidget {
                 textAlign: TextAlign.center,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  color: Colors.white,
+                ),
               ),
             ),
             Expanded(
@@ -74,6 +80,9 @@ class PlayerBar extends StatelessWidget {
                 "${player?.value}",
                 textAlign: TextAlign.center,
                 maxLines: 1,
+                style: const TextStyle(
+                  color: Colors.white,
+                ),
               ),
             ),
           ],

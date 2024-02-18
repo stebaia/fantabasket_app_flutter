@@ -14,12 +14,12 @@ class Constants {
 
   static Map<String, Color> categoryColors = {
     'A': const Color.fromARGB(255, 233, 75, 64),
-    'B': const Color.fromARGB(255, 238, 191, 39),
-    'C1': const Color.fromARGB(255, 134, 208, 70),
+    'B': const Color.fromARGB(255, 194, 155, 27),
+    'C1': const Color.fromARGB(255, 115, 177, 60),
     'C2': const Color.fromARGB(255, 66, 152, 69),
-    'D': const Color.fromARGB(255, 70, 200, 233),
-    'P': const Color.fromARGB(255, 45, 129, 199),
-    'F': const Color.fromARGB(255, 173, 58, 219),
+    'D': const Color.fromARGB(255, 57, 166, 193),
+    'P': const Color.fromARGB(255, 38, 110, 169),
+    'F': const Color.fromARGB(255, 145, 48, 183),
   };
 
   static Map<String, int> categoryValues = {
