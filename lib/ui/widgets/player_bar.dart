@@ -1,5 +1,6 @@
 import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:flutter/material.dart';
+import 'package:fantabasket_app_flutter/utils/constants.dart';
 
 class PlayerBar extends StatelessWidget {
   final Player? player;
@@ -10,16 +11,9 @@ class PlayerBar extends StatelessWidget {
   });
 
   Color _getColor() {
-    int value = player!.value!;
-    if (value == 0) {
-      return Colors.white;
-    } else if (value <= 5) {
-      return const Color.fromARGB(255, 205, 127, 50);
-    } else if (value > 5 && value <= 15) {
-      return const Color.fromARGB(255, 192, 192, 192);
-    } else {
-      return const Color.fromARGB(255, 229, 184, 11);
-    }
+    String? category = player!.category;
+    print("Giocatore: ${player!}");
+    return Constants.categoryColors[category]!;
   }
 
   @override
@@ -32,8 +26,9 @@ class PlayerBar extends StatelessWidget {
         elevation: 2,
         child: Row(
           children: [
+            const Expanded(flex: 1, child: SizedBox()),
             Expanded(
-              flex: 2,
+              flex: 4,
               child: Container(
                   clipBehavior: Clip.antiAlias,
                   decoration: BoxDecoration(
@@ -53,30 +48,45 @@ class PlayerBar extends StatelessWidget {
                 ),*/
                   ),
             ),
+            const Expanded(flex: 1, child: SizedBox()),
             Expanded(
-              flex: 5,
-              child: Text(
-                "${player?.lastName} ${player?.firstName}",
-                textAlign: TextAlign.center,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
+              flex: 14,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Text(
+                  "${player?.lastName} ${player?.firstName}",
+                  textAlign: TextAlign.start,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
               ),
             ),
+            const Expanded(flex: 1, child: SizedBox()),
             Expanded(
-              flex: 5,
+              flex: 12,
               child: Text(
                 "${player?.team}",
                 textAlign: TextAlign.center,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  color: Colors.white,
+                ),
               ),
             ),
+            const Expanded(flex: 1, child: SizedBox()),
             Expanded(
-              flex: 2,
+              flex: 5,
               child: Text(
                 "${player?.value}",
                 textAlign: TextAlign.center,
                 maxLines: 1,
+                style: const TextStyle(
+                  color: Colors.white,
+                ),
               ),
             ),
           ],

@@ -59,10 +59,10 @@ class PlayerDetailDTO extends DTO with EquatableMixin {
       firstName: json['nome'],
       lastName: json['cognome'],
       email: json['email'],
-      phone: json['phone'],
-      category: json['category'],
-      team: json['team'],
-      value: json['value'],
+      phone: json['cellulare'],
+      category: json['categoria'],
+      team: json['squadra'],
+      value: json['punteggio'] == null ? 0 : int.parse(json['punteggio']),
     );
   }
 
