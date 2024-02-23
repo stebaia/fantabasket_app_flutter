@@ -74,16 +74,31 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                         );
                       },
                     ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.1,
-                      clipBehavior: Clip.antiAlias,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Icon(
-                        Icons.arrow_forward_ios_rounded,
-                        color: Colors.white,
-                      ),
+                    BlocConsumer<SelectPlayerBloc, SelectPlayerState>(
+                      listener: (context, state) {},
+                      builder: (context, state) {
+                        var size = context
+                            .read<SelectPlayerBloc>()
+                            .getCheckedPlayers()
+                            .length;
+                        return Container(
+                          width: MediaQuery.of(context).size.width * 0.1,
+                          clipBehavior: Clip.antiAlias,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                          ),
+                          child: GestureDetector(
+                            onTap: () =>
+                                size == 5 ? print("Go") : print("stay"),
+                            child: Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              color: size == 5
+                                  ? Colors.white
+                                  : const Color.fromARGB(255, 209, 200, 200),
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   ],
                 ),
