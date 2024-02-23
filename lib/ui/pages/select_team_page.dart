@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:fantabasket_app_flutter/bloc/cubit/credits_cubit/credits_cubit.dart';
 import 'package:fantabasket_app_flutter/bloc/select_team_bloc/select_team_bloc.dart';
 import 'package:fantabasket_app_flutter/bloc/select_player_bloc/select_player_bloc.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
@@ -55,16 +56,23 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.1,
                     ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.7,
-                      child: const Text(
-                        "0/65",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 22,
-                          color: Colors.white,
-                        ),
-                      ),
+                    BlocConsumer<CreditsCubit, CreditsState>(
+                      listener: (context, state) {},
+                      builder: (context, state) {
+                        print("Rebuild, state: $state");
+                        int total = context.read<CreditsCubit>().getTotal();
+                        return SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.7,
+                          child: Text(
+                            "$total/65",
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 22,
+                              color: Colors.white,
+                            ),
+                          ),
+                        );
+                      },
                     ),
                     Container(
                       width: MediaQuery.of(context).size.width * 0.1,
@@ -89,7 +97,6 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                     var players =
                         context.read<SelectPlayerBloc>().getCheckedPlayers();
                     var size = players.length;
-                    print("Lunghezza array SOPRA: $size");
                     return Container(
                       alignment: Alignment.center,
                       width: double.infinity,
@@ -191,8 +198,6 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                                                 as List<Player>;
                                             var totalSize = players.length;
                                             var checkedSize = checked.length;
-                                            print(
-                                                "Lunghezza array SOTTO: ${totalSize - checkedSize}");
                                             final List<Player> list = List.from(
                                                 Set.from(players).difference(
                                                     Set.from(checked)));
@@ -205,8 +210,16 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                                                       int index) {
                                                 return GestureDetector(
                                                   onTap: () {
-                                                    print("Cliccata row");
-                                                    if (checkedSize < 5) {
+                                                    int total = context
+                                                        .read<CreditsCubit>()
+                                                        .getTotal();
+                                                    int value =
+                                                        list[index].value;
+                                                    if (checkedSize < 5 &&
+                                                        total + value <= 65) {
+                                                      context
+                                                          .read<CreditsCubit>()
+                                                          .increment(value);
                                                       context
                                                           .read<
                                                               SelectPlayerBloc>()
