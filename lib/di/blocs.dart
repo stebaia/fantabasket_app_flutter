@@ -13,4 +13,7 @@ final List<BlocProvider> _blocs = [
   BlocProvider<SelectPlayerBloc>(
     create: (context) => SelectPlayerBloc(),
   ),
+  BlocProvider<CreditsCubit>(
+    create: (context) => CreditsCubit(context: context),
+  ),
 ];

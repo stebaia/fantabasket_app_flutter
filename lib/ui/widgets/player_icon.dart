@@ -1,5 +1,7 @@
+import 'package:fantabasket_app_flutter/bloc/cubit/credits_cubit/credits_cubit.dart';
 import 'package:fantabasket_app_flutter/bloc/select_player_bloc/select_player_bloc.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
+import 'package:fantabasket_app_flutter/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,17 +18,22 @@ class PlayerIcon extends StatelessWidget {
     return GestureDetector(
       onTap: player == null
           ? null
-          : () => context.read<SelectPlayerBloc>().removePlayer(player!),
+          : () {
+              context.read<CreditsCubit>().decrement(player!.value);
+              context.read<SelectPlayerBloc>().removePlayer(player!);
+            },
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.3,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Colors.white,
-                border: Border.symmetric(
+                color: player == null
+                    ? Colors.white
+                    : Constants.categoryColors[player!.category],
+                border: const Border.symmetric(
                   horizontal:
                       BorderSide(color: Color.fromARGB(255, 201, 195, 195)),
                   vertical:
@@ -38,7 +45,9 @@ class PlayerIcon extends StatelessWidget {
               child: Icon(
                 Icons.person,
                 size: MediaQuery.of(context).size.width * 0.13,
-                color: const Color.fromARGB(255, 201, 195, 195),
+                color: player == null
+                    ? const Color.fromARGB(255, 201, 195, 195)
+                    : Colors.white,
               ),
             ),
             const SizedBox(height: 5),
