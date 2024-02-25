@@ -63,6 +63,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   generate: true
+  
   assets:
     - assets/images/user.png
     - assets/images/basketball.png
@@ -70,3 +71,13 @@ flutter:
     - assets/images/campo.png
     - assets/images/player.jpeg
     - assets/images/basketbal_big.png
+  
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Regular.ttf
+        - asset: assets/fonts/Poppins-Bold.ttf
+    - family: Nunito Sans
+      fonts:
+        - asset: assets/fonts/NunitoSans_10pt-Regular.ttf
+        - asset: assets/fonts/NunitoSans_10pt-Bold.ttf
