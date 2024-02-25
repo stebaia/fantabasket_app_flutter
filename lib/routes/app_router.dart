@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_route/empty_router_widgets.dart';
 import 'package:auto_route/annotations.dart';
+import 'package:fantabasket_app_flutter/ui/pages/completion_page.dart';
 import 'package:fantabasket_app_flutter/ui/pages/container_page.dart';
 import 'package:fantabasket_app_flutter/ui/pages/core_page.dart';
 import 'package:fantabasket_app_flutter/ui/pages/create_team.dart';
@@ -37,6 +38,7 @@ import 'package:fantabasket_app_flutter/ui/pages/select_team_page.dart';
     ]),
     AutoRoute(page: LoadStagesPage, path: 'load_stages_page'),
     AutoRoute(page: SelectTeamPage, path: 'select_team_page'),
+    AutoRoute(page: CompletionPage, path: 'completion_page'),
   ])
 
   /*
