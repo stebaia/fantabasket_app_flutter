@@ -42,7 +42,7 @@ class _CompletionButtonState extends State<CompletionButton> {
               backgroundColor: enabled
                   ? const Color.fromARGB(255, 225, 135, 57)
                   : const Color.fromARGB(255, 208, 201, 195)),
-          onPressed: widget.controller.text != "" ? () {} : null,
+          onPressed: enabled ? () {} : null,
           child: Text(
             "Conferma squadra",
             style: TextStyle(
