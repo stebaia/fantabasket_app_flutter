@@ -34,4 +34,9 @@ class CreditsCubit extends Cubit<CreditsState> {
   }
 
   int getTotal() => total;
+
+  bool resetTotal() {
+    total = 0;
+    return true;
+  }
 }

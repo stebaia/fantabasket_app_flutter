@@ -1,6 +1,5 @@
 part of 'credits_cubit.dart';
 
-@immutable
 abstract class CreditsState extends Equatable {
   const CreditsState();
 

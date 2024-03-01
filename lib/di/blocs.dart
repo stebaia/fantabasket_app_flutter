@@ -16,4 +16,10 @@ final List<BlocProvider> _blocs = [
   BlocProvider<CreditsCubit>(
     create: (context) => CreditsCubit(context: context),
   ),
+  BlocProvider<CaptainCubit>(
+    create: (context) => CaptainCubit(context: context),
+  ),
+  BlocProvider<SixthManCubit>(
+    create: (context) => SixthManCubit(context: context),
+  ),
 ];

@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:fantabasket_app_flutter/bloc/create_team_bloc/create_team_bloc.dart';
+import 'package:fantabasket_app_flutter/routes/app_router.gr.dart';
 import 'package:fantabasket_app_flutter/model/stage.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/load_stage_card.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/sponsors_banner.dart';
@@ -31,7 +32,15 @@ class _LoadStagesPageState extends State<LoadStagesPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.close))],
+        actions: [
+          IconButton(
+            onPressed: () {
+              context.router
+                  .popUntil((route) => route.settings.name == CoreRoute.name);
+            },
+            icon: const Icon(Icons.close),
+          ),
+        ],
         automaticallyImplyLeading: true,
       ),
       body: BlocConsumer<CreateTeamBloc, CreateTeamState>(
@@ -72,11 +81,7 @@ class _LoadStagesPageState extends State<LoadStagesPage> {
                                   .map((stage) => LoadStageCard(stage: stage))
                             else
                               ...(List.filled(
-                                  6,
-                                  LoadStageCard(
-                                      stage: Stage(id: 0
-                                    
-                                  ))))
+                                  6, LoadStageCard(stage: Stage(id: 0))))
                           ],
                         ),
                       ),
