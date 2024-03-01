@@ -3,6 +3,7 @@ import 'package:fantabasket_app_flutter/bloc/cubit/captain_cubit.dart/captain_cu
 import 'package:fantabasket_app_flutter/bloc/cubit/sixth_man_cubit/sixth_man_cubit.dart';
 import 'package:fantabasket_app_flutter/bloc/select_player_bloc/select_player_bloc.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
+import 'package:fantabasket_app_flutter/routes/app_router.gr.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/completion_button.dart';
 import 'package:fantabasket_app_flutter/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +45,10 @@ class CompletionPage extends StatelessWidget with AutoRouteWrapper {
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              context.router
+                  .popUntil((route) => route.settings.name == CoreRoute.name);
+            },
             icon: const Icon(Icons.close),
           )
         ],

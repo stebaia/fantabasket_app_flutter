@@ -38,7 +38,10 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
         appBar: AppBar(
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                context.router
+                    .popUntil((route) => route.settings.name == CoreRoute.name);
+              },
               icon: const Icon(Icons.close),
             )
           ],
