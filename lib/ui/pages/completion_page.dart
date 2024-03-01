@@ -37,6 +37,10 @@ class CompletionPage extends StatelessWidget with AutoRouteWrapper {
   @override
   Widget build(BuildContext context) {
     final _controller = TextEditingController();
+    print("SIde prima: $side");
+    side.removeWhere(
+        (player) => player.category == "A" || player.category == "B");
+    print("SIde dopo: $side");
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
