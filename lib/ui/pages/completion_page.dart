@@ -43,7 +43,6 @@ class CompletionPage extends StatelessWidget with AutoRouteWrapper {
   @override
   Widget build(BuildContext context) {
     final _controller = TextEditingController();
-    print("Stage: ${context.read<CreateTeamBloc>().selectedStage}");
     side.removeWhere(
         (player) => player.category == "A" || player.category == "B");
     return Scaffold(
