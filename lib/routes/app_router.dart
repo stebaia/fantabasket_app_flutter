@@ -37,7 +37,7 @@ import 'package:fantabasket_app_flutter/ui/pages/select_team_page.dart';
       AutoRoute(page: ProfilePage, path: 'profile_page'),
     ]),
     AutoRoute(page: LoadStagesPage, path: 'load_stages_page'),
-    AutoRoute(page: SelectTeamPage, path: 'select_team_page'),
+    AutoRoute(page: SelectTeamPage, path: 'select_team_page/:stage'),
     AutoRoute(page: CompletionPage, path: 'completion_page'),
   ])
 
