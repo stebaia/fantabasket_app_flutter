@@ -45,30 +45,26 @@ class AddTeamToStageRequest extends DTO with EquatableMixin {
 }
 
 class CreateTeamRequest extends DTO with EquatableMixin {
-  static const _token = 'token';
   static const _name = 'nome';
   static const _player = "player";
   static const _cpt = "cpt";
 
-  final String token;
   final String name;
   final List<int> player;
   final int cpt;
 
   CreateTeamRequest({
-    required this.token,
     required this.name,
     required this.player,
     required this.cpt,
   });
 
   Map<String, dynamic> toJson() => {
-        _token: token,
         _name: name,
         _player: player,
         _cpt: cpt,
       };
 
   @override
-  List<Object?> get props => [token, name, player, cpt];
+  List<Object?> get props => [name, player, cpt];
 }
