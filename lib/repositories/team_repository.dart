@@ -30,18 +30,18 @@ class TeamRepository {
   }
 
   Future<HttpResponse<ApiEmptyResponseDTO>> createTeam({
-    required String token,
     required String name,
     required List<int> player,
     required int cpt,
   }) async {
     try {
       CreateTeamRequest request = CreateTeamRequest(
-        token: token,
         name: name,
         player: player,
         cpt: cpt,
       );
+
+      print(request.toJson());
 
       final response = await teamService.createTeam(request);
       print(response);
