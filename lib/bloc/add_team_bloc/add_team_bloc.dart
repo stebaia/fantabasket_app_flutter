@@ -18,13 +18,11 @@ class AddTeamBloc extends Bloc<AddTeamEvent, AddTeamState> {
   }
 
   void addNewTeam({
-    required String token,
     required String name,
     required List<int> player,
     required int cpt,
   }) =>
       add(AddNewTeamEvent(
-        token: token,
         name: name,
         player: player,
         cpt: cpt,
@@ -36,8 +34,8 @@ class AddTeamBloc extends Bloc<AddTeamEvent, AddTeamState> {
   ) async {
     emit(const TryCreateState());
     try {
+      final teams = await teamRepository.getTeams();
       final result = await teamRepository.createTeam(
-        token: event.token,
         name: event.name,
         player: event.player,
         cpt: event.cpt,

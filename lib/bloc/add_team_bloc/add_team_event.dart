@@ -8,13 +8,11 @@ abstract class AddTeamEvent extends Equatable {
 }
 
 class AddNewTeamEvent extends AddTeamEvent {
-  final String token;
   final String name;
   final List<int> player;
   final int cpt;
 
   const AddNewTeamEvent({
-    required this.token,
     required this.name,
     required this.player,
     required this.cpt,
