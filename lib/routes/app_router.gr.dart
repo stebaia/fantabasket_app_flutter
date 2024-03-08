@@ -15,7 +15,8 @@ import 'package:auto_route/auto_route.dart' as _i13;
 import 'package:auto_route/empty_router_widgets.dart' as _i1;
 import 'package:flutter/material.dart' as _i14;
 
-import '../model/player.dart' as _i15;
+import '../model/player.dart' as _i16;
+import '../model/stage.dart' as _i15;
 import '../ui/pages/completion_page.dart' as _i8;
 import '../ui/pages/container_page.dart' as _i12;
 import '../ui/pages/core_page.dart' as _i5;
@@ -71,9 +72,14 @@ class AppRouter extends _i13.RootStackRouter {
       );
     },
     SelectTeamRoute.name: (routeData) {
+      final args = routeData.argsAs<SelectTeamRouteArgs>();
       return _i13.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i13.WrappedRoute(child: const _i7.SelectTeamPage()),
+        child: _i13.WrappedRoute(
+            child: _i7.SelectTeamPage(
+          key: args.key,
+          stage: args.stage,
+        )),
       );
     },
     CompletionRoute.name: (routeData) {
@@ -85,6 +91,7 @@ class AppRouter extends _i13.RootStackRouter {
           key: args.key,
           team: args.team,
           side: args.side,
+          stage: args.stage,
         )),
       );
     },
@@ -271,14 +278,36 @@ class LoadStagesRoute extends _i13.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i7.SelectTeamPage]
-class SelectTeamRoute extends _i13.PageRouteInfo<void> {
-  const SelectTeamRoute()
-      : super(
+class SelectTeamRoute extends _i13.PageRouteInfo<SelectTeamRouteArgs> {
+  SelectTeamRoute({
+    _i14.Key? key,
+    required _i15.Stage stage,
+  }) : super(
           SelectTeamRoute.name,
           path: 'select_team_page',
+          args: SelectTeamRouteArgs(
+            key: key,
+            stage: stage,
+          ),
         );
 
   static const String name = 'SelectTeamRoute';
+}
+
+class SelectTeamRouteArgs {
+  const SelectTeamRouteArgs({
+    this.key,
+    required this.stage,
+  });
+
+  final _i14.Key? key;
+
+  final _i15.Stage stage;
+
+  @override
+  String toString() {
+    return 'SelectTeamRouteArgs{key: $key, stage: $stage}';
+  }
 }
 
 /// generated route for
@@ -286,8 +315,9 @@ class SelectTeamRoute extends _i13.PageRouteInfo<void> {
 class CompletionRoute extends _i13.PageRouteInfo<CompletionRouteArgs> {
   CompletionRoute({
     _i14.Key? key,
-    required List<_i15.Player> team,
-    required List<_i15.Player> side,
+    required List<_i16.Player> team,
+    required List<_i16.Player> side,
+    required _i15.Stage stage,
   }) : super(
           CompletionRoute.name,
           path: 'completion_page',
@@ -295,6 +325,7 @@ class CompletionRoute extends _i13.PageRouteInfo<CompletionRouteArgs> {
             key: key,
             team: team,
             side: side,
+            stage: stage,
           ),
         );
 
@@ -306,17 +337,20 @@ class CompletionRouteArgs {
     this.key,
     required this.team,
     required this.side,
+    required this.stage,
   });
 
   final _i14.Key? key;
 
-  final List<_i15.Player> team;
+  final List<_i16.Player> team;
 
-  final List<_i15.Player> side;
+  final List<_i16.Player> side;
+
+  final _i15.Stage stage;
 
   @override
   String toString() {
-    return 'CompletionRouteArgs{key: $key, team: $team, side: $side}';
+    return 'CompletionRouteArgs{key: $key, team: $team, side: $side, stage: $stage}';
   }
 }
 

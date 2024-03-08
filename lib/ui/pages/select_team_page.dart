@@ -3,6 +3,7 @@ import 'package:fantabasket_app_flutter/bloc/cubit/credits_cubit/credits_cubit.d
 import 'package:fantabasket_app_flutter/bloc/select_team_bloc/select_team_bloc.dart';
 import 'package:fantabasket_app_flutter/bloc/select_player_bloc/select_player_bloc.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
+import 'package:fantabasket_app_flutter/model/stage.dart';
 import 'package:fantabasket_app_flutter/routes/app_router.gr.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/player_bar.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/player_icon.dart';
@@ -11,7 +12,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
-  const SelectTeamPage({super.key});
+  final Stage stage;
+
+  const SelectTeamPage({
+    super.key,
+    required this.stage,
+  });
 
   @override
   Widget wrappedRoute(BuildContext context) => MultiBlocProvider(
@@ -32,6 +38,7 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
   @override
   Widget build(BuildContext context) {
     late List<Player> allPlayers;
+    print("Stage 2: $stage");
     return PopScope(
       onPopInvoked: (value) => context.read<CreditsCubit>().resetTotal(),
       child: Scaffold(
@@ -96,12 +103,13 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                             ),
                             child: GestureDetector(
                               onTap: () => size == 5
-                                  ? context.pushRoute(CompletionRoute(
+                                  ? context.router.push(CompletionRoute(
                                       team: players,
                                       side: allPlayers
                                           .toSet()
                                           .difference(players.toSet())
                                           .toList(),
+                                      stage: stage,
                                     ))
                                   : null,
                               child: Icon(

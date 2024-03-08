@@ -21,9 +21,14 @@ abstract class TeamService {
   Future<HttpResponse<TeamListDTO>> getTeams();
 
   @POST('api/addTeamStage')
-  Future<HttpResponse<ApiEmptyResponseDTO>> addTeamToStage(@Body() AddTeamToStageRequest addTeamToStageRequest );
+  Future<HttpResponse<ApiEmptyResponseDTO>> addTeamToStage(
+      @Body() AddTeamToStageRequest addTeamToStageRequest);
 
   @POST('api/addPlayerTeam')
-  Future<HttpResponse<ApiEmptyResponseDTO>> addPlayerToTeam(@Body() AddPlayerToTeamRequest addPlayerToTeamRequest);
+  Future<HttpResponse<ApiEmptyResponseDTO>> addPlayerToTeam(
+      @Body() AddPlayerToTeamRequest addPlayerToTeamRequest);
 
+  @POST('api/addTeam')
+  Future<HttpResponse<ApiEmptyResponseDTO>> createTeam(
+      @Body() CreateTeamRequest createTeamRequest);
 }

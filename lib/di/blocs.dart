@@ -22,4 +22,7 @@ final List<BlocProvider> _blocs = [
   BlocProvider<SixthManCubit>(
     create: (context) => SixthManCubit(context: context),
   ),
+  BlocProvider<AddTeamBloc>(
+    create: ((context) => AddTeamBloc(teamRepository: context.read())),
+  ),
 ];
