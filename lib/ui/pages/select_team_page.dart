@@ -16,7 +16,7 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
 
   const SelectTeamPage({
     super.key,
-    @PathParam('stage') required this.stage,
+    required this.stage,
   });
 
   @override
@@ -38,6 +38,7 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
   @override
   Widget build(BuildContext context) {
     late List<Player> allPlayers;
+    print("Stage 2: $stage");
     return PopScope(
       onPopInvoked: (value) => context.read<CreditsCubit>().resetTotal(),
       child: Scaffold(
@@ -102,12 +103,13 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                             ),
                             child: GestureDetector(
                               onTap: () => size == 5
-                                  ? context.pushRoute(CompletionRoute(
+                                  ? context.router.push(CompletionRoute(
                                       team: players,
                                       side: allPlayers
                                           .toSet()
                                           .difference(players.toSet())
                                           .toList(),
+                                      stage: stage,
                                     ))
                                   : null,
                               child: Icon(

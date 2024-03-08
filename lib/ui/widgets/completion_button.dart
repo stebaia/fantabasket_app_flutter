@@ -55,6 +55,7 @@ class _CompletionButtonState extends State<CompletionButton> {
                     player: players,
                     cpt: cpt,
                   );
+              //aggiungere inserimento del team nello stage
             }
           // AGGIUNGERE SQUADRA A STAGE
           : null,

@@ -22,7 +22,7 @@ class LoadStageCard extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10),
       alignment: Alignment.centerLeft,
       child: GestureDetector(
-        onTap: () => context.router.push(const SelectTeamRoute(stage: stage)),
+        onTap: () => context.router.push(SelectTeamRoute(stage: stage)),
         child: Card(
           elevation: 2,
           child: Padding(

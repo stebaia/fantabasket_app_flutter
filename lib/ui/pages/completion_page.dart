@@ -5,6 +5,7 @@ import 'package:fantabasket_app_flutter/bloc/cubit/captain_cubit.dart/captain_cu
 import 'package:fantabasket_app_flutter/bloc/cubit/sixth_man_cubit/sixth_man_cubit.dart';
 import 'package:fantabasket_app_flutter/bloc/select_player_bloc/select_player_bloc.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
+import 'package:fantabasket_app_flutter/model/stage.dart';
 import 'package:fantabasket_app_flutter/routes/app_router.gr.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/completion_button.dart';
 import 'package:fantabasket_app_flutter/utils/constants.dart';
@@ -14,11 +15,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class CompletionPage extends StatelessWidget with AutoRouteWrapper {
   final List<Player> team;
   final List<Player> side;
+  final Stage stage;
 
   const CompletionPage({
     super.key,
     required this.team,
     required this.side,
+    required this.stage,
   });
 
   @override
@@ -43,6 +46,7 @@ class CompletionPage extends StatelessWidget with AutoRouteWrapper {
   @override
   Widget build(BuildContext context) {
     final _controller = TextEditingController();
+    print("Stage 3: $stage");
     side.removeWhere(
         (player) => player.category == "A" || player.category == "B");
     return Scaffold(
