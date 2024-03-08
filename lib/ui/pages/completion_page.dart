@@ -1,4 +1,6 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:fantabasket_app_flutter/bloc/add_team_bloc/add_team_bloc.dart';
+import 'package:fantabasket_app_flutter/bloc/create_team_bloc/create_team_bloc.dart';
 import 'package:fantabasket_app_flutter/bloc/cubit/captain_cubit.dart/captain_cubit.dart';
 import 'package:fantabasket_app_flutter/bloc/cubit/sixth_man_cubit/sixth_man_cubit.dart';
 import 'package:fantabasket_app_flutter/bloc/select_player_bloc/select_player_bloc.dart';
@@ -31,6 +33,9 @@ class CompletionPage extends StatelessWidget with AutoRouteWrapper {
           BlocProvider<SixthManCubit>(
             create: ((context) => SixthManCubit(context: context)),
           ),
+          BlocProvider<AddTeamBloc>(
+            create: ((context) => AddTeamBloc(teamRepository: context.read())),
+          ),
         ],
         child: this,
       );
@@ -38,6 +43,7 @@ class CompletionPage extends StatelessWidget with AutoRouteWrapper {
   @override
   Widget build(BuildContext context) {
     final _controller = TextEditingController();
+    print("Stage: ${context.read<CreateTeamBloc>().selectedStage}");
     side.removeWhere(
         (player) => player.category == "A" || player.category == "B");
     return Scaffold(
@@ -269,7 +275,12 @@ class CompletionPage extends StatelessWidget with AutoRouteWrapper {
               flex: 2,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [CompletionButton(controller: _controller)],
+                children: [
+                  CompletionButton(
+                    controller: _controller,
+                    team: team,
+                  )
+                ],
               ),
             ),
             const Expanded(flex: 1, child: SizedBox()),
