@@ -80,7 +80,7 @@ class RankingCard extends StatelessWidget {
                       shape: BoxShape.circle,
                     ),
                     alignment: Alignment.center,
-                    child: Text("${entry.value}"),
+                    child: Text("${entry.value}°"),
                   ),
                 ),
               ],
