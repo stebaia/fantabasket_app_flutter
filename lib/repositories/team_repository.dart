@@ -21,10 +21,10 @@ class TeamRepository {
   Future<HttpResponse<TeamList>> getTeams() async {
     try {
       final response = await teamService.getTeams();
-      TeamList stagesList = teamDTOMapper.fromDTO(response.data);
-      return HttpResponse(stagesList, response.response);
+      TeamList teamList = teamDTOMapper.fromDTO(response.data);
+      return HttpResponse(teamList, response.response);
     } catch (error, stackTrace) {
-      logger.e('Error getting list of stage',
+      logger.e('Error getting list of teams',
           error: error, stackTrace: stackTrace);
       rethrow;
     }
