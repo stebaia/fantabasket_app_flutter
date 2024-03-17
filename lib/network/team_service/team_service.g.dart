@@ -107,7 +107,7 @@ class _TeamService implements TeamService {
   }
 
   @override
-  Future<HttpResponse<ApiEmptyResponseDTO>> createTeam(
+  Future<HttpResponse<CreateTeamDTO>> createTeam(
       CreateTeamRequest createTeamRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -115,7 +115,7 @@ class _TeamService implements TeamService {
     final _data = <String, dynamic>{};
     _data.addAll(createTeamRequest.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<ApiEmptyResponseDTO>>(Options(
+        _setStreamType<HttpResponse<CreateTeamDTO>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -131,7 +131,7 @@ class _TeamService implements TeamService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = ApiEmptyResponseDTO.fromJson(_result.data!);
+    final value = CreateTeamDTO.fromJson(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

@@ -4,6 +4,7 @@ import 'package:fantabasket_app_flutter/model/requests/registration_request.dart
 import 'package:fantabasket_app_flutter/model/requests/team_request.dart';
 import 'package:fantabasket_app_flutter/model/responses/login_response.dart';
 import 'package:fantabasket_app_flutter/model/responses/registration_response.dart';
+import 'package:fantabasket_app_flutter/services/dto/create_team_dto.dart';
 import 'package:fantabasket_app_flutter/services/dto/empty_response_dto.dart';
 import 'package:fantabasket_app_flutter/services/dto/player_dto.dart';
 import 'package:fantabasket_app_flutter/services/dto/team_list_dto.dart';
@@ -29,6 +30,6 @@ abstract class TeamService {
       @Body() AddPlayerToTeamRequest addPlayerToTeamRequest);
 
   @POST('api/addTeam')
-  Future<HttpResponse<ApiEmptyResponseDTO>> createTeam(
+  Future<HttpResponse<CreateTeamDTO>> createTeam(
       @Body() CreateTeamRequest createTeamRequest);
 }

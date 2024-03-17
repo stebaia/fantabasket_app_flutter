@@ -31,7 +31,7 @@ class StageListDTO extends DTO with EquatableMixin {
     data['code'] = this.code;
     return data;
   }
-  
+
   @override
   // TODO: implement props
   List<Object?> get props => [status, msg, data, code];
@@ -60,7 +60,7 @@ class StageDTO extends DTO with EquatableMixin {
     data['data_inizio'] = this.dataInizio;
     return data;
   }
-  
+
   @override
   // TODO: implement props
   List<Object?> get props => [id, nome, stato, dataInizio];
