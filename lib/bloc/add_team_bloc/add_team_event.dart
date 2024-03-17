@@ -11,11 +11,13 @@ class AddNewTeamEvent extends AddTeamEvent {
   final String name;
   final List<int> player;
   final int cpt;
+  final int stage;
 
   const AddNewTeamEvent({
     required this.name,
     required this.player,
     required this.cpt,
+    required this.stage,
   });
 
   @override

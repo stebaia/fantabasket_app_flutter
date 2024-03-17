@@ -8,6 +8,10 @@ abstract class AddTeamState extends Equatable {
   List<Object> get props => [];
 }
 
+class InitCreateState extends AddTeamState {
+  const InitCreateState();
+}
+
 class TryCreateState extends AddTeamState {
   const TryCreateState();
 }

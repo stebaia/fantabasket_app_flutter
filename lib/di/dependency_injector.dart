@@ -6,7 +6,6 @@ import 'package:fantabasket_app_flutter/bloc/cubit/captain_cubit.dart/captain_cu
 import 'package:fantabasket_app_flutter/bloc/cubit/credits_cubit/credits_cubit.dart';
 import 'package:fantabasket_app_flutter/bloc/cubit/sixth_man_cubit/sixth_man_cubit.dart';
 import 'package:fantabasket_app_flutter/bloc/select_player_bloc/select_player_bloc.dart';
-import 'package:fantabasket_app_flutter/bloc/select_team_bloc/select_team_bloc.dart';
 import 'package:fantabasket_app_flutter/mappers/dto_mappers/player_dto_mapper.dart';
 import 'package:fantabasket_app_flutter/mappers/dto_mappers/stage_mapper.dart';
 import 'package:fantabasket_app_flutter/mappers/dto_mappers/team_dto_mapper.dart';
