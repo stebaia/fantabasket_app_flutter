@@ -28,7 +28,7 @@ class RankPage extends StatelessWidget {
           const SponsorsBanner(),
           const SizedBox(height: 10),
           const Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
             child: Text(
               "Classifiche",
               style: TextStyle(
@@ -42,7 +42,7 @@ class RankPage extends StatelessWidget {
           const SizedBox(height: 10),
           const Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: 8.0,
+              horizontal: 12.0,
               vertical: 2.0,
             ),
             child: SearchBar(
