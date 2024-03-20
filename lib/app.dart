@@ -43,7 +43,7 @@ class _AppState extends State<App> {
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          fontFamily: GoogleFonts.nunitoSans().fontFamily,
+          fontFamily: GoogleFonts.sen().fontFamily,
           useMaterial3: true,
         ),
         localizationsDelegates: [

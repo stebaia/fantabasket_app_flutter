@@ -65,25 +65,34 @@ class _LoadStagesPageState extends State<LoadStagesPage> {
               child: Column(
                 children: [
                   const SponsorsBanner(),
-                  Expanded(
-                    flex: 9,
-                    child: SingleChildScrollView(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 20),
-                        alignment: Alignment.center,
-                        child: Column(
-                          children: [
-                            if (state is ResultGetStagesState)
-                              ...(context.read<CreateTeamBloc>().state
-                                      as ResultGetStagesState)
-                                  .stagesList
-                                  .stages!
-                                  .map((stage) => LoadStageCard(stage: stage))
-                            else
-                              ...(List.filled(
-                                  6, LoadStageCard(stage: Stage(id: 0))))
-                          ],
-                        ),
+                  SingleChildScrollView(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      alignment: Alignment.center,
+                      child: Column(
+                        children: [
+                          if (state is ResultGetStagesState)
+                            ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: state.stagesList.count,
+                              itemBuilder: (context, index) {
+                                if (state.stagesList.stages != null) {
+                                  Stage stage = state.stagesList.stages![index];
+                                  return LoadStageCard(stage: stage);
+                                }
+                              },
+                            )
+                          else
+                            ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: 4,
+                              itemBuilder: (context, index) {
+                                return const LoadStageCard(
+                                  stage: Stage(id: 0),
+                                );
+                              },
+                            )
+                        ],
                       ),
                     ),
                   ),

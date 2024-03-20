@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:fantabasket_app_flutter/model/stage.dart';
 import 'package:fantabasket_app_flutter/routes/app_router.gr.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 
 class LoadStageCard extends StatelessWidget {
@@ -14,87 +15,57 @@ class LoadStageCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
     return Container(
-      width: width * 0.95,
-      height: height * 0.25,
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      alignment: Alignment.centerLeft,
       child: GestureDetector(
         onTap: () => context.router.push(SelectTeamRoute(stage: stage)),
         child: Card(
+          margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          color: Colors.white,
+          surfaceTintColor: Colors.orange,
           elevation: 2,
-          child: Padding(
-            padding: const EdgeInsets.all(12.0),
+          child: Container(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
-                  flex: 15,
-                  child: Text(
-                    "${stage.city}",
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
+                Row(
+                  children: [
+                    Container(
+                      width: 120,
+                      height: 120,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.asset(
+                          'assets/images/campo.png',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                const Expanded(
-                  flex: 5,
-                  child: SizedBox(),
-                ),
-                Expanded(
-                  flex: 50,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        flex: 20,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(50.0),
-                          child: Image.asset(
-                            'assets/images/campo.png',
-                          ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          stage.fieldName ?? "Nome campo non disponibile",
+                          maxLines: 2,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16),
                         ),
-                      ),
-                      const Expanded(flex: 7, child: SizedBox()),
-                      Expanded(
-                        flex: 70,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Text(
-                                stage.fieldName ?? "Nome campo non disponibile",
-                                maxLines: 2,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: Text(
-                                stage.address ?? "Indirizzo non disponibile",
-                                maxLines: 2,
-                              ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Text(
-                                "Da ${stage.openingDate} "
-                                "a ${stage.closingDate}",
-                                maxLines: 1,
-                                textAlign: TextAlign.start,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                          ],
+                        Text(
+                          stage.address ?? "Indirizzo non disponibile",
+                          maxLines: 2,
                         ),
-                      ),
-                    ],
-                  ),
+                        Text(
+                            "Da ${stage.openingDate} "
+                            "a ${stage.closingDate}",
+                            maxLines: 1,
+                            textAlign: TextAlign.start,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(fontSize: 12)),
+                      ],
+                    )
+                  ],
                 ),
               ],
             ),

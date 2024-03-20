@@ -9,59 +9,57 @@ class RankingCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
     return Container(
-      width: width * 0.95,
-      height: height * 0.15,
-      alignment: Alignment.centerLeft,
       child: GestureDetector(
         onTap: () {},
         child: Card(
+          margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          color: Colors.white,
+          surfaceTintColor: Colors.orange,
           elevation: 2,
-          child: Padding(
-            padding: const EdgeInsets.all(12.0),
+          child: Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Expanded(
-                  flex: 20,
+                Container(
+                  width: 120,
+                  height: 120,
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(50.0),
+                    borderRadius: BorderRadius.circular(10),
                     child: Image.asset(
                       'assets/images/campo.png',
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
-                const Expanded(flex: 10, child: SizedBox()),
-                Expanded(
-                  flex: 70,
-                  child: Container(
-                    alignment: Alignment.centerLeft,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          entry.key ?? "Nome campo non disponibile",
-                          maxLines: 2,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'Nunito Sans',
-                            fontSize: 18,
-                          ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Container(
+                  alignment: Alignment.centerLeft,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        entry.key ?? "Nome campo non disponibile",
+                        maxLines: 2,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Nunito Sans',
+                          fontSize: 18,
                         ),
-                        const SizedBox(height: 5),
-                        const Text(
-                          "Viale Roma 251",
-                          maxLines: 2,
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontFamily: 'Nunito Sans',
-                          ),
+                      ),
+                      const SizedBox(height: 5),
+                      const Text(
+                        "Viale Roma 251",
+                        maxLines: 2,
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontFamily: 'Nunito Sans',
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
                 const Expanded(flex: 10, child: SizedBox()),
