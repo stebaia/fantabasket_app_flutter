@@ -46,6 +46,7 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
           actions: [
             IconButton(
               onPressed: () {
+                context.read<CreditsCubit>().resetTotal();
                 context.router
                     .popUntil((route) => route.settings.name == CoreRoute.name);
               },

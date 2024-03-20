@@ -4,6 +4,7 @@ import 'package:fantabasket_app_flutter/bloc/create_team_bloc/create_team_bloc.d
 import 'package:fantabasket_app_flutter/bloc/cubit/captain_cubit.dart/captain_cubit.dart';
 import 'package:fantabasket_app_flutter/bloc/cubit/sixth_man_cubit/sixth_man_cubit.dart';
 import 'package:fantabasket_app_flutter/bloc/select_player_bloc/select_player_bloc.dart';
+import 'package:fantabasket_app_flutter/bloc/cubit/credits_cubit/credits_cubit.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:fantabasket_app_flutter/model/stage.dart';
 import 'package:fantabasket_app_flutter/routes/app_router.gr.dart';
@@ -55,6 +56,7 @@ class CompletionPage extends StatelessWidget with AutoRouteWrapper {
         actions: [
           IconButton(
             onPressed: () {
+              context.read<CreditsCubit>().resetTotal();
               context.router
                   .popUntil((route) => route.settings.name == CoreRoute.name);
             },
