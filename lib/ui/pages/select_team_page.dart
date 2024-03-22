@@ -3,7 +3,6 @@ import 'package:fantabasket_app_flutter/bloc/cubit/credits_cubit/credits_cubit.d
 import 'package:fantabasket_app_flutter/bloc/select_team_bloc/select_team_bloc.dart';
 import 'package:fantabasket_app_flutter/bloc/select_player_bloc/select_player_bloc.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
-import 'package:fantabasket_app_flutter/model/players_list.dart';
 import 'package:fantabasket_app_flutter/model/stage.dart';
 import 'package:fantabasket_app_flutter/routes/app_router.gr.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/player_icon.dart';
@@ -146,9 +145,6 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                                   SelectPlayerState>(
                                   listener: (context, state) {},
                                   builder: (context, state) {
-                                    var checkedPlayers = context
-                                        .read<SelectPlayerBloc>()
-                                        .getCheckedPlayers();
                                     final List<Player> list =
                                         upstate.playersList.players!;
                                     return Container(
