@@ -10,8 +10,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class PlayerIcon extends StatefulWidget {
   final List<Player> players;
 
+  final BuildContext mContext;
+
   const PlayerIcon({
     required this.players,
+    required this.mContext,
     super.key,
   });
 
@@ -38,7 +41,7 @@ class _PlayerIconState extends State<PlayerIcon> {
           isScrollControlled: true,
           builder: (BuildContext context) {
             var checkedPlayers =
-                context.read<SelectPlayerBloc>().getCheckedPlayers();
+                widget.mContext.read<SelectPlayerBloc>().getCheckedPlayers();
             print("Checked players: $checkedPlayers");
             final List<Player> list = List.from(
                 Set.from(widget.players).difference(Set.from(checkedPlayers)));
@@ -54,17 +57,25 @@ class _PlayerIconState extends State<PlayerIcon> {
                       ...list.map(
                         (player) => GestureDetector(
                           onTap: () {
-                            int total = context.read<CreditsCubit>().getTotal();
+                            int total =
+                                widget.mContext.read<CreditsCubit>().getTotal();
                             int value = player.value;
-                            int checkedSize = context
+                            List<Player> checkedPlayers = widget.mContext
                                 .read<SelectPlayerBloc>()
-                                .checkedPlayers
-                                .length;
-                            if (checkedSize < 5 && total + value <= 65) {
-                              context.read<CreditsCubit>().decrement(
+                                .checkedPlayers;
+                            if (checkedPlayers.length < 5 &&
+                                total + value <= 65) {
+                              widget.mContext.read<CreditsCubit>().decrement(
                                   selected == null ? 0 : selected!.value);
-                              context.read<CreditsCubit>().increment(value);
-                              context
+                              widget.mContext
+                                  .read<CreditsCubit>()
+                                  .increment(value);
+                              if (selected != null) {
+                                widget.mContext
+                                    .read<SelectPlayerBloc>()
+                                    .removePlayer(selected!);
+                              }
+                              widget.mContext
                                   .read<SelectPlayerBloc>()
                                   .addPlayer(player);
                             }
