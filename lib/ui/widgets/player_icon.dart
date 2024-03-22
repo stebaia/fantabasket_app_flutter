@@ -58,11 +58,13 @@ class _PlayerIconState extends State<PlayerIcon> {
                             int total =
                                 widget.mContext.read<CreditsCubit>().getTotal();
                             int value = player.value;
+                            int currentValue =
+                                selected == null ? 0 : selected!.value;
                             List<Player> checkedPlayers = widget.mContext
                                 .read<SelectPlayerBloc>()
                                 .checkedPlayers;
                             if (checkedPlayers.length < 5 &&
-                                total + value <= 65) {
+                                total - currentValue + value <= 65) {
                               widget.mContext.read<CreditsCubit>().decrement(
                                   selected == null ? 0 : selected!.value);
                               widget.mContext
