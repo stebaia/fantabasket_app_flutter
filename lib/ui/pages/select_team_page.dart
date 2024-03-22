@@ -151,7 +151,6 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                                         .getCheckedPlayers();
                                     final List<Player> list =
                                         upstate.playersList.players!;
-                                    var size = checkedPlayers.length;
                                     return Container(
                                       alignment: Alignment.center,
                                       width: double.infinity,
