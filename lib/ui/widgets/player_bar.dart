@@ -3,16 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:fantabasket_app_flutter/utils/constants.dart';
 
 class PlayerBar extends StatelessWidget {
-  final Player? player;
+  final Player player;
+  final bool enabled;
 
   const PlayerBar({
-    this.player,
+    required this.player,
+    required this.enabled,
     super.key,
   });
 
   Color _getColor() {
-    String? category = player!.category;
-    print("Giocatore: ${player!}");
+    String? category = player.category;
+    print("Giocatore: $player");
     return Constants.categoryColors[category]!;
   }
 
@@ -22,7 +24,7 @@ class PlayerBar extends StatelessWidget {
       width: double.infinity,
       height: MediaQuery.of(context).size.height * 0.1,
       child: Card(
-        color: _getColor(),
+        color: enabled ? _getColor() : const Color.fromARGB(255, 212, 207, 207),
         elevation: 2,
         child: Row(
           children: [
@@ -54,7 +56,7 @@ class PlayerBar extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Text(
-                  "${player?.lastName} ${player?.firstName}",
+                  "${player.lastName} ${player.firstName}",
                   textAlign: TextAlign.start,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -68,7 +70,7 @@ class PlayerBar extends StatelessWidget {
             Expanded(
               flex: 12,
               child: Text(
-                "${player?.team}",
+                player.team,
                 textAlign: TextAlign.center,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
@@ -81,7 +83,7 @@ class PlayerBar extends StatelessWidget {
             Expanded(
               flex: 5,
               child: Text(
-                "${player?.value}",
+                "${player.value}",
                 textAlign: TextAlign.center,
                 maxLines: 1,
                 style: const TextStyle(
