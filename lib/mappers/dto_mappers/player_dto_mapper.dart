@@ -34,6 +34,7 @@ class PlayerMapper extends DTOMapper<PlayerDetailDTO, Player> {
       lastName: dto.lastName ?? '',
       value: dto.value ?? 0,
       team: dto.team ?? '',
+      photo: dto.photo ?? '',
       phone: dto.phone ?? '',
       category: dto.category ?? '',
       email: dto.email ?? '');

@@ -5,6 +5,7 @@ class Player extends Equatable {
   final String firstName;
   final String lastName;
   final String email;
+  final String photo;
   final String phone;
   final String category;
   final String team;
@@ -16,11 +17,12 @@ class Player extends Equatable {
       required this.lastName,
       required this.value,
       required this.team,
+      required this.photo,
       required this.phone,
       required this.category,
       required this.email});
 
   @override
   List<Object?> get props =>
-      [id, firstName, lastName, value, team, phone, category, email];
+      [id, firstName, lastName, value, team, phone, category, email, photo];
 }

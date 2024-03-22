@@ -27,6 +27,9 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                 playerRepository: context.read())
               ..getPlayers()),
           ),
+          BlocProvider<CreditsCubit>(
+            create: ((context) => CreditsCubit(context: context)),
+          ),
           BlocProvider<SelectPlayerBloc>(
             create: ((context) => SelectPlayerBloc()),
           ),

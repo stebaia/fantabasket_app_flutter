@@ -3,6 +3,7 @@ import 'package:fantabasket_app_flutter/bloc/select_player_bloc/select_player_bl
 import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/player_bar.dart';
 import 'package:fantabasket_app_flutter/utils/constants.dart';
+import 'package:fantabasket_app_flutter/utils/theme_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -35,6 +36,9 @@ class _PlayerIconState extends State<PlayerIcon> {
     return GestureDetector(
       onTap: () async {
         var selectedPlayer = await showModalBottomSheet<Player>(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(10.0)),
+          ),
           context: context,
           isScrollControlled: true,
           builder: (BuildContext context) {
@@ -50,9 +54,23 @@ class _PlayerIconState extends State<PlayerIcon> {
               child: Center(
                 child: SingleChildScrollView(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const Text(
+                        'Seleziona giocatore',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       ...list.map(
                         (player) {
                           var enabled =
@@ -108,43 +126,67 @@ class _PlayerIconState extends State<PlayerIcon> {
         }
       },
       child: SizedBox(
-        width: MediaQuery.of(context).size.width * 0.3,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: selected == null
-                    ? Colors.white
-                    : Constants.categoryColors[selected!.category],
-                border: const Border.symmetric(
-                  horizontal:
-                      BorderSide(color: Color.fromARGB(255, 201, 195, 195)),
-                  vertical:
-                      BorderSide(color: Color.fromARGB(255, 201, 195, 195)),
-                ),
+        width: MediaQuery.of(context).size.width * 0.32,
+        height: MediaQuery.of(context).size.height * 0.26,
+        child: Card(
+          elevation: 4,
+          child: Column(
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width * 0.32,
+                height: MediaQuery.of(context).size.height * 0.25,
+                child: selected != null
+                    ? Column(
+                        children: [
+                          Container(
+                              width: MediaQuery.of(context).size.width * 0.32,
+                              height: MediaQuery.of(context).size.height * 0.15,
+                              child: ClipRRect(
+                                  borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10)),
+                                  child: selected!.photo != ''
+                                      ? Image.network(
+                                          '${Constants.baseUrl}${selected!.photo}',
+                                          fit: BoxFit.cover,
+                                        )
+                                      : Image.network(
+                                          'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/LeBron_James_%2851959977144%29_%28cropped2%29.jpg/640px-LeBron_James_%2851959977144%29_%28cropped2%29.jpg',
+                                          fit: BoxFit.cover))),
+                          SizedBox(
+                            height: 6,
+                          ),
+                          Text(
+                            selected!.firstName,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            selected!.lastName,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      )
+                    : Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Icon(Icons.add,
+                              size: MediaQuery.of(context).size.width * 0.13,
+                              color: const Color.fromARGB(255, 225, 135, 57)),
+                          const SizedBox(height: 5),
+                          Text(
+                            selected == null
+                                ? "Seleziona giocatore\n"
+                                : "${selected!.firstName} ${selected!.lastName}\n",
+                            textAlign: TextAlign.center,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+                      ),
               ),
-              width: MediaQuery.of(context).size.width * 0.17,
-              height: MediaQuery.of(context).size.width * 0.17,
-              child: Icon(
-                Icons.person,
-                size: MediaQuery.of(context).size.width * 0.13,
-                color: selected == null
-                    ? const Color.fromARGB(255, 201, 195, 195)
-                    : Colors.white,
-              ),
-            ),
-            const SizedBox(height: 5),
-            Text(
-              selected == null
-                  ? "Seleziona giocatore\n"
-                  : "${selected!.firstName} ${selected!.lastName}\n",
-              textAlign: TextAlign.center,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

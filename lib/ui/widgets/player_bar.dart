@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:flutter/material.dart';
 import 'package:fantabasket_app_flutter/utils/constants.dart';
+import 'package:flutter/widgets.dart';
 
 class PlayerBar extends StatelessWidget {
   final Player player;
@@ -22,75 +25,71 @@ class PlayerBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: MediaQuery.of(context).size.height * 0.1,
+      height: 100,
       child: Card(
-        color: enabled ? _getColor() : const Color.fromARGB(255, 212, 207, 207),
-        elevation: 2,
+        color:
+            enabled ? Colors.white : const Color.fromARGB(255, 212, 207, 207),
+        elevation: 6,
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Expanded(flex: 1, child: SizedBox()),
-            Expanded(
-              flex: 4,
-              child: Container(
-                  clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.white,
-                      width: 1.0,
-                    ),
-                    shape: BoxShape.circle,
+            Row(
+              children: [
+                SizedBox(
+                    width: 80,
+                    height: 100,
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: player.photo != ''
+                            ? Image.network(
+                                '${Constants.baseUrl}${player.photo}',
+                                fit: BoxFit.cover,
+                              )
+                            : Image.network(
+                                'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/LeBron_James_%2851959977144%29_%28cropped2%29.jpg/640px-LeBron_James_%2851959977144%29_%28cropped2%29.jpg',
+                                fit: BoxFit.cover))),
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '${player.firstName} ${player.lastName}',
+                        style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        player.team,
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                        ),
+                      )
+                    ],
                   ),
-                  child:
-                      Container() /*éClipRRect(
-                  borderRadius: BorderRadius.circular(50.0),
-                  child: Image.network(
-                    player!.image!,
-                    fit: BoxFit.fill,
-                  ),
-                ),*/
-                  ),
+                )
+              ],
             ),
-            const Expanded(flex: 1, child: SizedBox()),
-            Expanded(
-              flex: 14,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Text(
-                  "${player.lastName} ${player.firstName}",
-                  textAlign: TextAlign.start,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
+            Container(
+              width: 40,
+              height: 100,
+              decoration: BoxDecoration(
+                  color: _getColor(),
+                  borderRadius: const BorderRadius.only(
+                      topRight: Radius.circular(10),
+                      bottomRight: Radius.circular(10))),
+              child: Center(
+                  child: Text(
+                player.value.toString(),
+                style: const TextStyle(
                     color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
-            const Expanded(flex: 1, child: SizedBox()),
-            Expanded(
-              flex: 12,
-              child: Text(
-                player.team,
-                textAlign: TextAlign.center,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-            ),
-            const Expanded(flex: 1, child: SizedBox()),
-            Expanded(
-              flex: 5,
-              child: Text(
-                "${player.value}",
-                textAlign: TextAlign.center,
-                maxLines: 1,
-                style: const TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-            ),
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
+              )),
+            )
           ],
         ),
       ),

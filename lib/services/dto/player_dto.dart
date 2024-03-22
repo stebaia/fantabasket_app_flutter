@@ -39,6 +39,7 @@ class PlayerDetailDTO extends DTO with EquatableMixin {
   final String? lastName;
   final String? email;
   final String? phone;
+  final String? photo;
   final String? category;
   final String? team;
   final int? value;
@@ -49,6 +50,7 @@ class PlayerDetailDTO extends DTO with EquatableMixin {
       this.lastName,
       this.email,
       this.phone,
+      this.photo,
       this.category,
       this.team,
       this.value});
@@ -60,6 +62,7 @@ class PlayerDetailDTO extends DTO with EquatableMixin {
       lastName: json['cognome'],
       email: json['email'],
       phone: json['cellulare'],
+      photo: json['foto'],
       category: json['categoria'],
       team: json['squadra'],
       value: json['punteggio'] == null ? 0 : int.parse(json['punteggio']),
@@ -73,6 +76,7 @@ class PlayerDetailDTO extends DTO with EquatableMixin {
       'lastName': lastName,
       'email': email,
       'phone': phone,
+      'foto': photo,
       'category': category,
       'team': team,
       'value': value
@@ -86,6 +90,7 @@ class PlayerDetailDTO extends DTO with EquatableMixin {
         firstName,
         lastName,
         email,
+        photo,
         category,
         team,
         value,
