@@ -36,10 +36,11 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
 
   @override
   Widget build(BuildContext context) {
-    late List<Player> allPlayers;
-    print("Stage 2: $stage");
     return PopScope(
-      onPopInvoked: (value) => context.read<CreditsCubit>().resetTotal(),
+      onPopInvoked: (value) {
+        context.read<CreditsCubit>().resetTotal();
+        context.read<SelectPlayerBloc>().clearList();
+      },
       child: Scaffold(
         appBar: AppBar(
           actions: [
@@ -73,7 +74,7 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                       BlocConsumer<CreditsCubit, CreditsState>(
                         listener: (context, state) {},
                         builder: (context, state) {
-                          print("Rebuild, state: $state");
+                          print("Rebuild total: $state");
                           int total = context.read<CreditsCubit>().getTotal();
                           return SizedBox(
                             width: MediaQuery.of(context).size.width * 0.7,
@@ -143,10 +144,12 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                           : BlocConsumer<SelectPlayerBloc, SelectPlayerState>(
                               listener: (context, state) {},
                               builder: (context, state) {
-                                var players = context
+                                var checkedPlayers = context
                                     .read<SelectPlayerBloc>()
                                     .getCheckedPlayers();
-                                var size = players.length;
+                                final List<Player> list =
+                                    upstate.playersList.players!;
+                                var size = checkedPlayers.length;
                                 return Container(
                                   alignment: Alignment.center,
                                   width: double.infinity,
@@ -162,19 +165,13 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                                               MainAxisAlignment.spaceAround,
                                           children: [
                                             PlayerIcon(
-                                              player:
-                                                  size >= 1 ? players[0] : null,
-                                              players: upstate.playersList,
+                                              players: list,
                                             ),
                                             PlayerIcon(
-                                              player:
-                                                  size >= 2 ? players[1] : null,
-                                              players: upstate.playersList,
+                                              players: list,
                                             ),
                                             PlayerIcon(
-                                              player:
-                                                  size >= 3 ? players[2] : null,
-                                              players: upstate.playersList,
+                                              players: list,
                                             ),
                                           ],
                                         ),
@@ -189,16 +186,10 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                                                 MainAxisAlignment.spaceEvenly,
                                             children: [
                                               PlayerIcon(
-                                                player: size >= 4
-                                                    ? players[3]
-                                                    : null,
-                                                players: upstate.playersList,
+                                                players: list,
                                               ),
                                               PlayerIcon(
-                                                player: size >= 5
-                                                    ? players[4]
-                                                    : null,
-                                                players: upstate.playersList,
+                                                players: list,
                                               ),
                                             ],
                                           ),

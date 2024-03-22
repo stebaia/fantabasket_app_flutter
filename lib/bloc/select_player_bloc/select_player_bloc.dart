@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
+import 'package:fantabasket_app_flutter/model/players_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,6 +15,10 @@ class SelectPlayerBloc extends Bloc<SelectPlayerEvent, SelectPlayerState> {
   SelectPlayerBloc() : super(InitialPlayerState(List.empty(growable: true))) {
     on<AddPlayerEvent>(_addPlayer);
     on<RemovePlayerEvent>(_removePlayer);
+  }
+
+  void clearList() {
+    checkedPlayers.clear();
   }
 
   void addPlayer(Player player) => add(AddPlayerEvent(player));

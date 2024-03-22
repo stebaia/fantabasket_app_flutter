@@ -10,9 +10,6 @@ final List<BlocProvider> _blocs = [
     create: ((context) =>
         CreateTeamBloc(stagesRepository: context.read()..getStages())),
   ),
-  BlocProvider<SelectPlayerBloc>(
-    create: (context) => SelectPlayerBloc(),
-  ),
   BlocProvider<CreditsCubit>(
     create: (context) => CreditsCubit(context: context),
   ),

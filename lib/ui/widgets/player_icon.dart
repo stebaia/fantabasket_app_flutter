@@ -1,15 +1,16 @@
+import 'package:fantabasket_app_flutter/bloc/cubit/credits_cubit/credits_cubit.dart';
+import 'package:fantabasket_app_flutter/bloc/select_player_bloc/select_player_bloc.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:fantabasket_app_flutter/model/players_list.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/player_bar.dart';
 import 'package:fantabasket_app_flutter/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PlayerIcon extends StatefulWidget {
-  final Player? player;
-  final PlayersList players;
+  final List<Player> players;
 
   const PlayerIcon({
-    required this.player,
     required this.players,
     super.key,
   });
@@ -19,12 +20,11 @@ class PlayerIcon extends StatefulWidget {
 }
 
 class _PlayerIconState extends State<PlayerIcon> {
-  late Player? selected;
+  Player? selected;
 
   @override
   void initState() {
     super.initState();
-    selected = widget.player;
   }
 
   @override
@@ -37,6 +37,11 @@ class _PlayerIconState extends State<PlayerIcon> {
           context: context,
           isScrollControlled: true,
           builder: (BuildContext context) {
+            var checkedPlayers =
+                context.read<SelectPlayerBloc>().getCheckedPlayers();
+            print("Checked players: $checkedPlayers");
+            final List<Player> list = List.from(
+                Set.from(widget.players).difference(Set.from(checkedPlayers)));
             return Container(
               padding: const EdgeInsets.all(8.0),
               height: height,
@@ -46,9 +51,25 @@ class _PlayerIconState extends State<PlayerIcon> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      ...widget.players.players!.map(
+                      ...list.map(
                         (player) => GestureDetector(
-                          onTap: () => Navigator.of(context).pop(player),
+                          onTap: () {
+                            int total = context.read<CreditsCubit>().getTotal();
+                            int value = player.value;
+                            int checkedSize = context
+                                .read<SelectPlayerBloc>()
+                                .checkedPlayers
+                                .length;
+                            if (checkedSize < 5 && total + value <= 65) {
+                              context.read<CreditsCubit>().decrement(
+                                  selected == null ? 0 : selected!.value);
+                              context.read<CreditsCubit>().increment(value);
+                              context
+                                  .read<SelectPlayerBloc>()
+                                  .addPlayer(player);
+                            }
+                            Navigator.of(context).pop(player);
+                          },
                           child: PlayerBar(
                             player: player,
                           ),
@@ -61,10 +82,9 @@ class _PlayerIconState extends State<PlayerIcon> {
             );
           },
         );
-        setState(() {
-          print("Dentro set state");
-          selected = selectedPlayer;
-        });
+        if (selectedPlayer != null && selectedPlayer != selected) {
+          setState(() => selected = selectedPlayer);
+        }
       },
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.3,
