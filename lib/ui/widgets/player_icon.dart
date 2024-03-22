@@ -1,7 +1,6 @@
 import 'package:fantabasket_app_flutter/bloc/cubit/credits_cubit/credits_cubit.dart';
 import 'package:fantabasket_app_flutter/bloc/select_player_bloc/select_player_bloc.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
-import 'package:fantabasket_app_flutter/model/players_list.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/player_bar.dart';
 import 'package:fantabasket_app_flutter/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +31,6 @@ class _PlayerIconState extends State<PlayerIcon> {
 
   @override
   Widget build(BuildContext context) {
-    print("Rebuild player icon");
     var height = MediaQuery.of(context).size.height * 0.7;
     return GestureDetector(
       onTap: () async {
