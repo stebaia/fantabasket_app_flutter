@@ -78,8 +78,10 @@ class _PlayerIconState extends State<PlayerIcon> {
                               widget.mContext
                                   .read<SelectPlayerBloc>()
                                   .addPlayer(player);
+                              Navigator.of(context).pop(player);
+                            } else {
+                              Navigator.of(context).pop(null);
                             }
-                            Navigator.of(context).pop(player);
                           },
                           child: PlayerBar(
                             player: player,
