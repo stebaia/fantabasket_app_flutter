@@ -71,6 +71,7 @@ flutter:
     - assets/images/campo.png
     - assets/images/player.jpeg
     - assets/images/basketbal_big.png
+    - assets/images/basketballicon.png
   
   fonts:
     - family: Poppins

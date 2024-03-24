@@ -1,195 +1,274 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fantabasket_app_flutter/bloc/cubit/auth_cubit/auth_cubit.dart';
+import 'package:fantabasket_app_flutter/bloc/view_team_bloc/view_team_bloc.dart';
 import 'package:fantabasket_app_flutter/routes/app_router.gr.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/sponsors_banner.dart';
+import 'package:fantabasket_app_flutter/ui/widgets/team_card.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/wave_clipper.dart';
 import 'package:fantabasket_app_flutter/utils/constants.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CreateTeamPage extends StatelessWidget {
+class CreateTeamPage extends StatelessWidget with AutoRouteWrapper {
   const CreateTeamPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final user = (context.read<AuthCubit>().state as AuthenticatedState).user;
+
     return Container(
-      color: const Color.fromARGB(255, 225, 135, 57),
+      color: Color.fromARGB(255, 185, 87, 1),
       child: Stack(
         children: [
-          Positioned(
-            top: 150,
-            left: 0,
-            child: Image.asset(
-              "assets/images/basketbal_big.png",
-              color: Colors.white.withOpacity(0.6),
-              colorBlendMode: BlendMode.modulate,
-              width: 200,
-            ),
-          ),
           ClipPath(
             clipper: WaveClipper(),
             child: Container(
-              color: Colors.white,
+              color: Color.fromARGB(255, 14, 13, 13),
               height: double.infinity,
             ),
           ),
           Positioned(
-            right: 30,
-            top: 30,
+              child: SizedBox(
+            width: MediaQuery.of(context).size.width,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    elevation: 3,
-                    foregroundColor: Colors.black,
-                  ),
-                  onPressed: () {
-                    context.pushRoute(const LoadStagesRoute());
-                  },
-                  child: const Text(
-                    "Crea squadra",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Ciao ${user.firstName}!',
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 26,
+                              fontWeight: FontWeight.bold)),
+                      const Text(
+                        'Hai tempo fino al 15 maggio 2024 per creare il tuo fantateam!',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.white,
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.bottomRight,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.black,
+                            foregroundColor: Colors.white,
+                          ),
+                          onPressed: () {
+                            context.pushRoute(const LoadStagesRoute()).then(
+                                (value) =>
+                                    context.read<ViewTeamBloc>().viewMyTeams());
+                          },
+                          child: const Text(
+                            "Crea squadra",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-               Container(
-                  width: 130,
-                  child: Text(
-                    'Hai tempo fino al 15 maggio 2024',
-                    style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
-                  ),
-                )
+                BlocBuilder<ViewTeamBloc, ViewTeamState>(
+                  builder: (context, state) {
+                    if (state is ResultViewTeamState) {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.only(left: 20),
+                            child: const Text(
+                              'Le tue squadre',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  fontSize: 20),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            width: double.infinity,
+                            child: Container(
+                              child: CarouselSlider(
+                                options: CarouselOptions(
+                                  enableInfiniteScroll: false,
+                                  enlargeCenterPage: true,
+                                  aspectRatio: 1.6,
+                                ),
+                                items: state.myTeams.map((i) {
+                                  return Builder(
+                                    builder: (BuildContext context) {
+                                      return TeamCard(team: i);
+                                    },
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    } else if (state is NoTeamsState) {
+                      return Positioned(
+                        bottom: MediaQuery.of(context).size.height * 0.2,
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.75,
+                          padding: const EdgeInsets.only(left: 20),
+                          alignment: Alignment.centerLeft,
+                          child: Column(
+                            children: [
+                              Text.rich(
+                                TextSpan(
+                                  children: [
+                                    const TextSpan(
+                                      text: 'Leggi il ',
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: 'regolamento',
+                                      style: const TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.white,
+                                        decoration: TextDecoration.underline,
+                                      ),
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () {
+                                          showDialog(
+                                              context: context,
+                                              barrierDismissible: true,
+                                              builder: (BuildContext context) {
+                                                return Dialog(
+                                                    child: Container(
+                                                        height: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .height *
+                                                            0.75,
+                                                        alignment:
+                                                            Alignment.center,
+                                                        decoration:
+                                                            const BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          20)),
+                                                          color: Colors.white,
+                                                        ),
+                                                        child: Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              const Expanded(
+                                                                flex: 3,
+                                                                child: Center(
+                                                                  child: Text(
+                                                                    "Regolamento",
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      fontSize:
+                                                                          25,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              const Expanded(
+                                                                flex: 15,
+                                                                child:
+                                                                    SingleChildScrollView(
+                                                                  scrollDirection:
+                                                                      Axis.vertical,
+                                                                  child:
+                                                                      Padding(
+                                                                    padding:
+                                                                        EdgeInsets.all(
+                                                                            12.0),
+                                                                    child: Text(
+                                                                        Constants
+                                                                            .loremIpsum),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              Expanded(
+                                                                flex: 3,
+                                                                child: Center(
+                                                                  child:
+                                                                      ElevatedButton(
+                                                                    onPressed: () =>
+                                                                        Navigator.pop(
+                                                                            context),
+                                                                    child:
+                                                                        const Text(
+                                                                      "Chiudi",
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: Colors
+                                                                            .black,
+                                                                        fontWeight:
+                                                                            FontWeight.bold,
+                                                                        fontSize:
+                                                                            16,
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ])));
+                                              });
+                                        },
+                                    ),
+                                    const TextSpan(
+                                      text: ' e crea la tua squadra',
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 20),
+                              const Text(
+                                "Riuscirai ad arrivare primo e vincere la competizione?",
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    } else {
+                      return Container();
+                    }
+                  },
+                ),
               ],
             ),
-          ),
-          Positioned(
-            bottom: MediaQuery.of(context).size.height * 0.2,
-            child: Container(
-              width: MediaQuery.of(context).size.width * 0.75,
-              padding: const EdgeInsets.only(left: 20),
-              alignment: Alignment.centerLeft,
-              child: Column(
-                children: [
-                  Text.rich(
-                    TextSpan(
-                      children: [
-                        const TextSpan(
-                          text: 'Leggi il ',
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.black,
-                          ),
-                        ),
-                        TextSpan(
-                          text: 'regolamento',
-                          style: const TextStyle(
-                            fontSize: 18,
-                            color: Colors.black,
-                            decoration: TextDecoration.underline,
-                          ),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              showDialog(
-                                  context: context,
-                                  barrierDismissible: true,
-                                  builder: (BuildContext context) {
-                                    return Dialog(
-                                        child: Container(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.75,
-                                            alignment: Alignment.center,
-                                            decoration: const BoxDecoration(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(20)),
-                                              color: Colors.white,
-                                            ),
-                                            child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: [
-                                                  const Expanded(
-                                                    flex: 3,
-                                                    child: Center(
-                                                      child: Text(
-                                                        "Regolamento",
-                                                        style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 25,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  const Expanded(
-                                                    flex: 15,
-                                                    child:
-                                                        SingleChildScrollView(
-                                                      scrollDirection:
-                                                          Axis.vertical,
-                                                      child: Padding(
-                                                        padding: EdgeInsets.all(
-                                                            12.0),
-                                                        child: Text(Constants
-                                                            .loremIpsum),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    flex: 3,
-                                                    child: Center(
-                                                      child: ElevatedButton(
-                                                        onPressed: () =>
-                                                            Navigator.pop(
-                                                                context),
-                                                        child: const Text(
-                                                          "Chiudi",
-                                                          style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 16,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ])));
-                                  });
-                            },
-                        ),
-                        const TextSpan(
-                          text: ' e crea la tua squadra',
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  const Text(
-                    "Riuscirai ad arrivare primo e vincere la competizione?",
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.black,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          )),
           const Positioned(
             bottom: 0,
             child: SponsorsBanner(),
@@ -198,4 +277,15 @@ class CreateTeamPage extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  Widget wrappedRoute(BuildContext context) => MultiBlocProvider(
+        providers: [
+          BlocProvider<ViewTeamBloc>(
+            create: ((context) =>
+                ViewTeamBloc(teamRepository: context.read())..viewMyTeams()),
+          )
+        ],
+        child: this,
+      );
 }

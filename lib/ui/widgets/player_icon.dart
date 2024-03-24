@@ -2,6 +2,7 @@ import 'package:fantabasket_app_flutter/bloc/cubit/credits_cubit/credits_cubit.d
 import 'package:fantabasket_app_flutter/bloc/select_player_bloc/select_player_bloc.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/player_bar.dart';
+import 'package:fantabasket_app_flutter/utils/color_utils.dart';
 import 'package:fantabasket_app_flutter/utils/constants.dart';
 import 'package:fantabasket_app_flutter/utils/theme_helper.dart';
 import 'package:flutter/material.dart';
@@ -36,11 +37,9 @@ class _PlayerIconState extends State<PlayerIcon> {
     return GestureDetector(
       onTap: () async {
         var selectedPlayer = await showModalBottomSheet<Player>(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(10.0)),
-          ),
           context: context,
           isScrollControlled: true,
+          backgroundColor: Color.fromARGB(255, 14, 13, 13),
           builder: (BuildContext context) {
             var checkedPlayers =
                 widget.mContext.read<SelectPlayerBloc>().getCheckedPlayers();
@@ -49,6 +48,7 @@ class _PlayerIconState extends State<PlayerIcon> {
             final List<Player> list = List.from(
                 Set.from(widget.players).difference(Set.from(checkedPlayers)));
             return Container(
+              color: Color.fromARGB(255, 14, 13, 13),
               padding: const EdgeInsets.all(8.0),
               height: height,
               child: Center(
@@ -64,7 +64,7 @@ class _PlayerIconState extends State<PlayerIcon> {
                       const Text(
                         'Seleziona giocatore',
                         style: TextStyle(
-                            color: Colors.black,
+                            color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 16),
                       ),
@@ -129,6 +129,7 @@ class _PlayerIconState extends State<PlayerIcon> {
         width: MediaQuery.of(context).size.width * 0.32,
         height: MediaQuery.of(context).size.height * 0.26,
         child: Card(
+          color: Color.fromARGB(255, 14, 13, 13),
           elevation: 4,
           child: Column(
             children: [
@@ -153,16 +154,38 @@ class _PlayerIconState extends State<PlayerIcon> {
                                       : Image.network(
                                           'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/LeBron_James_%2851959977144%29_%28cropped2%29.jpg/640px-LeBron_James_%2851959977144%29_%28cropped2%29.jpg',
                                           fit: BoxFit.cover))),
-                          SizedBox(
-                            height: 6,
-                          ),
-                          Text(
-                            selected!.firstName,
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            selected!.lastName,
-                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height * 0.1,
+                            decoration: BoxDecoration(
+                                color: ColorUtils.getColor(selected!),
+                                borderRadius: const BorderRadius.only(
+                                    bottomLeft: Radius.circular(10),
+                                    bottomRight: Radius.circular(10))),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  selected!.firstName,
+                                  style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  selected!.lastName,
+                                  style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  selected!.value.toString(),
+                                  style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
                           )
                         ],
                       )
@@ -181,6 +204,9 @@ class _PlayerIconState extends State<PlayerIcon> {
                             textAlign: TextAlign.center,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
                           ),
                         ],
                       ),

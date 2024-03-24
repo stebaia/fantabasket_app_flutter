@@ -18,37 +18,49 @@ class _CorePageState extends State<CorePage> {
   Widget build(BuildContext context) {
     //final darkMode = Provider.of<DarkThemeProvider>(context);
     //final switchDasboard = Provider.of<SwitchDashboardProvider>(context);
-    return AutoTabsScaffold(
-      backgroundColor: Colors.white,
-      //darkMode.darkTheme ? ThemeHelper.backgroundColorDark : Colors.white,
-      routes: [RankRoute(), CreateTeamRoute(), ProfileRoute()],
-      bottomNavigationBuilder: (context, tabsRouter) {
-        return BottomNavigationBar(
-            elevation: 0,
-            type: BottomNavigationBarType.fixed,
-            backgroundColor: ThemeHelper.backgroundColorDark,
-            selectedItemColor: const Color.fromARGB(255, 225, 135, 57),
-            unselectedItemColor: Colors.white,
-            currentIndex: tabsRouter.activeIndex,
-            onTap: tabsRouter.setActiveIndex,
-            items: const [
-              BottomNavigationBarItem(
-                icon: FaIcon(FontAwesomeIcons.rankingStar),
-                activeIcon: FaIcon(FontAwesomeIcons.rankingStar),
-                label: 'Ranking',
-              ),
-              BottomNavigationBarItem(
-                icon: FaIcon(FontAwesomeIcons.basketball),
-                activeIcon: FaIcon(FontAwesomeIcons.basketball),
-                label: 'My Team',
-              ),
-              BottomNavigationBarItem(
-                icon: FaIcon(FontAwesomeIcons.user),
-                activeIcon: FaIcon(FontAwesomeIcons.user),
-                label: 'Profile',
-              ),
-            ]);
-      },
+    return PopScope(
+      canPop: false,
+      child: AutoTabsScaffold(
+        backgroundColor: Colors.white,
+        //darkMode.darkTheme ? ThemeHelper.backgroundColorDark : Colors.white,
+        routes: [RankRoute(), CreateTeamRoute(), ProfileRoute()],
+        bottomNavigationBuilder: (context, tabsRouter) {
+          return BottomNavigationBar(
+              elevation: 0,
+              type: BottomNavigationBarType.fixed,
+              backgroundColor: ThemeHelper.backgroundColorDark,
+              selectedItemColor: const Color.fromARGB(255, 225, 135, 57),
+              unselectedItemColor: Colors.white,
+              currentIndex: tabsRouter.activeIndex,
+              onTap: tabsRouter.setActiveIndex,
+              items: const [
+                BottomNavigationBarItem(
+                  icon: FaIcon(FontAwesomeIcons.rankingStar),
+                  activeIcon: FaIcon(FontAwesomeIcons.rankingStar),
+                  label: 'Ranking',
+                ),
+                BottomNavigationBarItem(
+                  icon: Image(
+                    width: 36,
+                    height: 36,
+                    image: AssetImage('assets/images/basketballicon.png'),
+                  ),
+                  activeIcon: Image(
+                    width: 36,
+                    height: 36,
+                    image: AssetImage('assets/images/basketballicon.png'),
+                    color: const Color.fromARGB(255, 225, 135, 57),
+                  ),
+                  label: 'My Team',
+                ),
+                BottomNavigationBarItem(
+                  icon: FaIcon(FontAwesomeIcons.user),
+                  activeIcon: FaIcon(FontAwesomeIcons.user),
+                  label: 'Profile',
+                ),
+              ]);
+        },
+      ),
     );
   }
 }

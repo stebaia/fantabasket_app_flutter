@@ -27,8 +27,9 @@ class PlayerBar extends StatelessWidget {
       width: double.infinity,
       height: 100,
       child: Card(
-        color:
-            enabled ? Colors.white : const Color.fromARGB(255, 212, 207, 207),
+        color: enabled
+            ? Color.fromARGB(255, 14, 13, 13)
+            : Color.fromARGB(255, 0, 0, 0),
         elevation: 6,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -57,14 +58,14 @@ class PlayerBar extends StatelessWidget {
                       Text(
                         '${player.firstName} ${player.lastName}',
                         style: const TextStyle(
-                            color: Colors.black,
+                            color: Colors.white,
                             fontSize: 16,
                             fontWeight: FontWeight.bold),
                       ),
                       Text(
                         player.team,
                         style: const TextStyle(
-                          color: Colors.black,
+                          color: Colors.white,
                           fontSize: 14,
                         ),
                       )

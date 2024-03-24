@@ -14,7 +14,7 @@ class RankingCard extends StatelessWidget {
         onTap: () {},
         child: Card(
           margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-          color: Colors.white,
+          color: Color.fromARGB(255, 14, 13, 13),
           surfaceTintColor: Colors.orange,
           elevation: 2,
           child: Container(
@@ -45,19 +45,19 @@ class RankingCard extends StatelessWidget {
                         entry.key ?? "Nome campo non disponibile",
                         maxLines: 2,
                         style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Nunito Sans',
-                          fontSize: 18,
-                        ),
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Nunito Sans',
+                            fontSize: 18,
+                            color: Colors.white),
                       ),
                       const SizedBox(height: 5),
                       const Text(
                         "Viale Roma 251",
                         maxLines: 2,
                         style: TextStyle(
-                          fontSize: 14,
-                          fontFamily: 'Nunito Sans',
-                        ),
+                            fontSize: 14,
+                            fontFamily: 'Nunito Sans',
+                            color: Colors.white),
                       ),
                     ],
                   ),

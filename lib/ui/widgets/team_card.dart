@@ -1,9 +1,10 @@
+import 'package:fantabasket_app_flutter/model/team.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class TeamCard extends StatelessWidget {
-  final int team;
+  final Team team;
 
   const TeamCard({
     required this.team,
@@ -15,93 +16,73 @@ class TeamCard extends StatelessWidget {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       child: Card(
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(30),
-          ),
-        ),
-        surfaceTintColor: Colors.white,
-        color: const Color.fromARGB(255, 246, 246, 238),
-        elevation: 2,
-        child: Column(
-          children: [
-            const Expanded(
-                flex: 10,
-                child: SizedBox(
-                  width: double.infinity,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30),
-                    ),
-                    child: FadeInImage(
-                      image: NetworkImage(
-                        "https://www.modenatoday.it/~media/horizontal-hi/15481104953775/castelnuovo-campo-da-basket-bryant-02-2.jpeg",
-                      ),
-                      placeholder: AssetImage("assets/images/campo.png"),
-                      fit: BoxFit.fill,
+        color: Color.fromARGB(255, 14, 13, 13),
+        elevation: 4,
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          height: 300,
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Image(
+                width: 36,
+                height: 36,
+                image: AssetImage('assets/images/basketballicon.png'),
+                color: Color.fromARGB(255, 225, 135, 57),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                team.nome!,
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
+              ),
+              const Row(
+                children: [
+                  Text(
+                    'Punti guadagnati: ',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
                     ),
                   ),
-                )),
-            const Expanded(flex: 1, child: SizedBox()),
-            Expanded(
-              flex: 3,
-              child: Container(
-                padding: const EdgeInsets.only(left: 10),
-                alignment: Alignment.centerLeft,
-                width: double.infinity,
-                child: Text(
-                  'Torneo: torneo $team',
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(fontSize: 16.0),
-                ),
+                  Text(
+                    '120',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  )
+                ],
               ),
-            ),
-            Expanded(
-              flex: 3,
-              child: Container(
-                padding: const EdgeInsets.only(left: 10),
-                alignment: Alignment.centerLeft,
-                width: double.infinity,
-                child: const Text(
-                  'Nome squadra: Fantateam',
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontSize: 16.0),
-                ),
+              const SizedBox(
+                height: 20,
               ),
-            ),
-            Expanded(
-              flex: 3,
-              child: Container(
-                padding: const EdgeInsets.only(left: 10),
-                alignment: Alignment.centerLeft,
-                width: double.infinity,
-                child: const Text(
-                  'Fantapunti: 120',
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontSize: 16.0),
-                ),
-              ),
-            ),
-            Expanded(
-              flex: 3,
-              child: Container(
-                padding: const EdgeInsets.only(left: 10),
-                alignment: Alignment.centerLeft,
-                width: double.infinity,
-                child: const Text(
-                  'Posizione: 1°',
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontSize: 16.0),
-                ),
-              ),
-            ),
-            const Expanded(flex: 1, child: SizedBox())
-          ],
+              const Row(
+                children: [
+                  Text(
+                    'Tappa: ',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                    ),
+                  ),
+                  Text(
+                    'Bologna',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  )
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
