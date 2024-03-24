@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fantabasket_app_flutter/bloc/cubit/auth_cubit/auth_cubit.dart';
+import 'package:fantabasket_app_flutter/bloc/view_team_bloc/view_team_bloc.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/team_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -81,42 +83,6 @@ class ProfilePage extends StatelessWidget {
             ),
           ),
           const Expanded(flex: 2, child: SizedBox()),
-          Expanded(
-            flex: 1,
-            child: Container(
-              width: double.infinity,
-              padding: const EdgeInsets.only(left: 20),
-              child: const Text(
-                'Le tue squadre',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
-          const Expanded(flex: 1, child: SizedBox()),
-          Expanded(
-            flex: 20,
-            child: Container(
-              width: double.infinity,
-              child: Container(
-                child: CarouselSlider(
-                  options: CarouselOptions(
-                    enableInfiniteScroll: false,
-                    enlargeCenterPage: true,
-                    aspectRatio: 1,
-                  ),
-                  items: [1, 2, 3, 4, 5].map((i) {
-                    return Builder(
-                      builder: (BuildContext context) {
-                        return TeamCard(team: i);
-                      },
-                    );
-                  }).toList(),
-                ),
-              ),
-            ),
-          ),
           const Expanded(flex: 1, child: SizedBox()),
           const Expanded(flex: 1, child: Divider(height: 1)),
           const Expanded(flex: 1, child: SizedBox()),

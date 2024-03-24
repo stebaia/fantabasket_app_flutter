@@ -21,7 +21,8 @@ class RankPage extends StatelessWidget {
       "Torino": 7,
       "Brescia": 5,
     };
-    return SizedBox(
+    return Container(
+      color: Color.fromARGB(255, 14, 13, 13),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -45,17 +46,19 @@ class RankPage extends StatelessWidget {
               horizontal: 12.0,
               vertical: 2.0,
             ),
-            child: SearchBar(
-              hintText: "Inserisci il nome della tappa...",
-              elevation: MaterialStatePropertyAll(0),
-              shape: MaterialStatePropertyAll(
-                RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(30),
-                    ),
-                    side: BorderSide(color: Colors.grey)),
+            child: TextField(
+              decoration: const InputDecoration(
+                focusColor: Colors.orange,
+                focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.orange, width: 2.0),
+                    borderRadius: BorderRadius.all(Radius.circular(10))),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10))),
+                hintText: 'Inserisci nome...',
+                hintStyle: TextStyle(color: Color.fromARGB(255, 173, 173, 173)),
               ),
-              backgroundColor: MaterialStatePropertyAll(Colors.white),
+              style: TextStyle(color: Colors.white),
+              textAlignVertical: TextAlignVertical.center,
             ),
           ),
           const SizedBox(height: 15),

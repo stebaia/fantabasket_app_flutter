@@ -30,17 +30,14 @@ class _LoadStagesPageState extends State<LoadStagesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color.fromARGB(255, 14, 13, 13),
       appBar: AppBar(
-        actions: [
-          IconButton(
-            onPressed: () {
-              context.router
-                  .popUntil((route) => route.settings.name == CoreRoute.name);
-            },
-            icon: const Icon(Icons.close),
-          ),
-        ],
+        foregroundColor: Colors.white,
+        backgroundColor: Color.fromARGB(255, 14, 13, 13),
+        title: const Text(
+          'Scegli la tappa',
+          style: TextStyle(fontSize: 18),
+        ),
         automaticallyImplyLeading: true,
       ),
       body: BlocConsumer<CreateTeamBloc, CreateTeamState>(

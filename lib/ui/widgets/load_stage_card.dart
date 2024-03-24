@@ -20,8 +20,7 @@ class LoadStageCard extends StatelessWidget {
         onTap: () => context.router.push(SelectTeamRoute(stage: stage)),
         child: Card(
           margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-          color: Colors.white,
-          surfaceTintColor: Colors.orange,
+          color: Color.fromARGB(255, 14, 13, 13),
           elevation: 2,
           child: Container(
             child: Column(
@@ -50,11 +49,16 @@ class LoadStageCard extends StatelessWidget {
                           stage.fieldName ?? "Nome campo non disponibile",
                           maxLines: 2,
                           style: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 16),
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16),
                         ),
                         Text(
                           stage.address ?? "Indirizzo non disponibile",
                           maxLines: 2,
+                          style: const TextStyle(
+                            color: Colors.white,
+                          ),
                         ),
                         Text(
                             "Da ${stage.openingDate} "
@@ -62,7 +66,10 @@ class LoadStageCard extends StatelessWidget {
                             maxLines: 1,
                             textAlign: TextAlign.start,
                             overflow: TextOverflow.ellipsis,
-                            style: TextStyle(fontSize: 12)),
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.white,
+                            )),
                       ],
                     )
                   ],
