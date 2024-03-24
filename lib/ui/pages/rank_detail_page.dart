@@ -1,11 +1,8 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:fantabasket_app_flutter/model/player_in_rank.dart';
+import 'package:fantabasket_app_flutter/bloc/rank_detail_bloc/rank_detail_bloc.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/rank_detail_card.dart';
-import 'package:fantabasket_app_flutter/utils/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fantabasket_app_flutter/bloc/create_team_bloc/create_team_bloc.dart';
 
 class RankDetailPage extends StatelessWidget with AutoRouteWrapper {
   final String stageName;
@@ -18,9 +15,8 @@ class RankDetailPage extends StatelessWidget with AutoRouteWrapper {
   @override
   Widget wrappedRoute(BuildContext context) => MultiBlocProvider(
         providers: [
-          BlocProvider<CreateTeamBloc>(
-            create: ((context) =>
-                CreateTeamBloc(stagesRepository: context.read())),
+          BlocProvider<RankDetailBloc>(
+            create: ((context) => RankDetailBloc()..getRanking()),
           ),
         ],
         child: this,
@@ -56,19 +52,29 @@ class RankDetailPage extends StatelessWidget with AutoRouteWrapper {
           ),
           const SizedBox(height: 10),
           Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  ...Constants.rankDetailMock.map((player) => Padding(
+            child: BlocBuilder<RankDetailBloc, RankDetailState>(
+                builder: (BuildContext context, RankDetailState state) {
+              return switch (state) {
+                TryGetRanking() => const Center(
+                      child: CircularProgressIndicator(
+                    color: Colors.white,
+                  )),
+                ResultRankingState() => ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: state.players.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 8.0,
                           vertical: 4.0,
                         ),
-                        child: RankDetailCard(player: player),
-                      )),
-                ],
-              ),
-            ),
+                        child: RankDetailCard(player: state.players[index]),
+                      );
+                    },
+                  ),
+                _ => Container(),
+              };
+            }),
           )
         ],
       ),

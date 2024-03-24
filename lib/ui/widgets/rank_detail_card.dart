@@ -10,6 +10,7 @@ class RankDetailCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("Card di ${player.lastName} ${player.firstName}");
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       color: const Color.fromARGB(255, 14, 13, 13),
