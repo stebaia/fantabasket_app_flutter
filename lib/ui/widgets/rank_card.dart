@@ -1,3 +1,5 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:fantabasket_app_flutter/routes/app_router.gr.dart';
 import 'package:flutter/material.dart';
 
 class RankingCard extends StatelessWidget {
@@ -11,7 +13,7 @@ class RankingCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: GestureDetector(
-        onTap: () {},
+        onTap: () => context.router.push(RankDetailRoute(stageName: entry.key)),
         child: Card(
           margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           color: Color.fromARGB(255, 14, 13, 13),
