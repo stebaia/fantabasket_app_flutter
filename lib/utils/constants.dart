@@ -1,3 +1,4 @@
+import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:fantabasket_app_flutter/model/player_in_rank.dart';
 import 'package:flutter/material.dart';
 
@@ -32,6 +33,64 @@ class Constants {
     'P': 5,
     'F': 0,
   };
+
+  static List<Player> detailTeamMock = [
+    const Player(
+      id: 1,
+      firstName: "Mario",
+      lastName: "Rossi",
+      value: 10,
+      team: "",
+      photo: "",
+      phone: "",
+      category: "A",
+      email: "",
+    ),
+    const Player(
+      id: 2,
+      firstName: "Luigi",
+      lastName: "Bianchi",
+      value: 10,
+      team: "",
+      photo: "",
+      phone: "",
+      category: "A",
+      email: "",
+    ),
+    const Player(
+      id: 3,
+      firstName: "Luca",
+      lastName: "Verdi",
+      value: 10,
+      team: "",
+      photo: "",
+      phone: "",
+      category: "A",
+      email: "",
+    ),
+    const Player(
+      id: 4,
+      firstName: "ALberto",
+      lastName: "Angela",
+      value: 10,
+      team: "",
+      photo: "",
+      phone: "",
+      category: "A",
+      email: "",
+    ),
+    const Player(
+      id: 5,
+      firstName: "Ciro",
+      lastName: "Esposito",
+      value: 10,
+      team: "",
+      photo: "",
+      phone: "",
+      category: "A",
+      email: "",
+    ),
+  ];
 
   static List<PlayerInRank> rankDetailMock = [
     const PlayerInRank(
