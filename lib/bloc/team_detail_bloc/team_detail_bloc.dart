@@ -11,16 +11,13 @@ part 'team_detail_event.dart';
 part 'team_detail_state.dart';
 
 class TeamDetailBloc extends Bloc<TeamDetailEvent, TeamDetailState> {
-  final TeamRepository teamRepository;
-
-  TeamDetailBloc({required this.teamRepository})
-      : super(const InitTeamDetailState()) {
-    on<TeamDetailEvent>(_createTeam);
+  TeamDetailBloc() : super(const InitTeamDetailState()) {
+    on<TeamDetailEvent>(_getTeamDetail);
   }
 
-  void addNewTeam() => add(const GetTeamDetailEvent());
+  void getTeamDetail() => add(const GetTeamDetailEvent());
 
-  FutureOr<void> _createTeam(
+  FutureOr<void> _getTeamDetail(
     TeamDetailEvent event,
     Emitter<TeamDetailState> emitter,
   ) async {
