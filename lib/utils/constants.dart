@@ -1,5 +1,7 @@
+import 'package:fantabasket_app_flutter/model/match_day.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:fantabasket_app_flutter/model/player_in_rank.dart';
+import 'package:fantabasket_app_flutter/model/team_detail.dart';
 import 'package:flutter/material.dart';
 
 class Constants {
@@ -34,63 +36,78 @@ class Constants {
     'F': 0,
   };
 
-  static List<Player> detailTeamMock = [
-    const Player(
-      id: 1,
-      firstName: "Mario",
-      lastName: "Rossi",
-      value: 10,
-      team: "",
-      photo: "",
-      phone: "",
-      category: "A",
-      email: "",
-    ),
-    const Player(
-      id: 2,
-      firstName: "Luigi",
-      lastName: "Bianchi",
-      value: 10,
-      team: "",
-      photo: "",
-      phone: "",
-      category: "A",
-      email: "",
-    ),
-    const Player(
-      id: 3,
-      firstName: "Luca",
-      lastName: "Verdi",
-      value: 10,
-      team: "",
-      photo: "",
-      phone: "",
-      category: "A",
-      email: "",
-    ),
-    const Player(
-      id: 4,
-      firstName: "ALberto",
-      lastName: "Angela",
-      value: 10,
-      team: "",
-      photo: "",
-      phone: "",
-      category: "A",
-      email: "",
-    ),
-    const Player(
-      id: 5,
-      firstName: "Ciro",
-      lastName: "Esposito",
-      value: 10,
-      team: "",
-      photo: "",
-      phone: "",
-      category: "A",
-      email: "",
-    ),
-  ];
+  static TeamDetail detailTeamMock = TeamDetail(
+    totalPoints: 886,
+    players: {
+      const Player(
+        id: 1,
+        firstName: "Mario",
+        lastName: "Rossi",
+        value: 10,
+        team: "",
+        photo: "",
+        phone: "",
+        category: "A",
+        email: "",
+      ): 70,
+      const Player(
+        id: 2,
+        firstName: "Luigi",
+        lastName: "Bianchi",
+        value: 10,
+        team: "",
+        photo: "",
+        phone: "",
+        category: "A",
+        email: "",
+      ): 60,
+      const Player(
+        id: 3,
+        firstName: "Luca",
+        lastName: "Verdi",
+        value: 10,
+        team: "",
+        photo: "",
+        phone: "",
+        category: "A",
+        email: "",
+      ): 50,
+      const Player(
+        id: 4,
+        firstName: "ALberto",
+        lastName: "Angela",
+        value: 10,
+        team: "",
+        photo: "",
+        phone: "",
+        category: "A",
+        email: "",
+      ): 80,
+      const Player(
+        id: 5,
+        firstName: "Ciro",
+        lastName: "Esposito",
+        value: 10,
+        team: "",
+        photo: "",
+        phone: "",
+        category: "A",
+        email: "",
+      ): 79,
+    },
+    days: const [
+      MatchDay(dayNumber: 1, points: 110),
+      MatchDay(dayNumber: 2, points: 70),
+      MatchDay(dayNumber: 3, points: 78),
+      MatchDay(dayNumber: 4, points: 90),
+      MatchDay(dayNumber: 5, points: 87),
+      MatchDay(dayNumber: 6, points: 68),
+      MatchDay(dayNumber: 7, points: 99),
+      MatchDay(dayNumber: 8, points: 102),
+      MatchDay(dayNumber: 9, points: 94),
+      MatchDay(dayNumber: 10, points: 88),
+    ],
+  );
 
   static List<PlayerInRank> rankDetailMock = [
     const PlayerInRank(

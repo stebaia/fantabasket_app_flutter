@@ -17,6 +17,7 @@ import 'package:flutter/material.dart' as _i16;
 
 import '../model/player.dart' as _i18;
 import '../model/stage.dart' as _i17;
+import '../model/team.dart' as _i19;
 import '../ui/pages/completion_page.dart' as _i8;
 import '../ui/pages/container_page.dart' as _i14;
 import '../ui/pages/core_page.dart' as _i5;
@@ -109,9 +110,14 @@ class AppRouter extends _i15.RootStackRouter {
       );
     },
     TeamDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<TeamDetailRouteArgs>();
       return _i15.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i15.WrappedRoute(child: const _i10.TeamDetailPage()),
+        child: _i15.WrappedRoute(
+            child: _i10.TeamDetailPage(
+          team: args.team,
+          key: args.key,
+        )),
       );
     },
     TopBarContainerRouter.name: (routeData) {
@@ -419,14 +425,36 @@ class RankDetailRouteArgs {
 
 /// generated route for
 /// [_i10.TeamDetailPage]
-class TeamDetailRoute extends _i15.PageRouteInfo<void> {
-  const TeamDetailRoute()
-      : super(
+class TeamDetailRoute extends _i15.PageRouteInfo<TeamDetailRouteArgs> {
+  TeamDetailRoute({
+    required _i19.Team team,
+    _i16.Key? key,
+  }) : super(
           TeamDetailRoute.name,
           path: 'team_detail_page',
+          args: TeamDetailRouteArgs(
+            team: team,
+            key: key,
+          ),
         );
 
   static const String name = 'TeamDetailRoute';
+}
+
+class TeamDetailRouteArgs {
+  const TeamDetailRouteArgs({
+    required this.team,
+    this.key,
+  });
+
+  final _i19.Team team;
+
+  final _i16.Key? key;
+
+  @override
+  String toString() {
+    return 'TeamDetailRouteArgs{team: $team, key: $key}';
+  }
 }
 
 /// generated route for

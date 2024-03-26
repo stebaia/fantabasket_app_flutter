@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
+import 'package:fantabasket_app_flutter/model/team_detail.dart';
 import 'package:fantabasket_app_flutter/repositories/team_repository.dart';
 import 'package:fantabasket_app_flutter/utils/constants.dart';
 import 'package:flutter/cupertino.dart';

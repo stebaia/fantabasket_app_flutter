@@ -4,7 +4,6 @@ import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/player_bar.dart';
 import 'package:fantabasket_app_flutter/utils/color_utils.dart';
 import 'package:fantabasket_app_flutter/utils/constants.dart';
-import 'package:fantabasket_app_flutter/utils/theme_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -16,7 +16,7 @@ class TeamCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => context.router.push(const TeamDetailRoute()),
+      onTap: () => context.router.push(TeamDetailRoute(team: team)),
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
         child: Card(

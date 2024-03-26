@@ -17,8 +17,8 @@ class TryTeamDetailState extends TeamDetailState {
 }
 
 class ResultTeamDetailState extends TeamDetailState {
-  final List<Player> players;
-  const ResultTeamDetailState(this.players);
+  final TeamDetail teamDetail;
+  const ResultTeamDetailState(this.teamDetail);
 }
 
 class ErrorTeamDetailState extends TeamDetailState {
