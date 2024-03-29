@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:fantabasket_app_flutter/bloc/add_team_bloc/add_team_bloc.dart';
 import 'package:fantabasket_app_flutter/bloc/create_team_bloc/create_team_bloc.dart';
+import 'package:fantabasket_app_flutter/bloc/select_team_bloc/select_team_bloc.dart';
 import 'package:fantabasket_app_flutter/routes/app_router.gr.dart';
 import 'package:fantabasket_app_flutter/model/stage.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/load_stage_card.dart';
@@ -68,29 +70,29 @@ class _LoadStagesPageState extends State<LoadStagesPage> {
                       alignment: Alignment.center,
                       child: Column(
                         children: [
-                          if (state is ResultGetStagesState)
-                            ListView.builder(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemCount: state.stagesList.count,
-                              itemBuilder: (context, index) {
-                                if (state.stagesList.stages != null) {
-                                  Stage stage = state.stagesList.stages![index];
-                                  return LoadStageCard(stage: stage);
-                                }
-                              },
-                            )
-                          else
-                            ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: 4,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemBuilder: (context, index) {
-                                return const LoadStageCard(
-                                  stage: Stage(id: 0),
-                                );
-                              },
-                            )
+                          switch (state) {
+                            TryGetStagesState() => const Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                            ResultGetStagesState(stagesList: var stages) =>
+                              ListView.builder(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: stages.count,
+                                itemBuilder: (context, index) =>
+                                    LoadStageCard(stage: stages.stages![index]),
+                              ),
+                            _ => ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: 4,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemBuilder: (context, index) {
+                                  return const LoadStageCard(
+                                    stage: Stage(id: 0),
+                                  );
+                                },
+                              ),
+                          }
                         ],
                       ),
                     ),

@@ -69,7 +69,7 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
                               topRight: Radius.circular(10)),
                           child: entry.key.photo != ''
                               ? Image.network(
-                                  '${Constants.baseUrl}${entry.key.photo}',
+                                  entry.key.photo,
                                   fit: BoxFit.cover,
                                 )
                               : Image.network(

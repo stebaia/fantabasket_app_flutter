@@ -2,32 +2,31 @@ import 'package:equatable/equatable.dart';
 
 class Stage extends Equatable {
   final int id;
-  final String? city;
   final String? fieldName;
-  final String? address;
-  final String? matchDate;
+  final String? city;
+  final String? status;
   final String? openingDate;
   final String? closingDate;
+  final String? photo;
 
   const Stage({
     required this.id,
-    this.city,
     this.fieldName,
-    this.address,
-    this.matchDate,
+    this.city,
+    this.status,
     this.openingDate,
     this.closingDate,
-  }   
-  );
+    this.photo,
+  });
 
   @override
   List<Object?> get props => [
         id,
         city,
         fieldName,
-        address,
-        matchDate,
+        status,
         openingDate,
         closingDate,
+        photo,
       ];
 }
