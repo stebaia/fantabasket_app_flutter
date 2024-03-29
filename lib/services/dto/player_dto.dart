@@ -9,9 +9,9 @@ class PlayerDTO extends DTO with EquatableMixin {
   PlayerDTO({this.data, this.code, this.status});
 
   PlayerDTO.fromJson(Map<String, dynamic> json) {
-    if (json['data'] != null) {
+    if (json['players'] != null) {
       data = <PlayerDetailDTO>[];
-      json['data'].forEach((v) {
+      json['players'].forEach((v) {
         data!.add(new PlayerDetailDTO.fromJson(v));
       });
     }
@@ -22,7 +22,7 @@ class PlayerDTO extends DTO with EquatableMixin {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
+      data['players'] = this.data!.map((v) => v.toJson()).toList();
     }
     data['code'] = code;
     data['message'] = status;

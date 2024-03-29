@@ -27,16 +27,15 @@ class StageListMapper extends DTOMapper<StageListDTO, StagesList> {
 class StageMapper extends DTOMapper<StageDTO, Stage> {
   @override
   Stage fromDTO(StageDTO dto) {
-
     return Stage(
-    id: int.parse(dto.id!),
-    city: dto.nome ?? '',
-    fieldName: dto.nome ?? '',
-    address: dto.nome ?? '',
-    openingDate: dto.dataInizio ?? '',
-    matchDate: dto.dataInizio ?? '',
-    closingDate: dto.dataInizio ?? '',
-  );
+      id: int.parse(dto.id!),
+      fieldName: dto.nome ?? '',
+      city: dto.citta ?? '',
+      status: dto.stato ?? '',
+      openingDate: dto.dataInizio ?? '',
+      closingDate: dto.dataFine ?? '',
+      photo: dto.foto ?? '',
+    );
   }
 
   @override

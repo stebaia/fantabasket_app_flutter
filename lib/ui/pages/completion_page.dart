@@ -86,7 +86,7 @@ class CompletionPage extends StatelessWidget with AutoRouteWrapper {
                 const SizedBox(
                   height: 20,
                 ),
-                Text(
+                const Text(
                   "Nome squadra",
                   style: TextStyle(color: Colors.white),
                 ),
@@ -166,7 +166,7 @@ class CompletionPage extends StatelessWidget with AutoRouteWrapper {
                                                                 20)),
                                                 child: player.photo != ''
                                                     ? Image.network(
-                                                        '${Constants.baseUrl}${player.photo}',
+                                                        player.photo,
                                                         fit: BoxFit.cover,
                                                       )
                                                     : Image.network(

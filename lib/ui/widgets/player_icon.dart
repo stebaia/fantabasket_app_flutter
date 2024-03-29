@@ -147,7 +147,7 @@ class _PlayerIconState extends State<PlayerIcon> {
                                       topRight: Radius.circular(10)),
                                   child: selected!.photo != ''
                                       ? Image.network(
-                                          '${Constants.baseUrl}${selected!.photo}',
+                                          selected!.photo,
                                           fit: BoxFit.cover,
                                         )
                                       : Image.network(

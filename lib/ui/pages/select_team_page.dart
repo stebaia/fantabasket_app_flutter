@@ -136,7 +136,12 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                                   child: CircularProgressIndicator()),
                               ResultGetPlayersState() => upstate
                                       .playersList.players!.isEmpty
-                                  ? const Text("Nessun giocatore disponibile")
+                                  ? const Center(
+                                      child: Text(
+                                        "Nessun giocatore disponibile",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    )
                                   : BlocConsumer<SelectPlayerBloc,
                                       SelectPlayerState>(
                                       listener: (context, state) {},

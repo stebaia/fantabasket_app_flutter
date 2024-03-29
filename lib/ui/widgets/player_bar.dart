@@ -43,7 +43,7 @@ class PlayerBar extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                         child: player.photo != ''
                             ? Image.network(
-                                '${Constants.baseUrl}${player.photo}',
+                                player.photo,
                                 fit: BoxFit.cover,
                               )
                             : Image.network(

@@ -15,6 +15,7 @@ class LoadStageCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(stage);
     return Container(
       child: GestureDetector(
         onTap: () => context.router.push(SelectTeamRoute(stage: stage)),
@@ -33,10 +34,14 @@ class LoadStageCard extends StatelessWidget {
                       height: 120,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
-                        child: Image.asset(
-                          'assets/images/campo.png',
-                          fit: BoxFit.cover,
-                        ),
+                        child: stage.photo != ''
+                            ? Image.network(
+                                stage.photo!,
+                                fit: BoxFit.cover,
+                              )
+                            : Image.network(
+                                'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/LeBron_James_%2851959977144%29_%28cropped2%29.jpg/640px-LeBron_James_%2851959977144%29_%28cropped2%29.jpg',
+                                fit: BoxFit.cover),
                       ),
                     ),
                     const SizedBox(
@@ -54,7 +59,7 @@ class LoadStageCard extends StatelessWidget {
                               fontSize: 16),
                         ),
                         Text(
-                          stage.address ?? "Indirizzo non disponibile",
+                          stage.city ?? "Indirizzo non disponibile",
                           maxLines: 2,
                           style: const TextStyle(
                             color: Colors.white,
