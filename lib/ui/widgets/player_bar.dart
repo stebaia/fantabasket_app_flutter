@@ -27,16 +27,20 @@ class PlayerBar extends StatelessWidget {
       width: double.infinity,
       height: 100,
       child: Card(
-        color: enabled
-            ? Color.fromARGB(255, 14, 13, 13)
-            : Color.fromARGB(255, 0, 0, 0),
+        color: Color.fromARGB(255, 14, 13, 13),
         elevation: 6,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
               children: [
-                SizedBox(
+                Container(
+                    foregroundDecoration: enabled
+                        ? null
+                        : const BoxDecoration(
+                            color: Colors.grey,
+                            backgroundBlendMode: BlendMode.saturation,
+                          ),
                     width: 80,
                     height: 100,
                     child: ClipRRect(
@@ -50,6 +54,12 @@ class PlayerBar extends StatelessWidget {
                                 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/LeBron_James_%2851959977144%29_%28cropped2%29.jpg/640px-LeBron_James_%2851959977144%29_%28cropped2%29.jpg',
                                 fit: BoxFit.cover))),
                 Container(
+                  foregroundDecoration: enabled
+                      ? null
+                      : const BoxDecoration(
+                          color: Colors.grey,
+                          backgroundBlendMode: BlendMode.saturation,
+                        ),
                   padding: const EdgeInsets.all(10),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -77,11 +87,23 @@ class PlayerBar extends StatelessWidget {
             Container(
               width: 40,
               height: 100,
+              foregroundDecoration: enabled
+                  ? null
+                  : const BoxDecoration(
+                      color: Colors.grey,
+                      backgroundBlendMode: BlendMode.saturation,
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(10),
+                        bottomRight: Radius.circular(10),
+                      ),
+                    ),
               decoration: BoxDecoration(
-                  color: _getColor(),
-                  borderRadius: const BorderRadius.only(
-                      topRight: Radius.circular(10),
-                      bottomRight: Radius.circular(10))),
+                color: _getColor(),
+                borderRadius: const BorderRadius.only(
+                  topRight: Radius.circular(10),
+                  bottomRight: Radius.circular(10),
+                ),
+              ),
               child: Center(
                   child: Text(
                 player.value.toString(),
