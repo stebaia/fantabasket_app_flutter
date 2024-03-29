@@ -12,18 +12,37 @@ part 'team_detail_event.dart';
 part 'team_detail_state.dart';
 
 class TeamDetailBloc extends Bloc<TeamDetailEvent, TeamDetailState> {
+  late TeamDetail team;
+  late int currentDay = 0;
+
   TeamDetailBloc() : super(const InitTeamDetailState()) {
     on<TeamDetailEvent>(_getTeamDetail);
+    on<UpdateDayEvent>(_updateDay);
   }
 
+  void updateDay(int dayNumber) => add(UpdateDayEvent(dayNumber));
+
   void getTeamDetail() => add(const GetTeamDetailEvent());
+
+  int getCurrentDay() => currentDay;
+
+  FutureOr<void> _updateDay(
+    UpdateDayEvent event,
+    Emitter<TeamDetailState> emitter,
+  ) {
+    emit(TryUpdateDayState(team));
+    currentDay = event.dayNumber;
+    Future.delayed(
+        const Duration(seconds: 1), () => emit(ResultUpdateDayState(team)));
+  }
 
   FutureOr<void> _getTeamDetail(
     TeamDetailEvent event,
     Emitter<TeamDetailState> emitter,
   ) async {
     emit(const TryTeamDetailState());
-    var team = Constants.detailTeamMock;
+    team = Constants.detailTeamMock;
+    currentDay = team.days.last.dayNumber;
     Future.delayed(
         const Duration(seconds: 1), () => emit(ResultTeamDetailState(team)));
     /*

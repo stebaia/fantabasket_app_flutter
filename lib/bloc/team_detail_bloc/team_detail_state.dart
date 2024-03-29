@@ -16,6 +16,16 @@ class TryTeamDetailState extends TeamDetailState {
   const TryTeamDetailState();
 }
 
+class TryUpdateDayState extends TeamDetailState {
+  final TeamDetail teamDetail;
+  const TryUpdateDayState(this.teamDetail);
+}
+
+class ResultUpdateDayState extends TeamDetailState {
+  final TeamDetail teamDetail;
+  const ResultUpdateDayState(this.teamDetail);
+}
+
 class ResultTeamDetailState extends TeamDetailState {
   final TeamDetail teamDetail;
   const ResultTeamDetailState(this.teamDetail);

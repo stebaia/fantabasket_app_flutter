@@ -13,3 +13,11 @@ class GetTeamDetailEvent extends TeamDetailEvent {
   @override
   List<Object> get props => [];
 }
+
+class UpdateDayEvent extends TeamDetailEvent {
+  final int dayNumber;
+  const UpdateDayEvent(this.dayNumber);
+
+  @override
+  List<Object> get props => [];
+}

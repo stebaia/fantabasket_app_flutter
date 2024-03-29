@@ -1,12 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:fantabasket_app_flutter/bloc/team_detail_bloc/team_detail_bloc.dart';
-import 'package:fantabasket_app_flutter/model/player.dart';
+import 'package:fantabasket_app_flutter/model/team_detail.dart';
 import 'package:fantabasket_app_flutter/utils/color_utils.dart';
 import 'package:fantabasket_app_flutter/utils/constants.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fantabasket_app_flutter/model/team.dart';
 
@@ -28,10 +25,22 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
         child: this,
       );
 
-  Widget getPlayerCard(BuildContext context, MapEntry<Player, int> entry) {
+  Widget _getPlayerCard(
+    BuildContext context,
+    TeamDetail td,
+    int position,
+    int currentDay,
+  ) {
+    var entry = td.days
+        .where((day) => day.dayNumber == currentDay)
+        .first
+        .players
+        .entries
+        .elementAt(position);
+    print(position);
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.32,
-      height: MediaQuery.of(context).size.height * 0.26,
+      //height: MediaQuery.of(context).size.height * 0.26,
       child: Card(
         color: Color.fromARGB(255, 14, 13, 13),
         elevation: 4,
@@ -39,12 +48,21 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
           children: [
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.32,
-              height: MediaQuery.of(context).size.height * 0.25,
+              //height: MediaQuery.of(context).size.height * 0.25,
               child: Column(
                 children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: Text(
+                      position == 5
+                          ? "Sesto uomo"
+                          : "Giocatore ${position + 1}",
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                  ),
                   SizedBox(
                       width: MediaQuery.of(context).size.width * 0.32,
-                      height: MediaQuery.of(context).size.height * 0.15,
+                      //height: MediaQuery.of(context).size.height * 0.15,
                       child: ClipRRect(
                           borderRadius: const BorderRadius.only(
                               topLeft: Radius.circular(10),
@@ -59,7 +77,7 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
                                   fit: BoxFit.cover))),
                   Container(
                     width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height * 0.1,
+                    //height: MediaQuery.of(context).size.height * 0.1,
                     decoration: BoxDecoration(
                         color: ColorUtils.getColor(entry.key),
                         borderRadius: const BorderRadius.only(
@@ -111,6 +129,8 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
       ),
       body: BlocBuilder<TeamDetailBloc, TeamDetailState>(
           builder: (BuildContext context, TeamDetailState state) {
+        final int currentDay = context.read<TeamDetailBloc>().getCurrentDay();
+        print("State is: $state");
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -130,11 +150,14 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
             const SizedBox(height: 5),
             switch (state) {
               TryTeamDetailState() => Container(),
-              ResultTeamDetailState() => Padding(
+              ResultTeamDetailState(teamDetail: var td) ||
+              ResultUpdateDayState(teamDetail: var td) ||
+              TryUpdateDayState(teamDetail: var td) =>
+                Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
                   child: Text(
-                    "Punti totali: ${state.teamDetail.totalPoints}",
+                    "Punti totali: ${td.totalPoints}",
                     style: const TextStyle(
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.bold,
@@ -148,32 +171,48 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
             const SizedBox(height: 20),
             switch (state) {
               TryTeamDetailState() => Container(),
-              ResultTeamDetailState() => SingleChildScrollView(
+              ResultTeamDetailState(teamDetail: var td) ||
+              ResultUpdateDayState(teamDetail: var td) ||
+              TryUpdateDayState(teamDetail: var td) =>
+                SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   reverse: true,
                   child: Row(
                     children: [
-                      ...state.teamDetail.days.map((matchDay) => SizedBox(
-                            height: 70,
-                            width: 70,
-                            child: Card(
-                              color: Colors.transparent,
-                              shape: const RoundedRectangleBorder(
-                                  side: BorderSide(color: Colors.white),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(30))),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "G${matchDay.dayNumber}",
-                                    style: const TextStyle(color: Colors.white),
-                                  ),
-                                  Text(
-                                    "${matchDay.points}",
-                                    style: const TextStyle(color: Colors.white),
-                                  ),
-                                ],
+                      ...td.days.map((matchDay) => GestureDetector(
+                            onTap: () => context
+                                .read<TeamDetailBloc>()
+                                .updateDay(matchDay.dayNumber),
+                            child: SizedBox(
+                              height: 70,
+                              width: 70,
+                              child: Card(
+                                color: Colors.transparent,
+                                shape: RoundedRectangleBorder(
+                                    side: BorderSide(
+                                        color: matchDay.dayNumber ==
+                                                context
+                                                    .read<TeamDetailBloc>()
+                                                    .getCurrentDay()
+                                            ? Colors.orange
+                                            : Colors.white),
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(30))),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "G${matchDay.dayNumber}",
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                    ),
+                                    Text(
+                                      "${matchDay.points}",
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ))
@@ -185,11 +224,13 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
             const SizedBox(height: 10),
             Expanded(
               child: switch (state) {
-                TryTeamDetailState() => const Center(
+                TryTeamDetailState() || TryUpdateDayState() => const Center(
                       child: CircularProgressIndicator(
                     color: Colors.white,
                   )),
-                ResultTeamDetailState() => Container(
+                ResultTeamDetailState(teamDetail: var td) ||
+                ResultUpdateDayState(teamDetail: var td) =>
+                  Container(
                     alignment: Alignment.center,
                     width: double.infinity,
                     child: Column(
@@ -201,18 +242,9 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              getPlayerCard(
-                                context,
-                                state.teamDetail.players.entries.elementAt(0),
-                              ),
-                              getPlayerCard(
-                                context,
-                                state.teamDetail.players.entries.elementAt(1),
-                              ),
-                              getPlayerCard(
-                                context,
-                                state.teamDetail.players.entries.elementAt(2),
-                              ),
+                              _getPlayerCard(context, td, 0, currentDay),
+                              _getPlayerCard(context, td, 1, currentDay),
+                              _getPlayerCard(context, td, 2, currentDay),
                             ],
                           ),
                         ),
@@ -221,16 +253,11 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
                           child: SizedBox(
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                getPlayerCard(
-                                  context,
-                                  state.teamDetail.players.entries.elementAt(3),
-                                ),
-                                getPlayerCard(
-                                  context,
-                                  state.teamDetail.players.entries.elementAt(4),
-                                ),
+                                _getPlayerCard(context, td, 3, currentDay),
+                                _getPlayerCard(context, td, 4, currentDay),
+                                _getPlayerCard(context, td, 5, currentDay),
                               ],
                             ),
                           ),
