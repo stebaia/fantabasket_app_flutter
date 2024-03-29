@@ -1,3 +1,7 @@
+import 'package:fantabasket_app_flutter/model/match_day.dart';
+import 'package:fantabasket_app_flutter/model/player.dart';
+import 'package:fantabasket_app_flutter/model/player_in_rank.dart';
+import 'package:fantabasket_app_flutter/model/team_detail.dart';
 import 'package:flutter/material.dart';
 
 class Constants {
@@ -31,4 +35,169 @@ class Constants {
     'P': 5,
     'F': 0,
   };
+
+  static Map<Player, int> mockPlayers = {
+    const Player(
+      id: 1,
+      firstName: "Mario",
+      lastName: "Rossi",
+      value: 10,
+      team: "",
+      photo: "",
+      phone: "",
+      category: "A",
+      email: "",
+    ): 70,
+    const Player(
+      id: 2,
+      firstName: "Luigi",
+      lastName: "Bianchi",
+      value: 10,
+      team: "",
+      photo: "",
+      phone: "",
+      category: "A",
+      email: "",
+    ): 60,
+    const Player(
+      id: 3,
+      firstName: "Luca",
+      lastName: "Verdi",
+      value: 10,
+      team: "",
+      photo: "",
+      phone: "",
+      category: "A",
+      email: "",
+    ): 50,
+    const Player(
+      id: 4,
+      firstName: "Alberto",
+      lastName: "Angela",
+      value: 10,
+      team: "",
+      photo: "",
+      phone: "",
+      category: "A",
+      email: "",
+    ): 80,
+    const Player(
+      id: 5,
+      firstName: "Ciro",
+      lastName: "Esposito",
+      value: 10,
+      team: "",
+      photo: "",
+      phone: "",
+      category: "A",
+      email: "",
+    ): 79,
+    const Player(
+      id: 6,
+      firstName: "Maurizio",
+      lastName: "Costanzo",
+      value: 5,
+      team: "",
+      photo: "",
+      phone: "",
+      category: "A",
+      email: "",
+    ): 70,
+  };
+
+  static TeamDetail detailTeamMock = TeamDetail(
+    totalPoints: 886,
+    days: [
+      MatchDay(dayNumber: 1, points: 110, players: mockPlayers),
+      MatchDay(dayNumber: 2, points: 70, players: mockPlayers),
+      MatchDay(dayNumber: 3, points: 78, players: mockPlayers),
+      MatchDay(dayNumber: 4, points: 90, players: mockPlayers),
+      MatchDay(dayNumber: 5, points: 87, players: mockPlayers),
+      MatchDay(dayNumber: 6, points: 68, players: mockPlayers),
+      MatchDay(dayNumber: 7, points: 99, players: mockPlayers),
+      MatchDay(dayNumber: 8, points: 102, players: mockPlayers),
+      MatchDay(dayNumber: 9, points: 94, players: mockPlayers),
+      MatchDay(dayNumber: 10, points: 88, players: mockPlayers),
+    ],
+  );
+
+  static List<PlayerInRank> rankDetailMock = [
+    const PlayerInRank(
+      firstName: "Mario",
+      lastName: "Rossi",
+      teamName: "JoyBoys",
+      points: 1100,
+      position: 1,
+    ),
+    const PlayerInRank(
+      firstName: "Luca",
+      lastName: "Verdi",
+      teamName: "PatRileyRitirati",
+      points: 890,
+      position: 2,
+    ),
+    const PlayerInRank(
+      firstName: "Alberto",
+      lastName: "Angela",
+      teamName: "I pesciazzi",
+      points: 670,
+      position: 3,
+    ),
+    const PlayerInRank(
+      firstName: "Luigi",
+      lastName: "Bianchi",
+      teamName: "Potatoes",
+      points: 540,
+      position: 4,
+    ),
+    const PlayerInRank(
+      firstName: "Ciro",
+      lastName: "Esposito",
+      teamName: "Maria maria",
+      points: 330,
+      position: 5,
+    ),
+    const PlayerInRank(
+      firstName: "Emanuele",
+      lastName: "Lamagna",
+      teamName: "Pedonis",
+      points: 290,
+      position: 6,
+    ),
+    const PlayerInRank(
+      firstName: "Gianmarco",
+      lastName: "Balza",
+      teamName: "Yoyos",
+      points: 150,
+      position: 7,
+    ),
+    const PlayerInRank(
+      firstName: "Mario",
+      lastName: "Rossi",
+      teamName: "JoyBoys",
+      points: 140,
+      position: 8,
+    ),
+    const PlayerInRank(
+      firstName: "Luca",
+      lastName: "Laurenti",
+      teamName: "Pappinos",
+      points: 130,
+      position: 9,
+    ),
+    const PlayerInRank(
+      firstName: "Angelo",
+      lastName: "Pintus",
+      teamName: "BlablaCard",
+      points: 100,
+      position: 10,
+    ),
+    const PlayerInRank(
+      firstName: "Simone",
+      lastName: "Lodi",
+      teamName: "Lodolodo",
+      points: 50,
+      position: 11,
+    ),
+  ];
 }

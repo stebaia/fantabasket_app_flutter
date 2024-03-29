@@ -47,7 +47,7 @@ class RankPage extends StatelessWidget {
               vertical: 2.0,
             ),
             child: TextField(
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 focusColor: Colors.orange,
                 focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.orange, width: 2.0),

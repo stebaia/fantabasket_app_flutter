@@ -71,6 +71,7 @@ class _LoadStagesPageState extends State<LoadStagesPage> {
                           if (state is ResultGetStagesState)
                             ListView.builder(
                               shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
                               itemCount: state.stagesList.count,
                               itemBuilder: (context, index) {
                                 if (state.stagesList.stages != null) {
@@ -83,6 +84,7 @@ class _LoadStagesPageState extends State<LoadStagesPage> {
                             ListView.builder(
                               shrinkWrap: true,
                               itemCount: 4,
+                              physics: const NeverScrollableScrollPhysics(),
                               itemBuilder: (context, index) {
                                 return const LoadStageCard(
                                   stage: Stage(id: 0),
