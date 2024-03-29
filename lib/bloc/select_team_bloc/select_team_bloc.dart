@@ -21,7 +21,7 @@ class SelectTeamBloc extends Bloc<SelectTeamEvent, SelectTeamState> {
     on<GetPlayersEvent>(_getPlayers);
   }
 
-  void getPlayers() => add(const GetPlayersEvent());
+  void getPlayers(int stage) => add(GetPlayersEvent(stage));
 
   void result(PlayersList playersList) =>
       emit(ResultGetPlayersState(playersList));
@@ -33,7 +33,7 @@ class SelectTeamBloc extends Bloc<SelectTeamEvent, SelectTeamState> {
     emit(const TryGetPlayersState());
 
     try {
-      final players = await playerRepository.getPlayers();
+      final players = await playerRepository.getPlayers(event.stage);
       if (players.response.statusCode == 200) {
         emit(ResultGetPlayersState(players.data));
       } else {

@@ -30,9 +30,9 @@ class PlayerRepository {
       required this.logger,
       required this.playerDTOMapper});
 
-  Future<HttpResponse<PlayersList>> getPlayers() async {
+  Future<HttpResponse<PlayersList>> getPlayers(int stage) async {
     try {
-      final response = await playerService.getPlayers();
+      final response = await playerService.getPlayersStage(stage);
       PlayersList playersList = playerDTOMapper.fromDTO(response.data);
       return HttpResponse(playersList, response.response);
     } catch (error, stackTrace) {

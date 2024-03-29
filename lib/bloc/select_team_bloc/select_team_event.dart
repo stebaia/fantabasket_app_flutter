@@ -8,7 +8,8 @@ abstract class SelectTeamEvent extends Equatable {
 }
 
 class GetPlayersEvent extends SelectTeamEvent {
-  const GetPlayersEvent();
+  final int stage;
+  const GetPlayersEvent(this.stage);
 
   @override
   List<Object> get props => [];
