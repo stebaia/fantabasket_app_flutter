@@ -1,17 +1,16 @@
-import 'dart:convert';
-
 import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:flutter/material.dart';
 import 'package:fantabasket_app_flutter/utils/constants.dart';
-import 'package:flutter/widgets.dart';
 
 class PlayerBar extends StatelessWidget {
   final Player player;
   final bool enabled;
+  final Player? sixth;
 
   const PlayerBar({
     required this.player,
     required this.enabled,
+    this.sixth,
     super.key,
   });
 
@@ -28,6 +27,13 @@ class PlayerBar extends StatelessWidget {
       height: 100,
       child: Card(
         color: Color.fromARGB(255, 14, 13, 13),
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: sixth == null ? Colors.white : Colors.orange,
+            width: sixth == null ? 0 : 3,
+          ),
+          borderRadius: BorderRadius.circular(10.0),
+        ),
         elevation: 6,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

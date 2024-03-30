@@ -48,7 +48,6 @@ class CompletionPage extends StatelessWidget with AutoRouteWrapper {
   @override
   Widget build(BuildContext context) {
     final controller = TextEditingController();
-    print("Stage 3: $stage");
     side.removeWhere(
         (player) => player.category == "A" || player.category == "B");
     return Scaffold(
@@ -113,11 +112,11 @@ class CompletionPage extends StatelessWidget with AutoRouteWrapper {
                 const SizedBox(
                   height: 20,
                 ),
-                Text(
+                const Text(
                   "Seleziona capitano",
                   style: TextStyle(color: Colors.white),
                 ),
-                Container(
+                SizedBox(
                   height: 170,
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
@@ -211,27 +210,33 @@ class CompletionPage extends StatelessWidget with AutoRouteWrapper {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Text(
+                const SizedBox(height: 20),
+                const Text(
                   "Seleziona sesto uomo",
                   style: TextStyle(color: Colors.white),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
-                ListView.builder(
-                  primary: false,
-                  shrinkWrap: true,
-                  itemCount: side.length,
-                  itemBuilder: (context, index) => GestureDetector(
-                    onTap: () => context
-                        .read<SixthManCubit>()
-                        .selectSixthMan(side[index]),
-                    child: PlayerBar(player: side[index], enabled: true),
-                  ),
-                ),
+                const SizedBox(height: 20),
+                BlocBuilder<SixthManCubit, SixthManState>(
+                    builder: (context, state) {
+                  var sixthMan = context.read<SixthManCubit>().getSixthMan();
+                  return ListView.builder(
+                    primary: false,
+                    shrinkWrap: true,
+                    itemCount: side.length,
+                    itemBuilder: (context, index) => GestureDetector(
+                      onTap: () => context
+                          .read<SixthManCubit>()
+                          .selectSixthMan(side[index]),
+                      child: PlayerBar(
+                        player: side[index],
+                        enabled: true,
+                        sixth: sixthMan != null && sixthMan.id == side[index].id
+                            ? sixthMan
+                            : null,
+                      ),
+                    ),
+                  );
+                }),
               ],
             ),
           ),
