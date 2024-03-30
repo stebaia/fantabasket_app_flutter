@@ -50,71 +50,67 @@ class _PlayerIconState extends State<PlayerIcon> {
               color: Color.fromARGB(255, 14, 13, 13),
               padding: const EdgeInsets.all(8.0),
               height: height,
-              child: Center(
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Text(
-                        'Seleziona giocatore',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      ...list.map(
-                        (player) {
-                          var enabled =
-                              total - currentValue + player.value <= 65;
-                          return GestureDetector(
-                            onTap: enabled
-                                ? () {
-                                    int value = player.value;
-                                    List<Player> checkedPlayers = widget
-                                        .mContext
-                                        .read<SelectPlayerBloc>()
-                                        .checkedPlayers;
-                                    if (checkedPlayers.length <= 5 &&
-                                        total - currentValue + value <= 65) {
-                                      widget.mContext
-                                          .read<CreditsCubit>()
-                                          .decrement(selected == null
-                                              ? 0
-                                              : selected!.value);
-                                      widget.mContext
-                                          .read<CreditsCubit>()
-                                          .increment(value);
-                                      if (selected != null) {
-                                        widget.mContext
-                                            .read<SelectPlayerBloc>()
-                                            .removePlayer(selected!);
-                                      }
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      'Seleziona giocatore',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    ...list.map(
+                      (player) {
+                        var enabled = total - currentValue + player.value <= 65;
+                        return GestureDetector(
+                          onTap: enabled
+                              ? () {
+                                  int value = player.value;
+                                  List<Player> checkedPlayers = widget.mContext
+                                      .read<SelectPlayerBloc>()
+                                      .checkedPlayers;
+                                  if (checkedPlayers.length <= 5 &&
+                                      total - currentValue + value <= 65) {
+                                    widget.mContext
+                                        .read<CreditsCubit>()
+                                        .decrement(selected == null
+                                            ? 0
+                                            : selected!.value);
+                                    widget.mContext
+                                        .read<CreditsCubit>()
+                                        .increment(value);
+                                    if (selected != null) {
                                       widget.mContext
                                           .read<SelectPlayerBloc>()
-                                          .addPlayer(player);
-                                      Navigator.of(context).pop(player);
-                                    } else {
-                                      Navigator.of(context).pop(null);
+                                          .removePlayer(selected!);
                                     }
+                                    widget.mContext
+                                        .read<SelectPlayerBloc>()
+                                        .addPlayer(player);
+                                    Navigator.of(context).pop(player);
+                                  } else {
+                                    Navigator.of(context).pop(null);
                                   }
-                                : null,
-                            child: PlayerBar(
-                              player: player,
-                              enabled: enabled,
-                            ),
-                          );
-                        },
-                      )
-                    ],
-                  ),
+                                }
+                              : null,
+                          child: PlayerBar(
+                            player: player,
+                            enabled: enabled,
+                          ),
+                        );
+                      },
+                    )
+                  ],
                 ),
               ),
             );
