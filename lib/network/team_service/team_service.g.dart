@@ -47,36 +47,6 @@ class _TeamService implements TeamService {
   }
 
   @override
-  Future<HttpResponse<ApiEmptyResponseDTO>> addTeamToStage(
-      AddTeamToStageRequest addTeamToStageRequest) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(addTeamToStageRequest.toJson());
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<ApiEmptyResponseDTO>>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              'api/addTeamStage',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = ApiEmptyResponseDTO.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
-    return httpResponse;
-  }
-
-  @override
   Future<HttpResponse<ApiEmptyResponseDTO>> addPlayerToTeam(
       AddPlayerToTeamRequest addPlayerToTeamRequest) async {
     const _extra = <String, dynamic>{};
