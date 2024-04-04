@@ -34,34 +34,21 @@ class TeamRepository {
     required String name,
     required List<int> player,
     required int cpt,
+    required int ris,
+    required int stageId,
   }) async {
     try {
       CreateTeamRequest request = CreateTeamRequest(
         name: name,
         player: player,
         cpt: cpt,
+        ris: ris,
+        stageId: stageId,
       );
 
       print(request.toJson());
 
       final response = await teamService.createTeam(request);
-      return response;
-    } catch (error, stackTrace) {
-      logger.e('Error in team creation', error: error, stackTrace: stackTrace);
-      rethrow;
-    }
-  }
-
-  Future<HttpResponse<ApiEmptyResponseDTO>> addTeamToStage({
-    required int teamId,
-    required int stageId,
-  }) async {
-    try {
-      final response = await teamService.addTeamToStage(AddTeamToStageRequest(
-        idStage: stageId.toString(),
-        idTeam: teamId.toString(),
-      ));
-      print("Result in repo: ${response.data}");
       return response;
     } catch (error, stackTrace) {
       logger.e('Error in team creation', error: error, stackTrace: stackTrace);

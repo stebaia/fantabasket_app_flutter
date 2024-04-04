@@ -57,18 +57,15 @@ class _CompletionButtonState extends State<CompletionButton> {
             ),
             onPressed: enabled
                 ? () {
-                    var players = widget.team
-                        .map((player) => player.id)
-                        .toList(growable: true);
-                    var sm = sixth.sixthMan!.id;
-                    players.add(sm);
-                    var cpt = captain.captain!.id;
+                    var players =
+                        widget.team.map((player) => player.id).toList();
                     var name = widget.controller.text;
                     context.read<AddTeamBloc>().addNewTeam(
                           name: name,
                           player: players,
-                          cpt: cpt,
+                          cpt: captain.captain!.id,
                           stage: widget.stage.id,
+                          ris: sixth.sixthMan!.id,
                         );
                   }
                 : null,
