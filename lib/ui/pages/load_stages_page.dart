@@ -64,36 +64,39 @@ class _LoadStagesPageState extends State<LoadStagesPage> {
               child: Column(
                 children: [
                   const SponsorsBanner(),
-                  SingleChildScrollView(
+                  Expanded(
                     child: Container(
                       padding: const EdgeInsets.symmetric(vertical: 20),
                       alignment: Alignment.center,
-                      child: Column(
-                        children: [
-                          switch (state) {
-                            TryGetStagesState() => const Center(
-                                child: CircularProgressIndicator(),
-                              ),
-                            ResultGetStagesState(stagesList: var stages) =>
-                              ListView.builder(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: stages.count,
-                                itemBuilder: (context, index) =>
-                                    LoadStageCard(stage: stages.stages![index]),
-                              ),
-                            _ => ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: 4,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemBuilder: (context, index) {
-                                  return const LoadStageCard(
-                                    stage: Stage(id: 0),
-                                  );
-                                },
-                              ),
-                          }
-                        ],
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            switch (state) {
+                              TryGetStagesState() => const Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                              ResultGetStagesState(stagesList: var stages) =>
+                                ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: stages.count,
+                                  itemBuilder: (context, index) =>
+                                      LoadStageCard(
+                                          stage: stages.stages![index]),
+                                ),
+                              _ => ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: 4,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemBuilder: (context, index) {
+                                    return const LoadStageCard(
+                                      stage: Stage(id: 0),
+                                    );
+                                  },
+                                ),
+                            }
+                          ],
+                        ),
                       ),
                     ),
                   ),

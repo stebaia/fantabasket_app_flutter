@@ -25,7 +25,7 @@ class CreateTeamRequest extends DTO with EquatableMixin {
   static const _player = "player";
   static const _cpt = "cpt";
   static const _ris = "ris";
-  static const _stageId = 'stage_id';
+  static const _stageId = 'stage';
 
   final String name;
   final List<int> player;
