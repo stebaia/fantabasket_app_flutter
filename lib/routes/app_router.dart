@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_route/empty_router_widgets.dart';
 import 'package:auto_route/annotations.dart';
+import 'package:fantabasket_app_flutter/ui/pages/best_players_page.dart';
 import 'package:fantabasket_app_flutter/ui/pages/completion_page.dart';
 import 'package:fantabasket_app_flutter/ui/pages/container_page.dart';
 import 'package:fantabasket_app_flutter/ui/pages/core_page.dart';
@@ -45,6 +46,7 @@ import 'package:fantabasket_app_flutter/ui/pages/team_detail_page.dart';
     AutoRoute(page: CompletionPage, path: 'completion_page'),
     AutoRoute(page: RankDetailPage, path: 'rank_detail_page'),
     AutoRoute(page: TeamDetailPage, path: 'team_detail_page'),
+    AutoRoute(page: BestPlayersPage, path: 'best_players_page'),
   ])
 
   /*

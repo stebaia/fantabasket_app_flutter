@@ -34,13 +34,15 @@ class SelectTeamBloc extends Bloc<SelectTeamEvent, SelectTeamState> {
 
     try {
       final players = await playerRepository.getPlayers(event.stage);
+      print("BUFE W: ${players.response.statusCode}");
       if (players.response.statusCode == 200) {
         emit(ResultGetPlayersState(players.data));
       } else {
         emit(const ErrorGetPlayersState('Giocatori non caricati'));
       }
     } catch (e) {
-      emit(const ErrorGetPlayersState('Giocatori non caricati'));
+      print("IN ERROR");
+      emit(const ErrorGetPlayersState('Errore nel caricamento dei giocatori'));
     }
   }
 }
