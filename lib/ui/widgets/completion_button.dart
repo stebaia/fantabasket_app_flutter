@@ -59,6 +59,7 @@ class _CompletionButtonState extends State<CompletionButton> {
                 ? () {
                     var players =
                         widget.team.map((player) => player.id).toList();
+                    players.add(sixth.sixthMan!.id);
                     var name = widget.controller.text;
                     context.read<AddTeamBloc>().addNewTeam(
                           name: name,

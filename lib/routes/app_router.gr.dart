@@ -11,74 +11,76 @@
 // ignore_for_file: type=lint
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i15;
+import 'package:auto_route/auto_route.dart' as _i17;
 import 'package:auto_route/empty_router_widgets.dart' as _i1;
-import 'package:flutter/material.dart' as _i16;
+import 'package:flutter/material.dart' as _i18;
 
-import '../model/player.dart' as _i18;
-import '../model/stage.dart' as _i17;
-import '../model/team.dart' as _i19;
+import '../model/player.dart' as _i20;
+import '../model/stage.dart' as _i19;
+import '../model/team.dart' as _i21;
+import '../ui/pages/best_players_page.dart' as _i11;
 import '../ui/pages/completion_page.dart' as _i8;
-import '../ui/pages/container_page.dart' as _i14;
+import '../ui/pages/container_page.dart' as _i16;
 import '../ui/pages/core_page.dart' as _i5;
-import '../ui/pages/create_team.dart' as _i11;
+import '../ui/pages/create_team.dart' as _i12;
 import '../ui/pages/load_stages_page.dart' as _i6;
 import '../ui/pages/login_page.dart' as _i3;
 import '../ui/pages/main_page.dart' as _i2;
-import '../ui/pages/profile_page.dart' as _i13;
+import '../ui/pages/players_page.dart' as _i14;
+import '../ui/pages/profile_page.dart' as _i15;
 import '../ui/pages/rank_detail_page.dart' as _i9;
-import '../ui/pages/rank_page.dart' as _i12;
+import '../ui/pages/rank_page.dart' as _i13;
 import '../ui/pages/registration_page.dart' as _i4;
 import '../ui/pages/select_team_page.dart' as _i7;
 import '../ui/pages/team_detail_page.dart' as _i10;
 
-class AppRouter extends _i15.RootStackRouter {
-  AppRouter([_i16.GlobalKey<_i16.NavigatorState>? navigatorKey])
+class AppRouter extends _i17.RootStackRouter {
+  AppRouter([_i18.GlobalKey<_i18.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
-  final Map<String, _i15.PageFactory> pagesMap = {
+  final Map<String, _i17.PageFactory> pagesMap = {
     EmptyRouterRoute.name: (routeData) {
-      return _i15.MaterialPageX<dynamic>(
+      return _i17.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i1.EmptyRouterPage(),
       );
     },
     MainRoute.name: (routeData) {
-      return _i15.MaterialPageX<dynamic>(
+      return _i17.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i2.MainPage(),
       );
     },
     LoginRoute.name: (routeData) {
-      return _i15.MaterialPageX<dynamic>(
+      return _i17.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i15.WrappedRoute(child: const _i3.LoginPage()),
+        child: _i17.WrappedRoute(child: const _i3.LoginPage()),
       );
     },
     RegistrationRoute.name: (routeData) {
-      return _i15.MaterialPageX<dynamic>(
+      return _i17.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i15.WrappedRoute(child: const _i4.RegistrationPage()),
+        child: _i17.WrappedRoute(child: const _i4.RegistrationPage()),
       );
     },
     CoreRoute.name: (routeData) {
-      return _i15.MaterialPageX<dynamic>(
+      return _i17.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i5.CorePage(),
       );
     },
     LoadStagesRoute.name: (routeData) {
-      return _i15.MaterialPageX<dynamic>(
+      return _i17.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i15.WrappedRoute(child: const _i6.LoadStagesPage()),
+        child: _i17.WrappedRoute(child: const _i6.LoadStagesPage()),
       );
     },
     SelectTeamRoute.name: (routeData) {
       final args = routeData.argsAs<SelectTeamRouteArgs>();
-      return _i15.MaterialPageX<dynamic>(
+      return _i17.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i15.WrappedRoute(
+        child: _i17.WrappedRoute(
             child: _i7.SelectTeamPage(
           key: args.key,
           stage: args.stage,
@@ -87,9 +89,9 @@ class AppRouter extends _i15.RootStackRouter {
     },
     CompletionRoute.name: (routeData) {
       final args = routeData.argsAs<CompletionRouteArgs>();
-      return _i15.MaterialPageX<dynamic>(
+      return _i17.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i15.WrappedRoute(
+        child: _i17.WrappedRoute(
             child: _i8.CompletionPage(
           key: args.key,
           team: args.team,
@@ -100,9 +102,9 @@ class AppRouter extends _i15.RootStackRouter {
     },
     RankDetailRoute.name: (routeData) {
       final args = routeData.argsAs<RankDetailRouteArgs>();
-      return _i15.MaterialPageX<dynamic>(
+      return _i17.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i15.WrappedRoute(
+        child: _i17.WrappedRoute(
             child: _i9.RankDetailPage(
           stageName: args.stageName,
           key: args.key,
@@ -111,125 +113,152 @@ class AppRouter extends _i15.RootStackRouter {
     },
     TeamDetailRoute.name: (routeData) {
       final args = routeData.argsAs<TeamDetailRouteArgs>();
-      return _i15.MaterialPageX<dynamic>(
+      return _i17.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i15.WrappedRoute(
+        child: _i17.WrappedRoute(
             child: _i10.TeamDetailPage(
           team: args.team,
           key: args.key,
         )),
       );
     },
+    BestPlayersRoute.name: (routeData) {
+      final args = routeData.argsAs<BestPlayersRouteArgs>();
+      return _i17.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: _i17.WrappedRoute(
+            child: _i11.BestPlayersPage(
+          stage: args.stage,
+          key: args.key,
+        )),
+      );
+    },
     TopBarContainerRouter.name: (routeData) {
-      return _i15.MaterialPageX<dynamic>(
+      return _i17.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i1.EmptyRouterScreen(),
       );
     },
     CreateTeamRoute.name: (routeData) {
-      return _i15.MaterialPageX<dynamic>(
+      return _i17.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i15.WrappedRoute(child: const _i11.CreateTeamPage()),
+        child: _i17.WrappedRoute(child: const _i12.CreateTeamPage()),
       );
     },
     RankRoute.name: (routeData) {
-      return _i15.MaterialPageX<dynamic>(
+      return _i17.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i12.RankPage(),
+        child: const _i13.RankPage(),
+      );
+    },
+    PlayersRoute.name: (routeData) {
+      return _i17.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: _i17.WrappedRoute(child: const _i14.PlayersPage()),
       );
     },
     ProfileRoute.name: (routeData) {
-      return _i15.MaterialPageX<dynamic>(
+      return _i17.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i13.ProfilePage(),
+        child: const _i15.ProfilePage(),
       );
     },
     ContainerRoute.name: (routeData) {
-      return _i15.MaterialPageX<dynamic>(
+      return _i17.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i14.ContainerPage(),
+        child: const _i16.ContainerPage(),
       );
     },
   };
 
   @override
-  List<_i15.RouteConfig> get routes => [
-        _i15.RouteConfig(
+  List<_i17.RouteConfig> get routes => [
+        _i17.RouteConfig(
           EmptyRouterRoute.name,
           path: '/',
           children: [
-            _i15.RouteConfig(
+            _i17.RouteConfig(
               MainRoute.name,
               path: '',
               parent: EmptyRouterRoute.name,
             ),
-            _i15.RouteConfig(
+            _i17.RouteConfig(
               LoginRoute.name,
               path: 'login',
               parent: EmptyRouterRoute.name,
             ),
-            _i15.RouteConfig(
+            _i17.RouteConfig(
               RegistrationRoute.name,
               path: 'registration',
               parent: EmptyRouterRoute.name,
             ),
-            _i15.RouteConfig(
+            _i17.RouteConfig(
               CoreRoute.name,
               path: 'core',
               parent: EmptyRouterRoute.name,
               children: [
-                _i15.RouteConfig(
+                _i17.RouteConfig(
                   TopBarContainerRouter.name,
                   path: 'container',
                   parent: CoreRoute.name,
                   children: [
-                    _i15.RouteConfig(
+                    _i17.RouteConfig(
                       ContainerRoute.name,
                       path: '',
                       parent: TopBarContainerRouter.name,
                     )
                   ],
                 ),
-                _i15.RouteConfig(
+                _i17.RouteConfig(
                   CreateTeamRoute.name,
                   path: 'create_team_page',
                   parent: CoreRoute.name,
                 ),
-                _i15.RouteConfig(
+                _i17.RouteConfig(
                   RankRoute.name,
                   path: 'rank_page',
                   parent: CoreRoute.name,
                 ),
-                _i15.RouteConfig(
+                _i17.RouteConfig(
+                  PlayersRoute.name,
+                  path: 'players_page',
+                  parent: CoreRoute.name,
+                ),
+                _i17.RouteConfig(
                   ProfileRoute.name,
                   path: 'profile_page',
                   parent: CoreRoute.name,
                 ),
               ],
             ),
-            _i15.RouteConfig(
+            _i17.RouteConfig(
               LoadStagesRoute.name,
               path: 'load_stages_page',
               parent: EmptyRouterRoute.name,
             ),
-            _i15.RouteConfig(
+            _i17.RouteConfig(
               SelectTeamRoute.name,
               path: 'select_team_page',
               parent: EmptyRouterRoute.name,
             ),
-            _i15.RouteConfig(
+            _i17.RouteConfig(
               CompletionRoute.name,
               path: 'completion_page',
               parent: EmptyRouterRoute.name,
             ),
-            _i15.RouteConfig(
+            _i17.RouteConfig(
               RankDetailRoute.name,
               path: 'rank_detail_page',
               parent: EmptyRouterRoute.name,
             ),
-            _i15.RouteConfig(
+            _i17.RouteConfig(
               TeamDetailRoute.name,
               path: 'team_detail_page',
+              parent: EmptyRouterRoute.name,
+            ),
+            _i17.RouteConfig(
+              BestPlayersRoute.name,
+              path: 'best_players_page',
               parent: EmptyRouterRoute.name,
             ),
           ],
@@ -239,8 +268,8 @@ class AppRouter extends _i15.RootStackRouter {
 
 /// generated route for
 /// [_i1.EmptyRouterPage]
-class EmptyRouterRoute extends _i15.PageRouteInfo<void> {
-  const EmptyRouterRoute({List<_i15.PageRouteInfo>? children})
+class EmptyRouterRoute extends _i17.PageRouteInfo<void> {
+  const EmptyRouterRoute({List<_i17.PageRouteInfo>? children})
       : super(
           EmptyRouterRoute.name,
           path: '/',
@@ -252,7 +281,7 @@ class EmptyRouterRoute extends _i15.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.MainPage]
-class MainRoute extends _i15.PageRouteInfo<void> {
+class MainRoute extends _i17.PageRouteInfo<void> {
   const MainRoute()
       : super(
           MainRoute.name,
@@ -264,7 +293,7 @@ class MainRoute extends _i15.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.LoginPage]
-class LoginRoute extends _i15.PageRouteInfo<void> {
+class LoginRoute extends _i17.PageRouteInfo<void> {
   const LoginRoute()
       : super(
           LoginRoute.name,
@@ -276,7 +305,7 @@ class LoginRoute extends _i15.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.RegistrationPage]
-class RegistrationRoute extends _i15.PageRouteInfo<void> {
+class RegistrationRoute extends _i17.PageRouteInfo<void> {
   const RegistrationRoute()
       : super(
           RegistrationRoute.name,
@@ -288,8 +317,8 @@ class RegistrationRoute extends _i15.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.CorePage]
-class CoreRoute extends _i15.PageRouteInfo<void> {
-  const CoreRoute({List<_i15.PageRouteInfo>? children})
+class CoreRoute extends _i17.PageRouteInfo<void> {
+  const CoreRoute({List<_i17.PageRouteInfo>? children})
       : super(
           CoreRoute.name,
           path: 'core',
@@ -301,7 +330,7 @@ class CoreRoute extends _i15.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i6.LoadStagesPage]
-class LoadStagesRoute extends _i15.PageRouteInfo<void> {
+class LoadStagesRoute extends _i17.PageRouteInfo<void> {
   const LoadStagesRoute()
       : super(
           LoadStagesRoute.name,
@@ -313,10 +342,10 @@ class LoadStagesRoute extends _i15.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i7.SelectTeamPage]
-class SelectTeamRoute extends _i15.PageRouteInfo<SelectTeamRouteArgs> {
+class SelectTeamRoute extends _i17.PageRouteInfo<SelectTeamRouteArgs> {
   SelectTeamRoute({
-    _i16.Key? key,
-    required _i17.Stage stage,
+    _i18.Key? key,
+    required _i19.Stage stage,
   }) : super(
           SelectTeamRoute.name,
           path: 'select_team_page',
@@ -335,9 +364,9 @@ class SelectTeamRouteArgs {
     required this.stage,
   });
 
-  final _i16.Key? key;
+  final _i18.Key? key;
 
-  final _i17.Stage stage;
+  final _i19.Stage stage;
 
   @override
   String toString() {
@@ -347,12 +376,12 @@ class SelectTeamRouteArgs {
 
 /// generated route for
 /// [_i8.CompletionPage]
-class CompletionRoute extends _i15.PageRouteInfo<CompletionRouteArgs> {
+class CompletionRoute extends _i17.PageRouteInfo<CompletionRouteArgs> {
   CompletionRoute({
-    _i16.Key? key,
-    required List<_i18.Player> team,
-    required List<_i18.Player> side,
-    required _i17.Stage stage,
+    _i18.Key? key,
+    required List<_i20.Player> team,
+    required List<_i20.Player> side,
+    required _i19.Stage stage,
   }) : super(
           CompletionRoute.name,
           path: 'completion_page',
@@ -375,13 +404,13 @@ class CompletionRouteArgs {
     required this.stage,
   });
 
-  final _i16.Key? key;
+  final _i18.Key? key;
 
-  final List<_i18.Player> team;
+  final List<_i20.Player> team;
 
-  final List<_i18.Player> side;
+  final List<_i20.Player> side;
 
-  final _i17.Stage stage;
+  final _i19.Stage stage;
 
   @override
   String toString() {
@@ -391,10 +420,10 @@ class CompletionRouteArgs {
 
 /// generated route for
 /// [_i9.RankDetailPage]
-class RankDetailRoute extends _i15.PageRouteInfo<RankDetailRouteArgs> {
+class RankDetailRoute extends _i17.PageRouteInfo<RankDetailRouteArgs> {
   RankDetailRoute({
     required String stageName,
-    _i16.Key? key,
+    _i18.Key? key,
   }) : super(
           RankDetailRoute.name,
           path: 'rank_detail_page',
@@ -415,7 +444,7 @@ class RankDetailRouteArgs {
 
   final String stageName;
 
-  final _i16.Key? key;
+  final _i18.Key? key;
 
   @override
   String toString() {
@@ -425,10 +454,10 @@ class RankDetailRouteArgs {
 
 /// generated route for
 /// [_i10.TeamDetailPage]
-class TeamDetailRoute extends _i15.PageRouteInfo<TeamDetailRouteArgs> {
+class TeamDetailRoute extends _i17.PageRouteInfo<TeamDetailRouteArgs> {
   TeamDetailRoute({
-    required _i19.Team team,
-    _i16.Key? key,
+    required _i21.Team team,
+    _i18.Key? key,
   }) : super(
           TeamDetailRoute.name,
           path: 'team_detail_page',
@@ -447,9 +476,9 @@ class TeamDetailRouteArgs {
     this.key,
   });
 
-  final _i19.Team team;
+  final _i21.Team team;
 
-  final _i16.Key? key;
+  final _i18.Key? key;
 
   @override
   String toString() {
@@ -458,9 +487,43 @@ class TeamDetailRouteArgs {
 }
 
 /// generated route for
+/// [_i11.BestPlayersPage]
+class BestPlayersRoute extends _i17.PageRouteInfo<BestPlayersRouteArgs> {
+  BestPlayersRoute({
+    required _i19.Stage stage,
+    _i18.Key? key,
+  }) : super(
+          BestPlayersRoute.name,
+          path: 'best_players_page',
+          args: BestPlayersRouteArgs(
+            stage: stage,
+            key: key,
+          ),
+        );
+
+  static const String name = 'BestPlayersRoute';
+}
+
+class BestPlayersRouteArgs {
+  const BestPlayersRouteArgs({
+    required this.stage,
+    this.key,
+  });
+
+  final _i19.Stage stage;
+
+  final _i18.Key? key;
+
+  @override
+  String toString() {
+    return 'BestPlayersRouteArgs{stage: $stage, key: $key}';
+  }
+}
+
+/// generated route for
 /// [_i1.EmptyRouterScreen]
-class TopBarContainerRouter extends _i15.PageRouteInfo<void> {
-  const TopBarContainerRouter({List<_i15.PageRouteInfo>? children})
+class TopBarContainerRouter extends _i17.PageRouteInfo<void> {
+  const TopBarContainerRouter({List<_i17.PageRouteInfo>? children})
       : super(
           TopBarContainerRouter.name,
           path: 'container',
@@ -471,8 +534,8 @@ class TopBarContainerRouter extends _i15.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i11.CreateTeamPage]
-class CreateTeamRoute extends _i15.PageRouteInfo<void> {
+/// [_i12.CreateTeamPage]
+class CreateTeamRoute extends _i17.PageRouteInfo<void> {
   const CreateTeamRoute()
       : super(
           CreateTeamRoute.name,
@@ -483,8 +546,8 @@ class CreateTeamRoute extends _i15.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i12.RankPage]
-class RankRoute extends _i15.PageRouteInfo<void> {
+/// [_i13.RankPage]
+class RankRoute extends _i17.PageRouteInfo<void> {
   const RankRoute()
       : super(
           RankRoute.name,
@@ -495,8 +558,20 @@ class RankRoute extends _i15.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i13.ProfilePage]
-class ProfileRoute extends _i15.PageRouteInfo<void> {
+/// [_i14.PlayersPage]
+class PlayersRoute extends _i17.PageRouteInfo<void> {
+  const PlayersRoute()
+      : super(
+          PlayersRoute.name,
+          path: 'players_page',
+        );
+
+  static const String name = 'PlayersRoute';
+}
+
+/// generated route for
+/// [_i15.ProfilePage]
+class ProfileRoute extends _i17.PageRouteInfo<void> {
   const ProfileRoute()
       : super(
           ProfileRoute.name,
@@ -507,8 +582,8 @@ class ProfileRoute extends _i15.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i14.ContainerPage]
-class ContainerRoute extends _i15.PageRouteInfo<void> {
+/// [_i16.ContainerPage]
+class ContainerRoute extends _i17.PageRouteInfo<void> {
   const ContainerRoute()
       : super(
           ContainerRoute.name,

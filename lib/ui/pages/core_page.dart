@@ -23,7 +23,12 @@ class _CorePageState extends State<CorePage> {
       child: AutoTabsScaffold(
         backgroundColor: Colors.white,
         //darkMode.darkTheme ? ThemeHelper.backgroundColorDark : Colors.white,
-        routes: [RankRoute(), CreateTeamRoute(), ProfileRoute()],
+        routes: [
+          RankRoute(),
+          PlayersRoute(),
+          CreateTeamRoute(),
+          ProfileRoute()
+        ],
         bottomNavigationBuilder: (context, tabsRouter) {
           return BottomNavigationBar(
               elevation: 0,
@@ -38,6 +43,11 @@ class _CorePageState extends State<CorePage> {
                   icon: FaIcon(FontAwesomeIcons.rankingStar),
                   activeIcon: FaIcon(FontAwesomeIcons.rankingStar),
                   label: 'Ranking',
+                ),
+                BottomNavigationBarItem(
+                  icon: FaIcon(FontAwesomeIcons.users),
+                  activeIcon: FaIcon(FontAwesomeIcons.users),
+                  label: 'Players',
                 ),
                 BottomNavigationBarItem(
                   icon: Image(
