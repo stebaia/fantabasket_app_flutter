@@ -73,6 +73,18 @@ class CompletionPage extends StatelessWidget with AutoRouteWrapper {
           if (state is ResultCreateState) {
             context.router
                 .popUntil((route) => route.settings.name == CoreRoute.name);
+          } else if (state is ErrorCreateState) {
+            showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                      content: Text(
+                          "Impossibile creare la squadra: ${state.errorString}"),
+                      actions: [
+                        ElevatedButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: const Text("Ok"))
+                      ],
+                    ));
           }
         },
         child: SingleChildScrollView(
