@@ -77,8 +77,7 @@ class CompletionPage extends StatelessWidget with AutoRouteWrapper {
             showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
-                      content: Text(
-                          "Impossibile creare la squadra: ${state.errorString}"),
+                      content: Text(state.errorString),
                       actions: [
                         ElevatedButton(
                             onPressed: () => Navigator.pop(context),

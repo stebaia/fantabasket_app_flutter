@@ -45,9 +45,6 @@ class TeamRepository {
         ris: ris,
         stageId: stageId,
       );
-
-      print(request.toJson());
-
       final response = await teamService.createTeam(request);
       return response;
     } catch (error, stackTrace) {
