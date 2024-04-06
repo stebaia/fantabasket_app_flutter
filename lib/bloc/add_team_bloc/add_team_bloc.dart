@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:fantabasket_app_flutter/repositories/team_repository.dart';
 import 'package:flutter/cupertino.dart';
@@ -50,7 +51,7 @@ class AddTeamBloc extends Bloc<AddTeamEvent, AddTeamState> {
       }
       emit(const InitCreateState());
     } catch (e) {
-      emit(const ErrorCreateState("Errore nella creazione della squadra"));
+      emit(ErrorCreateState((e as DioException).response!.data["msg"] ?? ""));
       emit(const InitCreateState());
     }
   }
