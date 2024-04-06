@@ -98,117 +98,112 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                     width: double.infinity,
                     child: Column(
                       children: [
+                        Container(
+                          alignment: Alignment.center,
+                          height: MediaQuery.of(context).size.height * 0.1,
+                          width: double.infinity,
+                          color: const Color.fromARGB(255, 225, 135, 57),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              BlocConsumer<CreditsCubit, CreditsState>(
+                                listener: (context, state) {},
+                                builder: (context, state) {
+                                  print("Rebuild total: $state");
+                                  int total =
+                                      context.read<CreditsCubit>().getTotal();
+                                  return SizedBox(
+                                    child: Text(
+                                      "$total/65",
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                        fontSize: 22,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
                         Expanded(
-                          flex: 1,
-                          child: Container(
-                            alignment: Alignment.center,
-                            width: double.infinity,
-                            color: const Color.fromARGB(255, 225, 135, 57),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                BlocConsumer<CreditsCubit, CreditsState>(
+                            child: switch (upstate) {
+                          TryGetPlayersState() =>
+                            const Center(child: CircularProgressIndicator()),
+                          ResultGetPlayersState() => upstate
+                                  .playersList.players!.isEmpty
+                              ? const Center(
+                                  child: Text(
+                                    "Nessun giocatore disponibile",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                )
+                              : BlocConsumer<SelectPlayerBloc,
+                                  SelectPlayerState>(
                                   listener: (context, state) {},
                                   builder: (context, state) {
-                                    print("Rebuild total: $state");
-                                    int total =
-                                        context.read<CreditsCubit>().getTotal();
-                                    return SizedBox(
-                                      child: Text(
-                                        "$total/65",
-                                        textAlign: TextAlign.center,
-                                        style: const TextStyle(
-                                          fontSize: 22,
-                                          color: Colors.white,
-                                        ),
+                                    final List<Player> list =
+                                        upstate.playersList.players!;
+                                    return Container(
+                                      alignment: Alignment.center,
+                                      width: double.infinity,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Expanded(
+                                            flex: 1,
+                                            child: Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              children: [
+                                                PlayerIcon(
+                                                  players: list,
+                                                  mContext: context,
+                                                ),
+                                                PlayerIcon(
+                                                  players: list,
+                                                  mContext: context,
+                                                ),
+                                                PlayerIcon(
+                                                  players: list,
+                                                  mContext: context,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Expanded(
+                                            flex: 1,
+                                            child: SizedBox(
+                                              child: Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: [
+                                                  PlayerIcon(
+                                                    players: list,
+                                                    mContext: context,
+                                                  ),
+                                                  PlayerIcon(
+                                                    players: list,
+                                                    mContext: context,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     );
                                   },
                                 ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                            flex: 7,
-                            child: switch (upstate) {
-                              TryGetPlayersState() => const Center(
-                                  child: CircularProgressIndicator()),
-                              ResultGetPlayersState() => upstate
-                                      .playersList.players!.isEmpty
-                                  ? const Center(
-                                      child: Text(
-                                        "Nessun giocatore disponibile",
-                                        style: TextStyle(color: Colors.white),
-                                      ),
-                                    )
-                                  : BlocConsumer<SelectPlayerBloc,
-                                      SelectPlayerState>(
-                                      listener: (context, state) {},
-                                      builder: (context, state) {
-                                        final List<Player> list =
-                                            upstate.playersList.players!;
-                                        return Container(
-                                          alignment: Alignment.center,
-                                          width: double.infinity,
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Expanded(
-                                                flex: 1,
-                                                child: Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceAround,
-                                                  children: [
-                                                    PlayerIcon(
-                                                      players: list,
-                                                      mContext: context,
-                                                    ),
-                                                    PlayerIcon(
-                                                      players: list,
-                                                      mContext: context,
-                                                    ),
-                                                    PlayerIcon(
-                                                      players: list,
-                                                      mContext: context,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              Expanded(
-                                                flex: 1,
-                                                child: SizedBox(
-                                                  child: Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceEvenly,
-                                                    children: [
-                                                      PlayerIcon(
-                                                        players: list,
-                                                        mContext: context,
-                                                      ),
-                                                      PlayerIcon(
-                                                        players: list,
-                                                        mContext: context,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        );
-                                      },
-                                    ),
-                              _ => const Text("No matching"),
-                            }),
+                          _ => const Text("No matching"),
+                        }),
                         const SponsorsBanner(),
                       ],
                     ),
