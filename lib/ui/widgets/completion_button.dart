@@ -49,38 +49,38 @@ class _CompletionButtonState extends State<CompletionButton> {
         return Container(
           padding: const EdgeInsets.all(10),
           child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: enabled
-                  ? const Color.fromARGB(255, 225, 135, 57)
-                  : const Color.fromARGB(255, 208, 201, 195),
-              minimumSize: const Size.fromWidth(150),
-            ),
-            onPressed: enabled
-                ? () {
-                    var players =
-                        widget.team.map((player) => player.id).toList();
-                    players.add(sixth.sixthMan!.id);
-                    var name = widget.controller.text;
-                    context.read<AddTeamBloc>().addNewTeam(
-                          name: name,
-                          player: players,
-                          cpt: captain.captain!.id,
-                          stage: widget.stage.id,
-                          ris: sixth.sixthMan!.id,
-                        );
-                  }
-                : null,
-            child: state is TryCreateState
-                ? const CircularProgressIndicator(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: enabled
+                    ? const Color.fromARGB(255, 225, 135, 57)
+                    : const Color.fromARGB(255, 208, 201, 195),
+                minimumSize: const Size.fromWidth(150),
+              ),
+              onPressed: enabled
+                  ? () {
+                      var players =
+                          widget.team.map((player) => player.id).toList();
+                      players.add(sixth.sixthMan!.id);
+                      var name = widget.controller.text;
+                      context.read<AddTeamBloc>().addNewTeam(
+                            name: name,
+                            player: players,
+                            cpt: captain.captain!.id,
+                            stage: widget.stage.id,
+                            ris: sixth.sixthMan!.id,
+                          );
+                    }
+                  : null,
+              child: switch (state) {
+                TryCreateState() => const CircularProgressIndicator(
                     color: Colors.white,
-                  )
-                : Text(
+                  ),
+                _ => Text(
                     "Conferma squadra",
                     style: TextStyle(
                       color: enabled ? Colors.white : Colors.grey,
                     ),
                   ),
-          ),
+              }),
         );
       },
     );
