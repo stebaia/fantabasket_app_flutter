@@ -3,7 +3,6 @@ import 'package:fantabasket_app_flutter/bloc/select_player_bloc/select_player_bl
 import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/player_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PlayersBottomSheet extends StatefulWidget {
@@ -54,28 +53,47 @@ class _PlayersBottomSheetState extends State<PlayersBottomSheet> {
                 color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
           ),
           const SizedBox(height: 20),
-          SearchBar(
-            backgroundColor: MaterialStateProperty.all(
-              const Color.fromARGB(32, 181, 181, 181),
-            ),
-            textStyle: MaterialStateProperty.all(
-              const TextStyle(
-                color: Colors.white,
+          Row(
+            children: [
+              Expanded(
+                flex: 20,
+                child: SearchBar(
+                  backgroundColor: MaterialStateProperty.all(
+                    const Color.fromARGB(32, 181, 181, 181),
+                  ),
+                  textStyle: MaterialStateProperty.all(
+                    const TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  hintText: "Digita il nome del giocatore...",
+                  hintStyle: MaterialStateProperty.all(
+                    const TextStyle(
+                      color: Color.fromARGB(255, 219, 217, 217),
+                    ),
+                  ),
+                  onChanged: (value) => setState(() {
+                    players = widget.players
+                        .where((player) =>
+                            "${player.lastName} ${player.firstName}"
+                                .toLowerCase()
+                                .contains(value))
+                        .toList();
+                  }),
+                ),
               ),
-            ),
-            hintText: "Digita il nome del giocatore...",
-            hintStyle: MaterialStateProperty.all(
-              const TextStyle(
-                color: Color.fromARGB(255, 219, 217, 217),
+              const Expanded(flex: 1, child: SizedBox()),
+              Expanded(
+                flex: 2,
+                child: GestureDetector(
+                  onTap: () {},
+                  child: const Icon(
+                    Icons.filter_list,
+                    color: Colors.white,
+                  ),
+                ),
               ),
-            ),
-            onChanged: (value) => setState(() {
-              players = widget.players
-                  .where((player) => "${player.lastName} ${player.firstName}"
-                      .toLowerCase()
-                      .contains(value))
-                  .toList();
-            }),
+            ],
           ),
           const SizedBox(height: 10),
           Expanded(
