@@ -1,8 +1,11 @@
 import 'package:fantabasket_app_flutter/bloc/cubit/credits_cubit/credits_cubit.dart';
 import 'package:fantabasket_app_flutter/bloc/select_player_bloc/select_player_bloc.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
+import 'package:fantabasket_app_flutter/ui/widgets/category_button.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/player_bar.dart';
+import 'package:fantabasket_app_flutter/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PlayersBottomSheet extends StatefulWidget {
@@ -22,29 +25,54 @@ class PlayersBottomSheet extends StatefulWidget {
 }
 
 class _PlayersBottomSheetState extends State<PlayersBottomSheet> {
-  late List<Player> players;
+  late List<Player> _players;
+  late List<String> _selectedCategories;
+  late TextEditingController _controller;
 
   @override
   void initState() {
     super.initState();
-    players = widget.players;
+    _players = widget.players;
+    _controller = TextEditingController();
+    _selectedCategories = Constants.categoryValues.keys.toList();
+  }
+
+  onCategorySelected(String category) {
+    setState(() {
+      _selectedCategories.contains(category)
+          ? _selectedCategories.remove(category)
+          : _selectedCategories.add(category);
+      _players = widget.players
+          .where((player) =>
+              "${player.lastName} ${player.firstName}"
+                  .toLowerCase()
+                  .contains(_controller.text.toLowerCase()) ||
+              player.team
+                  .toLowerCase()
+                  .contains(_controller.text.toLowerCase()))
+          .where((player) => _selectedCategories.contains(player.category))
+          .toList();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height * 0.7;
+    var height = MediaQuery.of(context).size.height * 0.75;
     var checkedPlayers =
         widget.mContext.read<SelectPlayerBloc>().getCheckedPlayers();
     int total = widget.mContext.read<CreditsCubit>().getTotal();
     int currentValue = widget.selected == null ? 0 : widget.selected!.value;
     final List<Player> list =
-        List.from(Set.from(players).difference(Set.from(checkedPlayers)));
+        List.from(Set.from(_players).difference(Set.from(checkedPlayers)));
     return Container(
-      color: Color.fromARGB(255, 14, 13, 13),
       padding: const EdgeInsets.all(8.0),
+      decoration: const BoxDecoration(
+          color: Color.fromARGB(255, 41, 40, 40),
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(30), topRight: Radius.circular(30))),
       height: height,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SizedBox(height: 20),
           const Text(
@@ -53,47 +81,48 @@ class _PlayersBottomSheetState extends State<PlayersBottomSheet> {
                 color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
           ),
           const SizedBox(height: 20),
-          Row(
-            children: [
-              Expanded(
-                flex: 20,
-                child: SearchBar(
-                  backgroundColor: MaterialStateProperty.all(
-                    const Color.fromARGB(32, 181, 181, 181),
-                  ),
-                  textStyle: MaterialStateProperty.all(
-                    const TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                  hintText: "Digita il nome del giocatore...",
-                  hintStyle: MaterialStateProperty.all(
-                    const TextStyle(
-                      color: Color.fromARGB(255, 219, 217, 217),
-                    ),
-                  ),
-                  onChanged: (value) => setState(() {
-                    players = widget.players
-                        .where((player) =>
-                            "${player.lastName} ${player.firstName}"
-                                .toLowerCase()
-                                .contains(value))
-                        .toList();
-                  }),
-                ),
+          SearchBar(
+            controller: _controller,
+            backgroundColor: MaterialStateProperty.all(
+              const Color.fromARGB(32, 181, 181, 181),
+            ),
+            textStyle: MaterialStateProperty.all(
+              const TextStyle(
+                color: Colors.white,
               ),
-              const Expanded(flex: 1, child: SizedBox()),
-              Expanded(
-                flex: 2,
-                child: GestureDetector(
-                  onTap: () {},
-                  child: const Icon(
-                    Icons.filter_list,
-                    color: Colors.white,
-                  ),
-                ),
+            ),
+            hintText: "Inserisci giocatore o squadra...",
+            hintStyle: MaterialStateProperty.all(
+              const TextStyle(
+                color: Color.fromARGB(255, 219, 217, 217),
               ),
-            ],
+            ),
+            onChanged: (value) => setState(() {
+              _players = widget.players
+                  .where((player) =>
+                      "${player.lastName} ${player.firstName}"
+                          .toLowerCase()
+                          .contains(value.toLowerCase()) ||
+                      player.team.toLowerCase().contains(value.toLowerCase()))
+                  .where(
+                      (player) => _selectedCategories.contains(player.category))
+                  .toList();
+            }),
+          ),
+          const SizedBox(height: 10),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                CategoryButton(onClick: onCategorySelected, category: "A"),
+                CategoryButton(onClick: onCategorySelected, category: "B"),
+                CategoryButton(onClick: onCategorySelected, category: "C1"),
+                CategoryButton(onClick: onCategorySelected, category: "C2"),
+                CategoryButton(onClick: onCategorySelected, category: "D"),
+                CategoryButton(onClick: onCategorySelected, category: "P"),
+                CategoryButton(onClick: onCategorySelected, category: "F"),
+              ],
+            ),
           ),
           const SizedBox(height: 10),
           Expanded(
