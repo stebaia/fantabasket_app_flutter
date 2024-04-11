@@ -83,6 +83,8 @@ class _PlayersBottomSheetState extends State<PlayersBottomSheet> {
           const SizedBox(height: 20),
           SearchBar(
             controller: _controller,
+            shape: const MaterialStatePropertyAll(RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(15)))),
             backgroundColor: MaterialStateProperty.all(
               const Color.fromARGB(32, 181, 181, 181),
             ),
