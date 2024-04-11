@@ -36,7 +36,7 @@ class _CategoryButtonState extends State<CategoryButton> {
             foregroundColor: Colors.white,
             splashFactory: NoSplash.splashFactory,
             shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20))),
+                borderRadius: BorderRadius.all(Radius.circular(15))),
           ),
           onPressed: () {
             setState(() {
