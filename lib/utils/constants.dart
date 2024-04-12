@@ -1,6 +1,11 @@
 import 'package:fantabasket_app_flutter/model/match_day.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
+import 'package:fantabasket_app_flutter/model/player_detail.dart';
 import 'package:fantabasket_app_flutter/model/player_in_rank.dart';
+import 'package:fantabasket_app_flutter/model/player_match.dart';
+import 'package:fantabasket_app_flutter/model/player_stage.dart';
+import 'package:fantabasket_app_flutter/model/player_stats.dart';
+import 'package:fantabasket_app_flutter/model/stage.dart';
 import 'package:fantabasket_app_flutter/model/team_detail.dart';
 import 'package:flutter/material.dart';
 
@@ -104,6 +109,72 @@ class Constants {
       email: "",
     ): 70,
   };
+/*
+   "id": "3",
+            "nome": "Torneo Cesena",
+            "citta": "Cesena",
+            "stato": "Aperta",
+            "data_inizio": "05/04/2024",
+            "data_fine": "07/04/2024",
+            "foto": "https://fantabasket.talkandprofit.net/images/noimage.jpg",
+*/
+  static PlayerDetail playerDetailMock = PlayerDetail(
+    firstName: "Mario",
+    lastName: "Rossi",
+    team: "Bologna",
+    stages: [
+      PlayerStage(
+        stage: const Stage(
+          id: 2,
+          fieldName: "Frampula Tournament 500",
+          city: "Forlimpopoli",
+          status: "Aperta",
+          openingDate: "05/04/2024",
+          closingDate: "07/04/2024",
+          photo: "https://fantabasket.talkandprofit.net/images/noimage.jpg",
+        ),
+        matches: [
+          ...List.generate(
+              10,
+              (index) => PlayerMatch(
+                    dayNumber: index,
+                    stats: const PlayerStats(
+                      totalPoints: 30,
+                      totalShots: 8,
+                      threePointers: 4,
+                      missedShots: 7,
+                      freeThrows: 2,
+                    ),
+                  )),
+        ],
+      ),
+      PlayerStage(
+        stage: const Stage(
+          id: 3,
+          fieldName: "Torneo Cesena",
+          city: "Cesena",
+          status: "Aperta",
+          openingDate: "05/04/2024",
+          closingDate: "07/04/2024",
+          photo: "https://fantabasket.talkandprofit.net/images/noimage.jpg",
+        ),
+        matches: [
+          ...List.generate(
+              10,
+              (index) => PlayerMatch(
+                    dayNumber: index,
+                    stats: const PlayerStats(
+                      totalPoints: 30,
+                      totalShots: 8,
+                      threePointers: 4,
+                      missedShots: 7,
+                      freeThrows: 2,
+                    ),
+                  )),
+        ],
+      ),
+    ],
+  );
 
   static TeamDetail detailTeamMock = TeamDetail(
     totalPoints: 886,
