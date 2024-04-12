@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:fantabasket_app_flutter/bloc/team_detail_bloc/team_detail_bloc.dart';
 import 'package:fantabasket_app_flutter/model/team_detail.dart';
+import 'package:fantabasket_app_flutter/routes/app_router.gr.dart';
 import 'package:fantabasket_app_flutter/utils/color_utils.dart';
-import 'package:fantabasket_app_flutter/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fantabasket_app_flutter/model/team.dart';
@@ -38,77 +38,85 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
         .entries
         .elementAt(position);
     print(position);
-    return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.32,
-      //height: MediaQuery.of(context).size.height * 0.26,
-      child: Card(
-        color: Color.fromARGB(255, 14, 13, 13),
-        elevation: 4,
-        child: Column(
-          children: [
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.32,
-              //height: MediaQuery.of(context).size.height * 0.25,
-              child: Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    child: Text(
-                      position == 5
-                          ? "Sesto uomo"
-                          : "Giocatore ${position + 1}",
-                      style: const TextStyle(color: Colors.white),
+    return GestureDetector(
+      onTap: () => context.router.push(
+        PlayerDetailRoute(player: entry.key),
+      ),
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width * 0.32,
+        //height: MediaQuery.of(context).size.height * 0.26,
+        child: Card(
+          color: Color.fromARGB(255, 14, 13, 13),
+          elevation: 4,
+          child: Column(
+            children: [
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.32,
+                //height: MediaQuery.of(context).size.height * 0.25,
+                child: Column(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: Text(
+                        position == 5
+                            ? "Sesto uomo"
+                            : "Giocatore ${position + 1}",
+                        style: const TextStyle(color: Colors.white),
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.32,
-                      //height: MediaQuery.of(context).size.height * 0.15,
-                      child: ClipRRect(
+                    SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.32,
+                        //height: MediaQuery.of(context).size.height * 0.15,
+                        child: ClipRRect(
+                            borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(10),
+                                topRight: Radius.circular(10)),
+                            child: entry.key.photo != ''
+                                ? Image.network(
+                                    entry.key.photo,
+                                    fit: BoxFit.cover,
+                                  )
+                                : Image.network(
+                                    'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/LeBron_James_%2851959977144%29_%28cropped2%29.jpg/640px-LeBron_James_%2851959977144%29_%28cropped2%29.jpg',
+                                    fit: BoxFit.cover))),
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      //height: MediaQuery.of(context).size.height * 0.1,
+                      decoration: BoxDecoration(
+                          color: ColorUtils.getColor(entry.key),
                           borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(10),
-                              topRight: Radius.circular(10)),
-                          child: entry.key.photo != ''
-                              ? Image.network(
-                                  entry.key.photo,
-                                  fit: BoxFit.cover,
-                                )
-                              : Image.network(
-                                  'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/LeBron_James_%2851959977144%29_%28cropped2%29.jpg/640px-LeBron_James_%2851959977144%29_%28cropped2%29.jpg',
-                                  fit: BoxFit.cover))),
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    //height: MediaQuery.of(context).size.height * 0.1,
-                    decoration: BoxDecoration(
-                        color: ColorUtils.getColor(entry.key),
-                        borderRadius: const BorderRadius.only(
-                            bottomLeft: Radius.circular(10),
-                            bottomRight: Radius.circular(10))),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          entry.key.firstName,
-                          style: const TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          entry.key.lastName,
-                          style: const TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          "Punti: ${entry.value}",
-                          style: const TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
+                              bottomLeft: Radius.circular(10),
+                              bottomRight: Radius.circular(10))),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            entry.key.firstName,
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            entry.key.lastName,
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            "Punti: ${entry.value}",
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

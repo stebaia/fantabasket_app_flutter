@@ -173,6 +173,281 @@ class Constants {
                   )),
         ],
       ),
+      PlayerStage(
+        stage: const Stage(
+          id: 3,
+          fieldName: "Torneo Cesena",
+          city: "Cesena",
+          status: "Aperta",
+          openingDate: "05/04/2024",
+          closingDate: "07/04/2024",
+          photo: "https://fantabasket.talkandprofit.net/images/noimage.jpg",
+        ),
+        matches: [
+          ...List.generate(
+              10,
+              (index) => PlayerMatch(
+                    dayNumber: index,
+                    stats: const PlayerStats(
+                      totalPoints: 30,
+                      totalShots: 8,
+                      threePointers: 4,
+                      missedShots: 7,
+                      freeThrows: 2,
+                    ),
+                  )),
+        ],
+      ),
+      PlayerStage(
+        stage: const Stage(
+          id: 3,
+          fieldName: "Torneo Cesena",
+          city: "Cesena",
+          status: "Aperta",
+          openingDate: "05/04/2024",
+          closingDate: "07/04/2024",
+          photo: "https://fantabasket.talkandprofit.net/images/noimage.jpg",
+        ),
+        matches: [
+          ...List.generate(
+              10,
+              (index) => PlayerMatch(
+                    dayNumber: index,
+                    stats: const PlayerStats(
+                      totalPoints: 30,
+                      totalShots: 8,
+                      threePointers: 4,
+                      missedShots: 7,
+                      freeThrows: 2,
+                    ),
+                  )),
+        ],
+      ),
+      PlayerStage(
+        stage: const Stage(
+          id: 3,
+          fieldName: "Torneo Cesena",
+          city: "Cesena",
+          status: "Aperta",
+          openingDate: "05/04/2024",
+          closingDate: "07/04/2024",
+          photo: "https://fantabasket.talkandprofit.net/images/noimage.jpg",
+        ),
+        matches: [
+          ...List.generate(
+              10,
+              (index) => PlayerMatch(
+                    dayNumber: index,
+                    stats: const PlayerStats(
+                      totalPoints: 30,
+                      totalShots: 8,
+                      threePointers: 4,
+                      missedShots: 7,
+                      freeThrows: 2,
+                    ),
+                  )),
+        ],
+      ),
+      PlayerStage(
+        stage: const Stage(
+          id: 3,
+          fieldName: "Torneo Cesena",
+          city: "Cesena",
+          status: "Aperta",
+          openingDate: "05/04/2024",
+          closingDate: "07/04/2024",
+          photo: "https://fantabasket.talkandprofit.net/images/noimage.jpg",
+        ),
+        matches: [
+          ...List.generate(
+              10,
+              (index) => PlayerMatch(
+                    dayNumber: index,
+                    stats: const PlayerStats(
+                      totalPoints: 30,
+                      totalShots: 8,
+                      threePointers: 4,
+                      missedShots: 7,
+                      freeThrows: 2,
+                    ),
+                  )),
+        ],
+      ),
+      PlayerStage(
+        stage: const Stage(
+          id: 3,
+          fieldName: "Torneo Cesena",
+          city: "Cesena",
+          status: "Aperta",
+          openingDate: "05/04/2024",
+          closingDate: "07/04/2024",
+          photo: "https://fantabasket.talkandprofit.net/images/noimage.jpg",
+        ),
+        matches: [
+          ...List.generate(
+              10,
+              (index) => PlayerMatch(
+                    dayNumber: index,
+                    stats: const PlayerStats(
+                      totalPoints: 30,
+                      totalShots: 8,
+                      threePointers: 4,
+                      missedShots: 7,
+                      freeThrows: 2,
+                    ),
+                  )),
+        ],
+      ),
+      PlayerStage(
+        stage: const Stage(
+          id: 3,
+          fieldName: "Torneo Cesena",
+          city: "Cesena",
+          status: "Aperta",
+          openingDate: "05/04/2024",
+          closingDate: "07/04/2024",
+          photo: "https://fantabasket.talkandprofit.net/images/noimage.jpg",
+        ),
+        matches: [
+          ...List.generate(
+              10,
+              (index) => PlayerMatch(
+                    dayNumber: index,
+                    stats: const PlayerStats(
+                      totalPoints: 30,
+                      totalShots: 8,
+                      threePointers: 4,
+                      missedShots: 7,
+                      freeThrows: 2,
+                    ),
+                  )),
+        ],
+      ),
+      PlayerStage(
+        stage: const Stage(
+          id: 3,
+          fieldName: "Torneo Cesena",
+          city: "Cesena",
+          status: "Aperta",
+          openingDate: "05/04/2024",
+          closingDate: "07/04/2024",
+          photo: "https://fantabasket.talkandprofit.net/images/noimage.jpg",
+        ),
+        matches: [
+          ...List.generate(
+              10,
+              (index) => PlayerMatch(
+                    dayNumber: index,
+                    stats: const PlayerStats(
+                      totalPoints: 30,
+                      totalShots: 8,
+                      threePointers: 4,
+                      missedShots: 7,
+                      freeThrows: 2,
+                    ),
+                  )),
+        ],
+      ),
+      PlayerStage(
+        stage: const Stage(
+          id: 3,
+          fieldName: "Torneo Cesena",
+          city: "Cesena",
+          status: "Aperta",
+          openingDate: "05/04/2024",
+          closingDate: "07/04/2024",
+          photo: "https://fantabasket.talkandprofit.net/images/noimage.jpg",
+        ),
+        matches: [
+          ...List.generate(
+              10,
+              (index) => PlayerMatch(
+                    dayNumber: index,
+                    stats: const PlayerStats(
+                      totalPoints: 30,
+                      totalShots: 8,
+                      threePointers: 4,
+                      missedShots: 7,
+                      freeThrows: 2,
+                    ),
+                  )),
+        ],
+      ),
+      PlayerStage(
+        stage: const Stage(
+          id: 3,
+          fieldName: "Torneo Cesena",
+          city: "Cesena",
+          status: "Aperta",
+          openingDate: "05/04/2024",
+          closingDate: "07/04/2024",
+          photo: "https://fantabasket.talkandprofit.net/images/noimage.jpg",
+        ),
+        matches: [
+          ...List.generate(
+              10,
+              (index) => PlayerMatch(
+                    dayNumber: index,
+                    stats: const PlayerStats(
+                      totalPoints: 30,
+                      totalShots: 8,
+                      threePointers: 4,
+                      missedShots: 7,
+                      freeThrows: 2,
+                    ),
+                  )),
+        ],
+      ),
+      PlayerStage(
+        stage: const Stage(
+          id: 3,
+          fieldName: "Torneo Cesena",
+          city: "Cesena",
+          status: "Aperta",
+          openingDate: "05/04/2024",
+          closingDate: "07/04/2024",
+          photo: "https://fantabasket.talkandprofit.net/images/noimage.jpg",
+        ),
+        matches: [
+          ...List.generate(
+              10,
+              (index) => PlayerMatch(
+                    dayNumber: index,
+                    stats: const PlayerStats(
+                      totalPoints: 30,
+                      totalShots: 8,
+                      threePointers: 4,
+                      missedShots: 7,
+                      freeThrows: 2,
+                    ),
+                  )),
+        ],
+      ),
+      PlayerStage(
+        stage: const Stage(
+          id: 3,
+          fieldName: "Torneo Cesena",
+          city: "Cesena",
+          status: "Aperta",
+          openingDate: "05/04/2024",
+          closingDate: "07/04/2024",
+          photo: "https://fantabasket.talkandprofit.net/images/noimage.jpg",
+        ),
+        matches: [
+          ...List.generate(
+              10,
+              (index) => PlayerMatch(
+                    dayNumber: index,
+                    stats: const PlayerStats(
+                      totalPoints: 30,
+                      totalShots: 8,
+                      threePointers: 4,
+                      missedShots: 7,
+                      freeThrows: 2,
+                    ),
+                  )),
+        ],
+      ),
     ],
   );
 
