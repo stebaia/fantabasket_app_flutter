@@ -1,12 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fantabasket_app_flutter/bloc/player_detail_bloc/player_detail_bloc.dart';
-import 'package:fantabasket_app_flutter/model/player_stats.dart';
+import 'package:fantabasket_app_flutter/model/bonus.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/player_stages_carousel.dart';
 import 'package:flutter/material.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pair/pair.dart';
 
 class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
   final Player player;
@@ -122,10 +123,10 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
                     Expanded(
                       child: Container(
                         padding: const EdgeInsets.all(20.0),
-                        child: Column(
+                        child: const Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
+                            Text(
                               "Punti totali",
                               style: TextStyle(
                                 color: Colors.white,
@@ -134,13 +135,8 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
                               ),
                             ),
                             Text(
-                              pd.stages
-                                  .map((stage) => stage.matches)
-                                  .expand((el) => el)
-                                  .map((match) => match.stats.totalPoints)
-                                  .reduce((value, element) => value + element)
-                                  .toString(),
-                              style: const TextStyle(
+                              "3900",
+                              style: TextStyle(
                                 color: Colors.white,
                                 fontFamily: 'Nunito Sans',
                                 fontWeight: FontWeight.bold,

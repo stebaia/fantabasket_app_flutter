@@ -1,9 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:fantabasket_app_flutter/model/malus.dart';
 import 'package:page_view_dot_indicator/page_view_dot_indicator.dart';
 import 'package:fantabasket_app_flutter/model/player_detail.dart';
 import 'package:fantabasket_app_flutter/model/player_stage.dart';
-import 'package:fantabasket_app_flutter/model/player_stats.dart';
+import 'package:fantabasket_app_flutter/model/bonus.dart';
 import 'package:flutter/material.dart';
+import 'package:pair/pair.dart';
 
 class PlayerStagesCarousel extends StatefulWidget {
   final PlayerDetail playerDetail;
@@ -23,6 +25,81 @@ class _PlayerStagesCarouselState extends State<PlayerStagesCarousel> {
   int _current = 0;
   final CarouselController _controller = CarouselController();
   late Iterable<MapEntry<int, PlayerStage>> indicators;
+
+  Widget _getBonusMalus(
+    bool bonus,
+    List<Pair<String, int>> props,
+  ) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Container(
+        padding: const EdgeInsets.all(8.0),
+        decoration: BoxDecoration(
+            color: bonus
+                ? const Color.fromARGB(255, 63, 160, 66)
+                : const Color.fromARGB(255, 210, 43, 31)),
+        child: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                bonus ? "Bonus" : "Malus",
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Nunito Sans',
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            ...props.map(
+              (pair) => Container(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    if (pair.key == "Totale") const Divider(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          flex: 12,
+                          child: Text(
+                            pair.key,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontWeight: pair.key == "Totale"
+                                  ? FontWeight.bold
+                                  : FontWeight.normal,
+                              fontFamily: 'Nunito Sans',
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Text(
+                            pair.value.toString(),
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.end,
+                            style: TextStyle(
+                              fontWeight: pair.key == "Totale"
+                                  ? FontWeight.bold
+                                  : FontWeight.normal,
+                              fontFamily: 'Nunito Sans',
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
   @override
   void initState() {
@@ -60,12 +137,18 @@ class _PlayerStagesCarouselState extends State<PlayerStagesCarousel> {
                           shrinkWrap: true,
                           itemCount: stage.matches.length + 1,
                           itemBuilder: (context, index) {
-                            final PlayerStats? stats = index == 0
+                            final Bonus? bonus = index == 0
                                 ? null
                                 : stage.matches
                                     .firstWhere(
                                         (match) => match.dayNumber == index - 1)
-                                    .stats;
+                                    .bonus;
+                            final Malus? malus = index == 0
+                                ? null
+                                : stage.matches
+                                    .firstWhere(
+                                        (match) => match.dayNumber == index - 1)
+                                    .malus;
                             return index == 0
                                 ? Padding(
                                     padding:
@@ -125,16 +208,22 @@ class _PlayerStagesCarouselState extends State<PlayerStagesCarousel> {
                                 : Card(
                                     child: Column(
                                       children: [
-                                        Text(
-                                            "Punti totali: ${stats!.totalPoints}"),
-                                        Text(
-                                            "Tiri liberi: ${stats.freeThrows}"),
-                                        Text(
-                                            "Tiri sbagliati: ${stats.missedShots}"),
-                                        Text(
-                                            "Tiri da 3 punti: ${stats.threePointers}"),
-                                        Text(
-                                            "Tiri totali: ${stats.totalShots}"),
+                                        Container(
+                                          padding: const EdgeInsets.only(
+                                            top: 12,
+                                            bottom: 2,
+                                          ),
+                                          child: const Text(
+                                            "Giornata 0",
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontFamily: 'Nunito Sans',
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                        ),
+                                        _getBonusMalus(true, bonus!.props),
+                                        _getBonusMalus(false, malus!.props)
                                       ],
                                     ),
                                   );

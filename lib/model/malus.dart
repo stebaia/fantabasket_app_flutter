@@ -1,19 +1,20 @@
 import 'package:equatable/equatable.dart';
+import 'package:pair/pair.dart';
 
 class Malus extends Equatable {
-  final int airball;
-  final int fouls;
-  final int tacticalFouls;
-  final int teamDefeat;
-  final int reverseClothing;
-  final int worstTeam;
-  final int concededDunk;
-  final int lost51;
-  final int basketConcededBuzzerBeater;
-  final int shaqtinAFool;
-  final int invisibleNumber;
-  final int worstTeamName;
-  final int total;
+  final Pair<String, int> airball;
+  final Pair<String, int> fouls;
+  final Pair<String, int> tacticalFouls;
+  final Pair<String, int> teamDefeat;
+  final Pair<String, int> reverseClothing;
+  final Pair<String, int> worstTeam;
+  final Pair<String, int> concededDunk;
+  final Pair<String, int> lost51;
+  final Pair<String, int> basketConcededBuzzerBeater;
+  final Pair<String, int> shaqtinAFool;
+  final Pair<String, int> invisibleNumber;
+  final Pair<String, int> worstTeamName;
+  final Pair<String, int> total;
 
   const Malus({
     required this.airball,
@@ -32,7 +33,7 @@ class Malus extends Equatable {
   });
 
   @override
-  List<Object?> get props => [
+  List<Pair<String, int>> get props => [
         airball,
         fouls,
         tacticalFouls,

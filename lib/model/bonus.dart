@@ -1,21 +1,22 @@
 import 'package:equatable/equatable.dart';
+import 'package:pair/pair.dart';
 
 class Bonus extends Equatable {
-  final int pointMade;
-  final int assist;
-  final int block;
-  final int bounce;
-  final int buzzerBeater;
-  final int dunk;
-  final int ankleBreaker;
-  final int postAnd1Exultation;
-  final int pregameRitual;
-  final int teamVictory;
-  final int ignorantClothing;
-  final int speakerKiss;
-  final int victory51;
-  final int mostLoved;
-  final int total;
+  final Pair<String, int> pointMade;
+  final Pair<String, int> assist;
+  final Pair<String, int> block;
+  final Pair<String, int> bounce;
+  final Pair<String, int> buzzerBeater;
+  final Pair<String, int> dunk;
+  final Pair<String, int> ankleBreaker;
+  final Pair<String, int> postAnd1Exultation;
+  final Pair<String, int> pregameRitual;
+  final Pair<String, int> teamVictory;
+  final Pair<String, int> ignorantClothing;
+  final Pair<String, int> speakerKiss;
+  final Pair<String, int> victory51;
+  final Pair<String, int> mostLoved;
+  final Pair<String, int> total;
 
   const Bonus({
     required this.pointMade,
@@ -36,7 +37,7 @@ class Bonus extends Equatable {
   });
 
   @override
-  List<Object?> get props => [
+  List<Pair<String, int>> get props => [
         pointMade,
         assist,
         block,
