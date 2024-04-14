@@ -31,9 +31,9 @@ class _PlayerStagesCarouselState extends State<PlayerStagesCarousel> {
     List<Pair<String, int>> props,
   ) {
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(14.0),
       child: Container(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(6.0),
         decoration: BoxDecoration(
             color: bonus
                 ? const Color.fromARGB(255, 63, 160, 66)
@@ -61,7 +61,7 @@ class _PlayerStagesCarouselState extends State<PlayerStagesCarousel> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
-                          flex: 12,
+                          flex: 11,
                           child: Text(
                             pair.key,
                             overflow: TextOverflow.ellipsis,
@@ -75,7 +75,7 @@ class _PlayerStagesCarouselState extends State<PlayerStagesCarousel> {
                           ),
                         ),
                         Expanded(
-                          flex: 1,
+                          flex: 2,
                           child: Text(
                             pair.value.toString(),
                             overflow: TextOverflow.ellipsis,
@@ -206,6 +206,22 @@ class _PlayerStagesCarouselState extends State<PlayerStagesCarousel> {
                                     ),
                                   )
                                 : Card(
+                                    color: Color.fromARGB(255, 35, 33, 33),
+                                    child: ExpansionTile(
+                                      title: const Text(
+                                        "Giornata 0",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      iconColor: Colors.white,
+                                      collapsedIconColor: Colors.white,
+                                      children: [
+                                        _getBonusMalus(true, bonus!.props),
+                                        _getBonusMalus(false, malus!.props),
+                                      ],
+                                    ),
+                                  );
+                            /*
+                                : Card(
                                     child: Column(
                                       children: [
                                         Container(
@@ -227,6 +243,7 @@ class _PlayerStagesCarouselState extends State<PlayerStagesCarousel> {
                                       ],
                                     ),
                                   );
+                                  */
                           },
                         ),
                       ),
