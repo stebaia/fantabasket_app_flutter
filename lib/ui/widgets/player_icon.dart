@@ -122,7 +122,7 @@ class _PlayerIconState extends State<PlayerIcon> {
                         children: [
                           Icon(Icons.add,
                               size: MediaQuery.of(context).size.width * 0.13,
-                              color: const Color.fromARGB(255, 225, 135, 57)),
+                              color: Theme.of(context).colorScheme.primary),
                           const SizedBox(height: 5),
                           Text(
                             selected == null
@@ -132,7 +132,7 @@ class _PlayerIconState extends State<PlayerIcon> {
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                              color: Colors.white,
+                              color: Theme.of(context).colorScheme.primary,
                             ),
                           ),
                         ],

@@ -102,7 +102,7 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                           alignment: Alignment.center,
                           height: MediaQuery.of(context).size.height * 0.1,
                           width: double.infinity,
-                          color: const Color.fromARGB(255, 225, 135, 57),
+                          color: Theme.of(context).colorScheme.secondary,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [

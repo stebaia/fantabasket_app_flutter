@@ -147,10 +147,10 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
                   const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
               child: Text(
                 team.nome ?? "Nome non disponibile",
-                style: const TextStyle(
+                style: TextStyle(
                   fontFamily: 'Poppins',
                   fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(255, 225, 135, 57),
+                  color: Theme.of(context).colorScheme.primary,
                   fontSize: 25,
                 ),
               ),
@@ -198,12 +198,16 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
                                 color: Colors.transparent,
                                 shape: RoundedRectangleBorder(
                                     side: BorderSide(
-                                        color: matchDay.dayNumber ==
-                                                context
-                                                    .read<TeamDetailBloc>()
-                                                    .getCurrentDay()
-                                            ? Colors.orange
-                                            : Colors.white),
+                                      color: matchDay.dayNumber ==
+                                              context
+                                                  .read<TeamDetailBloc>()
+                                                  .getCurrentDay()
+                                          ? Theme.of(context)
+                                              .colorScheme
+                                              .background
+                                          : Colors.white,
+                                      width: 2,
+                                    ),
                                     borderRadius: const BorderRadius.all(
                                         Radius.circular(30))),
                                 child: Column(

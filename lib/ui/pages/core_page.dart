@@ -34,23 +34,23 @@ class _CorePageState extends State<CorePage> {
               elevation: 0,
               type: BottomNavigationBarType.fixed,
               backgroundColor: ThemeHelper.backgroundColorDark,
-              selectedItemColor: const Color.fromARGB(255, 225, 135, 57),
+              selectedItemColor: Theme.of(context).colorScheme.tertiary,
               unselectedItemColor: Colors.white,
               currentIndex: tabsRouter.activeIndex,
               onTap: tabsRouter.setActiveIndex,
-              items: const [
-                BottomNavigationBarItem(
+              items: [
+                const BottomNavigationBarItem(
                   icon: FaIcon(FontAwesomeIcons.rankingStar),
                   activeIcon: FaIcon(FontAwesomeIcons.rankingStar),
                   label: 'Ranking',
                 ),
-                BottomNavigationBarItem(
+                const BottomNavigationBarItem(
                   icon: FaIcon(FontAwesomeIcons.users),
                   activeIcon: FaIcon(FontAwesomeIcons.users),
                   label: 'Players',
                 ),
                 BottomNavigationBarItem(
-                  icon: Image(
+                  icon: const Image(
                     width: 36,
                     height: 36,
                     image: AssetImage('assets/images/basketballicon.png'),
@@ -58,8 +58,8 @@ class _CorePageState extends State<CorePage> {
                   activeIcon: Image(
                     width: 36,
                     height: 36,
-                    image: AssetImage('assets/images/basketballicon.png'),
-                    color: const Color.fromARGB(255, 225, 135, 57),
+                    image: const AssetImage('assets/images/basketballicon.png'),
+                    color: Theme.of(context).colorScheme.tertiary,
                   ),
                   label: 'My Team',
                 ),

@@ -45,14 +45,21 @@ class _AppState extends State<App> {
         theme: ThemeData(
           fontFamily: GoogleFonts.sen().fontFamily,
           useMaterial3: true,
+          colorScheme: ColorScheme.fromSeed(
+            primary: const Color.fromARGB(255, 245, 238, 238),
+            secondary: const Color.fromARGB(255, 42, 49, 181),
+            tertiary: const Color.fromARGB(255, 198, 32, 31),
+            background: const Color.fromARGB(255, 31, 169, 193),
+            seedColor: Colors.white,
+          ),
         ),
-        localizationsDelegates: [
+        localizationsDelegates: const [
           AppLocalizations.delegate, // Add this line
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        supportedLocales: [
+        supportedLocales: const [
           Locale('en'), // English
           Locale('it'), // Italian
         ],

@@ -30,11 +30,11 @@ class TeamCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Image(
+                Image(
                   width: 36,
                   height: 36,
-                  image: AssetImage('assets/images/basketballicon.png'),
-                  color: Color.fromARGB(255, 225, 135, 57),
+                  image: const AssetImage('assets/images/basketballicon.png'),
+                  color: Theme.of(context).colorScheme.tertiary,
                 ),
                 const SizedBox(
                   height: 10,

@@ -38,14 +38,14 @@ class RankDetailPage extends StatelessWidget with AutoRouteWrapper {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
             child: Text(
               "Classifica",
               style: TextStyle(
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.bold,
-                color: Color.fromARGB(255, 225, 135, 57),
+                color: Theme.of(context).colorScheme.primary,
                 fontSize: 25,
               ),
             ),

@@ -14,7 +14,6 @@ class RankDetailCard extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       color: const Color.fromARGB(255, 14, 13, 13),
-      surfaceTintColor: Colors.orange,
       elevation: 2,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,

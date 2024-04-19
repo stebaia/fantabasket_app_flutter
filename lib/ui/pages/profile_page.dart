@@ -26,9 +26,9 @@ class ProfilePage extends StatelessWidget {
               children: [
                 Container(
                   width: double.infinity,
-                  decoration: const BoxDecoration(
-                      color: Color.fromARGB(255, 225, 135, 57),
-                      borderRadius: BorderRadius.only(
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.background,
+                      borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.circular(25),
                         bottomRight: Radius.circular(25),
                       )),
@@ -90,7 +90,7 @@ class ProfilePage extends StatelessWidget {
             flex: 2,
             child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 225, 135, 57),
+                  backgroundColor: Theme.of(context).colorScheme.background,
                 ),
                 onPressed: () => context.read<AuthCubit>().manualLogout(),
                 child: const Text(

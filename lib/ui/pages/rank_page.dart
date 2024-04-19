@@ -28,36 +28,43 @@ class RankPage extends StatelessWidget {
         children: [
           const SponsorsBanner(),
           const SizedBox(height: 10),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
             child: Text(
               "Classifiche",
               style: TextStyle(
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.bold,
-                color: Color.fromARGB(255, 225, 135, 57),
+                color: Theme.of(context).colorScheme.primary,
                 fontSize: 25,
               ),
             ),
           ),
           const SizedBox(height: 10),
-          const Padding(
-            padding: EdgeInsets.symmetric(
+          Padding(
+            padding: const EdgeInsets.symmetric(
               horizontal: 12.0,
               vertical: 2.0,
             ),
             child: TextField(
               decoration: InputDecoration(
-                focusColor: Colors.orange,
+                focusColor: Theme.of(context).colorScheme.background,
                 focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.orange, width: 2.0),
-                    borderRadius: BorderRadius.all(Radius.circular(10))),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10))),
+                  borderSide: BorderSide(
+                    color: Theme.of(context).colorScheme.background,
+                    width: 2.0,
+                  ),
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                ),
+                border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
                 hintText: 'Inserisci nome...',
-                hintStyle: TextStyle(color: Color.fromARGB(255, 173, 173, 173)),
+                hintStyle: const TextStyle(
+                  color: Color.fromARGB(255, 173, 173, 173),
+                ),
               ),
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
               textAlignVertical: TextAlignVertical.center,
             ),
           ),
