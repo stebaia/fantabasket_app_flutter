@@ -1013,6 +1013,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
+  page_view_dot_indicator:
+    dependency: "direct main"
+    description:
+      name: page_view_dot_indicator
+      sha256: "1854af4007e669c566d472c3982f0b49c166d6fe23c3302d95c923c4b5e28b19"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
+  pair:
+    dependency: "direct main"
+    description:
+      name: pair
+      sha256: "59ef7f052a9e8c1b208b0566d04c52a0e705e3e2f418255e8153a6f99687e1f6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.2"
   path:
     dependency: transitive
     description:

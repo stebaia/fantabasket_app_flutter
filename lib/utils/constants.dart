@@ -1,8 +1,15 @@
+import 'package:fantabasket_app_flutter/model/malus.dart';
 import 'package:fantabasket_app_flutter/model/match_day.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
+import 'package:fantabasket_app_flutter/model/player_detail.dart';
 import 'package:fantabasket_app_flutter/model/player_in_rank.dart';
+import 'package:fantabasket_app_flutter/model/player_match.dart';
+import 'package:fantabasket_app_flutter/model/player_stage.dart';
+import 'package:fantabasket_app_flutter/model/bonus.dart';
+import 'package:fantabasket_app_flutter/model/stage.dart';
 import 'package:fantabasket_app_flutter/model/team_detail.dart';
 import 'package:flutter/material.dart';
+import 'package:pair/pair.dart';
 
 class Constants {
   const Constants._();
@@ -104,6 +111,118 @@ class Constants {
       email: "",
     ): 70,
   };
+
+  static PlayerDetail playerDetailMock = PlayerDetail(
+    firstName: "Mario",
+    lastName: "Rossi",
+    team: "Bologna",
+    stages: [
+      PlayerStage(
+        stage: const Stage(
+          id: 2,
+          fieldName: "Frampula Tournament 500",
+          city: "Forlimpopoli",
+          status: "Aperta",
+          openingDate: "05/04/2024",
+          closingDate: "07/04/2024",
+          photo: "https://fantabasket.talkandprofit.net/images/noimage.jpg",
+        ),
+        matches: [
+          ...List.generate(
+              10,
+              (index) => PlayerMatch(
+                    dayNumber: index,
+                    bonus: const Bonus(
+                      pointMade: Pair("Punto realizzato", 2),
+                      assist: Pair("Assist", 6),
+                      block: Pair("Stoppata", 0),
+                      bounce: Pair("Rimbalzo", 0),
+                      buzzerBeater: Pair("Buzzer beater", 0),
+                      dunk: Pair("Schiacciata", 20),
+                      ankleBreaker: Pair("Ankle breaker", 0),
+                      postAnd1Exultation: Pair("Esultanza post and 1", 0),
+                      pregameRitual: Pair("Rituale pre partita", 0),
+                      teamVictory: Pair("Vittoria squadra", 0),
+                      ignorantClothing: Pair("Abbigliamento ignorante", 0),
+                      speakerKiss: Pair("Bacio in bocca allo speaker", 0),
+                      victory51: Pair("Vinta ai 51", 0),
+                      mostLoved: Pair("Most loved", 0),
+                      total: Pair("Totale", 34),
+                    ),
+                    malus: const Malus(
+                      airball: Pair("Airball", 0),
+                      fouls: Pair("Fallo", 2),
+                      tacticalFouls: Pair("Fallo tattico", 0),
+                      teamDefeat: Pair("Sconfitta squadra", 0),
+                      reverseClothing: Pair("Abbigliamento al contrario", 0),
+                      worstTeam: Pair("Squadra peggiore della giornata", 0),
+                      concededDunk:
+                          Pair("Schiacciata subita dalla squadra", 20),
+                      lost51: Pair("Airball", 10),
+                      basketConcededBuzzerBeater:
+                          Pair("Canestro subito buzzer beater", 0),
+                      shaqtinAFool: Pair("Shaqtin'a Fool", 0),
+                      invisibleNumber: Pair("Numero giocatore non visibile", 0),
+                      worstTeamName: Pair("Nome squadra più brutto", 0),
+                      total: Pair("Totale", 32),
+                    ),
+                  )),
+        ],
+      ),
+      PlayerStage(
+        stage: const Stage(
+          id: 3,
+          fieldName: "Torneo Cesena",
+          city: "Cesena",
+          status: "Aperta",
+          openingDate: "05/04/2024",
+          closingDate: "07/04/2024",
+          photo: "https://fantabasket.talkandprofit.net/images/noimage.jpg",
+        ),
+        matches: [
+          ...List.generate(
+              10,
+              (index) => PlayerMatch(
+                    dayNumber: index,
+                    bonus: const Bonus(
+                      pointMade: Pair("Punto realizzato", 2),
+                      assist: Pair("Assist", 6),
+                      block: Pair("Stoppata", 0),
+                      bounce: Pair("Rimbalzo", 0),
+                      buzzerBeater: Pair("Buzzer beater", 0),
+                      dunk: Pair("Schiacciata", 20),
+                      ankleBreaker: Pair("Ankle breaker", 0),
+                      postAnd1Exultation: Pair("Esultanza post and 1", 0),
+                      pregameRitual: Pair("Rituale pre partita", 0),
+                      teamVictory: Pair("Vittoria squadra", 0),
+                      ignorantClothing: Pair("Abbigliamento ignorante", 0),
+                      speakerKiss: Pair("Bacio in bocca allo speaker", 0),
+                      victory51: Pair("Vinta ai 51", 0),
+                      mostLoved: Pair("Most loved", 0),
+                      total: Pair("Totale", 34),
+                    ),
+                    malus: const Malus(
+                      airball: Pair("Airball", 0),
+                      fouls: Pair("Fallo", 2),
+                      tacticalFouls: Pair("Fallo tattico", 0),
+                      teamDefeat: Pair("Sconfitta squadra", 0),
+                      reverseClothing: Pair("Abbigliamento al contrario", 0),
+                      worstTeam: Pair("Squadra peggiore della giornata", 0),
+                      concededDunk:
+                          Pair("Schiacciata subita dalla squadra", 20),
+                      lost51: Pair("Airball", 10),
+                      basketConcededBuzzerBeater:
+                          Pair("Canestro subito buzzer beater", 0),
+                      shaqtinAFool: Pair("Shaqtin'a Fool", 0),
+                      invisibleNumber: Pair("Numero giocatore non visibile", 0),
+                      worstTeamName: Pair("Nome squadra più brutto", 0),
+                      total: Pair("Totale", 32),
+                    ),
+                  )),
+        ],
+      ),
+    ],
+  );
 
   static TeamDetail detailTeamMock = TeamDetail(
     totalPoints: 886,
