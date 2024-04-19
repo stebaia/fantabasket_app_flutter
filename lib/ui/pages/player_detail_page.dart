@@ -57,9 +57,9 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
               children: [
                 Container(
                   width: double.infinity,
-                  decoration: const BoxDecoration(
-                      color: Color.fromARGB(255, 225, 135, 57),
-                      borderRadius: BorderRadius.only(
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.background,
+                      borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.circular(25),
                         bottomRight: Radius.circular(25),
                       )),

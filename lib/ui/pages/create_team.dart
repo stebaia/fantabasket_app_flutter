@@ -21,7 +21,7 @@ class CreateTeamPage extends StatelessWidget with AutoRouteWrapper {
     final user = (context.read<AuthCubit>().state as AuthenticatedState).user;
 
     return Container(
-      color: Color.fromARGB(255, 185, 87, 1),
+      color: Theme.of(context).colorScheme.background,
       child: Stack(
         children: [
           ClipPath(

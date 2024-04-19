@@ -262,7 +262,7 @@ class _PlayerStagesCarouselState extends State<PlayerStagesCarousel> {
               currentItem: _current,
               count: indicators.length,
               unselectedColor: Colors.grey.withOpacity(0.4),
-              selectedColor: const Color.fromARGB(255, 225, 135, 57),
+              selectedColor: Theme.of(context).colorScheme.background,
               size: const Size(12, 12),
               unselectedSize: const Size(9, 9),
             ),

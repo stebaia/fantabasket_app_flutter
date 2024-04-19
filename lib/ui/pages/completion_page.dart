@@ -104,19 +104,25 @@ class CompletionPage extends StatelessWidget with AutoRouteWrapper {
                   height: 20,
                 ),
                 TextField(
-                  decoration: const InputDecoration(
-                    focusColor: Colors.orange,
+                  decoration: InputDecoration(
+                    focusColor: Theme.of(context).colorScheme.background,
                     focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.orange, width: 2.0),
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                      borderSide: BorderSide(
+                        color: Theme.of(context).colorScheme.background,
+                        width: 2.0,
+                      ),
+                      borderRadius: const BorderRadius.all(Radius.circular(10)),
+                    ),
+                    border: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
                     hintText: 'Inserisci nome...',
-                    hintStyle:
-                        TextStyle(color: Color.fromARGB(255, 173, 173, 173)),
+                    hintStyle: const TextStyle(
+                      color: Color.fromARGB(255, 173, 173, 173),
+                    ),
                   ),
-                  style: TextStyle(color: Colors.white),
+                  style:
+                      TextStyle(color: Theme.of(context).colorScheme.primary),
                   textAlignVertical: TextAlignVertical.center,
                   controller: controller,
                 ),
@@ -152,8 +158,9 @@ class CompletionPage extends StatelessWidget with AutoRouteWrapper {
                                         color: (captain == null ||
                                                 player.id != captain.id)
                                             ? Colors.white
-                                            : const Color.fromARGB(
-                                                255, 225, 135, 57),
+                                            : Theme.of(context)
+                                                .colorScheme
+                                                .background,
                                         width: 2,
                                       ),
                                       borderRadius: BorderRadius.circular(20.0),

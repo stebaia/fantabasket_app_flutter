@@ -51,7 +51,7 @@ class _CompletionButtonState extends State<CompletionButton> {
           child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: enabled
-                    ? const Color.fromARGB(255, 225, 135, 57)
+                    ? Theme.of(context).colorScheme.background
                     : const Color.fromARGB(255, 208, 201, 195),
                 minimumSize: const Size.fromWidth(150),
               ),

@@ -29,7 +29,9 @@ class PlayerBar extends StatelessWidget {
         color: Color.fromARGB(255, 14, 13, 13),
         shape: RoundedRectangleBorder(
           side: BorderSide(
-            color: sixth == null ? Colors.white : Colors.orange,
+            color: sixth == null
+                ? Colors.white
+                : Theme.of(context).colorScheme.background,
             width: sixth == null ? 0 : 3,
           ),
           borderRadius: BorderRadius.circular(10.0),
