@@ -62,9 +62,8 @@ class _MainPageState extends State<MainPage> {
                     shape: BoxShape.circle,
                   ),
                   child: Image.asset(
-                    'assets/images/basketballicon.png',
+                    'assets/images/basketballicon_colored.png',
                     height: 150,
-                    color: Theme.of(context).colorScheme.tertiary,
                   ),
                 ),
               ),

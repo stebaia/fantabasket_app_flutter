@@ -61,6 +61,7 @@ dev_dependencies:
   mockito: ^5.4.2
   lottie: ^2.7.0
   auto_route_generator: ^5.0.2
+  flutter_launcher_icons: "^0.13.1"
 
 flutter:
   uses-material-design: true
@@ -74,6 +75,7 @@ flutter:
     - assets/images/player.jpeg
     - assets/images/basketbal_big.png
     - assets/images/basketballicon.png
+    - assets/images/basketballicon_colored.png
   
   fonts:
     - family: Poppins
@@ -84,3 +86,22 @@ flutter:
       fonts:
         - asset: assets/fonts/NunitoSans_10pt-Regular.ttf
         - asset: assets/fonts/NunitoSans_10pt-Bold.ttf
+
+flutter_launcher_icons:
+  #  image_path: "assets/images/icon-128x128.png"
+  image_path_android: "assets/images/basketballicon_colored.png"
+  image_path_ios: "assets/images/basketballicon_colored.png"
+  android: true # can specify file name here e.g. "ic_launcher"
+  ios: true # can specify file name here e.g. "My-Launcher-Icon"
+  #adaptive_icon_background: "assets/images/christmas-background.png" # only available for Android 8.0 devices and above
+  #adaptive_icon_foreground: "assets/images/icon-foreground-432x432.png" # only available for Android 8.0 devices and above
+  #adaptive_icon_monochrome: "assets/images/icon-monochrome-432x432.png" # only available for Android 13 devices and above
+  min_sdk_android: 21
+  remove_alpha_ios: true
+  background_color_ios: "#ffffff"
+  web:
+    generate: false
+  windows:
+    generate: false
+  macos:
+    generate: false
