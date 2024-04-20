@@ -86,9 +86,8 @@ class _LoginPageState extends State<LoginPage> {
                       children: [
                         const SizedBox(height: 75),
                         Image.asset(
-                          'assets/images/basketballicon.png',
+                          'assets/images/basketballicon_colored.png',
                           height: size.width * 0.4,
-                          color: Theme.of(context).colorScheme.tertiary,
                         ),
                         Center(
                             child: Container(
