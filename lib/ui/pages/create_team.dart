@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fantabasket_app_flutter/bloc/cubit/auth_cubit/auth_cubit.dart';
 import 'package:fantabasket_app_flutter/bloc/view_team_bloc/view_team_bloc.dart';
+import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
 import 'package:fantabasket_app_flutter/routes/app_router.gr.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/sponsors_banner.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/team_card.dart';
@@ -12,6 +13,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
 class CreateTeamPage extends StatelessWidget with AutoRouteWrapper {
   const CreateTeamPage({Key? key}) : super(key: key);
@@ -19,6 +21,7 @@ class CreateTeamPage extends StatelessWidget with AutoRouteWrapper {
   @override
   Widget build(BuildContext context) {
     final user = (context.read<AuthCubit>().state as AuthenticatedState).user;
+    final darkMode = Provider.of<DarkThemeProvider>(context);
 
     return Container(
       color: Theme.of(context).colorScheme.background,
@@ -27,7 +30,7 @@ class CreateTeamPage extends StatelessWidget with AutoRouteWrapper {
           ClipPath(
             clipper: WaveClipper(),
             child: Container(
-              color: Color.fromARGB(255, 14, 13, 13),
+              color: Theme.of(context).colorScheme.primary,
               height: double.infinity,
             ),
           ),
@@ -60,8 +63,12 @@ class CreateTeamPage extends StatelessWidget with AutoRouteWrapper {
                         alignment: Alignment.bottomRight,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.black,
-                            foregroundColor: Colors.white,
+                            backgroundColor: darkMode.darkTheme
+                                ? CupertinoColors.black
+                                : CupertinoColors.white,
+                            foregroundColor: darkMode.darkTheme
+                                ? CupertinoColors.white
+                                : CupertinoColors.black,
                           ),
                           onPressed: () {
                             context.pushRoute(const LoadStagesRoute()).then(

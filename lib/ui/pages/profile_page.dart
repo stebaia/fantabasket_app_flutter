@@ -18,8 +18,8 @@ class ProfilePage extends StatelessWidget {
     final darkMode = Provider.of<DarkThemeProvider>(context);
 
     return Container(
-      decoration: const BoxDecoration(
-        color: Colors.white,
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.primary,
       ),
       child: Center(
           child: Column(
@@ -91,11 +91,15 @@ class ProfilePage extends StatelessWidget {
           const Expanded(flex: 1, child: Divider(height: 1)),
           Expanded(
             flex: 2,
-            child: Container(
+            child: SizedBox(
               height: 50,
               child: Padding(
-                padding:
-                    EdgeInsets.only(left: 20, right: 20, top: 16, bottom: 16),
+                padding: const EdgeInsets.only(
+                  left: 20,
+                  right: 20,
+                  top: 16,
+                  bottom: 16,
+                ),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Row(
@@ -104,9 +108,7 @@ class ProfilePage extends StatelessWidget {
                           color: darkMode.darkTheme
                               ? CupertinoColors.white
                               : CupertinoColors.black),
-                      SizedBox(
-                        width: 10,
-                      ),
+                      const SizedBox(width: 10),
                       Text(
                         'Dark Mode',
                         style: TextStyle(
@@ -116,8 +118,9 @@ class ProfilePage extends StatelessWidget {
                                 ? CupertinoColors.white
                                 : CupertinoColors.black),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       CupertinoSwitch(
+                        activeColor: Theme.of(context).colorScheme.background,
                         value: darkMode.darkTheme,
                         onChanged: (value) {
                           darkMode.darkTheme = value;

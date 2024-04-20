@@ -1,3 +1,4 @@
+import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
 import 'package:fantabasket_app_flutter/model/stage.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/players_list_card.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/rank_card.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:fantabasket_app_flutter/bloc/create_team_bloc/create_team_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class PlayersPage extends StatelessWidget with AutoRouteWrapper {
@@ -24,8 +26,10 @@ class PlayersPage extends StatelessWidget with AutoRouteWrapper {
 
   @override
   Widget build(BuildContext context) {
+    final darkMode = Provider.of<DarkThemeProvider>(context);
+
     return Container(
-      color: Color.fromARGB(255, 14, 13, 13),
+      color: Theme.of(context).colorScheme.primary,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -38,7 +42,7 @@ class PlayersPage extends StatelessWidget with AutoRouteWrapper {
               style: TextStyle(
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.bold,
-                color: Theme.of(context).colorScheme.primary,
+                color: darkMode.darkTheme ? Colors.white : Colors.black,
                 fontSize: 25,
               ),
             ),
@@ -66,7 +70,10 @@ class PlayersPage extends StatelessWidget with AutoRouteWrapper {
                   color: Color.fromARGB(255, 173, 173, 173),
                 ),
               ),
-              style: const TextStyle(color: Colors.white),
+              cursorColor: const Color.fromARGB(255, 173, 173, 173),
+              style: TextStyle(
+                color: darkMode.darkTheme ? Colors.white : Colors.black,
+              ),
               textAlignVertical: TextAlignVertical.center,
             ),
           ),
