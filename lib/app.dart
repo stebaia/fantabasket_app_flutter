@@ -46,7 +46,9 @@ class _AppState extends State<App> {
                   child: SafeArea(
                       child: MaterialApp.router(
             debugShowCheckedModeBanner: false,
-            theme: Styles.lightMode(themeChangeProvider.darkTheme, context),
+            theme: themeChangeProvider.darkTheme
+                ? Styles.darkMode(true, context)
+                : Styles.lightMode(false, context),
             localizationsDelegates: const [
               AppLocalizations.delegate, // Add this line
               GlobalMaterialLocalizations.delegate,
