@@ -74,12 +74,18 @@ class CompletionPage extends StatelessWidget with AutoRouteWrapper {
             context.router
                 .popUntil((route) => route.settings.name == CoreRoute.name);
           } else if (state is ErrorCreateState) {
+            print(state.errorString);
             showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
+                      backgroundColor: Theme.of(context).colorScheme.primary,
                       content: Text(state.errorString),
                       actions: [
                         ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor:
+                                  Theme.of(context).colorScheme.background,
+                            ),
                             onPressed: () => Navigator.pop(context),
                             child: const Text("Ok"))
                       ],

@@ -153,12 +153,17 @@ class CreateTeamPage extends StatelessWidget with AutoRouteWrapper {
                                               barrierDismissible: true,
                                               builder: (BuildContext context) {
                                                 return Dialog(
+                                                    backgroundColor:
+                                                        Theme.of(context)
+                                                            .colorScheme
+                                                            .primary,
                                                     child: Container(
-                                                        height: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .height *
-                                                            0.75,
+                                                        height:
+                                                            MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .height *
+                                                                0.75,
                                                         alignment:
                                                             Alignment.center,
                                                         decoration:
@@ -218,6 +223,13 @@ class CreateTeamPage extends StatelessWidget with AutoRouteWrapper {
                                                                     onPressed: () =>
                                                                         Navigator.pop(
                                                                             context),
+                                                                    style: ElevatedButton
+                                                                        .styleFrom(
+                                                                      backgroundColor: Theme.of(
+                                                                              context)
+                                                                          .colorScheme
+                                                                          .background,
+                                                                    ),
                                                                     child:
                                                                         const Text(
                                                                       "Chiudi",
