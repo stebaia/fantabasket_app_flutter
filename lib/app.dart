@@ -19,40 +19,16 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   final _router = AppRouter();
-
-  DarkThemeProvider themeChangeProvider = DarkThemeProvider();
-
-  void getCurrentAppTheme() async {
-    themeChangeProvider.darkTheme =
-        await themeChangeProvider.darkThemePreferences.getTheme();
-  }
-
-  Widget getApp(BuildContext mContext) {
-    final darkMode = Provider.of<DarkThemeProvider>(mContext);
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      theme: darkMode.darkTheme
-          ? Styles.darkMode(true, context)
-          : Styles.lightMode(false, context),
-      localizationsDelegates: const [
-        AppLocalizations.delegate, // Add this line
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale('en'),
-        Locale('it'),
-      ],
-      routeInformationParser: _router.defaultRouteParser(),
-      routerDelegate: _router.delegate(),
-    );
-  }
+  DarkThemeProvider themeChangeProvider = new DarkThemeProvider();
 
   @override
   void initState() {
     super.initState();
-    getCurrentAppTheme();
+  }
+
+  void getCurrentAppTheme() async {
+    themeChangeProvider.darkTheme =
+        await themeChangeProvider.darkThemePreferences.getTheme();
   }
 
   @override
@@ -61,10 +37,31 @@ class _AppState extends State<App> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    return DependencyInjector(
-        child: DismissKeyboard(
-            child: SafeArea(
-      child: getApp(context),
-    )));
+    return ChangeNotifierProvider(
+      create: (context) => themeChangeProvider,
+      child: Consumer<DarkThemeProvider>(
+        builder: (context, value, child) {
+          return DependencyInjector(
+              child: DismissKeyboard(
+                  child: SafeArea(
+                      child: MaterialApp.router(
+            debugShowCheckedModeBanner: false,
+            theme: Styles.lightMode(themeChangeProvider.darkTheme, context),
+            localizationsDelegates: const [
+              AppLocalizations.delegate, // Add this line
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: const [
+              Locale('en'),
+              Locale('it'),
+            ],
+            routeInformationParser: _router.defaultRouteParser(),
+            routerDelegate: _router.delegate(),
+          ))));
+        },
+      ),
+    );
   }
 }

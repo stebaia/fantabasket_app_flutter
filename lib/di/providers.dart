@@ -28,7 +28,6 @@ final List<SingleChildWidget> _providers = [
     create: (context) =>
         TeamService(context.read<Dio>(), baseUrl: Constants.baseUrl),
   ),
-  ChangeNotifierProvider<DarkThemeProvider>(create: (_) => DarkThemeProvider()),
 ];
 
 class DarkThemePreferences {

@@ -7,7 +7,7 @@ class Styles {
       fontFamily: GoogleFonts.sen().fontFamily,
       useMaterial3: true,
       colorScheme: ColorScheme.fromSeed(
-        primary: const Color.fromARGB(255, 245, 238, 238),
+        primary: isDarkTheme ? Colors.black : Colors.white,
         secondary: const Color.fromARGB(255, 42, 49, 181),
         tertiary: const Color.fromARGB(255, 198, 32, 31),
         background: Colors.yellow,
