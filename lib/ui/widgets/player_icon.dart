@@ -1,5 +1,6 @@
 import 'package:fantabasket_app_flutter/bloc/cubit/credits_cubit/credits_cubit.dart';
 import 'package:fantabasket_app_flutter/bloc/select_player_bloc/select_player_bloc.dart';
+import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/player_bar.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/players_bottom_sheet.dart';
@@ -7,6 +8,7 @@ import 'package:fantabasket_app_flutter/utils/color_utils.dart';
 import 'package:fantabasket_app_flutter/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
 class PlayerIcon extends StatefulWidget {
   final List<Player> players;
@@ -33,13 +35,15 @@ class _PlayerIconState extends State<PlayerIcon> {
 
   @override
   Widget build(BuildContext context) {
+    final darkMode = Provider.of<DarkThemeProvider>(context);
+
     var height = MediaQuery.of(context).size.height * 0.7;
     return GestureDetector(
       onTap: () async {
         var selectedPlayer = await showModalBottomSheet<Player>(
           context: context,
           isScrollControlled: true,
-          backgroundColor: Color.fromARGB(255, 14, 13, 13),
+          backgroundColor: Theme.of(context).colorScheme.primary,
           builder: (BuildContext context) {
             return PlayersBottomSheet(
               mContext: widget.mContext,
@@ -56,17 +60,17 @@ class _PlayerIconState extends State<PlayerIcon> {
         width: MediaQuery.of(context).size.width * 0.32,
         height: MediaQuery.of(context).size.height * 0.26,
         child: Card(
-          color: Color.fromARGB(255, 14, 13, 13),
+          color: Theme.of(context).colorScheme.primary,
           elevation: 4,
           child: Column(
             children: [
-              Container(
+              SizedBox(
                 width: MediaQuery.of(context).size.width * 0.32,
                 height: MediaQuery.of(context).size.height * 0.25,
                 child: selected != null
                     ? Column(
                         children: [
-                          Container(
+                          SizedBox(
                               width: MediaQuery.of(context).size.width * 0.32,
                               height: MediaQuery.of(context).size.height * 0.15,
                               child: ClipRRect(
@@ -120,9 +124,13 @@ class _PlayerIconState extends State<PlayerIcon> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Icon(Icons.add,
-                              size: MediaQuery.of(context).size.width * 0.13,
-                              color: Theme.of(context).colorScheme.primary),
+                          Icon(
+                            Icons.add,
+                            size: MediaQuery.of(context).size.width * 0.13,
+                            color: darkMode.darkTheme
+                                ? Colors.white
+                                : Colors.black,
+                          ),
                           const SizedBox(height: 5),
                           Text(
                             selected == null
@@ -132,7 +140,9 @@ class _PlayerIconState extends State<PlayerIcon> {
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                              color: Theme.of(context).colorScheme.primary,
+                              color: darkMode.darkTheme
+                                  ? Colors.white
+                                  : Colors.black,
                             ),
                           ),
                         ],

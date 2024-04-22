@@ -1,11 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:fantabasket_app_flutter/bloc/team_detail_bloc/team_detail_bloc.dart';
+import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
 import 'package:fantabasket_app_flutter/model/team_detail.dart';
 import 'package:fantabasket_app_flutter/routes/app_router.gr.dart';
+import 'package:fantabasket_app_flutter/ui/widgets/double_spinner.dart';
 import 'package:fantabasket_app_flutter/utils/color_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fantabasket_app_flutter/model/team.dart';
+import 'package:provider/provider.dart';
 
 class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
   final Team team;
@@ -30,6 +33,7 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
     TeamDetail td,
     int position,
     int currentDay,
+    bool darkMode,
   ) {
     var entry = td.days
         .where((day) => day.dayNumber == currentDay)
@@ -46,76 +50,71 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
         width: MediaQuery.of(context).size.width * 0.32,
         //height: MediaQuery.of(context).size.height * 0.26,
         child: Card(
-          color: Color.fromARGB(255, 14, 13, 13),
+          color: Theme.of(context).colorScheme.primary,
           elevation: 4,
-          child: Column(
-            children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.32,
-                //height: MediaQuery.of(context).size.height * 0.25,
-                child: Column(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(vertical: 8),
-                      child: Text(
-                        position == 5
-                            ? "Sesto uomo"
-                            : "Giocatore ${position + 1}",
-                        style: const TextStyle(color: Colors.white),
-                      ),
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width * 0.32,
+            //height: MediaQuery.of(context).size.height * 0.25,
+            child: Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: Text(
+                    position == 5 ? "Sesto uomo" : "Giocatore ${position + 1}",
+                    style: TextStyle(
+                      color: darkMode ? Colors.white : Colors.black,
                     ),
-                    SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.32,
-                        //height: MediaQuery.of(context).size.height * 0.15,
-                        child: ClipRRect(
-                            borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                topRight: Radius.circular(10)),
-                            child: entry.key.photo != ''
-                                ? Image.network(
-                                    entry.key.photo,
-                                    fit: BoxFit.cover,
-                                  )
-                                : Image.network(
-                                    'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/LeBron_James_%2851959977144%29_%28cropped2%29.jpg/640px-LeBron_James_%2851959977144%29_%28cropped2%29.jpg',
-                                    fit: BoxFit.cover))),
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      //height: MediaQuery.of(context).size.height * 0.1,
-                      decoration: BoxDecoration(
-                          color: ColorUtils.getColor(entry.key),
-                          borderRadius: const BorderRadius.only(
-                              bottomLeft: Radius.circular(10),
-                              bottomRight: Radius.circular(10))),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            entry.key.firstName,
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            entry.key.lastName,
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            "Punti: ${entry.value}",
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
+                  ),
                 ),
-              ),
-            ],
+                SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.32,
+                    //height: MediaQuery.of(context).size.height * 0.15,
+                    child: ClipRRect(
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10)),
+                        child: entry.key.photo != ''
+                            ? Image.network(
+                                entry.key.photo,
+                                fit: BoxFit.cover,
+                              )
+                            : Image.network(
+                                'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/LeBron_James_%2851959977144%29_%28cropped2%29.jpg/640px-LeBron_James_%2851959977144%29_%28cropped2%29.jpg',
+                                fit: BoxFit.cover))),
+                Expanded(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    //height: MediaQuery.of(context).size.height * 0.1,
+                    decoration: BoxDecoration(
+                        color: ColorUtils.getColor(entry.key),
+                        borderRadius: const BorderRadius.only(
+                            bottomLeft: Radius.circular(10),
+                            bottomRight: Radius.circular(10))),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          entry.key.firstName,
+                          style: const TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          entry.key.lastName,
+                          style: const TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          "Punti: ${entry.value}",
+                          style: const TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -124,11 +123,13 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
 
   @override
   Widget build(BuildContext context) {
+    final darkMode = Provider.of<DarkThemeProvider>(context);
+
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 14, 13, 13),
+      backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: AppBar(
-        foregroundColor: Colors.white,
-        backgroundColor: const Color.fromARGB(255, 14, 13, 13),
+        foregroundColor: darkMode.darkTheme ? Colors.white : Colors.black,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         title: const Text(
           "Bologna",
           style: TextStyle(fontSize: 18),
@@ -150,7 +151,7 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
                 style: TextStyle(
                   fontFamily: 'Poppins',
                   fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.primary,
+                  color: darkMode.darkTheme ? Colors.white : Colors.black,
                   fontSize: 25,
                 ),
               ),
@@ -166,10 +167,10 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
                       const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
                   child: Text(
                     "Punti totali: ${td.totalPoints}",
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: darkMode.darkTheme ? Colors.white : Colors.black,
                       fontSize: 18,
                     ),
                   ),
@@ -236,10 +237,9 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
             const SizedBox(height: 10),
             Expanded(
               child: switch (state) {
-                TryTeamDetailState() || TryUpdateDayState() => const Center(
-                      child: CircularProgressIndicator(
-                    color: Colors.white,
-                  )),
+                TryTeamDetailState() ||
+                TryUpdateDayState() =>
+                  const Center(child: DoubleSpinner()),
                 ResultTeamDetailState(teamDetail: var td) ||
                 ResultUpdateDayState(teamDetail: var td) =>
                   Container(
@@ -254,9 +254,12 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              _getPlayerCard(context, td, 0, currentDay),
-                              _getPlayerCard(context, td, 1, currentDay),
-                              _getPlayerCard(context, td, 2, currentDay),
+                              _getPlayerCard(context, td, 0, currentDay,
+                                  darkMode.darkTheme),
+                              _getPlayerCard(context, td, 1, currentDay,
+                                  darkMode.darkTheme),
+                              _getPlayerCard(context, td, 2, currentDay,
+                                  darkMode.darkTheme),
                             ],
                           ),
                         ),
@@ -267,9 +270,12 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                _getPlayerCard(context, td, 3, currentDay),
-                                _getPlayerCard(context, td, 4, currentDay),
-                                _getPlayerCard(context, td, 5, currentDay),
+                                _getPlayerCard(context, td, 3, currentDay,
+                                    darkMode.darkTheme),
+                                _getPlayerCard(context, td, 4, currentDay,
+                                    darkMode.darkTheme),
+                                _getPlayerCard(context, td, 5, currentDay,
+                                    darkMode.darkTheme),
                               ],
                             ),
                           ),

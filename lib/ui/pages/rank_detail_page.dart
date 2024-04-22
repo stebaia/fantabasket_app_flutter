@@ -1,8 +1,11 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
 import 'package:fantabasket_app_flutter/bloc/rank_detail_bloc/rank_detail_bloc.dart';
+import 'package:fantabasket_app_flutter/ui/widgets/double_spinner.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/rank_detail_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
 class RankDetailPage extends StatelessWidget with AutoRouteWrapper {
   final String stageName;
@@ -24,11 +27,12 @@ class RankDetailPage extends StatelessWidget with AutoRouteWrapper {
 
   @override
   Widget build(BuildContext context) {
+    final darkMode = Provider.of<DarkThemeProvider>(context);
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 14, 13, 13),
+      backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: AppBar(
-        foregroundColor: Colors.white,
-        backgroundColor: const Color.fromARGB(255, 14, 13, 13),
+        foregroundColor: darkMode.darkTheme ? Colors.white : Colors.black,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(
           stageName,
           style: const TextStyle(fontSize: 18),
@@ -45,7 +49,7 @@ class RankDetailPage extends StatelessWidget with AutoRouteWrapper {
               style: TextStyle(
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.bold,
-                color: Theme.of(context).colorScheme.primary,
+                color: darkMode.darkTheme ? Colors.white : Colors.black,
                 fontSize: 25,
               ),
             ),
@@ -55,10 +59,7 @@ class RankDetailPage extends StatelessWidget with AutoRouteWrapper {
             child: BlocBuilder<RankDetailBloc, RankDetailState>(
                 builder: (BuildContext context, RankDetailState state) {
               return switch (state) {
-                TryGetRanking() => const Center(
-                      child: CircularProgressIndicator(
-                    color: Colors.white,
-                  )),
+                TryGetRanking() => const Center(child: DoubleSpinner()),
                 ResultRankingState() => ListView.builder(
                     shrinkWrap: true,
                     itemCount: state.players.length,

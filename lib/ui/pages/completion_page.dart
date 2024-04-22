@@ -5,6 +5,7 @@ import 'package:fantabasket_app_flutter/bloc/cubit/captain_cubit.dart/captain_cu
 import 'package:fantabasket_app_flutter/bloc/cubit/sixth_man_cubit/sixth_man_cubit.dart';
 import 'package:fantabasket_app_flutter/bloc/select_player_bloc/select_player_bloc.dart';
 import 'package:fantabasket_app_flutter/bloc/cubit/credits_cubit/credits_cubit.dart';
+import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:fantabasket_app_flutter/model/stage.dart';
 import 'package:fantabasket_app_flutter/routes/app_router.gr.dart';
@@ -13,6 +14,7 @@ import 'package:fantabasket_app_flutter/ui/widgets/player_bar.dart';
 import 'package:fantabasket_app_flutter/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
 class CompletionPage extends StatelessWidget with AutoRouteWrapper {
   final List<Player> team;
@@ -47,11 +49,13 @@ class CompletionPage extends StatelessWidget with AutoRouteWrapper {
 
   @override
   Widget build(BuildContext context) {
+    final darkMode = Provider.of<DarkThemeProvider>(context);
+
     final controller = TextEditingController();
     side.removeWhere(
         (player) => player.category == "A" || player.category == "B");
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 14, 13, 13),
+      backgroundColor: Theme.of(context).colorScheme.primary,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         actions: [
@@ -64,8 +68,8 @@ class CompletionPage extends StatelessWidget with AutoRouteWrapper {
             ),
           )
         ],
-        foregroundColor: Colors.white,
-        backgroundColor: Color.fromARGB(255, 14, 13, 13),
+        foregroundColor: darkMode.darkTheme ? Colors.white : Colors.black,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         automaticallyImplyLeading: true,
       ),
       body: BlocListener<AddTeamBloc, AddTeamState>(
@@ -102,9 +106,11 @@ class CompletionPage extends StatelessWidget with AutoRouteWrapper {
                 const SizedBox(
                   height: 20,
                 ),
-                const Text(
+                Text(
                   "Nome squadra",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(
+                    color: darkMode.darkTheme ? Colors.white : Colors.black,
+                  ),
                 ),
                 const SizedBox(
                   height: 20,
@@ -127,17 +133,21 @@ class CompletionPage extends StatelessWidget with AutoRouteWrapper {
                       color: Color.fromARGB(255, 173, 173, 173),
                     ),
                   ),
-                  style:
-                      TextStyle(color: Theme.of(context).colorScheme.primary),
+                  cursorColor: const Color.fromARGB(255, 173, 173, 173),
+                  style: TextStyle(
+                    color: darkMode.darkTheme ? Colors.white : Colors.black,
+                  ),
                   textAlignVertical: TextAlignVertical.center,
                   controller: controller,
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                const Text(
+                Text(
                   "Seleziona capitano",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(
+                    color: darkMode.darkTheme ? Colors.white : Colors.black,
+                  ),
                 ),
                 SizedBox(
                   height: 170,
@@ -235,9 +245,11 @@ class CompletionPage extends StatelessWidget with AutoRouteWrapper {
                   ),
                 ),
                 const SizedBox(height: 20),
-                const Text(
+                Text(
                   "Seleziona sesto uomo",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(
+                    color: darkMode.darkTheme ? Colors.white : Colors.black,
+                  ),
                 ),
                 const SizedBox(height: 20),
                 BlocBuilder<SixthManCubit, SixthManState>(

@@ -11,8 +11,8 @@ class DoubleSpinner extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           SizedBox(
-            width: height * 0.15,
-            height: height * 0.15,
+            width: height * 0.09,
+            height: height * 0.09,
             child: CircularProgressIndicator(
               valueColor: AlwaysStoppedAnimation<Color>(
                   Theme.of(context).colorScheme.secondary),
@@ -22,8 +22,8 @@ class DoubleSpinner extends StatelessWidget {
           Transform.rotate(
             angle: -3.14,
             child: SizedBox(
-              width: height * 0.12,
-              height: height * 0.12,
+              width: height * 0.06,
+              height: height * 0.06,
               child: CircularProgressIndicator(
                 valueColor: AlwaysStoppedAnimation<Color>(
                     Theme.of(context).colorScheme.tertiary),
@@ -31,10 +31,6 @@ class DoubleSpinner extends StatelessWidget {
                     5.0, // Imposta lo spessore e il diametro del CircularProgressIndicator esterno
               ),
             ),
-          ),
-          Image.asset(
-            'assets/images/basketballicon_colored.png',
-            width: height * 0.1,
           ),
         ],
       ),

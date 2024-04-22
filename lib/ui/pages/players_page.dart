@@ -1,5 +1,6 @@
 import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
 import 'package:fantabasket_app_flutter/model/stage.dart';
+import 'package:fantabasket_app_flutter/ui/widgets/double_spinner.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/players_list_card.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/rank_card.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/sponsors_banner.dart';
@@ -57,11 +58,12 @@ class PlayersPage extends StatelessWidget with AutoRouteWrapper {
               decoration: InputDecoration(
                 focusColor: Theme.of(context).colorScheme.background,
                 focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Theme.of(context).colorScheme.background,
-                      width: 2.0,
-                    ),
-                    borderRadius: const BorderRadius.all(Radius.circular(10))),
+                  borderSide: BorderSide(
+                    color: Theme.of(context).colorScheme.background,
+                    width: 2.0,
+                  ),
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                ),
                 border: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                 ),
@@ -110,7 +112,7 @@ class PlayersPage extends StatelessWidget with AutoRouteWrapper {
                                 children: [
                                   switch (state) {
                                     TryGetStagesState() => const Center(
-                                        child: CircularProgressIndicator(),
+                                        child: DoubleSpinner(),
                                       ),
                                     ResultGetStagesState(
                                       stagesList: var stages

@@ -2,12 +2,15 @@ import 'package:auto_route/auto_route.dart';
 import 'package:fantabasket_app_flutter/bloc/add_team_bloc/add_team_bloc.dart';
 import 'package:fantabasket_app_flutter/bloc/create_team_bloc/create_team_bloc.dart';
 import 'package:fantabasket_app_flutter/bloc/select_team_bloc/select_team_bloc.dart';
+import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
 import 'package:fantabasket_app_flutter/routes/app_router.gr.dart';
 import 'package:fantabasket_app_flutter/model/stage.dart';
+import 'package:fantabasket_app_flutter/ui/widgets/double_spinner.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/load_stage_card.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/sponsors_banner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class LoadStagesPage extends StatefulWidget with AutoRouteWrapper {
@@ -31,11 +34,13 @@ class LoadStagesPage extends StatefulWidget with AutoRouteWrapper {
 class _LoadStagesPageState extends State<LoadStagesPage> {
   @override
   Widget build(BuildContext context) {
+    final darkMode = Provider.of<DarkThemeProvider>(context);
+
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 14, 13, 13),
+      backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: AppBar(
-        foregroundColor: Colors.white,
-        backgroundColor: Color.fromARGB(255, 14, 13, 13),
+        foregroundColor: darkMode.darkTheme ? Colors.white : Colors.black,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         title: const Text(
           'Scegli la tappa',
           style: TextStyle(fontSize: 18),
@@ -72,7 +77,7 @@ class _LoadStagesPageState extends State<LoadStagesPage> {
                           children: [
                             switch (state) {
                               TryGetStagesState() => const Center(
-                                  child: CircularProgressIndicator(),
+                                  child: DoubleSpinner(),
                                 ),
                               ResultGetStagesState(stagesList: var stages) =>
                                 ListView.builder(

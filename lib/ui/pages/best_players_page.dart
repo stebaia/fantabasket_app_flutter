@@ -1,11 +1,16 @@
+import 'dart:ffi';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:fantabasket_app_flutter/bloc/select_team_bloc/select_team_bloc.dart';
+import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:fantabasket_app_flutter/model/stage.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/best_players_card.dart';
+import 'package:fantabasket_app_flutter/ui/widgets/double_spinner.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/sponsors_banner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class BestPlayersPage extends StatelessWidget with AutoRouteWrapper {
@@ -31,11 +36,12 @@ class BestPlayersPage extends StatelessWidget with AutoRouteWrapper {
 
   @override
   Widget build(BuildContext context) {
+    final darkMode = Provider.of<DarkThemeProvider>(context);
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 14, 13, 13),
+      backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: AppBar(
-        foregroundColor: Colors.white,
-        backgroundColor: Color.fromARGB(255, 14, 13, 13),
+        foregroundColor: darkMode.darkTheme ? Colors.white : Colors.black,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         title: const Text(
           'Migliori giocatori',
           style: TextStyle(fontSize: 18),
@@ -77,7 +83,7 @@ class BestPlayersPage extends StatelessWidget with AutoRouteWrapper {
                             children: [
                               switch (state) {
                                 TryGetPlayersState() => const Center(
-                                    child: CircularProgressIndicator(),
+                                    child: DoubleSpinner(),
                                   ),
                                 ResultGetPlayersState(
                                   playersList: var players
