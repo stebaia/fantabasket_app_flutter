@@ -1,13 +1,17 @@
+import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/rank_card.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/sponsors_banner.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class RankPage extends StatelessWidget {
   const RankPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final darkMode = Provider.of<DarkThemeProvider>(context);
+
     var size = MediaQuery.of(context).size;
     final mockList = {
       "Bologna": 1,
@@ -22,7 +26,7 @@ class RankPage extends StatelessWidget {
       "Brescia": 5,
     };
     return Container(
-      color: Color.fromARGB(255, 14, 13, 13),
+      color: Theme.of(context).colorScheme.primary,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -35,7 +39,7 @@ class RankPage extends StatelessWidget {
               style: TextStyle(
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.bold,
-                color: Theme.of(context).colorScheme.primary,
+                color: darkMode.darkTheme ? Colors.white : Colors.black,
                 fontSize: 25,
               ),
             ),
@@ -64,7 +68,9 @@ class RankPage extends StatelessWidget {
                   color: Color.fromARGB(255, 173, 173, 173),
                 ),
               ),
-              style: const TextStyle(color: Colors.white),
+              cursorColor: const Color.fromARGB(255, 173, 173, 173),
+              style: TextStyle(
+                  color: darkMode.darkTheme ? Colors.white : Colors.black),
               textAlignVertical: TextAlignVertical.center,
             ),
           ),

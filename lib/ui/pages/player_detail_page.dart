@@ -1,13 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fantabasket_app_flutter/bloc/player_detail_bloc/player_detail_bloc.dart';
+import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
 import 'package:fantabasket_app_flutter/model/bonus.dart';
+import 'package:fantabasket_app_flutter/ui/widgets/double_spinner.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/player_stages_carousel.dart';
 import 'package:flutter/material.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pair/pair.dart';
+import 'package:provider/provider.dart';
 
 class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
   final Player player;
@@ -30,12 +33,13 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
 
   @override
   Widget build(BuildContext context) {
+    final darkMode = Provider.of<DarkThemeProvider>(context);
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 14, 13, 13),
+      backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: AppBar(
-        foregroundColor: Colors.white,
-        backgroundColor: const Color.fromARGB(255, 14, 13, 13),
+        foregroundColor: darkMode.darkTheme ? Colors.white : Colors.black,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(
           "${player.firstName} ${player.lastName}",
           style: const TextStyle(fontSize: 18),
@@ -48,9 +52,8 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
       ) {
         return switch (state) {
           TryPlayerDetailState() || TryUpdateDayState() => const Center(
-                child: CircularProgressIndicator(
-              color: Colors.white,
-            )),
+              child: DoubleSpinner(),
+            ),
           ResultPlayerDetailState(playerDetail: var pd) ||
           ResultUpdateDayState(playerDetail: var pd) =>
             Column(
@@ -99,18 +102,22 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
+                            Text(
                               "Squadra",
                               style: TextStyle(
-                                color: Colors.white,
+                                color: darkMode.darkTheme
+                                    ? Colors.white
+                                    : Colors.black,
                                 fontFamily: 'Nunito Sans',
                                 fontSize: 16,
                               ),
                             ),
                             Text(
                               pd.team,
-                              style: const TextStyle(
-                                color: Colors.white,
+                              style: TextStyle(
+                                color: darkMode.darkTheme
+                                    ? Colors.white
+                                    : Colors.black,
                                 fontFamily: 'Nunito Sans',
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
@@ -123,13 +130,15 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
                     Expanded(
                       child: Container(
                         padding: const EdgeInsets.all(20.0),
-                        child: const Column(
+                        child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               "Punti totali",
                               style: TextStyle(
-                                color: Colors.white,
+                                color: darkMode.darkTheme
+                                    ? Colors.white
+                                    : Colors.black,
                                 fontFamily: 'Nunito Sans',
                                 fontSize: 16,
                               ),
@@ -137,7 +146,9 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
                             Text(
                               "3900",
                               style: TextStyle(
-                                color: Colors.white,
+                                color: darkMode.darkTheme
+                                    ? Colors.white
+                                    : Colors.black,
                                 fontFamily: 'Nunito Sans',
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,

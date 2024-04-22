@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
 import 'package:fantabasket_app_flutter/routes/app_router.gr.dart';
 import 'package:fantabasket_app_flutter/utils/theme_helper.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -16,14 +16,14 @@ class CorePage extends StatefulWidget {
 class _CorePageState extends State<CorePage> {
   @override
   Widget build(BuildContext context) {
-    //final darkMode = Provider.of<DarkThemeProvider>(context);
+    final darkMode = Provider.of<DarkThemeProvider>(context);
     //final switchDasboard = Provider.of<SwitchDashboardProvider>(context);
     return PopScope(
       canPop: false,
       child: AutoTabsScaffold(
         backgroundColor: Colors.white,
         //darkMode.darkTheme ? ThemeHelper.backgroundColorDark : Colors.white,
-        routes: [
+        routes: const [
           RankRoute(),
           PlayersRoute(),
           CreateTeamRoute(),
@@ -33,9 +33,10 @@ class _CorePageState extends State<CorePage> {
           return BottomNavigationBar(
               elevation: 0,
               type: BottomNavigationBarType.fixed,
-              backgroundColor: ThemeHelper.backgroundColorDark,
+              backgroundColor: Theme.of(context).colorScheme.primary,
               selectedItemColor: Theme.of(context).colorScheme.tertiary,
-              unselectedItemColor: Colors.white,
+              unselectedItemColor:
+                  darkMode.darkTheme ? Colors.white : Colors.black,
               currentIndex: tabsRouter.activeIndex,
               onTap: tabsRouter.setActiveIndex,
               items: [
@@ -50,10 +51,11 @@ class _CorePageState extends State<CorePage> {
                   label: 'Players',
                 ),
                 BottomNavigationBarItem(
-                  icon: const Image(
+                  icon: Image(
                     width: 36,
                     height: 36,
-                    image: AssetImage('assets/images/basketballicon.png'),
+                    image: const AssetImage('assets/images/basketballicon.png'),
+                    color: darkMode.darkTheme ? Colors.white : Colors.black,
                   ),
                   activeIcon: Image(
                     width: 36,
@@ -63,7 +65,7 @@ class _CorePageState extends State<CorePage> {
                   ),
                   label: 'My Team',
                 ),
-                BottomNavigationBarItem(
+                const BottomNavigationBarItem(
                   icon: FaIcon(FontAwesomeIcons.user),
                   activeIcon: FaIcon(FontAwesomeIcons.user),
                   label: 'Profile',

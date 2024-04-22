@@ -1,6 +1,8 @@
+import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:flutter/material.dart';
 import 'package:fantabasket_app_flutter/utils/constants.dart';
+import 'package:provider/provider.dart';
 
 class PlayerBar extends StatelessWidget {
   final Player player;
@@ -22,11 +24,13 @@ class PlayerBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final darkMode = Provider.of<DarkThemeProvider>(context);
+
     return SizedBox(
       width: double.infinity,
       height: 100,
       child: Card(
-        color: Color.fromARGB(255, 14, 13, 13),
+        color: Theme.of(context).colorScheme.primary,
         shape: RoundedRectangleBorder(
           side: BorderSide(
             color: sixth == null
@@ -36,7 +40,7 @@ class PlayerBar extends StatelessWidget {
           ),
           borderRadius: BorderRadius.circular(10.0),
         ),
-        elevation: 6,
+        elevation: 2,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -75,15 +79,18 @@ class PlayerBar extends StatelessWidget {
                     children: [
                       Text(
                         '${player.firstName} ${player.lastName}',
-                        style: const TextStyle(
-                            color: Colors.white,
+                        style: TextStyle(
+                            color: darkMode.darkTheme
+                                ? Colors.white
+                                : Colors.black,
                             fontSize: 16,
                             fontWeight: FontWeight.bold),
                       ),
                       Text(
                         player.team,
-                        style: const TextStyle(
-                          color: Colors.white,
+                        style: TextStyle(
+                          color:
+                              darkMode.darkTheme ? Colors.white : Colors.black,
                           fontSize: 14,
                         ),
                       )

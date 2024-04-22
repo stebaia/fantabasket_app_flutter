@@ -2,13 +2,16 @@ import 'package:auto_route/auto_route.dart';
 import 'package:fantabasket_app_flutter/bloc/cubit/credits_cubit/credits_cubit.dart';
 import 'package:fantabasket_app_flutter/bloc/select_team_bloc/select_team_bloc.dart';
 import 'package:fantabasket_app_flutter/bloc/select_player_bloc/select_player_bloc.dart';
+import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:fantabasket_app_flutter/model/stage.dart';
 import 'package:fantabasket_app_flutter/routes/app_router.gr.dart';
+import 'package:fantabasket_app_flutter/ui/widgets/double_spinner.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/player_icon.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/sponsors_banner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
 class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
   final Stage stage;
@@ -39,16 +42,19 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
 
   @override
   Widget build(BuildContext context) {
+    final darkMode = Provider.of<DarkThemeProvider>(context);
+
     return PopScope(
         onPopInvoked: (value) => context.read<CreditsCubit>().resetTotal(),
         child: BlocConsumer<SelectTeamBloc, SelectTeamState>(
             listener: (context, upstate) {},
             builder: (context, upstate) {
               return Scaffold(
-                  backgroundColor: Color.fromARGB(255, 14, 13, 13),
+                  backgroundColor: Theme.of(context).colorScheme.primary,
                   appBar: AppBar(
-                    foregroundColor: Colors.white,
-                    backgroundColor: Color.fromARGB(255, 14, 13, 13),
+                    foregroundColor:
+                        darkMode.darkTheme ? Colors.white : Colors.black,
+                    backgroundColor: Theme.of(context).colorScheme.primary,
                     title: const Text(
                       'Scegli i giocatori',
                       style: TextStyle(
@@ -84,9 +90,11 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                                       : null,
                               child: Icon(
                                 Icons.arrow_forward_ios_rounded,
-                                color: size == 5
-                                    ? Colors.white
-                                    : const Color.fromARGB(255, 209, 200, 200),
+                                color: size != 5
+                                    ? const Color.fromARGB(255, 209, 200, 200)
+                                    : darkMode.darkTheme
+                                        ? Colors.white
+                                        : Colors.black,
                               ),
                             ),
                           );
@@ -130,7 +138,7 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                         Expanded(
                             child: switch (upstate) {
                           TryGetPlayersState() =>
-                            const Center(child: CircularProgressIndicator()),
+                            const Center(child: DoubleSpinner()),
                           ResultGetPlayersState() => upstate
                                   .playersList.players!.isEmpty
                               ? const Center(

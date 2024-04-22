@@ -43,6 +43,7 @@ import 'package:pine/utils/mapper.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'blocs.dart';
 part 'mappers.dart';

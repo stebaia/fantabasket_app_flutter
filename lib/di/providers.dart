@@ -29,3 +29,30 @@ final List<SingleChildWidget> _providers = [
         TeamService(context.read<Dio>(), baseUrl: Constants.baseUrl),
   ),
 ];
+
+class DarkThemePreferences {
+  static const THEME_STATUS = "THEMESTATUS";
+
+  setDarkTheme(bool value) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setBool(THEME_STATUS, value);
+  }
+
+  Future<bool> getTheme() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(THEME_STATUS) ?? false;
+  }
+}
+
+class DarkThemeProvider with ChangeNotifier {
+  DarkThemePreferences darkThemePreferences = DarkThemePreferences();
+  bool _darkTheme = false;
+
+  bool get darkTheme => _darkTheme;
+
+  set darkTheme(bool value) {
+    _darkTheme = value;
+    darkThemePreferences.setDarkTheme(value);
+    notifyListeners();
+  }
+}

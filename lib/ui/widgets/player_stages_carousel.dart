@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
 import 'package:fantabasket_app_flutter/model/malus.dart';
 import 'package:page_view_dot_indicator/page_view_dot_indicator.dart';
 import 'package:fantabasket_app_flutter/model/player_detail.dart';
@@ -6,6 +7,7 @@ import 'package:fantabasket_app_flutter/model/player_stage.dart';
 import 'package:fantabasket_app_flutter/model/bonus.dart';
 import 'package:flutter/material.dart';
 import 'package:pair/pair.dart';
+import 'package:provider/provider.dart';
 
 class PlayerStagesCarousel extends StatefulWidget {
   final PlayerDetail playerDetail;
@@ -109,6 +111,8 @@ class _PlayerStagesCarouselState extends State<PlayerStagesCarousel> {
 
   @override
   Widget build(BuildContext context) {
+    final darkMode = Provider.of<DarkThemeProvider>(context);
+
     return Column(
       children: [
         Expanded(
@@ -128,8 +132,8 @@ class _PlayerStagesCarouselState extends State<PlayerStagesCarousel> {
                   return SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: Card(
-                      color: const Color.fromARGB(255, 49, 47, 47),
-                      elevation: 4,
+                      color: Theme.of(context).colorScheme.primary,
+                      elevation: 2,
                       child: Container(
                         width: MediaQuery.of(context).size.width,
                         padding: const EdgeInsets.all(20),
@@ -180,8 +184,10 @@ class _PlayerStagesCarouselState extends State<PlayerStagesCarousel> {
                                               Text(
                                                 stage.stage.fieldName ??
                                                     "Nome non disponiible",
-                                                style: const TextStyle(
-                                                  color: Colors.white,
+                                                style: TextStyle(
+                                                  color: darkMode.darkTheme
+                                                      ? Colors.white
+                                                      : Colors.black,
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 18,
                                                 ),
@@ -193,8 +199,10 @@ class _PlayerStagesCarouselState extends State<PlayerStagesCarousel> {
                                               Text(
                                                 stage.stage.city ??
                                                     "Nome non disponiible",
-                                                style: const TextStyle(
-                                                  color: Colors.white,
+                                                style: TextStyle(
+                                                  color: darkMode.darkTheme
+                                                      ? Colors.white
+                                                      : Colors.black,
                                                 ),
                                                 textAlign: TextAlign.center,
                                                 overflow: TextOverflow.ellipsis,
@@ -206,44 +214,29 @@ class _PlayerStagesCarouselState extends State<PlayerStagesCarousel> {
                                     ),
                                   )
                                 : Card(
-                                    color: Color.fromARGB(255, 35, 33, 33),
+                                    elevation: 4,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
                                     child: ExpansionTile(
-                                      title: const Text(
+                                      title: Text(
                                         "Giornata 0",
-                                        style: TextStyle(color: Colors.white),
+                                        style: TextStyle(
+                                            color: darkMode.darkTheme
+                                                ? Colors.white
+                                                : Colors.black),
                                       ),
-                                      iconColor: Colors.white,
-                                      collapsedIconColor: Colors.white,
+                                      iconColor: darkMode.darkTheme
+                                          ? Colors.white
+                                          : Colors.black,
+                                      collapsedIconColor: darkMode.darkTheme
+                                          ? Colors.white
+                                          : Colors.black,
                                       children: [
                                         _getBonusMalus(true, bonus!.props),
                                         _getBonusMalus(false, malus!.props),
                                       ],
                                     ),
                                   );
-                            /*
-                                : Card(
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          padding: const EdgeInsets.only(
-                                            top: 12,
-                                            bottom: 2,
-                                          ),
-                                          child: const Text(
-                                            "Giornata 0",
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontFamily: 'Nunito Sans',
-                                              fontSize: 16,
-                                            ),
-                                          ),
-                                        ),
-                                        _getBonusMalus(true, bonus!.props),
-                                        _getBonusMalus(false, malus!.props)
-                                      ],
-                                    ),
-                                  );
-                                  */
                           },
                         ),
                       ),

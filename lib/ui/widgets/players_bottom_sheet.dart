@@ -1,12 +1,12 @@
 import 'package:fantabasket_app_flutter/bloc/cubit/credits_cubit/credits_cubit.dart';
 import 'package:fantabasket_app_flutter/bloc/select_player_bloc/select_player_bloc.dart';
+import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/category_button.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/player_bar.dart';
 import 'package:fantabasket_app_flutter/utils/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
 class PlayersBottomSheet extends StatefulWidget {
   final BuildContext mContext;
@@ -57,6 +57,7 @@ class _PlayersBottomSheetState extends State<PlayersBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
+    final darkMode = Provider.of<DarkThemeProvider>(context);
     var height = MediaQuery.of(context).size.height * 0.75;
     var checkedPlayers =
         widget.mContext.read<SelectPlayerBloc>().getCheckedPlayers();
@@ -66,39 +67,51 @@ class _PlayersBottomSheetState extends State<PlayersBottomSheet> {
         List.from(Set.from(_players).difference(Set.from(checkedPlayers)));
     return Container(
       padding: const EdgeInsets.all(8.0),
-      decoration: const BoxDecoration(
-          color: Color.fromARGB(255, 41, 40, 40),
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(30), topRight: Radius.circular(30))),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.primary,
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(30),
+          topRight: Radius.circular(30),
+        ),
+      ),
       height: height,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SizedBox(height: 20),
-          const Text(
+          Text(
             'Seleziona giocatore',
             style: TextStyle(
-                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+              color: darkMode.darkTheme ? Colors.white : Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
           ),
           const SizedBox(height: 20),
-          SearchBar(
+          TextField(
             controller: _controller,
-            shape: const MaterialStatePropertyAll(RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(15)))),
-            backgroundColor: MaterialStateProperty.all(
-              const Color.fromARGB(32, 181, 181, 181),
-            ),
-            textStyle: MaterialStateProperty.all(
-              const TextStyle(
-                color: Colors.white,
+            decoration: InputDecoration(
+              focusColor: Theme.of(context).colorScheme.background,
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Theme.of(context).colorScheme.background,
+                  width: 2.0,
+                ),
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
+              ),
+              border: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+              ),
+              hintText: 'Inserisci nome...',
+              hintStyle: const TextStyle(
+                color: Color.fromARGB(255, 173, 173, 173),
               ),
             ),
-            hintText: "Inserisci giocatore o squadra...",
-            hintStyle: MaterialStateProperty.all(
-              const TextStyle(
-                color: Color.fromARGB(255, 219, 217, 217),
-              ),
+            cursorColor: const Color.fromARGB(255, 173, 173, 173),
+            style: TextStyle(
+              color: darkMode.darkTheme ? Colors.white : Colors.black,
             ),
+            textAlignVertical: TextAlignVertical.center,
             onChanged: (value) => setState(() {
               _players = widget.players
                   .where((player) =>
