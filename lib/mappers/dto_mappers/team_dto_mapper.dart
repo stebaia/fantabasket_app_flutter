@@ -8,18 +8,17 @@ class TeamListMapper extends DTOMapper<TeamListDTO, TeamList> {
   // ignore: prefer_if_null_operators
   TeamList fromDTO(TeamListDTO dto) {
     List<Team> players = [];
-    TeamMapper playerMapper = new TeamMapper();
+    TeamMapper playerMapper = TeamMapper();
     if (dto.data != null) {
-      dto.data!.forEach((element) {
+      for (var element in dto.data!) {
         players.add(playerMapper.fromDTO(element));
-      });
+      }
     }
     return TeamList(count: dto.data?.length ?? 0, teams: players);
   }
 
   @override
   TeamListDTO toDTO(TeamList model) {
-    // TODO: implement toDTO
     throw UnimplementedError();
   }
 }
@@ -27,14 +26,16 @@ class TeamListMapper extends DTOMapper<TeamListDTO, TeamList> {
 class TeamMapper extends DTOMapper<TeamDTO, Team> {
   @override
   Team fromDTO(TeamDTO dto) => Team(
-      id: int.parse(dto.id ?? '0'),
-      nome: dto.nome ?? '',
-      user: dto.user ?? ''
+        id: int.parse(dto.id ?? '0'),
+        nome: dto.nome ?? '',
+        stageStatus: dto.stageStatus ?? false,
+        stageName: dto.stageName ?? '',
+        stageId: dto.stageId ?? '',
+        points: dto.points ?? 0,
       );
 
   @override
   TeamDTO toDTO(Team model) {
-    // TODO: implement toDTO
     throw UnimplementedError();
   }
 }

@@ -14,9 +14,10 @@ class StageListDTO extends DTO with EquatableMixin {
     msg = json['msg'];
     if (json['data'] != null) {
       data = <StageDTO>[];
-      json['data'].forEach((v) {
-        data!.add(new StageDTO.fromJson(v));
-      });
+      var map = json['data'] as Map<String, dynamic>;
+      for (var v in map.entries) {
+        data!.add(StageDTO.fromJson(v));
+      }
     }
     code = json['code'];
   }
@@ -56,14 +57,17 @@ class StageDTO extends DTO with EquatableMixin {
     this.foto,
   });
 
-  StageDTO.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    nome = json['nome'];
-    citta = json['citta'];
-    stato = json['stato'];
-    dataInizio = json['data_inizio'];
-    dataFine = json['data_fine'];
-    foto = json['foto'];
+  StageDTO.fromJson(MapEntry<String, dynamic> v) {
+    var map = v.value as Map<String, dynamic>;
+    var detList = map["dettagli"] as List<dynamic>;
+    var det = detList.first as Map<String, dynamic>;
+    id = (det['id'] as String?) ?? "0";
+    nome = v.key;
+    citta = det['citta'] as String?;
+    stato = det['stato'] as String?;
+    dataInizio = det['data_inizio'] as String?;
+    dataFine = det['data_fine'] as String?;
+    foto = det['foto'] as String?;
   }
 
   Map<String, dynamic> toJson() {
