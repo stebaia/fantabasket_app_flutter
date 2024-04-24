@@ -5,6 +5,7 @@ import 'package:fantabasket_app_flutter/bloc/select_player_bloc/select_player_bl
 import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:fantabasket_app_flutter/model/stage.dart';
+import 'package:fantabasket_app_flutter/model/team.dart';
 import 'package:fantabasket_app_flutter/routes/app_router.gr.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/double_spinner.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/player_icon.dart';
@@ -14,11 +15,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
-  final Stage stage;
+  final int stageId;
+  final Team? team;
 
   const SelectTeamPage({
+    required this.stageId,
+    this.team,
     super.key,
-    required this.stage,
   });
 
   @override
@@ -28,7 +31,7 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
             create: ((context) => SelectTeamBloc(
                 stagesRepository: context.read(),
                 playerRepository: context.read())
-              ..getPlayers(stage.id)),
+              ..getPlayers(stageId)),
           ),
           BlocProvider<CreditsCubit>(
             create: ((context) => CreditsCubit(context: context)),
@@ -85,7 +88,7 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                                               .toSet()
                                               .difference(players.toSet())
                                               .toList(),
-                                          stage: stage,
+                                          stageId: stageId,
                                         ))
                                       : null,
                               child: Icon(

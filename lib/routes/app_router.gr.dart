@@ -16,8 +16,8 @@ import 'package:auto_route/empty_router_widgets.dart' as _i1;
 import 'package:flutter/material.dart' as _i19;
 
 import '../model/player.dart' as _i21;
-import '../model/stage.dart' as _i20;
-import '../model/team.dart' as _i22;
+import '../model/stage.dart' as _i22;
+import '../model/team.dart' as _i20;
 import '../ui/pages/best_players_page.dart' as _i12;
 import '../ui/pages/completion_page.dart' as _i8;
 import '../ui/pages/container_page.dart' as _i17;
@@ -83,8 +83,9 @@ class AppRouter extends _i18.RootStackRouter {
         routeData: routeData,
         child: _i18.WrappedRoute(
             child: _i7.SelectTeamPage(
+          stageId: args.stageId,
+          team: args.team,
           key: args.key,
-          stage: args.stage,
         )),
       );
     },
@@ -97,7 +98,7 @@ class AppRouter extends _i18.RootStackRouter {
           key: args.key,
           team: args.team,
           side: args.side,
-          stage: args.stage,
+          stageId: args.stageId,
         )),
       );
     },
@@ -361,14 +362,16 @@ class LoadStagesRoute extends _i18.PageRouteInfo<void> {
 /// [_i7.SelectTeamPage]
 class SelectTeamRoute extends _i18.PageRouteInfo<SelectTeamRouteArgs> {
   SelectTeamRoute({
+    required int stageId,
+    _i20.Team? team,
     _i19.Key? key,
-    required _i20.Stage stage,
   }) : super(
           SelectTeamRoute.name,
           path: 'select_team_page',
           args: SelectTeamRouteArgs(
+            stageId: stageId,
+            team: team,
             key: key,
-            stage: stage,
           ),
         );
 
@@ -377,17 +380,20 @@ class SelectTeamRoute extends _i18.PageRouteInfo<SelectTeamRouteArgs> {
 
 class SelectTeamRouteArgs {
   const SelectTeamRouteArgs({
+    required this.stageId,
+    this.team,
     this.key,
-    required this.stage,
   });
+
+  final int stageId;
+
+  final _i20.Team? team;
 
   final _i19.Key? key;
 
-  final _i20.Stage stage;
-
   @override
   String toString() {
-    return 'SelectTeamRouteArgs{key: $key, stage: $stage}';
+    return 'SelectTeamRouteArgs{stageId: $stageId, team: $team, key: $key}';
   }
 }
 
@@ -398,7 +404,7 @@ class CompletionRoute extends _i18.PageRouteInfo<CompletionRouteArgs> {
     _i19.Key? key,
     required List<_i21.Player> team,
     required List<_i21.Player> side,
-    required _i20.Stage stage,
+    required int stageId,
   }) : super(
           CompletionRoute.name,
           path: 'completion_page',
@@ -406,7 +412,7 @@ class CompletionRoute extends _i18.PageRouteInfo<CompletionRouteArgs> {
             key: key,
             team: team,
             side: side,
-            stage: stage,
+            stageId: stageId,
           ),
         );
 
@@ -418,7 +424,7 @@ class CompletionRouteArgs {
     this.key,
     required this.team,
     required this.side,
-    required this.stage,
+    required this.stageId,
   });
 
   final _i19.Key? key;
@@ -427,11 +433,11 @@ class CompletionRouteArgs {
 
   final List<_i21.Player> side;
 
-  final _i20.Stage stage;
+  final int stageId;
 
   @override
   String toString() {
-    return 'CompletionRouteArgs{key: $key, team: $team, side: $side, stage: $stage}';
+    return 'CompletionRouteArgs{key: $key, team: $team, side: $side, stageId: $stageId}';
   }
 }
 
@@ -473,7 +479,7 @@ class RankDetailRouteArgs {
 /// [_i10.TeamDetailPage]
 class TeamDetailRoute extends _i18.PageRouteInfo<TeamDetailRouteArgs> {
   TeamDetailRoute({
-    required _i22.Team team,
+    required _i20.Team team,
     _i19.Key? key,
   }) : super(
           TeamDetailRoute.name,
@@ -493,7 +499,7 @@ class TeamDetailRouteArgs {
     this.key,
   });
 
-  final _i22.Team team;
+  final _i20.Team team;
 
   final _i19.Key? key;
 
@@ -541,7 +547,7 @@ class PlayerDetailRouteArgs {
 /// [_i12.BestPlayersPage]
 class BestPlayersRoute extends _i18.PageRouteInfo<BestPlayersRouteArgs> {
   BestPlayersRoute({
-    required _i20.Stage stage,
+    required _i22.Stage stage,
     _i19.Key? key,
   }) : super(
           BestPlayersRoute.name,
@@ -561,7 +567,7 @@ class BestPlayersRouteArgs {
     this.key,
   });
 
-  final _i20.Stage stage;
+  final _i22.Stage stage;
 
   final _i19.Key? key;
 

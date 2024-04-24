@@ -19,13 +19,13 @@ import 'package:provider/provider.dart';
 class CompletionPage extends StatelessWidget with AutoRouteWrapper {
   final List<Player> team;
   final List<Player> side;
-  final Stage stage;
+  final int stageId;
 
   const CompletionPage({
     super.key,
     required this.team,
     required this.side,
-    required this.stage,
+    required this.stageId,
   });
 
   @override
@@ -64,7 +64,7 @@ class CompletionPage extends StatelessWidget with AutoRouteWrapper {
             child: CompletionButton(
               controller: controller,
               team: team,
-              stage: stage,
+              stageId: stageId,
             ),
           )
         ],
