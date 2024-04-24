@@ -12,53 +12,50 @@ class TeamListDTO extends DTO with EquatableMixin {
   TeamListDTO.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     msg = json['msg'];
-    if (json['data'] != null) {
+    if (json['squadre'] != null) {
       data = <TeamDTO>[];
-      json['data'].forEach((v) {
-        data!.add(new TeamDTO.fromJson(v));
-      });
+      var map = json['squadre'] as Map<String, dynamic>;
+      for (var v in map.entries) {
+        data!.add(TeamDTO.fromJson(v));
+      }
     }
     code = json['code'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
-    data['msg'] = this.msg;
-    if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
-    }
-    data['code'] = this.code;
-    return data;
-  }
-  
   @override
-  // TODO: implement props
   List<Object?> get props => [status, msg, data, code];
 }
 
 class TeamDTO extends DTO with EquatableMixin {
   String? id;
-  String? user;
+  bool? stageStatus;
+  String? stageName;
+  String? stageId;
   String? nome;
+  int? points;
 
-  TeamDTO({this.id, this.user, this.nome});
+  TeamDTO({
+    this.id,
+    this.stageStatus,
+    this.stageName,
+    this.stageId,
+    this.nome,
+    this.points,
+  });
 
-  TeamDTO.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    user = json['user'];
-    nome = json['nome'];
+  TeamDTO.fromJson(MapEntry<String, dynamic> v) {
+    nome = v.key;
+    var map = v.value as Map<String, dynamic>;
+    id = map["idSquadra"] as String?;
+    var stage = map.entries.firstWhere((entry) => entry.key != "idSquadra");
+    stageName = stage.key;
+    var stageMap = stage.value as Map<String, dynamic>;
+    stageStatus = stageMap['stato'] as bool?;
+    stageId = stageMap["idTappa"] as String?;
+    points = stageMap["punti"] as int?;
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['user'] = this.user;
-    data['nome'] = this.nome;
-    return data;
-  }
-  
   @override
-  // TODO: implement props
-  List<Object?> get props => [id, user, nome];
+  List<Object?> get props =>
+      [id, stageStatus, stageName, stageId, nome, points];
 }

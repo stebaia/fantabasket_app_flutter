@@ -32,7 +32,7 @@ class _TeamService implements TeamService {
     )
             .compose(
               _dio.options,
-              'api/viewTeams',
+              'api/viewMyFantaTeams',
               queryParameters: queryParameters,
               data: _data,
             )

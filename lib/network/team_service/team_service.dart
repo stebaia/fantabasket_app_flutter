@@ -18,7 +18,7 @@ part 'team_service.g.dart';
 abstract class TeamService {
   factory TeamService(Dio dio, {String baseUrl}) = _TeamService;
 
-  @GET('api/viewTeams')
+  @GET('api/viewMyFantaTeams')
   Future<HttpResponse<TeamListDTO>> getTeams();
 
   @POST('api/addPlayerTeam')
