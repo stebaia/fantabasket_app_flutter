@@ -5,26 +5,41 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class RankPage extends StatelessWidget {
+class RankPage extends StatefulWidget {
+  static const Map<String, int> mockList = {
+    "Bologna": 1,
+    "Forli": 5,
+    "Cesena": 2,
+    "Rimini": 4,
+    "Padova": 3,
+    "Reggio Emilia": 8,
+    "Firenze": 1,
+    "Novara": 2,
+    "Torino": 7,
+    "Brescia": 5,
+  };
   const RankPage({super.key});
+
+  @override
+  State<RankPage> createState() => _RankPageState();
+}
+
+class _RankPageState extends State<RankPage> {
+  late Map<String, int> _list;
+
+  @override
+  void initState() {
+    super.initState();
+    _list = {};
+    for (var el in RankPage.mockList.entries) {
+      _list[el.key] = el.value;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final darkMode = Provider.of<DarkThemeProvider>(context);
 
-    var size = MediaQuery.of(context).size;
-    final mockList = {
-      "Bologna": 1,
-      "Forli": 5,
-      "Cesena": 2,
-      "Rimini": 4,
-      "Padova": 3,
-      "Reggio Emilia": 8,
-      "Firenze": 1,
-      "Novara": 2,
-      "Torino": 7,
-      "Brescia": 5,
-    };
     return Container(
       color: Theme.of(context).colorScheme.primary,
       child: Column(
@@ -72,6 +87,16 @@ class RankPage extends StatelessWidget {
               style: TextStyle(
                   color: darkMode.darkTheme ? Colors.white : Colors.black),
               textAlignVertical: TextAlignVertical.center,
+              onChanged: (value) {
+                setState(() {
+                  _list = {};
+                  for (var el in RankPage.mockList.entries) {
+                    _list[el.key] = el.value;
+                  }
+                  _list.removeWhere((k, v) =>
+                      !(k.toLowerCase()).contains(value.toLowerCase()));
+                });
+              },
             ),
           ),
           const SizedBox(height: 15),
@@ -79,7 +104,7 @@ class RankPage extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  ...mockList.entries.map(
+                  ..._list.entries.map(
                     (entry) => Padding(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 8.0,
