@@ -231,16 +231,16 @@ class Constants {
   static TeamDetail detailTeamMock = TeamDetail(
     totalPoints: 886,
     days: [
-      MatchDay(dayNumber: 1, points: 110, players: mockPlayers),
-      MatchDay(dayNumber: 2, points: 70, players: mockPlayers),
-      MatchDay(dayNumber: 3, points: 78, players: mockPlayers),
-      MatchDay(dayNumber: 4, points: 90, players: mockPlayers),
-      MatchDay(dayNumber: 5, points: 87, players: mockPlayers),
-      MatchDay(dayNumber: 6, points: 68, players: mockPlayers),
-      MatchDay(dayNumber: 7, points: 99, players: mockPlayers),
-      MatchDay(dayNumber: 8, points: 102, players: mockPlayers),
-      MatchDay(dayNumber: 9, points: 94, players: mockPlayers),
-      MatchDay(dayNumber: 10, points: 88, players: mockPlayers),
+      MatchDay(day: 1, points: 110, players: mockPlayers),
+      MatchDay(day: 2, points: 70, players: mockPlayers),
+      MatchDay(day: 3, points: 78, players: mockPlayers),
+      MatchDay(day: 4, points: 90, players: mockPlayers),
+      MatchDay(day: 5, points: 87, players: mockPlayers),
+      MatchDay(day: 6, points: 68, players: mockPlayers),
+      MatchDay(day: 7, points: 99, players: mockPlayers),
+      MatchDay(day: 8, points: 102, players: mockPlayers),
+      MatchDay(day: 9, points: 94, players: mockPlayers),
+      MatchDay(day: 10, points: 88, players: mockPlayers),
     ],
   );
 
