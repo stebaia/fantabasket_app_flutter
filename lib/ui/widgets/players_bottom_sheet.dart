@@ -62,7 +62,9 @@ class _PlayersBottomSheetState extends State<PlayersBottomSheet> {
     var checkedPlayers =
         widget.mContext.read<SelectPlayerBloc>().getCheckedPlayers();
     int total = widget.mContext.read<CreditsCubit>().getTotal();
-    int currentValue = widget.selected == null ? 0 : widget.selected!.value;
+    int currentValue = widget.selected == null
+        ? 0
+        : Constants.categoryValues[widget.selected!.category]!;
     final List<Player> list =
         List.from(Set.from(_players).difference(Set.from(checkedPlayers)));
     return Container(
@@ -152,11 +154,15 @@ class _PlayersBottomSheetState extends State<PlayersBottomSheet> {
                   ),
                   ...list.map(
                     (player) {
-                      var enabled = total - currentValue + player.value <= 65;
+                      var enabled = total -
+                              currentValue +
+                              Constants.categoryValues[player.category]! <=
+                          65;
                       return GestureDetector(
                         onTap: enabled
                             ? () {
-                                int value = player.value;
+                                int value =
+                                    Constants.categoryValues[player.category]!;
                                 List<Player> checkedPlayers = widget.mContext
                                     .read<SelectPlayerBloc>()
                                     .checkedPlayers;
@@ -166,7 +172,8 @@ class _PlayersBottomSheetState extends State<PlayersBottomSheet> {
                                       .read<CreditsCubit>()
                                       .decrement(widget.selected == null
                                           ? 0
-                                          : widget.selected!.value);
+                                          : Constants.categoryValues[
+                                              widget.selected!.category]!);
                                   widget.mContext
                                       .read<CreditsCubit>()
                                       .increment(value);

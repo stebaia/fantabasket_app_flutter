@@ -8,6 +8,8 @@ class Stage extends Equatable {
   final String? openingDate;
   final String? closingDate;
   final String? photo;
+  final String? fantateams;
+  final int? position;
 
   const Stage({
     required this.id,
@@ -17,6 +19,8 @@ class Stage extends Equatable {
     this.openingDate,
     this.closingDate,
     this.photo,
+    this.fantateams,
+    this.position,
   });
 
   @override
@@ -28,5 +32,7 @@ class Stage extends Equatable {
         openingDate,
         closingDate,
         photo,
+        fantateams,
+        position,
       ];
 }

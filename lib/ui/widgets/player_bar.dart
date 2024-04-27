@@ -121,7 +121,7 @@ class PlayerBar extends StatelessWidget {
               ),
               child: Center(
                   child: Text(
-                player.value.toString(),
+                Constants.categoryValues[player.category].toString(),
                 style: const TextStyle(
                     color: Colors.white,
                     fontSize: 20,

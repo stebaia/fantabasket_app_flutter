@@ -110,7 +110,8 @@ class _PlayerIconState extends State<PlayerIcon> {
                                       fontWeight: FontWeight.bold),
                                 ),
                                 Text(
-                                  selected!.value.toString(),
+                                  Constants.categoryValues[selected!.category]
+                                      .toString(),
                                   style: const TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold),

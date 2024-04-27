@@ -17,6 +17,6 @@ abstract class PlayerService {
   @GET('api/viewPlayers')
   Future<HttpResponse<PlayerDTO>> getPlayers();
 
-  @GET('api/viewPlayersStage')
+  @GET('api/viewPlayers')
   Future<HttpResponse<PlayerDTO>> getPlayersStage(@Query("stage") int stage);
 }
