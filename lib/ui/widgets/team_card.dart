@@ -19,7 +19,10 @@ class TeamCard extends StatelessWidget {
 
     return GestureDetector(
       onTap: () => team.stageStatus!
-          ? context.router.push(TeamDetailRoute(team: team))
+          ? context.router.push(TeamDetailRoute(
+              teamId: team.id,
+              teamName: team.nome!,
+            ))
           : context.router.push(
               SelectTeamRoute(
                 stageId: int.parse(team.stageId!),

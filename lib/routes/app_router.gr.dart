@@ -119,7 +119,8 @@ class AppRouter extends _i18.RootStackRouter {
         routeData: routeData,
         child: _i18.WrappedRoute(
             child: _i10.TeamDetailPage(
-          team: args.team,
+          teamId: args.teamId,
+          teamName: args.teamName,
           key: args.key,
         )),
       );
@@ -479,13 +480,15 @@ class RankDetailRouteArgs {
 /// [_i10.TeamDetailPage]
 class TeamDetailRoute extends _i18.PageRouteInfo<TeamDetailRouteArgs> {
   TeamDetailRoute({
-    required _i20.Team team,
+    required int teamId,
+    required String teamName,
     _i19.Key? key,
   }) : super(
           TeamDetailRoute.name,
           path: 'team_detail_page',
           args: TeamDetailRouteArgs(
-            team: team,
+            teamId: teamId,
+            teamName: teamName,
             key: key,
           ),
         );
@@ -495,17 +498,20 @@ class TeamDetailRoute extends _i18.PageRouteInfo<TeamDetailRouteArgs> {
 
 class TeamDetailRouteArgs {
   const TeamDetailRouteArgs({
-    required this.team,
+    required this.teamId,
+    required this.teamName,
     this.key,
   });
 
-  final _i20.Team team;
+  final int teamId;
+
+  final String teamName;
 
   final _i19.Key? key;
 
   @override
   String toString() {
-    return 'TeamDetailRouteArgs{team: $team, key: $key}';
+    return 'TeamDetailRouteArgs{teamId: $teamId, teamName: $teamName, key: $key}';
   }
 }
 

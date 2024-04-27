@@ -11,10 +11,12 @@ import 'package:fantabasket_app_flutter/model/team.dart';
 import 'package:provider/provider.dart';
 
 class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
-  final Team team;
+  final int teamId;
+  final String teamName;
 
   const TeamDetailPage({
-    required this.team,
+    required this.teamId,
+    required this.teamName,
     super.key,
   });
 
@@ -147,7 +149,7 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
               padding:
                   const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
               child: Text(
-                team.nome ?? "Nome non disponibile",
+                teamName,
                 style: TextStyle(
                   fontFamily: 'Poppins',
                   fontWeight: FontWeight.bold,
