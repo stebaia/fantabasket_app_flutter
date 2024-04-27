@@ -67,10 +67,7 @@ class RankDetailPage extends StatelessWidget with AutoRouteWrapper {
                     itemCount: state.players.count,
                     itemBuilder: (context, index) {
                       return Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 8.0,
-                          vertical: 4.0,
-                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: RankDetailCard(
                           player: state.players.teams![index],
                           position: index + 1,
