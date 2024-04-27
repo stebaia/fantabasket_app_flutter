@@ -28,13 +28,15 @@ class StageMapper extends DTOMapper<StageDTO, Stage> {
   @override
   Stage fromDTO(StageDTO dto) {
     return Stage(
-      id: int.parse(dto.id!),
+      id: dto.id ?? 0,
       fieldName: dto.nome ?? '',
       city: dto.citta ?? '',
       status: dto.stato ?? '',
       openingDate: dto.dataInizio ?? '',
       closingDate: dto.dataFine ?? '',
       photo: dto.foto ?? '',
+      fantateams: dto.fantateams ?? '',
+      position: dto.position ?? 0,
     );
   }
 

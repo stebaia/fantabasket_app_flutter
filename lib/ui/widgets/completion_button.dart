@@ -12,13 +12,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class CompletionButton extends StatefulWidget {
   final TextEditingController controller;
   final List<Player> team;
-  final Stage stage;
+  final int stageId;
 
   const CompletionButton({
     super.key,
     required this.controller,
     required this.team,
-    required this.stage,
+    required this.stageId,
   });
 
   @override
@@ -65,7 +65,7 @@ class _CompletionButtonState extends State<CompletionButton> {
                             name: name,
                             player: players,
                             cpt: captain.captain!.id,
-                            stage: widget.stage.id,
+                            stage: widget.stageId,
                             ris: sixth.sixthMan!.id,
                           );
                     }

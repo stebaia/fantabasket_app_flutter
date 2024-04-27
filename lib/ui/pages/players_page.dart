@@ -77,12 +77,12 @@ class PlayersPage extends StatelessWidget with AutoRouteWrapper {
                 color: darkMode.darkTheme ? Colors.white : Colors.black,
               ),
               textAlignVertical: TextAlignVertical.center,
+              onChanged: (value) {},
             ),
           ),
           const SizedBox(height: 15),
           Expanded(
-            child: BlocConsumer<CreateTeamBloc, CreateTeamState>(
-              listener: (context, state) {},
+            child: BlocBuilder<CreateTeamBloc, CreateTeamState>(
               builder: (context, state) {
                 if (state is ErrorGetStagesState) {
                   return const Center(

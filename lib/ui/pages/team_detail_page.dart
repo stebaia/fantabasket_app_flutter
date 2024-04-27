@@ -36,7 +36,7 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
     bool darkMode,
   ) {
     var entry = td.days
-        .where((day) => day.dayNumber == currentDay)
+        .where((day) => day.day == currentDay)
         .first
         .players
         .entries
@@ -191,7 +191,7 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
                       ...td.days.map((matchDay) => GestureDetector(
                             onTap: () => context
                                 .read<TeamDetailBloc>()
-                                .updateDay(matchDay.dayNumber),
+                                .updateDay(matchDay.day),
                             child: SizedBox(
                               height: 70,
                               width: 70,
@@ -199,7 +199,7 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
                                 color: Colors.transparent,
                                 shape: RoundedRectangleBorder(
                                     side: BorderSide(
-                                      color: matchDay.dayNumber ==
+                                      color: matchDay.day ==
                                               context
                                                   .read<TeamDetailBloc>()
                                                   .getCurrentDay()
@@ -215,7 +215,7 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      "G${matchDay.dayNumber}",
+                                      "G${matchDay.day}",
                                       style:
                                           const TextStyle(color: Colors.white),
                                     ),

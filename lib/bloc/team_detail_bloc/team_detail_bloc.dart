@@ -42,7 +42,7 @@ class TeamDetailBloc extends Bloc<TeamDetailEvent, TeamDetailState> {
   ) async {
     emit(const TryTeamDetailState());
     team = Constants.detailTeamMock;
-    currentDay = team.days.last.dayNumber;
+    currentDay = team.days.last.day;
     Future.delayed(
         const Duration(seconds: 1), () => emit(ResultTeamDetailState(team)));
     /*

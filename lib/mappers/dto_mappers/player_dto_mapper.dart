@@ -7,10 +7,9 @@ import 'package:pine/pine.dart';
 
 class PlayerListMapper extends DTOMapper<PlayerDTO, PlayersList> {
   @override
-  // ignore: prefer_if_null_operators
   PlayersList fromDTO(PlayerDTO dto) {
     List<Player> players = [];
-    PlayerMapper playerMapper = new PlayerMapper();
+    PlayerMapper playerMapper = PlayerMapper();
     if (dto.data != null) {
       dto.data!.forEach((element) {
         players.add(playerMapper.fromDTO(element));

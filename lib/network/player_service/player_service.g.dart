@@ -60,7 +60,7 @@ class _PlayerService implements PlayerService {
     )
             .compose(
               _dio.options,
-              'api/viewPlayersStage',
+              'api/viewPlayers',
               queryParameters: queryParameters,
               data: _data,
             )

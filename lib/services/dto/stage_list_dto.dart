@@ -14,9 +14,9 @@ class StageListDTO extends DTO with EquatableMixin {
     msg = json['msg'];
     if (json['data'] != null) {
       data = <StageDTO>[];
-      var map = json['data'] as Map<String, dynamic>;
-      for (var v in map.entries) {
-        data!.add(StageDTO.fromJson(v));
+      var list = json['data'] as List<dynamic>;
+      for (var v in list) {
+        data!.add(StageDTO.fromJson(v as Map<String, dynamic>));
       }
     }
     code = json['code'];
@@ -39,13 +39,15 @@ class StageListDTO extends DTO with EquatableMixin {
 }
 
 class StageDTO extends DTO with EquatableMixin {
-  String? id;
+  int? id;
   String? nome;
   String? citta;
   String? stato;
   String? dataInizio;
   String? dataFine;
   String? foto;
+  String? fantateams;
+  int? position;
 
   StageDTO({
     this.id,
@@ -55,19 +57,20 @@ class StageDTO extends DTO with EquatableMixin {
     this.dataInizio,
     this.dataFine,
     this.foto,
+    this.fantateams,
+    this.position,
   });
 
-  StageDTO.fromJson(MapEntry<String, dynamic> v) {
-    var map = v.value as Map<String, dynamic>;
-    var detList = map["dettagli"] as List<dynamic>;
-    var det = detList.first as Map<String, dynamic>;
-    id = (det['id'] as String?) ?? "0";
-    nome = v.key;
-    citta = det['citta'] as String?;
-    stato = det['stato'] as String?;
-    dataInizio = det['data_inizio'] as String?;
-    dataFine = det['data_fine'] as String?;
-    foto = det['foto'] as String?;
+  StageDTO.fromJson(Map<String, dynamic> map) {
+    id = map["id"] as int;
+    nome = map["nome"] as String?;
+    citta = map["citta"] as String?;
+    stato = map['stato'] as String?;
+    dataInizio = map['data_inizio'] as String?;
+    dataFine = map['data_fine'] as String?;
+    foto = map['foto'] as String?;
+    fantateams = map["fantateams"] as String?;
+    position = map["position"] as int?;
   }
 
   Map<String, dynamic> toJson() {
@@ -79,6 +82,8 @@ class StageDTO extends DTO with EquatableMixin {
     data['data_inizio'] = dataInizio;
     data['data_fine'] = dataFine;
     data['foto'] = foto;
+    data['posizione'] = position;
+    data['fantateams'] = fantateams;
     return data;
   }
 

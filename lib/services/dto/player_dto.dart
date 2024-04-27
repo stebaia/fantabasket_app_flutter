@@ -9,10 +9,10 @@ class PlayerDTO extends DTO with EquatableMixin {
   PlayerDTO({this.data, this.code, this.status});
 
   PlayerDTO.fromJson(Map<String, dynamic> json) {
-    if (json['players'] != null) {
+    if (json['giocatori'] != null) {
       data = <PlayerDetailDTO>[];
-      json['players'].forEach((v) {
-        data!.add(new PlayerDetailDTO.fromJson(v));
+      (json['giocatori'] as List<dynamic>).forEach((v) {
+        data!.add(PlayerDetailDTO.fromJson(v));
       });
     }
     code = json['code'];
@@ -22,7 +22,7 @@ class PlayerDTO extends DTO with EquatableMixin {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     if (this.data != null) {
-      data['players'] = this.data!.map((v) => v.toJson()).toList();
+      data['giocatori'] = this.data!.map((v) => v.toJson()).toList();
     }
     data['code'] = code;
     data['message'] = status;
@@ -57,15 +57,15 @@ class PlayerDetailDTO extends DTO with EquatableMixin {
 
   factory PlayerDetailDTO.fromJson(Map<String, dynamic> json) {
     return PlayerDetailDTO(
-      id: json['id'],
-      firstName: json['nome'],
-      lastName: json['cognome'],
-      email: json['email'],
-      phone: json['cellulare'],
-      photo: json['foto'],
-      category: json['categoria'],
-      team: json['squadra'],
-      value: json['punteggio'] == null ? 0 : int.parse(json['punteggio']),
+      id: json['id'] as String?,
+      firstName: json['nome'] as String?,
+      lastName: json['cognome'] as String?,
+      email: json['email'] as String?,
+      phone: json['cellulare'] as String?,
+      photo: json['foto'] as String?,
+      category: json['categoria'] as String?,
+      team: json['squadra'] as String?,
+      value: json['punteggio'] == null ? 0 : json['punteggio'] as int,
     );
   }
 

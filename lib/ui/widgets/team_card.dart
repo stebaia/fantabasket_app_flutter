@@ -18,7 +18,14 @@ class TeamCard extends StatelessWidget {
     final darkMode = Provider.of<DarkThemeProvider>(context);
 
     return GestureDetector(
-      onTap: () => context.router.push(TeamDetailRoute(team: team)),
+      onTap: () => team.stageStatus!
+          ? context.router.push(TeamDetailRoute(team: team))
+          : context.router.push(
+              SelectTeamRoute(
+                stageId: int.parse(team.stageId!),
+                team: team,
+              ),
+            ),
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
         child: Card(
