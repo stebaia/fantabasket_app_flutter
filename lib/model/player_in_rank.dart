@@ -1,20 +1,18 @@
 import 'package:equatable/equatable.dart';
 
 class PlayerInRank extends Equatable {
-  final String firstName;
-  final String lastName;
-  final String teamName;
-  final int points;
-  final int position;
+  final int id;
+  final String? teamName;
+  final int? points;
+  final bool? owner;
 
   const PlayerInRank({
-    required this.firstName,
-    required this.lastName,
+    required this.id,
     required this.teamName,
     required this.points,
-    required this.position,
+    required this.owner,
   });
 
   @override
-  List<Object?> get props => [firstName, lastName, teamName, points, position];
+  List<Object?> get props => [id, teamName, points, owner];
 }

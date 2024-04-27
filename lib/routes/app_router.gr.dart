@@ -108,7 +108,7 @@ class AppRouter extends _i18.RootStackRouter {
         routeData: routeData,
         child: _i18.WrappedRoute(
             child: _i9.RankDetailPage(
-          stageName: args.stageName,
+          stage: args.stage,
           key: args.key,
         )),
       );
@@ -161,7 +161,7 @@ class AppRouter extends _i18.RootStackRouter {
     RankRoute.name: (routeData) {
       return _i18.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i14.RankPage(),
+        child: _i18.WrappedRoute(child: const _i14.RankPage()),
       );
     },
     PlayersRoute.name: (routeData) {
@@ -445,13 +445,13 @@ class CompletionRouteArgs {
 /// [_i9.RankDetailPage]
 class RankDetailRoute extends _i18.PageRouteInfo<RankDetailRouteArgs> {
   RankDetailRoute({
-    required String stageName,
+    required _i22.Stage stage,
     _i19.Key? key,
   }) : super(
           RankDetailRoute.name,
           path: 'rank_detail_page',
           args: RankDetailRouteArgs(
-            stageName: stageName,
+            stage: stage,
             key: key,
           ),
         );
@@ -461,17 +461,17 @@ class RankDetailRoute extends _i18.PageRouteInfo<RankDetailRouteArgs> {
 
 class RankDetailRouteArgs {
   const RankDetailRouteArgs({
-    required this.stageName,
+    required this.stage,
     this.key,
   });
 
-  final String stageName;
+  final _i22.Stage stage;
 
   final _i19.Key? key;
 
   @override
   String toString() {
-    return 'RankDetailRouteArgs{stageName: $stageName, key: $key}';
+    return 'RankDetailRouteArgs{stage: $stage, key: $key}';
   }
 }
 

@@ -42,15 +42,9 @@ class RankPage extends StatefulWidget with AutoRouteWrapper {
 }
 
 class _RankPageState extends State<RankPage> {
-  late Map<String, int> _list;
-
   @override
   void initState() {
     super.initState();
-    _list = {};
-    for (var el in RankPage.mockList.entries) {
-      _list[el.key] = el.value;
-    }
   }
 
   @override
@@ -104,16 +98,7 @@ class _RankPageState extends State<RankPage> {
               style: TextStyle(
                   color: darkMode.darkTheme ? Colors.white : Colors.black),
               textAlignVertical: TextAlignVertical.center,
-              onChanged: (value) {
-                setState(() {
-                  _list = {};
-                  for (var el in RankPage.mockList.entries) {
-                    _list[el.key] = el.value;
-                  }
-                  _list.removeWhere((k, v) =>
-                      !(k.toLowerCase()).contains(value.toLowerCase()));
-                });
-              },
+              onChanged: (value) {},
             ),
           ),
           Expanded(

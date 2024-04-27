@@ -18,8 +18,7 @@ class RankingCard extends StatelessWidget {
     final darkMode = Provider.of<DarkThemeProvider>(context);
 
     return GestureDetector(
-      onTap: () => context.router
-          .push(RankDetailRoute(stageName: stage.fieldName ?? "")),
+      onTap: () => context.router.push(RankDetailRoute(stage: stage)),
       child: Card(
         margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         color: Theme.of(context).colorScheme.primary,

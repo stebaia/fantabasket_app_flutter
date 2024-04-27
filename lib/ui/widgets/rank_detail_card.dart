@@ -5,8 +5,13 @@ import 'package:provider/provider.dart';
 
 class RankDetailCard extends StatelessWidget {
   final PlayerInRank player;
+  final int position;
+  final bool owner;
+
   const RankDetailCard({
     required this.player,
+    required this.position,
+    required this.owner,
     super.key,
   });
 
@@ -30,25 +35,31 @@ class RankDetailCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      player.teamName,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Nunito Sans',
-                          fontSize: 18,
-                          color:
-                              darkMode.darkTheme ? Colors.white : Colors.black),
+                    Container(
+                      color: owner
+                          ? const Color.fromARGB(109, 244, 67, 54)
+                          : Colors.transparent,
+                      child: Text(
+                        player.teamName ?? "Nome non disponibile",
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Nunito Sans',
+                            fontSize: 18,
+                            color: darkMode.darkTheme
+                                ? Colors.white
+                                : Colors.black),
+                      ),
                     ),
                     const SizedBox(height: 5),
                     Text(
-                      "${player.lastName} ${player.firstName}",
+                      "Proprietario non disponibile",
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                          fontSize: 14,
-                          fontFamily: 'Nunito Sans',
-                          color:
-                              darkMode.darkTheme ? Colors.white : Colors.black),
+                        fontSize: 14,
+                        fontFamily: 'Nunito Sans',
+                        color: darkMode.darkTheme ? Colors.white : Colors.black,
+                      ),
                     ),
                   ],
                 ),
@@ -59,7 +70,7 @@ class RankDetailCard extends StatelessWidget {
               flex: 15,
               child: Container(
                 decoration: BoxDecoration(
-                  color: switch (player.position) {
+                  color: switch (position) {
                     1 => const Color.fromARGB(255, 255, 215, 0),
                     2 => const Color.fromARGB(255, 192, 192, 192),
                     3 => const Color.fromARGB(255, 176, 141, 87),
@@ -70,7 +81,7 @@ class RankDetailCard extends StatelessWidget {
                   shape: BoxShape.circle,
                 ),
                 alignment: Alignment.center,
-                child: Text("${player.position}°"),
+                child: Text("$position°"),
               ),
             ),
             Expanded(
