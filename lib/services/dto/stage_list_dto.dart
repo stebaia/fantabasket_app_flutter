@@ -70,7 +70,7 @@ class StageDTO extends DTO with EquatableMixin {
     dataFine = map['data_fine'] as String?;
     foto = map['foto'] as String?;
     fantateams = map["fantateams"] as String?;
-    position = map["position"] as int?;
+    position = map["posizione"] as int?;
   }
 
   Map<String, dynamic> toJson() {
