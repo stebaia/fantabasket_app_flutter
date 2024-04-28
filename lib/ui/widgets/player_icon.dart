@@ -89,7 +89,7 @@ class _PlayerIconState extends State<PlayerIcon> {
                             width: MediaQuery.of(context).size.width,
                             height: MediaQuery.of(context).size.height * 0.1,
                             decoration: BoxDecoration(
-                                color: ColorUtils.getColor(selected!),
+                                color: ColorUtils.getColor(selected!.category),
                                 borderRadius: const BorderRadius.only(
                                     bottomLeft: Radius.circular(10),
                                     bottomRight: Radius.circular(10))),

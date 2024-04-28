@@ -14,15 +14,17 @@ part 'team_detail_state.dart';
 class TeamDetailBloc extends Bloc<TeamDetailEvent, TeamDetailState> {
   late TeamDetail team;
   late int currentDay = 0;
+  final TeamRepository teamRepository;
 
-  TeamDetailBloc() : super(const InitTeamDetailState()) {
+  TeamDetailBloc({required this.teamRepository})
+      : super(const InitTeamDetailState()) {
     on<TeamDetailEvent>(_getTeamDetail);
     on<UpdateDayEvent>(_updateDay);
   }
 
   void updateDay(int dayNumber) => add(UpdateDayEvent(dayNumber));
 
-  void getTeamDetail() => add(const GetTeamDetailEvent());
+  void getTeamDetail(int teamId) => add(GetTeamDetailEvent(teamId: teamId));
 
   int getCurrentDay() => currentDay;
 
@@ -41,32 +43,19 @@ class TeamDetailBloc extends Bloc<TeamDetailEvent, TeamDetailState> {
     Emitter<TeamDetailState> emitter,
   ) async {
     emit(const TryTeamDetailState());
-    team = Constants.detailTeamMock;
-    currentDay = team.days.last.day;
-    Future.delayed(
-        const Duration(seconds: 1), () => emit(ResultTeamDetailState(team)));
-    /*
     try {
-      var result = await teamRepository.createTeam(
-        name: event.name,
-        player: event.player,
-        cpt: event.cpt,
-      );
-      if (result.data.code == 1) {
-        var finalResult = await teamRepository.addTeamToStage(
-          teamId: result.data.team!,
-          stageId: event.stage,
-        );
-        print("pre emit");
-        emit(const ResultCreateState());
+      var e = event as GetTeamDetailEvent;
+      var result = await teamRepository.getTeamDetail(e.teamId);
+      if (result.response.statusCode == 200) {
+        emit(ResultTeamDetailState(result.data));
       } else {
-        emit(ErrorCreateState(result.data.message!));
+        emit(const ErrorTeamDetailState(
+            'Errore nello scaricamento della squadra'));
       }
-      emit(const InitCreateState());
+      //emit(const InitTeamDetailState());
     } catch (e) {
-      emit(const ErrorCreateState("Errore nella creazione della squadra"));
-      emit(const InitCreateState());
+      emit(const ErrorTeamDetailState("Errore nella creazione della squadra"));
+      //emit(const InitTeamDetailState());
     }
-    */
   }
 }
