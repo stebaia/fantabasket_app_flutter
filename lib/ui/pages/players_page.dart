@@ -80,7 +80,6 @@ class PlayersPage extends StatelessWidget with AutoRouteWrapper {
               onChanged: (value) {},
             ),
           ),
-          const SizedBox(height: 15),
           Expanded(
             child: BlocBuilder<CreateTeamBloc, CreateTeamState>(
               builder: (context, state) {

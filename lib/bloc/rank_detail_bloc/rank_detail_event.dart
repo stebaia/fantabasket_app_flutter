@@ -8,7 +8,8 @@ abstract class RankDetailEvent extends Equatable {
 }
 
 class GetRankingEvent extends RankDetailEvent {
-  const GetRankingEvent();
+  final int stageId;
+  const GetRankingEvent(this.stageId);
 
   @override
   List<Object> get props => [];

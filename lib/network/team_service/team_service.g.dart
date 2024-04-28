@@ -47,6 +47,34 @@ class _TeamService implements TeamService {
   }
 
   @override
+  Future<HttpResponse<RankTeamsDTO>> getTeamsRanked(int stage) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'stage': stage};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HttpResponse<RankTeamsDTO>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'api/viewFantaTeams',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = RankTeamsDTO.fromJson(_result.data!);
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
+  }
+
+  @override
   Future<HttpResponse<ApiEmptyResponseDTO>> addPlayerToTeam(
       AddPlayerToTeamRequest addPlayerToTeamRequest) async {
     const _extra = <String, dynamic>{};

@@ -1,11 +1,28 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:fantabasket_app_flutter/bloc/create_team_bloc/create_team_bloc.dart';
 import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
+import 'package:fantabasket_app_flutter/model/stage.dart';
+import 'package:fantabasket_app_flutter/ui/widgets/double_spinner.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/rank_card.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/sponsors_banner.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
-class RankPage extends StatefulWidget {
+class RankPage extends StatefulWidget with AutoRouteWrapper {
+  @override
+  Widget wrappedRoute(BuildContext context) => MultiBlocProvider(
+        providers: [
+          BlocProvider<CreateTeamBloc>(
+            create: ((context) =>
+                CreateTeamBloc(stagesRepository: context.read())..getStages()),
+          )
+        ],
+        child: this,
+      );
+
   static const Map<String, int> mockList = {
     "Bologna": 1,
     "Forli": 5,
@@ -25,15 +42,9 @@ class RankPage extends StatefulWidget {
 }
 
 class _RankPageState extends State<RankPage> {
-  late Map<String, int> _list;
-
   @override
   void initState() {
     super.initState();
-    _list = {};
-    for (var el in RankPage.mockList.entries) {
-      _list[el.key] = el.value;
-    }
   }
 
   @override
@@ -87,35 +98,76 @@ class _RankPageState extends State<RankPage> {
               style: TextStyle(
                   color: darkMode.darkTheme ? Colors.white : Colors.black),
               textAlignVertical: TextAlignVertical.center,
-              onChanged: (value) {
-                setState(() {
-                  _list = {};
-                  for (var el in RankPage.mockList.entries) {
-                    _list[el.key] = el.value;
-                  }
-                  _list.removeWhere((k, v) =>
-                      !(k.toLowerCase()).contains(value.toLowerCase()));
-                });
-              },
+              onChanged: (value) {},
             ),
           ),
-          const SizedBox(height: 15),
           Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  ..._list.entries.map(
-                    (entry) => Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8.0,
-                        vertical: 4.0,
+            child: BlocBuilder<CreateTeamBloc, CreateTeamState>(
+              builder: (context, state) {
+                if (state is ErrorGetStagesState) {
+                  return const Center(
+                    child: Text("Errore nel caricamento delle tappe"),
+                  );
+                } else if (state is EmptyGetStagesState) {
+                  return const Column(
+                    children: [
+                      SponsorsBanner(),
+                      Center(
+                        child: Text("Nessuna tappa presente"),
                       ),
-                      child: RankingCard(entry: entry),
+                    ],
+                  );
+                } else {
+                  return Skeletonizer(
+                    enabled: state is TryGetStagesState,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  switch (state) {
+                                    TryGetStagesState() => const Center(
+                                        child: DoubleSpinner(),
+                                      ),
+                                    ResultGetStagesState(
+                                      stagesList: var stages
+                                    ) =>
+                                      ListView.builder(
+                                        shrinkWrap: true,
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
+                                        itemCount: stages.count,
+                                        itemBuilder: (context, index) =>
+                                            RankingCard(
+                                                stage: stages.stages![index]),
+                                      ),
+                                    _ => ListView.builder(
+                                        shrinkWrap: true,
+                                        itemCount: 4,
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
+                                        itemBuilder: (context, index) {
+                                          return const RankingCard(
+                                            stage: Stage(id: 0),
+                                          );
+                                        },
+                                      ),
+                                  }
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                  const SizedBox(height: 10),
-                ],
-              ),
+                  );
+                }
+              },
             ),
           ),
         ],

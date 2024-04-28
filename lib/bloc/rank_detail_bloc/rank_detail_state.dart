@@ -18,7 +18,7 @@ class NoRankingState extends RankDetailState {
 }
 
 class ResultRankingState extends RankDetailState {
-  final List<PlayerInRank> players;
+  final PlayersInRank players;
   const ResultRankingState(this.players);
 }
 

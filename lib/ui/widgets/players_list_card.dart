@@ -53,15 +53,17 @@ class PlayersListCard extends StatelessWidget {
                       stage.fieldName ?? "Nome campo non disponibile",
                       maxLines: 2,
                       style: TextStyle(
-                          color:
-                              darkMode.darkTheme ? Colors.white : Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16),
+                        color: darkMode.darkTheme ? Colors.white : Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Nunito Sans',
+                        fontSize: 16,
+                      ),
                     ),
                     Text(
                       stage.city ?? "Indirizzo non disponibile",
                       maxLines: 2,
                       style: TextStyle(
+                        fontFamily: 'Nunito Sans',
                         color: darkMode.darkTheme ? Colors.white : Colors.black,
                       ),
                     ),
@@ -73,6 +75,7 @@ class PlayersListCard extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           fontSize: 12,
+                          fontFamily: 'Nunito Sans',
                           color:
                               darkMode.darkTheme ? Colors.white : Colors.black,
                         )),

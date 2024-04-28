@@ -7,6 +7,7 @@ import 'package:fantabasket_app_flutter/model/responses/registration_response.da
 import 'package:fantabasket_app_flutter/services/dto/create_team_dto.dart';
 import 'package:fantabasket_app_flutter/services/dto/empty_response_dto.dart';
 import 'package:fantabasket_app_flutter/services/dto/player_dto.dart';
+import 'package:fantabasket_app_flutter/services/dto/rank_teams_dto.dart';
 import 'package:fantabasket_app_flutter/services/dto/team_list_dto.dart';
 import 'package:fantabasket_app_flutter/services/dto/user_dto.dart';
 import 'package:retrofit/dio.dart';
@@ -20,6 +21,9 @@ abstract class TeamService {
 
   @GET('api/viewMyFantaTeams')
   Future<HttpResponse<TeamListDTO>> getTeams();
+
+  @GET('api/viewFantaTeams')
+  Future<HttpResponse<RankTeamsDTO>> getTeamsRanked(@Query("stage") int stage);
 
   @POST('api/addPlayerTeam')
   Future<HttpResponse<ApiEmptyResponseDTO>> addPlayerToTeam(

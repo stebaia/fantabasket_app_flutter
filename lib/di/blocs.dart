@@ -6,10 +6,6 @@ final List<BlocProvider> _blocs = [
         AuthCubit(userRepository: context.read(), context: context)
           ..checkAuthenticationState(),
   ),
-  BlocProvider<CreateTeamBloc>(
-    create: ((context) =>
-        CreateTeamBloc(stagesRepository: context.read()..getStages())),
-  ),
   BlocProvider<CaptainCubit>(
     create: (context) => CaptainCubit(context: context),
   ),

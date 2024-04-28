@@ -24,5 +24,11 @@ final List<SingleChildWidget> _mappers = [
   ),
   Provider<DTOMapper<TeamDTO, Team>>(
     create: (_) => TeamMapper(),
-  )
+  ),
+  Provider<DTOMapper<RankTeamsDTO, PlayersInRank>>(
+    create: (_) => RankTeamsMapper(),
+  ),
+  Provider<DTOMapper<RankTeamDTO, PlayerInRank>>(
+    create: (_) => RankTeamMapper(),
+  ),
 ];

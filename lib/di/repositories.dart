@@ -41,15 +41,16 @@ final List<RepositoryProvider> _repositories = [
     return playerRepository;
   })),
   RepositoryProvider<TeamRepository>(create: ((context) {
-    final playerRepository = TeamRepository(
+    final teamRepository = TeamRepository(
         teamDTOMapper: context.read(),
+        rankDTOMapper: context.read(),
         teamService: context.read(),
         logger: context.read());
     context
         .read<Dio>()
         .interceptors
         .insert(0, AuthInterceptor(repository: context.read()));
-    return playerRepository;
+    return teamRepository;
   })),
 
   // VEHICLE

@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
 import 'package:fantabasket_app_flutter/bloc/rank_detail_bloc/rank_detail_bloc.dart';
+import 'package:fantabasket_app_flutter/model/stage.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/double_spinner.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/rank_detail_card.dart';
 import 'package:flutter/material.dart';
@@ -8,10 +9,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 class RankDetailPage extends StatelessWidget with AutoRouteWrapper {
-  final String stageName;
+  final Stage stage;
 
   const RankDetailPage({
-    required this.stageName,
+    required this.stage,
     super.key,
   });
 
@@ -19,7 +20,8 @@ class RankDetailPage extends StatelessWidget with AutoRouteWrapper {
   Widget wrappedRoute(BuildContext context) => MultiBlocProvider(
         providers: [
           BlocProvider<RankDetailBloc>(
-            create: ((context) => RankDetailBloc()..getRanking()),
+            create: ((context) => RankDetailBloc(teamRepository: context.read())
+              ..getRanking(stage.id)),
           ),
         ],
         child: this,
@@ -34,7 +36,7 @@ class RankDetailPage extends StatelessWidget with AutoRouteWrapper {
         foregroundColor: darkMode.darkTheme ? Colors.white : Colors.black,
         backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(
-          stageName,
+          stage.fieldName ?? "Nome non disponibile",
           style: const TextStyle(fontSize: 18),
         ),
         automaticallyImplyLeading: true,
@@ -62,14 +64,15 @@ class RankDetailPage extends StatelessWidget with AutoRouteWrapper {
                 TryGetRanking() => const Center(child: DoubleSpinner()),
                 ResultRankingState() => ListView.builder(
                     shrinkWrap: true,
-                    itemCount: state.players.length,
+                    itemCount: state.players.count,
                     itemBuilder: (context, index) {
                       return Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 8.0,
-                          vertical: 4.0,
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: RankDetailCard(
+                          player: state.players.teams![index],
+                          position: index + 1,
+                          owner: state.players.teams![index].owner!,
                         ),
-                        child: RankDetailCard(player: state.players[index]),
                       );
                     },
                   ),
