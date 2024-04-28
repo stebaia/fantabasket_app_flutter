@@ -14,9 +14,9 @@ class TeamListDTO extends DTO with EquatableMixin {
     msg = json['msg'];
     if (json['squadre'] != null) {
       data = <TeamDTO>[];
-      var map = json['squadre'] as Map<String, dynamic>;
-      for (var v in map.entries) {
-        data!.add(TeamDTO.fromJson(v));
+      var list = json['squadre'] as List<dynamic>;
+      for (var v in list) {
+        data!.add(TeamDTO.fromJson(v as Map<String, dynamic>));
       }
     }
     code = json['code'];
@@ -27,11 +27,11 @@ class TeamListDTO extends DTO with EquatableMixin {
 }
 
 class TeamDTO extends DTO with EquatableMixin {
-  String? id;
-  bool? stageStatus;
+  int? id;
+  String? stageStatus;
   String? stageName;
-  String? stageId;
-  String? nome;
+  int? stageId;
+  String? teamName;
   int? points;
 
   TeamDTO({
@@ -39,23 +39,20 @@ class TeamDTO extends DTO with EquatableMixin {
     this.stageStatus,
     this.stageName,
     this.stageId,
-    this.nome,
+    this.teamName,
     this.points,
   });
 
-  TeamDTO.fromJson(MapEntry<String, dynamic> v) {
-    nome = v.key;
-    var map = v.value as Map<String, dynamic>;
-    id = map["idSquadra"] as String?;
-    var stage = map.entries.firstWhere((entry) => entry.key != "idSquadra");
-    stageName = stage.key;
-    var stageMap = stage.value as Map<String, dynamic>;
-    stageStatus = stageMap['stato'] as bool?;
-    stageId = stageMap["idTappa"] as String?;
-    points = stageMap["punti"] as int?;
+  TeamDTO.fromJson(Map<String, dynamic> map) {
+    id = map["idSquadra"] as int?;
+    teamName = map['nomeSquadra'] as String?;
+    stageStatus = map['stato'] as String?;
+    stageId = map["idTappa"] as int?;
+    stageName = map['nomeTappa'] as String?;
+    points = map["punteggio"] as int?;
   }
 
   @override
   List<Object?> get props =>
-      [id, stageStatus, stageName, stageId, nome, points];
+      [id, stageStatus, stageName, stageId, teamName, points];
 }

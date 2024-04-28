@@ -26,11 +26,11 @@ class TeamListMapper extends DTOMapper<TeamListDTO, TeamList> {
 class TeamMapper extends DTOMapper<TeamDTO, Team> {
   @override
   Team fromDTO(TeamDTO dto) => Team(
-        id: int.parse(dto.id ?? '0'),
-        nome: dto.nome ?? '',
-        stageStatus: dto.stageStatus ?? false,
+        id: dto.id!,
+        teamName: dto.teamName ?? '',
+        stageStatus: dto.stageStatus,
         stageName: dto.stageName ?? '',
-        stageId: dto.stageId ?? '',
+        stageId: dto.stageId,
         points: dto.points ?? 0,
       );
 

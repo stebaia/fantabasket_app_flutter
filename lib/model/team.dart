@@ -2,10 +2,10 @@ import 'package:equatable/equatable.dart';
 
 class Team extends Equatable {
   final int id;
-  final bool? stageStatus;
+  final String? stageStatus;
   final String? stageName;
-  final String? stageId;
-  final String? nome;
+  final int? stageId;
+  final String? teamName;
   final int? points;
 
   const Team({
@@ -13,11 +13,11 @@ class Team extends Equatable {
     this.stageStatus,
     this.stageName,
     this.stageId,
-    this.nome,
+    this.teamName,
     this.points,
   });
 
   @override
   List<Object?> get props =>
-      [id, stageStatus, stageName, stageId, nome, points];
+      [id, stageStatus, stageName, stageId, teamName, points];
 }

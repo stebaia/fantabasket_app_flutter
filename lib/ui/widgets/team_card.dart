@@ -18,14 +18,14 @@ class TeamCard extends StatelessWidget {
     final darkMode = Provider.of<DarkThemeProvider>(context);
 
     return GestureDetector(
-      onTap: () => team.stageStatus!
+      onTap: () => team.stageStatus != "Aperta"
           ? context.router.push(TeamDetailRoute(
               teamId: team.id,
-              teamName: team.nome!,
+              teamName: team.teamName!,
             ))
           : context.router.push(
               SelectTeamRoute(
-                stageId: int.parse(team.stageId!),
+                stageId: team.stageId!,
                 team: team,
               ),
             ),
@@ -52,7 +52,7 @@ class TeamCard extends StatelessWidget {
                   height: 10,
                 ),
                 Text(
-                  team.nome!,
+                  team.teamName!,
                   style: TextStyle(
                       color: darkMode.darkTheme ? Colors.white : Colors.black,
                       fontSize: 20,
