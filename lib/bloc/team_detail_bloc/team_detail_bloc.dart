@@ -1,10 +1,8 @@
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';
-import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:fantabasket_app_flutter/model/team_detail.dart';
 import 'package:fantabasket_app_flutter/repositories/team_repository.dart';
-import 'package:fantabasket_app_flutter/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,25 +11,27 @@ part 'team_detail_state.dart';
 
 class TeamDetailBloc extends Bloc<TeamDetailEvent, TeamDetailState> {
   late TeamDetail team;
-  late int currentDay = 0;
+  late String currentDay = "";
+  final TeamRepository teamRepository;
 
-  TeamDetailBloc() : super(const InitTeamDetailState()) {
+  TeamDetailBloc({required this.teamRepository})
+      : super(const InitTeamDetailState()) {
     on<TeamDetailEvent>(_getTeamDetail);
     on<UpdateDayEvent>(_updateDay);
   }
 
-  void updateDay(int dayNumber) => add(UpdateDayEvent(dayNumber));
+  void updateDay(String day) => add(UpdateDayEvent(day));
 
-  void getTeamDetail() => add(const GetTeamDetailEvent());
+  void getTeamDetail(int teamId) => add(GetTeamDetailEvent(teamId: teamId));
 
-  int getCurrentDay() => currentDay;
+  String getCurrentDay() => currentDay;
 
   FutureOr<void> _updateDay(
     UpdateDayEvent event,
     Emitter<TeamDetailState> emitter,
   ) {
     emit(TryUpdateDayState(team));
-    currentDay = event.dayNumber;
+    currentDay = event.day;
     Future.delayed(
         const Duration(seconds: 1), () => emit(ResultUpdateDayState(team)));
   }
@@ -41,32 +41,24 @@ class TeamDetailBloc extends Bloc<TeamDetailEvent, TeamDetailState> {
     Emitter<TeamDetailState> emitter,
   ) async {
     emit(const TryTeamDetailState());
-    team = Constants.detailTeamMock;
-    currentDay = team.days.last.day;
-    Future.delayed(
-        const Duration(seconds: 1), () => emit(ResultTeamDetailState(team)));
-    /*
     try {
-      var result = await teamRepository.createTeam(
-        name: event.name,
-        player: event.player,
-        cpt: event.cpt,
-      );
-      if (result.data.code == 1) {
-        var finalResult = await teamRepository.addTeamToStage(
-          teamId: result.data.team!,
-          stageId: event.stage,
-        );
-        print("pre emit");
-        emit(const ResultCreateState());
+      var e = event as GetTeamDetailEvent;
+      var result = await teamRepository.getTeamDetail(e.teamId);
+      if (result.response.statusCode == 200) {
+        team = result.data;
+        if (team.days.isNotEmpty) {
+          currentDay = team.days.map((day) => day.day).toList().last;
+        }
+        emit(ResultTeamDetailState(team));
       } else {
-        emit(ErrorCreateState(result.data.message!));
+        emit(const ErrorTeamDetailState(
+            'Errore nella visualizzazione della squadra'));
       }
-      emit(const InitCreateState());
+      //emit(const InitTeamDetailState());
     } catch (e) {
-      emit(const ErrorCreateState("Errore nella creazione della squadra"));
-      emit(const InitCreateState());
+      emit(const ErrorTeamDetailState(
+          "Errore nella visualizzazione della squadra"));
+      //emit(const InitTeamDetailState());
     }
-    */
   }
 }

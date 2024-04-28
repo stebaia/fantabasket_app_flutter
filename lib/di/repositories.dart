@@ -43,6 +43,7 @@ final List<RepositoryProvider> _repositories = [
   RepositoryProvider<TeamRepository>(create: ((context) {
     final teamRepository = TeamRepository(
         teamDTOMapper: context.read(),
+        teamDetailDTOMapper: context.read(),
         rankDTOMapper: context.read(),
         teamService: context.read(),
         logger: context.read());

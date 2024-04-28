@@ -7,7 +7,6 @@ import 'package:fantabasket_app_flutter/ui/widgets/double_spinner.dart';
 import 'package:fantabasket_app_flutter/utils/color_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fantabasket_app_flutter/model/team.dart';
 import 'package:provider/provider.dart';
 
 class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
@@ -24,7 +23,8 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
   Widget wrappedRoute(BuildContext context) => MultiBlocProvider(
         providers: [
           BlocProvider<TeamDetailBloc>(
-            create: ((context) => TeamDetailBloc()..getTeamDetail()),
+            create: ((context) => TeamDetailBloc(teamRepository: context.read())
+              ..getTeamDetail(teamId)),
           ),
         ],
         child: this,
@@ -34,19 +34,22 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
     BuildContext context,
     TeamDetail td,
     int position,
-    int currentDay,
+    String currentDay,
     bool darkMode,
   ) {
     var entry = td.days
         .where((day) => day.day == currentDay)
         .first
         .players
-        .entries
         .elementAt(position);
     print(position);
     return GestureDetector(
       onTap: () => context.router.push(
-        PlayerDetailRoute(player: entry.key),
+        PlayerDetailRoute(
+          id: entry.id,
+          firstName: entry.firstName,
+          lastName: entry.lastName,
+        ),
       ),
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.32,
@@ -75,9 +78,9 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
                         borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(10),
                             topRight: Radius.circular(10)),
-                        child: entry.key.photo != ''
+                        child: entry.photo != ''
                             ? Image.network(
-                                entry.key.photo,
+                                entry.photo,
                                 fit: BoxFit.cover,
                               )
                             : Image.network(
@@ -88,7 +91,7 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
                     width: MediaQuery.of(context).size.width,
                     //height: MediaQuery.of(context).size.height * 0.1,
                     decoration: BoxDecoration(
-                        color: ColorUtils.getColor(entry.key),
+                        color: ColorUtils.getColor(entry.category),
                         borderRadius: const BorderRadius.only(
                             bottomLeft: Radius.circular(10),
                             bottomRight: Radius.circular(10))),
@@ -97,17 +100,17 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          entry.key.firstName,
+                          entry.firstName,
                           style: const TextStyle(
                               color: Colors.white, fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          entry.key.lastName,
+                          entry.lastName,
                           style: const TextStyle(
                               color: Colors.white, fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          "Punti: ${entry.value}",
+                          "Punti: ${entry.total}",
                           style: const TextStyle(
                               color: Colors.white, fontWeight: FontWeight.bold),
                         ),
@@ -133,14 +136,15 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
         foregroundColor: darkMode.darkTheme ? Colors.white : Colors.black,
         backgroundColor: Theme.of(context).colorScheme.primary,
         title: const Text(
-          "Bologna",
+          "Dettagli squadra",
           style: TextStyle(fontSize: 18),
         ),
         automaticallyImplyLeading: true,
       ),
       body: BlocBuilder<TeamDetailBloc, TeamDetailState>(
           builder: (BuildContext context, TeamDetailState state) {
-        final int currentDay = context.read<TeamDetailBloc>().getCurrentDay();
+        final String currentDay =
+            context.read<TeamDetailBloc>().getCurrentDay();
         print("State is: $state");
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -195,38 +199,59 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
                                 .read<TeamDetailBloc>()
                                 .updateDay(matchDay.day),
                             child: SizedBox(
-                              height: 70,
-                              width: 70,
+                              height: 80,
                               child: Card(
-                                color: Colors.transparent,
+                                color: matchDay.day ==
+                                        context
+                                            .read<TeamDetailBloc>()
+                                            .getCurrentDay()
+                                    ? Theme.of(context).colorScheme.background
+                                    : Colors.transparent,
                                 shape: RoundedRectangleBorder(
-                                    side: BorderSide(
-                                      color: matchDay.day ==
-                                              context
-                                                  .read<TeamDetailBloc>()
-                                                  .getCurrentDay()
-                                          ? Theme.of(context)
-                                              .colorScheme
-                                              .background
-                                          : Colors.white,
-                                      width: 2,
-                                    ),
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(30))),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      "G${matchDay.day}",
-                                      style:
-                                          const TextStyle(color: Colors.white),
-                                    ),
-                                    Text(
-                                      "${matchDay.points}",
-                                      style:
-                                          const TextStyle(color: Colors.white),
-                                    ),
-                                  ],
+                                  side: BorderSide(
+                                    color: matchDay.day ==
+                                            context
+                                                .read<TeamDetailBloc>()
+                                                .getCurrentDay()
+                                        ? Theme.of(context)
+                                            .colorScheme
+                                            .background
+                                        : Colors.white,
+                                    width: 2,
+                                  ),
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(15),
+                                  ),
+                                ),
+                                child: Container(
+                                  constraints: const BoxConstraints(
+                                    minWidth: 120,
+                                    maxWidth: 120,
+                                  ),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 12.0,
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        matchDay.day,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Text(
+                                        "Punti: ${matchDay.points}",
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),

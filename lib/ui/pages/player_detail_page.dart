@@ -1,22 +1,22 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fantabasket_app_flutter/bloc/player_detail_bloc/player_detail_bloc.dart';
 import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
-import 'package:fantabasket_app_flutter/model/bonus.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/double_spinner.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/player_stages_carousel.dart';
 import 'package:flutter/material.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pair/pair.dart';
 import 'package:provider/provider.dart';
 
 class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
-  final Player player;
+  final int id;
+  final String firstName;
+  final String lastName;
 
   const PlayerDetailPage({
-    required this.player,
+    required this.id,
+    required this.firstName,
+    required this.lastName,
     super.key,
   });
 
@@ -24,8 +24,7 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
   Widget wrappedRoute(BuildContext context) => MultiBlocProvider(
         providers: [
           BlocProvider<PlayerDetailBloc>(
-            create: ((context) =>
-                PlayerDetailBloc()..getPlayerDetail(player.id)),
+            create: ((context) => PlayerDetailBloc()..getPlayerDetail(id)),
           ),
         ],
         child: this,
@@ -41,7 +40,7 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
         foregroundColor: darkMode.darkTheme ? Colors.white : Colors.black,
         backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(
-          "${player.firstName} ${player.lastName}",
+          "$firstName $lastName",
           style: const TextStyle(fontSize: 18),
         ),
         automaticallyImplyLeading: true,
@@ -84,7 +83,7 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
                       ),
                       SizedBox(height: size.height * 0.01),
                       Text(
-                        '${player.firstName} ${player.lastName}',
+                        '$firstName $lastName',
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.white,

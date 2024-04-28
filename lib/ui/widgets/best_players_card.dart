@@ -17,7 +17,11 @@ class BestPlayersCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final darkMode = Provider.of<DarkThemeProvider>(context);
     return GestureDetector(
-      onTap: () => context.router.push(PlayerDetailRoute(player: player)),
+      onTap: () => context.router.push(PlayerDetailRoute(
+        id: player.id,
+        firstName: player.firstName,
+        lastName: player.lastName,
+      )),
       child: SizedBox(
         width: double.infinity,
         height: 100,
