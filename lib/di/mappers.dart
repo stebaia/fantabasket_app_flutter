@@ -37,7 +37,7 @@ final List<SingleChildWidget> _mappers = [
   Provider<DTOMapper<DayDTO, MatchDay>>(
     create: (_) => DayMapper(),
   ),
-  Provider<DTOMapper<PlayerDetailDTO, PlayerStatsSint>>(
+  Provider<DTOMapper<PlayerSintDTO, PlayerStatsSint>>(
     create: (_) => PlayerSintMapper(),
   ),
 ];

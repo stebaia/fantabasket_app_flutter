@@ -16,8 +16,8 @@ class GetTeamDetailEvent extends TeamDetailEvent {
 }
 
 class UpdateDayEvent extends TeamDetailEvent {
-  final int dayNumber;
-  const UpdateDayEvent(this.dayNumber);
+  final String day;
+  const UpdateDayEvent(this.day);
 
   @override
   List<Object> get props => [];

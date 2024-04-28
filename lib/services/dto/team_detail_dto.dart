@@ -34,7 +34,7 @@ class TeamDetailDTO extends DTO with EquatableMixin {
 class DayDTO extends DTO with EquatableMixin {
   String? name;
   int? points;
-  List<PlayerDetailDTO>? players;
+  List<PlayerSintDTO>? players;
 
   DayDTO({
     this.name,
@@ -43,15 +43,54 @@ class DayDTO extends DTO with EquatableMixin {
   });
 
   DayDTO.fromJson(Map<String, dynamic> map) {
-    name = map['nome'];
-    points = map['points'];
+    name = map['nome'] as String?;
+    points = map['punteggio'] as int?;
     var pls = map['giocatori'] as List<dynamic>;
     players = [];
     for (var p in pls) {
-      players!.add(PlayerDetailDTO.fromJson(p as Map<String, dynamic>));
+      players!.add(PlayerSintDTO.fromJson(p as Map<String, dynamic>));
     }
   }
 
   @override
   List<Object?> get props => [name, points, players];
+}
+
+class PlayerSintDTO extends DTO with EquatableMixin {
+  final String? id;
+  final String? firstName;
+  final String? lastName;
+  final String? photo;
+  final String? category;
+  final int? bonus;
+  final int? malus;
+  final int? total;
+
+  PlayerSintDTO({
+    this.id,
+    this.firstName,
+    this.lastName,
+    this.photo,
+    this.category,
+    this.bonus,
+    this.malus,
+    this.total,
+  });
+
+  factory PlayerSintDTO.fromJson(Map<String, dynamic> json) {
+    return PlayerSintDTO(
+      id: json['id'] as String?,
+      firstName: json['nome'] as String?,
+      lastName: json['cognome'] as String?,
+      photo: json['foto'] as String?,
+      category: json['categoria'] as String?,
+      bonus: json['bonus'] as int?,
+      malus: json['malus'] as int?,
+      total: json['totale'] as int?,
+    );
+  }
+
+  @override
+  List<Object?> get props =>
+      [id, firstName, lastName, photo, category, bonus, malus, total];
 }

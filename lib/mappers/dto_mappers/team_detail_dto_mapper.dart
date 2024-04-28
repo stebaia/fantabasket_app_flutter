@@ -35,7 +35,7 @@ class DayMapper extends DTOMapper<DayDTO, MatchDay> {
       }
     }
     return MatchDay(
-      day: 0,
+      day: dto.name ?? "",
       points: dto.points ?? 0,
       players: players,
     );
@@ -47,21 +47,21 @@ class DayMapper extends DTOMapper<DayDTO, MatchDay> {
   }
 }
 
-class PlayerSintMapper extends DTOMapper<PlayerDetailDTO, PlayerStatsSint> {
+class PlayerSintMapper extends DTOMapper<PlayerSintDTO, PlayerStatsSint> {
   @override
-  PlayerStatsSint fromDTO(PlayerDetailDTO dto) => PlayerStatsSint(
+  PlayerStatsSint fromDTO(PlayerSintDTO dto) => PlayerStatsSint(
         id: int.parse(dto.id!),
         firstName: dto.firstName ?? '',
         lastName: dto.lastName ?? '',
         photo: dto.photo ?? '',
         category: dto.category ?? '',
-        bonus: 0,
-        malus: 0,
-        total: dto.value ?? 0,
+        bonus: dto.bonus ?? 0,
+        malus: dto.malus ?? 0,
+        total: dto.total ?? 0,
       );
 
   @override
-  PlayerDetailDTO toDTO(PlayerStatsSint model) {
+  PlayerSintDTO toDTO(PlayerStatsSint model) {
     throw UnimplementedError();
   }
 }
