@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
-import 'package:osm_nominatim/osm_nominatim.dart';
 
 class EmailFormField extends StatelessWidget {
   final String label;
