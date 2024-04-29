@@ -1,4 +1,4 @@
-package com.example.fantabasket_app_flutter
+package com.onlyfanta.onlyfantapp
 
 import io.flutter.embedding.android.FlutterActivity
 
