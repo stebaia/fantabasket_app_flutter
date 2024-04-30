@@ -193,17 +193,6 @@ class _PlayerStagesCarouselState extends State<PlayerStagesCarousel> {
                                                 textAlign: TextAlign.start,
                                                 overflow: TextOverflow.ellipsis,
                                               ),
-                                              const SizedBox(height: 5),
-                                              Text(
-                                                "Città",
-                                                style: TextStyle(
-                                                  color: darkMode.darkTheme
-                                                      ? Colors.white
-                                                      : Colors.black,
-                                                ),
-                                                textAlign: TextAlign.center,
-                                                overflow: TextOverflow.ellipsis,
-                                              ),
                                             ],
                                           ),
                                         ),
