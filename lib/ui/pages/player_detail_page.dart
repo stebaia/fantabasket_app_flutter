@@ -11,11 +11,13 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
   final int id;
   final String firstName;
   final String lastName;
+  final String photo;
 
   const PlayerDetailPage({
     required this.id,
     required this.firstName,
     required this.lastName,
+    required this.photo,
     super.key,
   });
 
@@ -40,9 +42,9 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
       appBar: AppBar(
         foregroundColor: darkMode.darkTheme ? Colors.white : Colors.black,
         backgroundColor: Theme.of(context).colorScheme.primary,
-        title: Text(
-          "$firstName $lastName",
-          style: const TextStyle(fontSize: 18),
+        title: const Text(
+          "Dettagli giocatore",
+          style: TextStyle(fontSize: 18),
         ),
         automaticallyImplyLeading: true,
       ),
@@ -142,7 +144,13 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
                               ),
                             ),
                             Text(
-                              "3900",
+                              pd.stages == null
+                                  ? "0"
+                                  : pd.stages!
+                                      .map((s) => s.points)
+                                      .reduce(
+                                          (value, element) => value + element)
+                                      .toString(),
                               style: TextStyle(
                                 color: darkMode.darkTheme
                                     ? Colors.white
