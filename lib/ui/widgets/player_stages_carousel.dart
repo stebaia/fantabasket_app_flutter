@@ -217,7 +217,7 @@ class _PlayerStagesCarouselState extends State<PlayerStagesCarousel> {
                                     child: ExpansionTile(
                                       shape: const Border(),
                                       title: Text(
-                                        "Giornata 0",
+                                        playerMatch!.day,
                                         style: TextStyle(
                                             color: darkMode.darkTheme
                                                 ? Colors.white
