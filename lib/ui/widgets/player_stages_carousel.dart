@@ -193,17 +193,6 @@ class _PlayerStagesCarouselState extends State<PlayerStagesCarousel> {
                                                 textAlign: TextAlign.start,
                                                 overflow: TextOverflow.ellipsis,
                                               ),
-                                              const SizedBox(height: 5),
-                                              Text(
-                                                "Città",
-                                                style: TextStyle(
-                                                  color: darkMode.darkTheme
-                                                      ? Colors.white
-                                                      : Colors.black,
-                                                ),
-                                                textAlign: TextAlign.center,
-                                                overflow: TextOverflow.ellipsis,
-                                              ),
                                             ],
                                           ),
                                         ),
@@ -215,8 +204,9 @@ class _PlayerStagesCarouselState extends State<PlayerStagesCarousel> {
                                     color:
                                         Theme.of(context).colorScheme.primary,
                                     child: ExpansionTile(
+                                      shape: const Border(),
                                       title: Text(
-                                        "Giornata 0",
+                                        playerMatch!.day,
                                         style: TextStyle(
                                             color: darkMode.darkTheme
                                                 ? Colors.white

@@ -135,6 +135,7 @@ class AppRouter extends _i18.RootStackRouter {
           firstName: args.firstName,
           lastName: args.lastName,
           photo: args.photo,
+          category: args.category,
           key: args.key,
         )),
       );
@@ -526,6 +527,7 @@ class PlayerDetailRoute extends _i18.PageRouteInfo<PlayerDetailRouteArgs> {
     required String firstName,
     required String lastName,
     required String photo,
+    required String category,
     _i19.Key? key,
   }) : super(
           PlayerDetailRoute.name,
@@ -535,6 +537,7 @@ class PlayerDetailRoute extends _i18.PageRouteInfo<PlayerDetailRouteArgs> {
             firstName: firstName,
             lastName: lastName,
             photo: photo,
+            category: category,
             key: key,
           ),
         );
@@ -548,6 +551,7 @@ class PlayerDetailRouteArgs {
     required this.firstName,
     required this.lastName,
     required this.photo,
+    required this.category,
     this.key,
   });
 
@@ -559,11 +563,13 @@ class PlayerDetailRouteArgs {
 
   final String photo;
 
+  final String category;
+
   final _i19.Key? key;
 
   @override
   String toString() {
-    return 'PlayerDetailRouteArgs{id: $id, firstName: $firstName, lastName: $lastName, photo: $photo, key: $key}';
+    return 'PlayerDetailRouteArgs{id: $id, firstName: $firstName, lastName: $lastName, photo: $photo, category: $category, key: $key}';
   }
 }
 

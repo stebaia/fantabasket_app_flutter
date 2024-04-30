@@ -50,6 +50,7 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
           firstName: entry.firstName,
           lastName: entry.lastName,
           photo: entry.photo,
+          category: entry.category,
         ),
       ),
       child: SizedBox(
@@ -60,7 +61,6 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
           elevation: 4,
           child: SizedBox(
             width: MediaQuery.of(context).size.width * 0.32,
-            //height: MediaQuery.of(context).size.height * 0.25,
             child: Column(
               children: [
                 Container(
@@ -74,7 +74,7 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
                 ),
                 SizedBox(
                     width: MediaQuery.of(context).size.width * 0.32,
-                    //height: MediaQuery.of(context).size.height * 0.15,
+                    height: MediaQuery.of(context).size.height * 0.15,
                     child: ClipRRect(
                         borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(10),
@@ -102,18 +102,28 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
                       children: [
                         Text(
                           entry.firstName,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         Text(
                           entry.lastName,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         Text(
                           "Punti: ${entry.total}",
                           style: const TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ],
                     ),

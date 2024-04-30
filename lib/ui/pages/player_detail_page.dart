@@ -12,12 +12,14 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
   final String firstName;
   final String lastName;
   final String photo;
+  final String category;
 
   const PlayerDetailPage({
     required this.id,
     required this.firstName,
     required this.lastName,
     required this.photo,
+    required this.category,
     super.key,
   });
 
@@ -105,7 +107,7 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Squadra",
+                              "Categoria",
                               style: TextStyle(
                                 color: darkMode.darkTheme
                                     ? Colors.white
@@ -115,7 +117,7 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
                               ),
                             ),
                             Text(
-                              "Squadra",
+                              category,
                               style: TextStyle(
                                 color: darkMode.darkTheme
                                     ? Colors.white
