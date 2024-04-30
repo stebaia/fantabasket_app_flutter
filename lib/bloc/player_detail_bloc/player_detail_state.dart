@@ -16,19 +16,9 @@ class TryPlayerDetailState extends PlayerDetailState {
   const TryPlayerDetailState();
 }
 
-class TryUpdateDayState extends PlayerDetailState {
-  final PlayerDetail playerDetail;
-  const TryUpdateDayState(this.playerDetail);
-}
-
-class ResultUpdateDayState extends PlayerDetailState {
-  final PlayerDetail playerDetail;
-  const ResultUpdateDayState(this.playerDetail);
-}
-
 class ResultPlayerDetailState extends PlayerDetailState {
-  final PlayerDetail playerDetail;
-  const ResultPlayerDetailState(this.playerDetail);
+  final PlayersStatsList playerStatsList;
+  const ResultPlayerDetailState(this.playerStatsList);
 }
 
 class ErrorPlayerDetailState extends PlayerDetailState {

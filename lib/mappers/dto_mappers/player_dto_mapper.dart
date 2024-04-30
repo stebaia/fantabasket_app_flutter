@@ -1,8 +1,6 @@
 import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:fantabasket_app_flutter/model/players_list.dart';
-import 'package:fantabasket_app_flutter/model/user.dart';
 import 'package:fantabasket_app_flutter/services/dto/player_dto.dart';
-import 'package:fantabasket_app_flutter/services/dto/user_dto.dart';
 import 'package:pine/pine.dart';
 
 class PlayerListMapper extends DTOMapper<PlayerDTO, PlayersList> {

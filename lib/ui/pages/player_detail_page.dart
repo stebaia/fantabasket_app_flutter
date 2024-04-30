@@ -4,7 +4,6 @@ import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/double_spinner.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/player_stages_carousel.dart';
 import 'package:flutter/material.dart';
-import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
@@ -12,11 +11,13 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
   final int id;
   final String firstName;
   final String lastName;
+  final String photo;
 
   const PlayerDetailPage({
     required this.id,
     required this.firstName,
     required this.lastName,
+    required this.photo,
     super.key,
   });
 
@@ -24,7 +25,9 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
   Widget wrappedRoute(BuildContext context) => MultiBlocProvider(
         providers: [
           BlocProvider<PlayerDetailBloc>(
-            create: ((context) => PlayerDetailBloc()..getPlayerDetail(id)),
+            create: ((context) =>
+                PlayerDetailBloc(playerRepository: context.read())
+                  ..getPlayerDetail(id)),
           ),
         ],
         child: this,
@@ -39,9 +42,9 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
       appBar: AppBar(
         foregroundColor: darkMode.darkTheme ? Colors.white : Colors.black,
         backgroundColor: Theme.of(context).colorScheme.primary,
-        title: Text(
-          "$firstName $lastName",
-          style: const TextStyle(fontSize: 18),
+        title: const Text(
+          "Dettagli giocatore",
+          style: TextStyle(fontSize: 18),
         ),
         automaticallyImplyLeading: true,
       ),
@@ -50,12 +53,10 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
         PlayerDetailState state,
       ) {
         return switch (state) {
-          TryPlayerDetailState() || TryUpdateDayState() => const Center(
+          TryPlayerDetailState() => const Center(
               child: DoubleSpinner(),
             ),
-          ResultPlayerDetailState(playerDetail: var pd) ||
-          ResultUpdateDayState(playerDetail: var pd) =>
-            Column(
+          ResultPlayerDetailState(playerStatsList: var pd) => Column(
               children: [
                 Container(
                   width: double.infinity,
@@ -70,14 +71,16 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
                       SizedBox(height: size.height * 0.01),
                       Container(
                         width: size.width * 0.25,
+                        height: size.width * 0.25,
                         decoration: BoxDecoration(
                           border: Border.all(color: Colors.white, width: 1.0),
                           shape: BoxShape.circle,
                         ),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(50.0),
-                          child: Image.asset(
-                            'assets/images/player.jpeg',
+                          child: Image.network(
+                            photo,
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),
@@ -112,7 +115,7 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
                               ),
                             ),
                             Text(
-                              pd.team,
+                              "Squadra",
                               style: TextStyle(
                                 color: darkMode.darkTheme
                                     ? Colors.white
@@ -143,7 +146,13 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
                               ),
                             ),
                             Text(
-                              "3900",
+                              pd.stages == null
+                                  ? "0"
+                                  : pd.stages!
+                                      .map((s) => s.points)
+                                      .reduce(
+                                          (value, element) => value + element)
+                                      .toString(),
                               style: TextStyle(
                                 color: darkMode.darkTheme
                                     ? Colors.white

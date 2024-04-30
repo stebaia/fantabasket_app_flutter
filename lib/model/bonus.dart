@@ -2,21 +2,20 @@ import 'package:equatable/equatable.dart';
 import 'package:pair/pair.dart';
 
 class Bonus extends Equatable {
-  final Pair<String, int> pointMade;
-  final Pair<String, int> assist;
-  final Pair<String, int> block;
-  final Pair<String, int> bounce;
-  final Pair<String, int> buzzerBeater;
-  final Pair<String, int> dunk;
-  final Pair<String, int> ankleBreaker;
-  final Pair<String, int> postAnd1Exultation;
-  final Pair<String, int> pregameRitual;
-  final Pair<String, int> teamVictory;
-  final Pair<String, int> ignorantClothing;
-  final Pair<String, int> speakerKiss;
-  final Pair<String, int> victory51;
-  final Pair<String, int> mostLoved;
-  final Pair<String, int> total;
+  final Pair<String, String> pointMade;
+  final Pair<String, String> assist;
+  final Pair<String, String> block;
+  final Pair<String, String> bounce;
+  final Pair<String, String> buzzerBeater;
+  final Pair<String, String> dunk;
+  final Pair<String, String> ankleBreaker;
+  final Pair<String, String> postAnd1Exultation;
+  final Pair<String, String> pregameRitual;
+  final Pair<String, String> teamVictory;
+  final Pair<String, String> ignorantClothing;
+  final Pair<String, String> speakerKiss;
+  final Pair<String, String> victory51;
+  final Pair<String, String> mostLoved;
 
   const Bonus({
     required this.pointMade,
@@ -33,11 +32,10 @@ class Bonus extends Equatable {
     required this.speakerKiss,
     required this.victory51,
     required this.mostLoved,
-    required this.total,
   });
 
   @override
-  List<Pair<String, int>> get props => [
+  List<Pair<String, String>> get props => [
         pointMade,
         assist,
         block,
@@ -52,6 +50,5 @@ class Bonus extends Equatable {
         speakerKiss,
         victory51,
         mostLoved,
-        total,
       ];
 }
