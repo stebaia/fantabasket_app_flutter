@@ -30,6 +30,7 @@ class _CorePageState extends State<CorePage> {
           ProfileRoute()
         ],
         bottomNavigationBuilder: (context, tabsRouter) {
+          
           return BottomNavigationBar(
               elevation: 0,
               type: BottomNavigationBarType.fixed,

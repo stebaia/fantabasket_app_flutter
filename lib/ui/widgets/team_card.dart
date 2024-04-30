@@ -36,7 +36,7 @@ class TeamCard extends StatelessWidget {
           elevation: 4,
           child: Container(
             width: MediaQuery.of(context).size.width,
-            height: 300,
+          
             padding: const EdgeInsets.all(20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -90,7 +90,7 @@ class TeamCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'Bologna',
+                      team.stageName!,
                       style: TextStyle(
                           color:
                               darkMode.darkTheme ? Colors.white : Colors.black,
