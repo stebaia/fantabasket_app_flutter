@@ -21,6 +21,7 @@ final List<RepositoryProvider> _repositories = [
     final playerRepository = PlayerRepository(
         playerService: context.read(),
         playerDTOMapper: context.read(),
+        playerStatsDTOMapper: context.read(),
         logger: context.read());
     context
         .read<Dio>()

@@ -19,9 +19,9 @@ class _PlayerService implements PlayerService {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<PlayerDTO>> getPlayers() async {
+  Future<HttpResponse<PlayerDTO>> getPlayersStage(int stage) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'stage': stage};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
@@ -47,20 +47,20 @@ class _PlayerService implements PlayerService {
   }
 
   @override
-  Future<HttpResponse<PlayerDTO>> getPlayersStage(int stage) async {
+  Future<HttpResponse<PlayerStatsDTO>> getPlayerDetails(int playerId) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'stage': stage};
+    final queryParameters = <String, dynamic>{r'player': playerId};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<PlayerDTO>>(Options(
+        _setStreamType<HttpResponse<PlayerStatsDTO>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              'api/viewPlayers',
+              'api/detailPlayer',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -69,7 +69,7 @@ class _PlayerService implements PlayerService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = PlayerDTO.fromJson(_result.data!);
+    final value = PlayerStatsDTO.fromJson(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

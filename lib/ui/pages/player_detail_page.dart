@@ -4,7 +4,6 @@ import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/double_spinner.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/player_stages_carousel.dart';
 import 'package:flutter/material.dart';
-import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
@@ -24,7 +23,9 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
   Widget wrappedRoute(BuildContext context) => MultiBlocProvider(
         providers: [
           BlocProvider<PlayerDetailBloc>(
-            create: ((context) => PlayerDetailBloc()..getPlayerDetail(id)),
+            create: ((context) =>
+                PlayerDetailBloc(playerRepository: context.read())
+                  ..getPlayerDetail(id)),
           ),
         ],
         child: this,
@@ -50,12 +51,10 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
         PlayerDetailState state,
       ) {
         return switch (state) {
-          TryPlayerDetailState() || TryUpdateDayState() => const Center(
+          TryPlayerDetailState() => const Center(
               child: DoubleSpinner(),
             ),
-          ResultPlayerDetailState(playerDetail: var pd) ||
-          ResultUpdateDayState(playerDetail: var pd) =>
-            Column(
+          ResultPlayerDetailState(playerStatsList: var pd) => Column(
               children: [
                 Container(
                   width: double.infinity,
@@ -112,7 +111,7 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
                               ),
                             ),
                             Text(
-                              pd.team,
+                              "Squadra",
                               style: TextStyle(
                                 color: darkMode.darkTheme
                                     ? Colors.white

@@ -40,4 +40,19 @@ final List<SingleChildWidget> _mappers = [
   Provider<DTOMapper<PlayerSintDTO, PlayerStatsSint>>(
     create: (_) => PlayerSintMapper(),
   ),
+  Provider<DTOMapper<PlayerStatsDTO, PlayersStatsList>>(
+    create: (_) => PlayerStatsMapper(),
+  ),
+  Provider<DTOMapper<StageStatsDTO, StageStats>>(
+    create: (_) => StageStatsMapper(),
+  ),
+  Provider<DTOMapper<PlayerDayDTO, PlayerMatch>>(
+    create: (_) => PlayerMatchMapper(),
+  ),
+  Provider<DTOMapper<BonusDTO, Bonus>>(
+    create: (_) => BonusMapper(),
+  ),
+  Provider<DTOMapper<MalusDTO, Malus>>(
+    create: (_) => MalusMapper(),
+  ),
 ];
