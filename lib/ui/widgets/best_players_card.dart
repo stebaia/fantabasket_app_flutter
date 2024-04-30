@@ -22,6 +22,7 @@ class BestPlayersCard extends StatelessWidget {
         firstName: player.firstName,
         lastName: player.lastName,
         photo: player.photo,
+        category: player.category,
       )),
       child: SizedBox(
         width: double.infinity,

@@ -50,6 +50,7 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
           firstName: entry.firstName,
           lastName: entry.lastName,
           photo: entry.photo,
+          category: entry.category,
         ),
       ),
       child: SizedBox(

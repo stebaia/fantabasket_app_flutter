@@ -215,6 +215,7 @@ class _PlayerStagesCarouselState extends State<PlayerStagesCarousel> {
                                     color:
                                         Theme.of(context).colorScheme.primary,
                                     child: ExpansionTile(
+                                      shape: const Border(),
                                       title: Text(
                                         "Giornata 0",
                                         style: TextStyle(
