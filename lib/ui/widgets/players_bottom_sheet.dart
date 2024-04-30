@@ -131,13 +131,19 @@ class _PlayersBottomSheetState extends State<PlayersBottomSheet> {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                CategoryButton(onClick: onCategorySelected, category: "A"),
+                CategoryButton(onClick: onCategorySelected, category: "A1"),
+                CategoryButton(onClick: onCategorySelected, category: "A2"),
                 CategoryButton(onClick: onCategorySelected, category: "B"),
                 CategoryButton(onClick: onCategorySelected, category: "C1"),
                 CategoryButton(onClick: onCategorySelected, category: "C2"),
                 CategoryButton(onClick: onCategorySelected, category: "D"),
-                CategoryButton(onClick: onCategorySelected, category: "P"),
-                CategoryButton(onClick: onCategorySelected, category: "F"),
+                CategoryButton(onClick: onCategorySelected, category: "PROMO"),
+                CategoryButton(
+                    onClick: onCategorySelected, category: "AMATORE"),
+                CategoryButton(
+                    onClick: onCategorySelected, category: "GIOVANE"),
+                CategoryButton(
+                    onClick: onCategorySelected, category: "RITIRATO"),
               ],
             ),
           ),
