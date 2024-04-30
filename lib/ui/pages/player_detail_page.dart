@@ -71,14 +71,16 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
                       SizedBox(height: size.height * 0.01),
                       Container(
                         width: size.width * 0.25,
+                        height: size.width * 0.25,
                         decoration: BoxDecoration(
                           border: Border.all(color: Colors.white, width: 1.0),
                           shape: BoxShape.circle,
                         ),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(50.0),
-                          child: Image.asset(
-                            'assets/images/player.jpeg',
+                          child: Image.network(
+                            photo,
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),
