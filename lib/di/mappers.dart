@@ -55,4 +55,10 @@ final List<SingleChildWidget> _mappers = [
   Provider<DTOMapper<MalusDTO, Malus>>(
     create: (_) => MalusMapper(),
   ),
+  Provider<DTOMapper<BannerListDTO, BannerList>>(
+    create: (_) => BannerListMapper(),
+  ),
+  Provider<DTOMapper<BannerDTO, BannerModel>>(
+    create: (_) => BannerMapper(),
+  ),
 ];
