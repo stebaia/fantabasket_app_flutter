@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:fantabasket_app_flutter/bloc/add_team_bloc/add_team_bloc.dart';
+import 'package:fantabasket_app_flutter/bloc/banner_bloc/banner_bloc.dart';
 import 'package:fantabasket_app_flutter/bloc/create_team_bloc/create_team_bloc.dart';
 import 'package:fantabasket_app_flutter/bloc/select_team_bloc/select_team_bloc.dart';
 import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
@@ -25,6 +26,10 @@ class LoadStagesPage extends StatefulWidget with AutoRouteWrapper {
           BlocProvider<CreateTeamBloc>(
             create: ((context) =>
                 CreateTeamBloc(stagesRepository: context.read())..getStages()),
+          ),
+          BlocProvider<BannerBloc>(
+            create: ((context) =>
+                BannerBloc(repository: context.read())..getBannerList()),
           )
         ],
         child: this,
@@ -55,9 +60,20 @@ class _LoadStagesPageState extends State<LoadStagesPage> {
               child: Text("Errore nel caricamento delle tappe"),
             );
           } else if (state is EmptyGetStagesState) {
-            return const Column(
+            return  Column(
               children: [
-                SponsorsBanner(),
+                BlocBuilder<BannerBloc, BannerState>(
+            builder: (context, state) {
+              if(state is TryGetBannerState) {
+                return const SponsorsBannerBlank();
+              }else if(state is ResultBannerListState){
+                return SponsorsBanner(banner: state.bannerList.banners![0]);
+              }else {
+               return const SponsorsBannerBlank();
+              }
+              
+            },
+          ),
                 Center(
                   child: Text("Nessuna tappa presente"),
                 ),
@@ -68,7 +84,18 @@ class _LoadStagesPageState extends State<LoadStagesPage> {
               enabled: state is TryGetStagesState,
               child: Column(
                 children: [
-                  const SponsorsBanner(),
+                  BlocBuilder<BannerBloc, BannerState>(
+            builder: (context, state) {
+              if(state is TryGetBannerState) {
+                return const SponsorsBannerBlank();
+              }else if(state is ResultBannerListState){
+                return SponsorsBanner(banner: state.bannerList.banners![0]);
+              }else {
+               return const SponsorsBannerBlank();
+              }
+              
+            },
+          ),
                   Expanded(
                     child: Container(
                       padding: const EdgeInsets.symmetric(vertical: 20),

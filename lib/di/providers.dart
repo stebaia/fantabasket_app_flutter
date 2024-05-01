@@ -24,6 +24,10 @@ final List<SingleChildWidget> _providers = [
     create: (context) =>
         StageService(context.read<Dio>(), baseUrl: Constants.baseUrl),
   ),
+  Provider<BannerService>(
+    create: (context) =>
+        BannerService(context.read<Dio>(), baseUrl: Constants.baseUrl),
+  ),
   Provider<TeamService>(
     create: (context) =>
         TeamService(context.read<Dio>(), baseUrl: Constants.baseUrl),

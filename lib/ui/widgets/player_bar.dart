@@ -87,7 +87,7 @@ class PlayerBar extends StatelessWidget {
                             fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        player.team,
+                        player.category,
                         style: TextStyle(
                           color:
                               darkMode.darkTheme ? Colors.white : Colors.black,

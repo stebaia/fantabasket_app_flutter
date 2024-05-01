@@ -54,6 +54,17 @@ final List<RepositoryProvider> _repositories = [
         .insert(0, AuthInterceptor(repository: context.read()));
     return teamRepository;
   })),
+RepositoryProvider<BannerRepository>(create: ((context) {
+    final bannerRepository = BannerRepository(
+        bannerDTOMapper: context.read(),
+        bannerService: context.read(),
+        logger: context.read());
+    context
+        .read<Dio>()
+        .interceptors
+        .insert(0, AuthInterceptor(repository: context.read()));
+    return bannerRepository;
+  })),
 
   // VEHICLE
 ];

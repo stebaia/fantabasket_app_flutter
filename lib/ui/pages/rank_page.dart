@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:fantabasket_app_flutter/bloc/banner_bloc/banner_bloc.dart';
 import 'package:fantabasket_app_flutter/bloc/create_team_bloc/create_team_bloc.dart';
 import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
 import 'package:fantabasket_app_flutter/model/stage.dart';
@@ -18,23 +19,15 @@ class RankPage extends StatefulWidget with AutoRouteWrapper {
           BlocProvider<CreateTeamBloc>(
             create: ((context) =>
                 CreateTeamBloc(stagesRepository: context.read())..getStages()),
+          ),
+          BlocProvider<BannerBloc>(
+            create: ((context) =>
+                BannerBloc(repository: context.read())..getBannerList()),
           )
         ],
         child: this,
       );
 
-  static const Map<String, int> mockList = {
-    "Bologna": 1,
-    "Forli": 5,
-    "Cesena": 2,
-    "Rimini": 4,
-    "Padova": 3,
-    "Reggio Emilia": 8,
-    "Firenze": 1,
-    "Novara": 2,
-    "Torino": 7,
-    "Brescia": 5,
-  };
   const RankPage({super.key});
 
   @override
@@ -56,7 +49,18 @@ class _RankPageState extends State<RankPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SponsorsBanner(),
+          BlocBuilder<BannerBloc, BannerState>(
+            builder: (context, state) {
+              if(state is TryGetBannerState) {
+                return const SponsorsBannerBlank();
+              }else if(state is ResultBannerListState){
+                return SponsorsBanner(banner: state.bannerList.banners![0]);
+              }else {
+               return const SponsorsBannerBlank();
+              }
+              
+            },
+          ),
           const SizedBox(height: 10),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
@@ -109,9 +113,20 @@ class _RankPageState extends State<RankPage> {
                     child: Text("Errore nel caricamento delle tappe"),
                   );
                 } else if (state is EmptyGetStagesState) {
-                  return const Column(
+                  return  Column(
                     children: [
-                      SponsorsBanner(),
+                      BlocBuilder<BannerBloc, BannerState>(
+            builder: (context, state) {
+              if(state is TryGetBannerState) {
+                return const SponsorsBannerBlank();
+              }else if(state is ResultBannerListState){
+                return SponsorsBanner(banner: state.bannerList.banners![0]);
+              }else {
+               return const SponsorsBannerBlank();
+              }
+              
+            },
+          ),
                       Center(
                         child: Text("Nessuna tappa presente"),
                       ),

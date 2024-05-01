@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:fantabasket_app_flutter/bloc/banner_bloc/banner_bloc.dart';
 import 'package:fantabasket_app_flutter/bloc/cubit/auth_cubit/auth_cubit.dart';
 import 'package:fantabasket_app_flutter/bloc/view_team_bloc/view_team_bloc.dart';
 import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
@@ -288,9 +289,20 @@ class CreateTeamPage extends StatelessWidget with AutoRouteWrapper {
               ],
             ),
           )),
-          const Positioned(
+          Positioned(
             bottom: 0,
-            child: SponsorsBanner(),
+            child: BlocBuilder<BannerBloc, BannerState>(
+            builder: (context, state) {
+              if(state is TryGetBannerState) {
+                return const SponsorsBannerBlank();
+              }else if(state is ResultBannerListState){
+                return SponsorsBanner(banner: state.bannerList.banners![0]);
+              }else {
+               return const SponsorsBannerBlank();
+              }
+              
+            },
+          ),
           ),
         ],
       ),
@@ -303,6 +315,10 @@ class CreateTeamPage extends StatelessWidget with AutoRouteWrapper {
           BlocProvider<ViewTeamBloc>(
             create: ((context) =>
                 ViewTeamBloc(teamRepository: context.read())..viewMyTeams()),
+          ),
+          BlocProvider<BannerBloc>(
+            create: ((context) =>
+                BannerBloc(repository: context.read())..getBannerList()),
           )
         ],
         child: this,

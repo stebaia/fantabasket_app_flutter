@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:fantabasket_app_flutter/bloc/banner_bloc/banner_bloc.dart';
 import 'package:fantabasket_app_flutter/bloc/select_team_bloc/select_team_bloc.dart';
 import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
@@ -29,6 +30,10 @@ class BestPlayersPage extends StatelessWidget with AutoRouteWrapper {
                 playerRepository: context.read(),
                 stagesRepository: context.read())
               ..getPlayers(stage.id)),
+          ),
+          BlocProvider<BannerBloc>(
+            create: ((context) =>
+                BannerBloc(repository: context.read())..getBannerList()),
           )
         ],
         child: this,
@@ -58,9 +63,20 @@ class BestPlayersPage extends StatelessWidget with AutoRouteWrapper {
                   style: const TextStyle(color: Colors.white),
                 ),
               ),
-            EmptyGetPlayersState() => const Column(
+            EmptyGetPlayersState() =>  Column(
                 children: [
-                  SponsorsBanner(),
+                  BlocBuilder<BannerBloc, BannerState>(
+            builder: (context, state) {
+              if(state is TryGetBannerState) {
+                return const SponsorsBannerBlank();
+              }else if(state is ResultBannerListState){
+                return SponsorsBanner(banner: state.bannerList.banners![0]);
+              }else {
+               return const SponsorsBannerBlank();
+              }
+              
+            },
+          ),
                   Center(
                     child: Text(
                       "Nessun giocatore presente",
@@ -73,10 +89,21 @@ class BestPlayersPage extends StatelessWidget with AutoRouteWrapper {
                 enabled: state is TryGetPlayersState,
                 child: Column(
                   children: [
-                    const SponsorsBanner(),
+                    BlocBuilder<BannerBloc, BannerState>(
+            builder: (context, state) {
+              if(state is TryGetBannerState) {
+                return const SponsorsBannerBlank();
+              }else if(state is ResultBannerListState){
+                return SponsorsBanner(banner: state.bannerList.banners![0]);
+              }else {
+               return const SponsorsBannerBlank();
+              }
+              
+            },
+          ),
                     Expanded(
                       child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 20),
+                       
                         alignment: Alignment.center,
                         child: SingleChildScrollView(
                           child: Column(
