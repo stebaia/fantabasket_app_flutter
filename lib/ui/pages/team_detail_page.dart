@@ -280,47 +280,54 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
                   const Center(child: DoubleSpinner()),
                 ResultTeamDetailState(teamDetail: var td) ||
                 ResultUpdateDayState(teamDetail: var td) =>
-                  Container(
-                    alignment: Alignment.center,
-                    width: double.infinity,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  td.days.isEmpty
+                      ? const Center(
+                          child: Text("Nessuna giornata caricata"),
+                        )
+                      : Container(
+                          alignment: Alignment.center,
+                          width: double.infinity,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              _getPlayerCard(context, td, 0, currentDay,
-                                  darkMode.darkTheme),
-                              _getPlayerCard(context, td, 1, currentDay,
-                                  darkMode.darkTheme),
-                              _getPlayerCard(context, td, 2, currentDay,
-                                  darkMode.darkTheme),
+                              Expanded(
+                                flex: 1,
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    _getPlayerCard(context, td, 0, currentDay,
+                                        darkMode.darkTheme),
+                                    _getPlayerCard(context, td, 1, currentDay,
+                                        darkMode.darkTheme),
+                                    _getPlayerCard(context, td, 2, currentDay,
+                                        darkMode.darkTheme),
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: SizedBox(
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      _getPlayerCard(context, td, 3, currentDay,
+                                          darkMode.darkTheme),
+                                      _getPlayerCard(context, td, 4, currentDay,
+                                          darkMode.darkTheme),
+                                      _getPlayerCard(context, td, 5, currentDay,
+                                          darkMode.darkTheme),
+                                    ],
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ),
-                        Expanded(
-                          flex: 1,
-                          child: SizedBox(
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                _getPlayerCard(context, td, 3, currentDay,
-                                    darkMode.darkTheme),
-                                _getPlayerCard(context, td, 4, currentDay,
-                                    darkMode.darkTheme),
-                                _getPlayerCard(context, td, 5, currentDay,
-                                    darkMode.darkTheme),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
                 _ => Container(),
               },
             )
