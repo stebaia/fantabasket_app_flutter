@@ -77,6 +77,9 @@ class _LoginPageState extends State<LoginPage> {
                   listener: (context, state) {
                     if (state is LoggedInState) {
                       context.read<AuthCubit>().authenticated(state.user);
+                    }else {
+                                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Nessun utente trovato, ricontrolla le credenziali',),backgroundColor: Colors.red,));
+
                     }
                   },
                   builder: (context, state) {
@@ -156,7 +159,7 @@ class _LoginPageState extends State<LoginPage> {
                                 const SizedBox(
                                   height: 14,
                                 ),
-                                Align(
+                                /*Align(
                                   alignment: Alignment.centerRight,
                                   child: GestureDetector(
                                     onTap: () {},
@@ -169,7 +172,7 @@ class _LoginPageState extends State<LoginPage> {
                                           decoration: TextDecoration.underline),
                                     ),
                                   ),
-                                ),
+                                ),*/
                                 const SizedBox(
                                   height: 14,
                                 ),

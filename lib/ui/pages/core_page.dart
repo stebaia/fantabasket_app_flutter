@@ -23,10 +23,10 @@ class _CorePageState extends State<CorePage> {
       child: AutoTabsScaffold(
         backgroundColor: Colors.white,
         //darkMode.darkTheme ? ThemeHelper.backgroundColorDark : Colors.white,
-        routes: const [
-          RankRoute(),
-          PlayersRoute(),
-          CreateTeamRoute(),
+        routes: [
+          const RankRoute(),
+          const PlayersRoute(),
+          const CreateTeamRoute(),
           ProfileRoute()
         ],
         bottomNavigationBuilder: (context, tabsRouter) {

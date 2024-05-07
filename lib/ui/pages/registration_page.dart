@@ -64,12 +64,16 @@ class _RegistrationPageState extends State<RegistrationPage> {
             SingleChildScrollView(
               child: BlocConsumer<LoginBloc, LoginInState>(
                 listener: (context, state) {
-                  if (state is LoggedInState) {
+                  if (state is RegistrationDoneState) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Registrazione avvenuta con successo!',),backgroundColor: Colors.green,));
                     /*Fluttertoast.showToast(
                             msg: AppLocalizations.of(context).registration_confirm,
                           );*/
                     context.popRoute();
+                    
                   } else if (state is ErrorLoginInState) {
+                                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Campi non completi, ricontrolla',),backgroundColor: Colors.red,));
+
                     //showErrorDialog
                   }
                 },
@@ -207,7 +211,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                             name: name,
                                             surname: surname,
                                           );
-                                      context.popRoute();
+                                      
                                     } else {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(const SnackBar(
