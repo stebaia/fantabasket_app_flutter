@@ -20,10 +20,10 @@ class _PlayerService implements PlayerService {
 
   @override
   Future<HttpResponse<PlayerDTO>> getPlayersStage(int stage) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'stage': stage};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<PlayerDTO>>(Options(
       method: 'GET',
@@ -48,10 +48,10 @@ class _PlayerService implements PlayerService {
 
   @override
   Future<HttpResponse<PlayerStatsDTO>> getPlayerDetails(int playerId) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'player': playerId};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<PlayerStatsDTO>>(Options(
       method: 'GET',

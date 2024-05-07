@@ -20,7 +20,7 @@ class _UserService implements UserService {
 
   @override
   Future<LoginResponse> login(LoginRequest request) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -48,7 +48,7 @@ class _UserService implements UserService {
 
   @override
   Future<UserDTO> takeToken(LoginRequest request) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -76,7 +76,7 @@ class _UserService implements UserService {
 
   @override
   Future<RegistrationResponse> registration(RegistrationRequest request) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};

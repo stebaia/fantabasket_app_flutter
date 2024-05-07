@@ -176,9 +176,11 @@ class AppRouter extends _i18.RootStackRouter {
       );
     },
     ProfileRoute.name: (routeData) {
+      final args = routeData.argsAs<ProfileRouteArgs>(
+          orElse: () => const ProfileRouteArgs());
       return _i18.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i16.ProfilePage(),
+        child: _i16.ProfilePage(key: args.key),
       );
     },
     ContainerRoute.name: (routeData) {
@@ -658,14 +660,26 @@ class PlayersRoute extends _i18.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i16.ProfilePage]
-class ProfileRoute extends _i18.PageRouteInfo<void> {
-  const ProfileRoute()
+class ProfileRoute extends _i18.PageRouteInfo<ProfileRouteArgs> {
+  ProfileRoute({_i19.Key? key})
       : super(
           ProfileRoute.name,
           path: 'profile_page',
+          args: ProfileRouteArgs(key: key),
         );
 
   static const String name = 'ProfileRoute';
+}
+
+class ProfileRouteArgs {
+  const ProfileRouteArgs({this.key});
+
+  final _i19.Key? key;
+
+  @override
+  String toString() {
+    return 'ProfileRouteArgs{key: $key}';
+  }
 }
 
 /// generated route for
