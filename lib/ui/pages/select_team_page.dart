@@ -76,7 +76,7 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                       darkMode.darkTheme ? Colors.white : Colors.black,
                   backgroundColor: Theme.of(context).colorScheme.primary,
                   title: const Text(
-                    'Scegli i giocatori',
+                    'Scegli il tuo quintetto',
                     style: TextStyle(
                       fontSize: 18,
                     ),
@@ -230,17 +230,17 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                         _ => const Text("No matching"),
                       }),
                       BlocBuilder<BannerBloc, BannerState>(
-            builder: (context, state) {
-              if(state is TryGetBannerState) {
-                return const SponsorsBannerBlank();
-              }else if(state is ResultBannerListState){
-                return SponsorsBanner(banner: state.bannerList.banners![0]);
-              }else {
-               return const SponsorsBannerBlank();
-              }
-              
-            },
-          ),
+                        builder: (context, state) {
+                          if (state is TryGetBannerState) {
+                            return const SponsorsBannerBlank();
+                          } else if (state is ResultBannerListState) {
+                            return SponsorsBanner(
+                                banner: state.bannerList.banners![0]);
+                          } else {
+                            return const SponsorsBannerBlank();
+                          }
+                        },
+                      ),
                     ],
                   ),
                 ));
