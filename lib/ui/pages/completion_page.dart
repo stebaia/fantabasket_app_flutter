@@ -57,6 +57,8 @@ class CompletionPage extends StatelessWidget with AutoRouteWrapper {
         player.category == "A2" ||
         player.category == "B" ||
         player.category == "C1");
+    side.sort((b, a) => Constants.categoryValues[a.category]!
+        .compareTo(Constants.categoryValues[b.category]!));
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       resizeToAvoidBottomInset: false,
