@@ -177,7 +177,7 @@ class CompletionPage extends StatelessWidget with AutoRouteWrapper {
                                             : Theme.of(context)
                                                 .colorScheme
                                                 .background,
-                                        width: 2,
+                                        width: 4,
                                       ),
                                       borderRadius: BorderRadius.circular(20.0),
                                     ),
