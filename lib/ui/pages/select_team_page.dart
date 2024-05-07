@@ -142,7 +142,7 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                                 if (edit) {}
                                 return SizedBox(
                                   child: Text(
-                                    "$total/65",
+                                    "Fanta Coins: $total/65",
                                     textAlign: TextAlign.center,
                                     style: const TextStyle(
                                       fontSize: 22,
