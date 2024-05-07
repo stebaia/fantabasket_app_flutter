@@ -52,8 +52,11 @@ class CompletionPage extends StatelessWidget with AutoRouteWrapper {
     final darkMode = Provider.of<DarkThemeProvider>(context);
 
     final controller = TextEditingController();
-    side.removeWhere(
-        (player) => player.category == "A" || player.category == "B");
+    side.removeWhere((player) =>
+        player.category == "A1" ||
+        player.category == "A2" ||
+        player.category == "B" ||
+        player.category == "C1");
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       resizeToAvoidBottomInset: false,
