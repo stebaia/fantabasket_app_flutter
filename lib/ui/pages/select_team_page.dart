@@ -12,6 +12,7 @@ import 'package:fantabasket_app_flutter/routes/app_router.gr.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/double_spinner.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/player_icon.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/sponsors_banner.dart';
+import 'package:fantabasket_app_flutter/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -76,7 +77,7 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                       darkMode.darkTheme ? Colors.white : Colors.black,
                   backgroundColor: Theme.of(context).colorScheme.primary,
                   title: const Text(
-                    'Scegli i giocatori',
+                    'Scegli il tuo quintetto',
                     style: TextStyle(
                       fontSize: 18,
                     ),
@@ -113,8 +114,12 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                               color: size != 5
                                   ? const Color.fromARGB(255, 209, 200, 200)
                                   : darkMode.darkTheme
-                                      ? Colors.white
-                                      : Colors.black,
+                                      ? Styles.darkMode(true, context)
+                                          .colorScheme
+                                          .tertiary
+                                      : Styles.lightMode(true, context)
+                                          .colorScheme
+                                          .tertiary,
                             ),
                           ),
                         );
@@ -142,7 +147,7 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                                 if (edit) {}
                                 return SizedBox(
                                   child: Text(
-                                    "$total/65",
+                                    "Fanta Coins: $total/65",
                                     textAlign: TextAlign.center,
                                     style: const TextStyle(
                                       fontSize: 22,
@@ -230,17 +235,17 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                         _ => const Text("No matching"),
                       }),
                       BlocBuilder<BannerBloc, BannerState>(
-            builder: (context, state) {
-              if(state is TryGetBannerState) {
-                return const SponsorsBannerBlank();
-              }else if(state is ResultBannerListState){
-                return SponsorsBanner(banner: state.bannerList.banners![0]);
-              }else {
-               return const SponsorsBannerBlank();
-              }
-              
-            },
-          ),
+                        builder: (context, state) {
+                          if (state is TryGetBannerState) {
+                            return const SponsorsBannerBlank();
+                          } else if (state is ResultBannerListState) {
+                            return SponsorsBanner(
+                                banner: state.bannerList.banners![0]);
+                          } else {
+                            return const SponsorsBannerBlank();
+                          }
+                        },
+                      ),
                     ],
                   ),
                 ));

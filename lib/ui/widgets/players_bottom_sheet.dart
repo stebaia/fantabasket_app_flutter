@@ -67,6 +67,8 @@ class _PlayersBottomSheetState extends State<PlayersBottomSheet> {
         : Constants.categoryValues[widget.selected!.category]!;
     final List<Player> list =
         List.from(Set.from(_players).difference(Set.from(checkedPlayers)));
+    list.sort((b, a) => Constants.categoryValues[a.category]!
+        .compareTo(Constants.categoryValues[b.category]!));
     return Container(
       padding: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
