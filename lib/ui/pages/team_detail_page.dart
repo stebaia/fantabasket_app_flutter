@@ -53,18 +53,18 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
           category: entry.category,
         ),
       ),
-      child: SizedBox(
-        width: MediaQuery.of(context).size.width * 0.32,
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.29,
         //height: MediaQuery.of(context).size.height * 0.26,
         child: Card(
           color: Theme.of(context).colorScheme.primary,
           elevation: 4,
           child: SizedBox(
-            width: MediaQuery.of(context).size.width * 0.32,
+            width: MediaQuery.of(context).size.width * 0.29,
             child: Column(
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  padding: const EdgeInsets.symmetric(vertical: 2),
                   child: Text(
                     position == 5 ? "Sesto uomo" : "Giocatore ${position + 1}",
                     style: TextStyle(
@@ -162,7 +162,7 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
           children: [
             Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
+                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
               child: Text(
                 teamName,
                 style: TextStyle(
@@ -209,7 +209,8 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
                             onTap: () => context
                                 .read<TeamDetailBloc>()
                                 .updateDay(matchDay.day),
-                            child: SizedBox(
+                            child: Container(
+                              padding: EdgeInsets.only(left: 10),
                               height: 80,
                               child: Card(
                                 color: matchDay.day ==
@@ -285,6 +286,7 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
                           child: Text("Nessuna giornata caricata"),
                         )
                       : Container(
+                        padding: EdgeInsets.all(10),
                           alignment: Alignment.center,
                           width: double.infinity,
                           child: Column(

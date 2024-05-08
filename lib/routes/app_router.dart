@@ -9,6 +9,7 @@ import 'package:fantabasket_app_flutter/ui/pages/create_team.dart';
 import 'package:fantabasket_app_flutter/ui/pages/load_stages_page.dart';
 import 'package:fantabasket_app_flutter/ui/pages/login_page.dart';
 import 'package:fantabasket_app_flutter/ui/pages/main_page.dart';
+import 'package:fantabasket_app_flutter/ui/pages/pdf_viewer_page.dart';
 import 'package:fantabasket_app_flutter/ui/pages/player_detail_page.dart';
 import 'package:fantabasket_app_flutter/ui/pages/players_page.dart';
 import 'package:fantabasket_app_flutter/ui/pages/profile_page.dart';
@@ -43,6 +44,7 @@ import 'package:fantabasket_app_flutter/ui/pages/team_detail_page.dart';
       AutoRoute(page: ProfilePage, path: 'profile_page'),
     ]),
     AutoRoute(page: LoadStagesPage, path: 'load_stages_page'),
+    AutoRoute(page: PdfViewerPage, path: 'pdf_viewer_page'),
     AutoRoute(page: SelectTeamPage, path: 'select_team_page'),
     AutoRoute(page: CompletionPage, path: 'completion_page'),
     AutoRoute(page: RankDetailPage, path: 'rank_detail_page'),

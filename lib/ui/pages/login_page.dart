@@ -9,6 +9,7 @@ import 'package:fantabasket_app_flutter/ui/widgets/login_wave_clipper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 
 class LoginPage extends StatefulWidget with AutoRouteWrapper {
   const LoginPage({super.key});
@@ -77,9 +78,13 @@ class _LoginPageState extends State<LoginPage> {
                   listener: (context, state) {
                     if (state is LoggedInState) {
                       context.read<AuthCubit>().authenticated(state.user);
-                    }else {
-                                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Nessun utente trovato, ricontrolla le credenziali',),backgroundColor: Colors.red,));
-
+                    } else if (state is ErrorLoginInState) {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text(
+                          'Nessun utente trovato, ricontrolla le credenziali',
+                        ),
+                        backgroundColor: Colors.red,
+                      ));
                     }
                   },
                   builder: (context, state) {
@@ -89,7 +94,7 @@ class _LoginPageState extends State<LoginPage> {
                       children: [
                         const SizedBox(height: 75),
                         Image.asset(
-                          'assets/images/basketballicon_colored.png',
+                          'assets/images/onlyfanta_logo.png',
                           height: size.width * 0.4,
                         ),
                         Center(
@@ -117,7 +122,7 @@ class _LoginPageState extends State<LoginPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 EmailFormField(
-                                  AppLocalizations.of(context)!.email_address,
+                                  'Email',
                                   textEditingController: _singUpEmailController,
                                   focusNode: _focusNodeEmail,
                                   textColor: Colors.black,
@@ -134,7 +139,7 @@ class _LoginPageState extends State<LoginPage> {
                                   height: 20,
                                 ),
                                 PasswordFormField(
-                                  AppLocalizations.of(context)!.password,
+                                  'Password',
                                   textEditingController:
                                       _singUpPasswordController,
                                   focusNode: _focusNodePassword,
@@ -203,14 +208,16 @@ class _LoginPageState extends State<LoginPage> {
                                           'Non hai un account? ',
                                           style: TextStyle(
                                               color: Colors.black,
-                                              fontSize: 12),
+                                              fontSize: 14),
                                         ),
                                         Text(
                                           'Registrati',
                                           style: TextStyle(
+                                              decoration:
+                                                  TextDecoration.underline,
                                               color: Colors.black,
                                               fontWeight: FontWeight.bold,
-                                              fontSize: 12),
+                                              fontSize: 16),
                                         )
                                       ],
                                     ))

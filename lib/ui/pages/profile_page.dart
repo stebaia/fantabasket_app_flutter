@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fantabasket_app_flutter/bloc/cubit/auth_cubit/auth_cubit.dart';
 import 'package:fantabasket_app_flutter/bloc/view_team_bloc/view_team_bloc.dart';
 import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
+import 'package:fantabasket_app_flutter/routes/app_router.gr.dart';
 import 'package:fantabasket_app_flutter/ui/components/function_button.dart';
 import 'package:fantabasket_app_flutter/ui/components/text_form_fields.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/team_card.dart';
@@ -127,20 +128,7 @@ class ProfilePage extends StatelessWidget {
                 ),
                 GestureDetector(
                               onTap: () {
-                                showModalBottomSheet(
-                                    context: context,
-                                    isScrollControlled: true,
-                                    builder: ((modalContext) =>
-                                        CustomBaseBottomSheet(
-                                          title: 'Regolamento',
-                                          body: PdfView(
-                                            controller: pdfController,
-                                          ),
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.85,
-                                        )));
+                               context.pushRoute(PdfViewerRoute());
                               },
                               child: 
                 SizedBox(
