@@ -14,23 +14,7 @@ class ImagePickerBody extends StatelessWidget {
     final imagePickerCubit = context.read<ImagePickerCubit>();
 
     return BlocListener<LoginBloc, LoginInState>(
-      listener: (context, state) {
-        if (state is UploadedPhotoState) {
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            content: Text(
-              'Foto caricata con successo',
-            ),
-            backgroundColor: Colors.green,
-          ));
-        } else if (state is ErrorUploadedPhotoState) {
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            content: Text(
-              'Problema momentaneo, riprova più tardi',
-            ),
-            backgroundColor: Colors.red,
-          ));
-        }
-      },
+      listener: (context, state) {},
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

@@ -34,5 +34,6 @@ class Stage extends Equatable {
         photo,
         fantateams,
         position,
+        photo
       ];
 }

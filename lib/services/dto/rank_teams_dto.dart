@@ -7,6 +7,7 @@ class RankTeamsDTO extends DTO with EquatableMixin {
   List<RankTeamDTO>? fantateams;
   int? code;
   int? position;
+  String? photo;
 
   RankTeamsDTO({
     this.status,
@@ -14,6 +15,7 @@ class RankTeamsDTO extends DTO with EquatableMixin {
     this.fantateams,
     this.code,
     this.position,
+    this.photo,
   });
 
   RankTeamsDTO.fromJson(Map<String, dynamic> json) {
@@ -28,10 +30,11 @@ class RankTeamsDTO extends DTO with EquatableMixin {
     }
     code = json['code'];
     position = json['posizione'];
+    photo = json['photo'];
   }
 
   @override
-  List<Object?> get props => [status, msg, fantateams, position, code];
+  List<Object?> get props => [status, msg, fantateams, position, code, photo];
 }
 
 class RankTeamDTO extends DTO with EquatableMixin {
@@ -39,21 +42,18 @@ class RankTeamDTO extends DTO with EquatableMixin {
   String? teamName;
   bool? owner;
   int? points;
+  String? photo;
 
-  RankTeamDTO({
-    this.id,
-    this.teamName,
-    this.owner,
-    this.points,
-  });
+  RankTeamDTO({this.id, this.teamName, this.owner, this.points, this.photo});
 
   RankTeamDTO.fromJson(Map<String, dynamic> map) {
     id = map["id"] as int?;
     teamName = map["squadra"] as String?;
     owner = map["proprietario"] as bool?;
     points = map["punti"] as int?;
+    photo = map["foto"] as String?;
   }
 
   @override
-  List<Object?> get props => [id, teamName, owner, points];
+  List<Object?> get props => [id, teamName, owner, points, photo];
 }

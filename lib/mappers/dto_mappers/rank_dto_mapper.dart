@@ -25,11 +25,11 @@ class RankTeamsMapper extends DTOMapper<RankTeamsDTO, PlayersInRank> {
 class RankTeamMapper extends DTOMapper<RankTeamDTO, PlayerInRank> {
   @override
   PlayerInRank fromDTO(RankTeamDTO dto) => PlayerInRank(
-        id: dto.id!,
-        owner: dto.owner,
-        teamName: dto.teamName,
-        points: dto.points ?? 0,
-      );
+      id: dto.id!,
+      owner: dto.owner,
+      teamName: dto.teamName,
+      points: dto.points ?? 0,
+      photo: dto.photo ?? '');
 
   @override
   RankTeamDTO toDTO(PlayerInRank model) {

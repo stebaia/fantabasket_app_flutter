@@ -25,72 +25,48 @@ class RankDetailCard extends StatelessWidget {
         teamId: player.id,
         teamName: player.teamName!,
       )),
-      child: SizedBox(
-        height: 80,
-        child: Card(
-          margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-          color: owner
-              ? const Color.fromARGB(108, 190, 189, 189)
-              : Theme.of(context).colorScheme.primary,
-          elevation: 2,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const Expanded(flex: 1, child: SizedBox()),
-                Expanded(
-                  flex: 40,
-                  child: Container(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      player.teamName ?? "Nome non disponibile",
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Nunito Sans',
-                          fontSize: 18,
-                          color:
-                              darkMode.darkTheme ? Colors.white : Colors.black),
-                    ),
-                  ),
-                ),
-                const Expanded(flex: 5, child: SizedBox()),
-                Expanded(
-                  flex: 10,
-                  child: Container(
-                    margin: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: switch (position) {
-                        1 => const Color.fromARGB(255, 255, 215, 0),
-                        2 => const Color.fromARGB(255, 192, 192, 192),
-                        3 => const Color.fromARGB(255, 176, 141, 87),
-                        _ => Colors.white,
-                      },
-                      border: Border.all(
-                        color: const Color.fromARGB(255, 212, 204, 204),
-                      ),
-                      shape: BoxShape.circle,
-                    ),
-                    alignment: Alignment.center,
-                    child: Text("$position°"),
-                  ),
-                ),
-                Expanded(
-                  flex: 10,
-                  child: Text(
-                    "${player.points}",
-                    textAlign: TextAlign.right,
-                    style: TextStyle(
-                        fontSize: 14,
-                        fontFamily: 'Nunito Sans',
-                        color:
-                            darkMode.darkTheme ? Colors.white : Colors.black),
-                  ),
-                ),
-                const Expanded(flex: 1, child: SizedBox()),
-              ],
+      child: ListTile(
+        title: Text(
+          player.teamName ?? "Nome non disponibile",
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Nunito Sans',
+              fontSize: 18,
+              color: darkMode.darkTheme ? Colors.white : Colors.black),
+        ),
+        subtitle: Text('Punti totali: ${player.points}'),
+        leading: SizedBox(
+          width: 50,
+          height: 50,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Image.network(
+              player.photo ??
+                  'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/LeBron_James_%2851959977144%29_%28cropped2%29.jpg/640px-LeBron_James_%2851959977144%29_%28cropped2%29.jpg',
+              fit: BoxFit.cover,
             ),
+          ),
+        ),
+        trailing: Container(
+          height: 40,
+          width: 40,
+          decoration: BoxDecoration(
+            color: switch (position) {
+              1 => const Color.fromARGB(255, 255, 215, 0),
+              2 => const Color.fromARGB(255, 192, 192, 192),
+              3 => const Color.fromARGB(255, 176, 141, 87),
+              _ => Colors.white,
+            },
+            border: Border.all(
+              color: const Color.fromARGB(255, 212, 204, 204),
+            ),
+            shape: BoxShape.circle,
+          ),
+          alignment: Alignment.center,
+          child: Text(
+            "$position°",
+            style: const TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
       ),

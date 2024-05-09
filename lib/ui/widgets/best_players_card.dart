@@ -26,7 +26,7 @@ class BestPlayersCard extends StatelessWidget {
       )),
       child: SizedBox(
         width: double.infinity,
-        height: 100,
+        height: 80,
         child: Card(
           color: Theme.of(context).colorScheme.primary,
           shape: RoundedRectangleBorder(
@@ -67,8 +67,9 @@ class BestPlayersCard extends StatelessWidget {
                               fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          player.team,
+                          player.category,
                           style: TextStyle(
+                            fontWeight: FontWeight.bold,
                             color: darkMode.darkTheme
                                 ? Colors.white
                                 : Colors.black,

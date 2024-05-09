@@ -62,17 +62,17 @@ class RankDetailPage extends StatelessWidget with AutoRouteWrapper {
                 builder: (BuildContext context, RankDetailState state) {
               return switch (state) {
                 TryGetRanking() => const Center(child: DoubleSpinner()),
-                ResultRankingState() => ListView.builder(
+                ResultRankingState() => ListView.separated(
+                    separatorBuilder: (context, index) => const Divider(
+                        indent: 15, //spacing at the start of divider
+                        endIndent: 20),
                     shrinkWrap: true,
                     itemCount: state.players.count,
                     itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: RankDetailCard(
-                          player: state.players.teams![index],
-                          position: index + 1,
-                          owner: state.players.teams![index].owner!,
-                        ),
+                      return RankDetailCard(
+                        player: state.players.teams![index],
+                        position: index + 1,
+                        owner: state.players.teams![index].owner!,
                       );
                     },
                   ),
