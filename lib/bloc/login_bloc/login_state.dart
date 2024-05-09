@@ -16,6 +16,18 @@ class TryLogginInState extends LoginInState {
   const TryLogginInState();
 }
 
+class TryToUploadPhotoInState extends LoginInState {
+  const TryToUploadPhotoInState();
+}
+
+class UploadedPhotoState extends LoginInState {
+  const UploadedPhotoState();
+}
+
+class ErrorUploadedPhotoState extends LoginInState {
+  const ErrorUploadedPhotoState();
+}
+
 class TryToRegister extends LoginInState {
   const TryToRegister();
 }

@@ -10,6 +10,7 @@ class UserMapper extends DTOMapper<UserDTO, User> {
         lastName: dto.data!.lastName ?? '',
         email: dto.data!.email ?? '',
         token: dto.data!.token ?? '',
+        foto: dto.data!.photo ?? '',
         tokenExpiration: dto.data!.tokenExpiration ?? '',
       );
 
@@ -21,6 +22,7 @@ class UserMapper extends DTOMapper<UserDTO, User> {
           lastName: model.lastName,
           email: model.email,
           token: model.token,
+          photo: model.foto,
           tokenExpiration: model.tokenExpiration,
         ),
         status:

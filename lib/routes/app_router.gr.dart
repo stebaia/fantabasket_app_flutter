@@ -187,7 +187,7 @@ class AppRouter extends _i19.RootStackRouter {
           orElse: () => const ProfileRouteArgs());
       return _i19.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i17.ProfilePage(key: args.key),
+        child: _i19.WrappedRoute(child: _i17.ProfilePage(key: args.key)),
       );
     },
     ContainerRoute.name: (routeData) {

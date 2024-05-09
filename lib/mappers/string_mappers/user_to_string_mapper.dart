@@ -11,6 +11,7 @@ class UserToStringMapper extends Mapper<User, String> {
         'lastName': from.lastName,
         'email': from.email,
         'token': from.token,
+        'foto': from.foto,
         'tokenExpiration': from.tokenExpiration,
       });
 
@@ -23,6 +24,7 @@ class UserToStringMapper extends Mapper<User, String> {
       lastName: json['lastName'],
       email: json['email'],
       token: json['token'],
+      foto: json['foto'],
       tokenExpiration: '',
     );
   }

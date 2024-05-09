@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -18,6 +19,20 @@ class LoginBloc extends Bloc<AuthEvent, LoginInState> {
   }) : super(const NotLoginInState()) {
     on<LoginInEvent>(_loginIn);
     on<RegistrationEvent>(_registration);
+    on<UploadPhotoEvent>(_uploadPhoto);
+  }
+
+  void uploadPhoto({required File file}) => add(UploadPhotoEvent(photo: file));
+
+  FutureOr<void> _uploadPhoto(
+      UploadPhotoEvent uploadPhotoEvent, Emitter<LoginInState> emitter) {
+    emit(TryToUploadPhotoInState());
+    try {
+      userRepository.uploadPhoto(file: uploadPhotoEvent.photo);
+      emit(UploadedPhotoState());
+    } catch (e) {
+      emit(ErrorUploadedPhotoState());
+    }
   }
 
   void loginIn(

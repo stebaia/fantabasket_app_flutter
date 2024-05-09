@@ -6,6 +6,7 @@ class User extends Equatable {
   final String lastName;
   final String email;
   String token;
+  final String foto;
   final String tokenExpiration;
 
   User(
@@ -14,6 +15,7 @@ class User extends Equatable {
       required this.email,
       required this.lastName,
       required this.token,
+      required this.foto,
       required this.tokenExpiration});
 
   @override

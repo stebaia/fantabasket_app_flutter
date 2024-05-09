@@ -36,6 +36,7 @@ class UserDetailDTO extends DTO with EquatableMixin {
   final String? email;
   final List<String>? roles;
   final String? token;
+  final String? photo;
   final String? tokenExpiration;
 
   UserDetailDTO({
@@ -46,6 +47,7 @@ class UserDetailDTO extends DTO with EquatableMixin {
     this.email,
     this.roles,
     this.token,
+    this.photo,
     this.tokenExpiration,
   });
 
@@ -58,6 +60,7 @@ class UserDetailDTO extends DTO with EquatableMixin {
       email: json['email'],
       roles: List<String>.from(json['roles'] ?? <String>[]),
       token: json['access_token'],
+      photo: json['foto'],
       tokenExpiration: json['tokenExpiration'],
     );
   }
@@ -71,6 +74,7 @@ class UserDetailDTO extends DTO with EquatableMixin {
       'email': email,
       'roles': roles,
       'token': token,
+      'foto': photo,
       'tokenExpiration': tokenExpiration,
     };
   }
@@ -84,6 +88,7 @@ class UserDetailDTO extends DTO with EquatableMixin {
         email,
         roles,
         token,
+        photo,
         tokenExpiration,
       ];
 }
