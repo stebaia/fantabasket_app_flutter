@@ -1,4 +1,5 @@
 import 'package:fantabasket_app_flutter/bloc/cubit/credits_cubit/credits_cubit.dart';
+import 'package:fantabasket_app_flutter/bloc/cubit/remove_filters_cubit/remove_filters_cubit.dart';
 import 'package:fantabasket_app_flutter/bloc/select_player_bloc/select_player_bloc.dart';
 import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
@@ -34,7 +35,22 @@ class _PlayersBottomSheetState extends State<PlayersBottomSheet> {
     super.initState();
     _players = widget.players;
     _controller = TextEditingController();
-    _selectedCategories = Constants.categoryValues.keys.toList();
+    _selectedCategories = [];
+  }
+
+  _updateList() {
+    _players = _selectedCategories.isEmpty
+        ? widget.players
+        : widget.players
+            .where((player) => _selectedCategories.contains(player.category))
+            .toList();
+    _players = _players
+        .where((player) =>
+            "${player.lastName} ${player.firstName}"
+                .toLowerCase()
+                .contains(_controller.text.toLowerCase()) ||
+            player.team.toLowerCase().contains(_controller.text.toLowerCase()))
+        .toList();
   }
 
   onCategorySelected(String category) {
@@ -42,16 +58,7 @@ class _PlayersBottomSheetState extends State<PlayersBottomSheet> {
       _selectedCategories.contains(category)
           ? _selectedCategories.remove(category)
           : _selectedCategories.add(category);
-      _players = widget.players
-          .where((player) =>
-              "${player.lastName} ${player.firstName}"
-                  .toLowerCase()
-                  .contains(_controller.text.toLowerCase()) ||
-              player.team
-                  .toLowerCase()
-                  .contains(_controller.text.toLowerCase()))
-          .where((player) => _selectedCategories.contains(player.category))
-          .toList();
+      _updateList();
     });
   }
 
@@ -80,15 +87,19 @@ class _PlayersBottomSheetState extends State<PlayersBottomSheet> {
       ),
       height: height,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 20),
-          Text(
-            'Seleziona giocatore',
-            style: TextStyle(
-              color: darkMode.darkTheme ? Colors.white : Colors.black,
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
+          SizedBox(
+            width: double.infinity,
+            child: Text(
+              'Seleziona giocatore',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: darkMode.darkTheme ? Colors.white : Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
             ),
           ),
           const SizedBox(height: 20),
@@ -116,17 +127,7 @@ class _PlayersBottomSheetState extends State<PlayersBottomSheet> {
               color: darkMode.darkTheme ? Colors.white : Colors.black,
             ),
             textAlignVertical: TextAlignVertical.center,
-            onChanged: (value) => setState(() {
-              _players = widget.players
-                  .where((player) =>
-                      "${player.lastName} ${player.firstName}"
-                          .toLowerCase()
-                          .contains(value.toLowerCase()) ||
-                      player.team.toLowerCase().contains(value.toLowerCase()))
-                  .where(
-                      (player) => _selectedCategories.contains(player.category))
-                  .toList();
-            }),
+            onChanged: (value) => setState(() => _updateList()),
           ),
           const SizedBox(height: 10),
           SingleChildScrollView(
@@ -149,6 +150,22 @@ class _PlayersBottomSheetState extends State<PlayersBottomSheet> {
               ],
             ),
           ),
+          const SizedBox(height: 10),
+          GestureDetector(
+              onTap: () {
+                setState(() {
+                  _players = widget.players;
+                  _controller.clear();
+                  _selectedCategories = [];
+                  context.read<RemoveFiltersCubit>().reset();
+                });
+              },
+              child: const Row(
+                children: [
+                  Icon(Icons.delete_outline),
+                  Text("Rimuovi tutti i filtri"),
+                ],
+              )),
           const SizedBox(height: 10),
           Expanded(
             child: SingleChildScrollView(

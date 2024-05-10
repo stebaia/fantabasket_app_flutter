@@ -15,4 +15,7 @@ final List<BlocProvider> _blocs = [
   BlocProvider<AddTeamBloc>(
     create: ((context) => AddTeamBloc(teamRepository: context.read())),
   ),
+  BlocProvider<RemoveFiltersCubit>(
+    create: (context) => RemoveFiltersCubit(context: context),
+  ),
 ];
