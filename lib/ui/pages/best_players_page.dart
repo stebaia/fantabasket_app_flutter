@@ -77,7 +77,7 @@ class BestPlayersPage extends StatelessWidget with AutoRouteWrapper {
                       }
                     },
                   ),
-                  Center(
+                  const Center(
                     child: Text(
                       "Nessun giocatore presente",
                       style: TextStyle(color: Colors.white),
