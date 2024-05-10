@@ -9,6 +9,7 @@ import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:fantabasket_app_flutter/model/stage.dart';
 import 'package:fantabasket_app_flutter/routes/app_router.gr.dart';
+import 'package:fantabasket_app_flutter/ui/widgets/captain_selection.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/completion_button.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/player_bar.dart';
 import 'package:fantabasket_app_flutter/utils/constants.dart';
@@ -104,7 +105,7 @@ class CompletionPage extends StatelessWidget with AutoRouteWrapper {
         child: SingleChildScrollView(
           child: Container(
             width: double.infinity,
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -154,101 +155,7 @@ class CompletionPage extends StatelessWidget with AutoRouteWrapper {
                     color: darkMode.darkTheme ? Colors.white : Colors.black,
                   ),
                 ),
-                SizedBox(
-                  height: 170,
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        ...team.map(
-                          (player) => BlocBuilder<CaptainCubit, CaptainState>(
-                            builder:
-                                (BuildContext context, CaptainState state) {
-                              var captain =
-                                  context.read<CaptainCubit>().getCaptain();
-                              return GestureDetector(
-                                onTap: () => context
-                                    .read<CaptainCubit>()
-                                    .selectCaptain(player),
-                                child: SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.35,
-                                  child: Card(
-                                    shape: RoundedRectangleBorder(
-                                      side: BorderSide(
-                                        color: (captain == null ||
-                                                player.id != captain.id)
-                                            ? Colors.white
-                                            : Theme.of(context)
-                                                .colorScheme
-                                                .background,
-                                        width: 4,
-                                      ),
-                                      borderRadius: BorderRadius.circular(20.0),
-                                    ),
-                                    elevation: 4,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        SizedBox(
-                                            width: 140,
-                                            height: 130,
-                                            child: ClipRRect(
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                        topLeft:
-                                                            Radius.circular(20),
-                                                        topRight:
-                                                            Radius.circular(
-                                                                20)),
-                                                child: player.photo != ''
-                                                    ? Image.network(
-                                                        player.photo,
-                                                        fit: BoxFit.cover,
-                                                      )
-                                                    : Image.network(
-                                                        'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/LeBron_James_%2851959977144%29_%28cropped2%29.jpg/640px-LeBron_James_%2851959977144%29_%28cropped2%29.jpg',
-                                                        fit: BoxFit.cover))),
-                                        Expanded(
-                                          flex: 2,
-                                          child: Container(
-                                            alignment: Alignment.centerLeft,
-                                            decoration: BoxDecoration(
-                                              color: Constants.categoryColors[
-                                                  player.category],
-                                              borderRadius:
-                                                  const BorderRadius.only(
-                                                bottomLeft: Radius.circular(20),
-                                                bottomRight:
-                                                    Radius.circular(20),
-                                              ),
-                                            ),
-                                            width: double.infinity,
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 8),
-                                            child: Text(
-                                              "${player.lastName} ${player.firstName}",
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: const TextStyle(
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                SelectCaptain(team: team),
                 const SizedBox(height: 20),
                 Text(
                   "Seleziona sesto uomo",
