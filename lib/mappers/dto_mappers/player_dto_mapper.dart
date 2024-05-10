@@ -13,6 +13,7 @@ class PlayerListMapper extends DTOMapper<PlayerDTO, PlayersList> {
         players.add(playerMapper.fromDTO(element));
       });
     }
+    players.sort((b, a) => a.value.compareTo(b.value));
     return PlayersList(count: dto.data?.length ?? 0, players: players);
   }
 
