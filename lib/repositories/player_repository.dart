@@ -32,6 +32,18 @@ class PlayerRepository {
     }
   }
 
+  Future<HttpResponse<PlayersList>> getAllPlayers() async {
+    try {
+      final response = await playerService.getAllPlayers();
+      PlayersList playersList = playerDTOMapper.fromDTO(response.data);
+      return HttpResponse(playersList, response.response);
+    } catch (error, stackTrace) {
+      logger.e('Error getting list of player',
+          error: error, stackTrace: stackTrace);
+      rethrow;
+    }
+  }
+
   Future<HttpResponse<PlayersStatsList>> getPlayerDetails(int playerId) async {
     try {
       final response = await playerService.getPlayerDetails(playerId);
