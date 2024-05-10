@@ -63,20 +63,20 @@ class BestPlayersPage extends StatelessWidget with AutoRouteWrapper {
                   style: const TextStyle(color: Colors.white),
                 ),
               ),
-            EmptyGetPlayersState() =>  Column(
+            EmptyGetPlayersState() => Column(
                 children: [
                   BlocBuilder<BannerBloc, BannerState>(
-            builder: (context, state) {
-              if(state is TryGetBannerState) {
-                return const SponsorsBannerBlank();
-              }else if(state is ResultBannerListState){
-                return SponsorsBanner(banner: state.bannerList.banners![0]);
-              }else {
-               return const SponsorsBannerBlank();
-              }
-              
-            },
-          ),
+                    builder: (context, state) {
+                      if (state is TryGetBannerState) {
+                        return const SponsorsBannerBlank();
+                      } else if (state is ResultBannerListState) {
+                        return SponsorsBanner(
+                            banner: state.bannerList.banners![0]);
+                      } else {
+                        return const SponsorsBannerBlank();
+                      }
+                    },
+                  ),
                   Center(
                     child: Text(
                       "Nessun giocatore presente",
@@ -90,20 +90,19 @@ class BestPlayersPage extends StatelessWidget with AutoRouteWrapper {
                 child: Column(
                   children: [
                     BlocBuilder<BannerBloc, BannerState>(
-            builder: (context, state) {
-              if(state is TryGetBannerState) {
-                return const SponsorsBannerBlank();
-              }else if(state is ResultBannerListState){
-                return SponsorsBanner(banner: state.bannerList.banners![0]);
-              }else {
-               return const SponsorsBannerBlank();
-              }
-              
-            },
-          ),
+                      builder: (context, state) {
+                        if (state is TryGetBannerState) {
+                          return const SponsorsBannerBlank();
+                        } else if (state is ResultBannerListState) {
+                          return SponsorsBanner(
+                              banner: state.bannerList.banners![0]);
+                        } else {
+                          return const SponsorsBannerBlank();
+                        }
+                      },
+                    ),
                     Expanded(
                       child: Container(
-                       
                         alignment: Alignment.center,
                         child: SingleChildScrollView(
                           child: Column(

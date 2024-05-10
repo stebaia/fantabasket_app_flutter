@@ -41,14 +41,13 @@ class PlayersPage extends StatelessWidget with AutoRouteWrapper {
         children: [
           BlocBuilder<BannerBloc, BannerState>(
             builder: (context, state) {
-              if(state is TryGetBannerState) {
+              if (state is TryGetBannerState) {
                 return const SponsorsBannerBlank();
-              }else if(state is ResultBannerListState){
+              } else if (state is ResultBannerListState) {
                 return SponsorsBanner(banner: state.bannerList.banners![0]);
-              }else {
-               return const SponsorsBannerBlank();
+              } else {
+                return const SponsorsBannerBlank();
               }
-              
             },
           ),
           const SizedBox(height: 10),
@@ -104,20 +103,20 @@ class PlayersPage extends StatelessWidget with AutoRouteWrapper {
                     child: Text("Errore nel caricamento delle tappe"),
                   );
                 } else if (state is EmptyGetStagesState) {
-                  return  Column(
+                  return Column(
                     children: [
                       BlocBuilder<BannerBloc, BannerState>(
-            builder: (context, state) {
-              if(state is TryGetBannerState) {
-                return const SponsorsBannerBlank();
-              }else if(state is ResultBannerListState){
-                return SponsorsBanner(banner: state.bannerList.banners![0]);
-              }else {
-               return const SponsorsBannerBlank();
-              }
-              
-            },
-          ),
+                        builder: (context, state) {
+                          if (state is TryGetBannerState) {
+                            return const SponsorsBannerBlank();
+                          } else if (state is ResultBannerListState) {
+                            return SponsorsBanner(
+                                banner: state.bannerList.banners![0]);
+                          } else {
+                            return const SponsorsBannerBlank();
+                          }
+                        },
+                      ),
                       Center(
                         child: Text("Nessuna tappa presente"),
                       ),
