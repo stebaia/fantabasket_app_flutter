@@ -115,10 +115,10 @@ class PlayersPage extends StatelessWidget with AutoRouteWrapper {
                           list: list,
                         ),
                       ErrorAllPlayersState() => const Center(
-                          child: Text("Errore nel caricamento delle tappe"),
+                          child: Text("Errore nel caricamento dei giocatori"),
                         ),
                       EmptyAllPlayersState() => const Center(
-                          child: Text("Nessuna tappa presente"),
+                          child: Text("Nessun giocatore presente"),
                         ),
                       _ => Container(),
                     };
