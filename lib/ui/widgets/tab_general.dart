@@ -1,4 +1,5 @@
 import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
+import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:fantabasket_app_flutter/model/players_list.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/best_players_card.dart';
 import 'package:flutter/material.dart';
@@ -18,12 +19,24 @@ class TabGeneral extends StatefulWidget {
 }
 
 class _TabGeneralState extends State<TabGeneral> {
-  late PlayersList list;
+  late List<Player> _list;
+  late TextEditingController _controller;
+
+  _updateList() {
+    _list = widget.list.players!
+        .where((player) =>
+            "${player.lastName} ${player.firstName}"
+                .toLowerCase()
+                .contains(_controller.text.toLowerCase()) ||
+            player.team.toLowerCase().contains(_controller.text.toLowerCase()))
+        .toList();
+  }
 
   @override
   void initState() {
     super.initState();
-    list = widget.list;
+    _list = widget.list.players!;
+    _controller = TextEditingController();
   }
 
   @override
@@ -36,6 +49,7 @@ class _TabGeneralState extends State<TabGeneral> {
             vertical: 2.0,
           ),
           child: TextField(
+            controller: _controller,
             decoration: InputDecoration(
               focusColor: Theme.of(context).colorScheme.background,
               focusedBorder: OutlineInputBorder(
@@ -58,21 +72,22 @@ class _TabGeneralState extends State<TabGeneral> {
               color: widget.darkMode.darkTheme ? Colors.white : Colors.black,
             ),
             textAlignVertical: TextAlignVertical.center,
-            onChanged: (value) {},
+            onChanged: (value) => setState(() => _updateList()),
           ),
         ),
         Expanded(
           child: Container(
-            alignment: Alignment.center,
+            alignment: Alignment.topCenter,
             child: SingleChildScrollView(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   ListView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: widget.list.count,
+                    itemCount: _list.length,
                     itemBuilder: (context, index) =>
-                        BestPlayersCard(player: widget.list.players![index]),
+                        BestPlayersCard(player: _list[index]),
                   ),
                 ],
               ),

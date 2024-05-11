@@ -24,12 +24,22 @@ class TabStages extends StatefulWidget {
 }
 
 class _TabStagesState extends State<TabStages> {
-  late StagesList list;
+  late List<Stage> _list;
+  late TextEditingController _controller;
+
+  _updateList() {
+    _list = widget.list.stages!
+        .where((stage) => stage.fieldName!
+            .toLowerCase()
+            .contains(_controller.text.toLowerCase()))
+        .toList();
+  }
 
   @override
   void initState() {
     super.initState();
-    list = widget.list;
+    _list = widget.list.stages!;
+    _controller = TextEditingController();
   }
 
   @override
@@ -42,6 +52,7 @@ class _TabStagesState extends State<TabStages> {
             vertical: 2.0,
           ),
           child: TextField(
+            controller: _controller,
             decoration: InputDecoration(
               focusColor: Theme.of(context).colorScheme.background,
               focusedBorder: OutlineInputBorder(
@@ -64,7 +75,7 @@ class _TabStagesState extends State<TabStages> {
               color: widget.darkMode.darkTheme ? Colors.white : Colors.black,
             ),
             textAlignVertical: TextAlignVertical.center,
-            onChanged: (value) {},
+            onChanged: (value) => setState(() => _updateList()),
           ),
         ),
         Expanded(
@@ -81,9 +92,9 @@ class _TabStagesState extends State<TabStages> {
                         ListView.builder(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          itemCount: list.count,
+                          itemCount: _list.length,
                           itemBuilder: (context, index) => PlayersListCard(
-                            stage: list.stages![index],
+                            stage: _list[index],
                           ),
                         ),
                       ],
