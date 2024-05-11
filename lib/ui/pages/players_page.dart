@@ -1,12 +1,8 @@
 import 'package:fantabasket_app_flutter/bloc/all_players_bloc/all_players_bloc.dart';
 import 'package:fantabasket_app_flutter/bloc/banner_bloc/banner_bloc.dart';
+import 'package:fantabasket_app_flutter/bloc/select_team_bloc/select_team_bloc.dart';
 import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
-import 'package:fantabasket_app_flutter/model/player.dart';
-import 'package:fantabasket_app_flutter/model/stage.dart';
-import 'package:fantabasket_app_flutter/ui/widgets/best_players_card.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/double_spinner.dart';
-import 'package:fantabasket_app_flutter/ui/widgets/players_list_card.dart';
-import 'package:fantabasket_app_flutter/ui/widgets/rank_card.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/sponsors_banner.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/tab_general.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/tab_stages.dart';
@@ -15,7 +11,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:fantabasket_app_flutter/bloc/create_team_bloc/create_team_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 class PlayersPage extends StatelessWidget with AutoRouteWrapper {
   const PlayersPage({super.key});
@@ -53,13 +48,12 @@ class PlayersPage extends StatelessWidget with AutoRouteWrapper {
           children: [
             BlocBuilder<BannerBloc, BannerState>(
               builder: (context, state) {
-                if (state is TryGetBannerState) {
-                  return const SponsorsBannerBlank();
-                } else if (state is ResultBannerListState) {
-                  return SponsorsBanner(banner: state.bannerList.banners![0]);
-                } else {
-                  return const SponsorsBannerBlank();
-                }
+                return switch (state) {
+                  TryGetBannerState() => const SponsorsBannerBlank(),
+                  ResultBannerListState() =>
+                    SponsorsBanner(banner: state.bannerList.banners![0]),
+                  _ => const SponsorsBannerBlank(),
+                };
               },
             ),
             const SizedBox(height: 10),
@@ -90,8 +84,45 @@ class PlayersPage extends StatelessWidget with AutoRouteWrapper {
             Expanded(
               child: TabBarView(
                 children: [
-                  TabStages(darkMode: darkMode),
-                  TabGeneral(darkMode: darkMode),
+                  BlocBuilder<CreateTeamBloc, CreateTeamState>(
+                      builder: (context, state) {
+                    return switch (state) {
+                      TryGetStagesState() => const Center(
+                          child: DoubleSpinner(),
+                        ),
+                      ResultGetStagesState(stagesList: var list) => TabStages(
+                          darkMode: darkMode,
+                          list: list,
+                        ),
+                      ErrorGetStagesState() => const Center(
+                          child: Text("Errore nel caricamento delle tappe"),
+                        ),
+                      EmptyGetStagesState() => const Center(
+                          child: Text("Nessuna tappa presente"),
+                        ),
+                      _ => Container()
+                    };
+                  }),
+                  BlocBuilder<AllPlayersBloc, AllPlayersState>(
+                      builder: (context, state) {
+                    return switch (state) {
+                      TryAllPlayersState() => const Center(
+                          child: DoubleSpinner(),
+                        ),
+                      ResultAllPlayersState(playersList: var list) =>
+                        TabGeneral(
+                          darkMode: darkMode,
+                          list: list,
+                        ),
+                      ErrorAllPlayersState() => const Center(
+                          child: Text("Errore nel caricamento delle tappe"),
+                        ),
+                      EmptyAllPlayersState() => const Center(
+                          child: Text("Nessuna tappa presente"),
+                        ),
+                      _ => Container(),
+                    };
+                  }),
                 ],
               ),
             ),
