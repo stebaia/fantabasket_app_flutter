@@ -84,4 +84,29 @@ class TeamRepository {
       rethrow;
     }
   }
+
+  Future<HttpResponse<CreateTeamDTO>> editTeam({
+    required String name,
+    required List<int> player,
+    required int cpt,
+    required int ris,
+    required int stageId,
+    required int teamId,
+  }) async {
+    try {
+      EditTeamRequest request = EditTeamRequest(
+        name: name,
+        player: player,
+        cpt: cpt,
+        ris: ris,
+        stageId: stageId,
+        teamId: teamId,
+      );
+      final response = await teamService.editTeam(request);
+      return response;
+    } catch (error, stackTrace) {
+      logger.e('Error in team creation', error: error, stackTrace: stackTrace);
+      rethrow;
+    }
+  }
 }

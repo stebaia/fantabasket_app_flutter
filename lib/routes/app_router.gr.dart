@@ -96,9 +96,10 @@ class AppRouter extends _i18.RootStackRouter {
         child: _i18.WrappedRoute(
             child: _i8.CompletionPage(
           key: args.key,
-          team: args.team,
+          players: args.players,
           side: args.side,
           stageId: args.stageId,
+          team: args.team,
         )),
       );
     },
@@ -409,17 +410,19 @@ class SelectTeamRouteArgs {
 class CompletionRoute extends _i18.PageRouteInfo<CompletionRouteArgs> {
   CompletionRoute({
     _i19.Key? key,
-    required List<_i21.Player> team,
+    required List<_i21.Player> players,
     required List<_i21.Player> side,
     required int stageId,
+    required _i20.Team? team,
   }) : super(
           CompletionRoute.name,
           path: 'completion_page',
           args: CompletionRouteArgs(
             key: key,
-            team: team,
+            players: players,
             side: side,
             stageId: stageId,
+            team: team,
           ),
         );
 
@@ -429,22 +432,25 @@ class CompletionRoute extends _i18.PageRouteInfo<CompletionRouteArgs> {
 class CompletionRouteArgs {
   const CompletionRouteArgs({
     this.key,
-    required this.team,
+    required this.players,
     required this.side,
     required this.stageId,
+    required this.team,
   });
 
   final _i19.Key? key;
 
-  final List<_i21.Player> team;
+  final List<_i21.Player> players;
 
   final List<_i21.Player> side;
 
   final int stageId;
 
+  final _i20.Team? team;
+
   @override
   String toString() {
-    return 'CompletionRouteArgs{key: $key, team: $team, side: $side, stageId: $stageId}';
+    return 'CompletionRouteArgs{key: $key, players: $players, side: $side, stageId: $stageId, team: $team}';
   }
 }
 

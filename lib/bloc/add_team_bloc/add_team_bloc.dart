@@ -14,6 +14,7 @@ class AddTeamBloc extends Bloc<AddTeamEvent, AddTeamState> {
 
   AddTeamBloc({required this.teamRepository}) : super(const InitCreateState()) {
     on<AddNewTeamEvent>(_createTeam);
+    on<EditTeamEvent>(_editTeam);
   }
 
   void addNewTeam({
@@ -31,6 +32,23 @@ class AddTeamBloc extends Bloc<AddTeamEvent, AddTeamState> {
         stage: stage,
       ));
 
+  void editTeam({
+    required String name,
+    required List<int> player,
+    required int cpt,
+    required int ris,
+    required int stage,
+    required int teamId,
+  }) =>
+      add(EditTeamEvent(
+        name: name,
+        player: player,
+        cpt: cpt,
+        ris: ris,
+        stage: stage,
+        teamId: teamId,
+      ));
+
   FutureOr<void> _createTeam(
     AddNewTeamEvent event,
     Emitter<AddTeamState> emitter,
@@ -43,6 +61,32 @@ class AddTeamBloc extends Bloc<AddTeamEvent, AddTeamState> {
         cpt: event.cpt,
         ris: event.ris,
         stageId: event.stage,
+      );
+      if (result.data.code == 1) {
+        emit(const ResultCreateState());
+      } else {
+        emit(ErrorCreateState(result.data.message!));
+      }
+      emit(const InitCreateState());
+    } catch (e) {
+      emit(ErrorCreateState((e as DioException).response!.data["msg"] ?? ""));
+      emit(const InitCreateState());
+    }
+  }
+
+  FutureOr<void> _editTeam(
+    EditTeamEvent event,
+    Emitter<AddTeamState> emitter,
+  ) async {
+    emit(const TryCreateState());
+    try {
+      var result = await teamRepository.editTeam(
+        name: event.name,
+        player: event.player,
+        cpt: event.cpt,
+        ris: event.ris,
+        stageId: event.stage,
+        teamId: event.teamId,
       );
       if (result.data.code == 1) {
         emit(const ResultCreateState());

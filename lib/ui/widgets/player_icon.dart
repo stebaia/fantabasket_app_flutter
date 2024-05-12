@@ -12,12 +12,13 @@ import 'package:provider/provider.dart';
 
 class PlayerIcon extends StatefulWidget {
   final List<Player> players;
-
   final BuildContext mContext;
+  final Player? selected;
 
   const PlayerIcon({
     required this.players,
     required this.mContext,
+    required this.selected,
     super.key,
   });
 
@@ -31,13 +32,19 @@ class _PlayerIconState extends State<PlayerIcon> {
   @override
   void initState() {
     super.initState();
+    if (widget.selected != null) {
+      selected = widget.selected;
+      context
+          .read<CreditsCubit>()
+          .increment(Constants.categoryValues[selected!.category]!);
+      context.read<SelectPlayerBloc>().addPlayer(selected!);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final darkMode = Provider.of<DarkThemeProvider>(context);
 
-    var height = MediaQuery.of(context).size.height * 0.7;
     return GestureDetector(
       onTap: () async {
         var selectedPlayer = await showModalBottomSheet<Player>(

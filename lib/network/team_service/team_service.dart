@@ -37,4 +37,8 @@ abstract class TeamService {
   @POST('api/addFantaTeam')
   Future<HttpResponse<CreateTeamDTO>> createTeam(
       @Body() CreateTeamRequest createTeamRequest);
+
+  @POST('api/editFantaTeam')
+  Future<HttpResponse<CreateTeamDTO>> editTeam(
+      @Body() EditTeamRequest createTeamRequest);
 }
