@@ -60,21 +60,21 @@ class _LoadStagesPageState extends State<LoadStagesPage> {
               child: Text("Errore nel caricamento delle tappe"),
             );
           } else if (state is EmptyGetStagesState) {
-            return  Column(
+            return Column(
               children: [
                 BlocBuilder<BannerBloc, BannerState>(
-            builder: (context, state) {
-              if(state is TryGetBannerState) {
-                return const SponsorsBannerBlank();
-              }else if(state is ResultBannerListState){
-                return SponsorsBanner(banner: state.bannerList.banners![0]);
-              }else {
-               return const SponsorsBannerBlank();
-              }
-              
-            },
-          ),
-                Center(
+                  builder: (context, state) {
+                    if (state is TryGetBannerState) {
+                      return const SponsorsBannerBlank();
+                    } else if (state is ResultBannerListState) {
+                      return SponsorsBanner(
+                          banner: state.bannerList.banners![0]);
+                    } else {
+                      return const SponsorsBannerBlank();
+                    }
+                  },
+                ),
+                const Center(
                   child: Text("Nessuna tappa presente"),
                 ),
               ],
@@ -85,17 +85,17 @@ class _LoadStagesPageState extends State<LoadStagesPage> {
               child: Column(
                 children: [
                   BlocBuilder<BannerBloc, BannerState>(
-            builder: (context, state) {
-              if(state is TryGetBannerState) {
-                return const SponsorsBannerBlank();
-              }else if(state is ResultBannerListState){
-                return SponsorsBanner(banner: state.bannerList.banners![0]);
-              }else {
-               return const SponsorsBannerBlank();
-              }
-              
-            },
-          ),
+                    builder: (context, state) {
+                      if (state is TryGetBannerState) {
+                        return const SponsorsBannerBlank();
+                      } else if (state is ResultBannerListState) {
+                        return SponsorsBanner(
+                            banner: state.bannerList.banners![0]);
+                      } else {
+                        return const SponsorsBannerBlank();
+                      }
+                    },
+                  ),
                   Expanded(
                     child: Container(
                       padding: const EdgeInsets.symmetric(vertical: 20),
@@ -107,14 +107,29 @@ class _LoadStagesPageState extends State<LoadStagesPage> {
                                   child: DoubleSpinner(),
                                 ),
                               ResultGetStagesState(stagesList: var stages) =>
-                                ListView.builder(
-                                  shrinkWrap: true,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  itemCount: stages.count,
-                                  itemBuilder: (context, index) =>
-                                      LoadStageCard(
-                                          stage: stages.stages![index]),
-                                ),
+                                stages.stages!
+                                        .where((s) => s.position == 0)
+                                        .toList()
+                                        .isEmpty
+                                    ? const Center(
+                                        child: Text(
+                                            "Nessuna tappa a cui iscriversi"),
+                                      )
+                                    : ListView.builder(
+                                        shrinkWrap: true,
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
+                                        itemCount: stages.stages!
+                                            .where((s) => s.position == 0)
+                                            .toList()
+                                            .length,
+                                        itemBuilder: (context, index) =>
+                                            LoadStageCard(
+                                                stage: stages.stages!
+                                                    .where(
+                                                        (s) => s.position == 0)
+                                                    .toList()[index]),
+                                      ),
                               _ => ListView.builder(
                                   shrinkWrap: true,
                                   itemCount: 4,
