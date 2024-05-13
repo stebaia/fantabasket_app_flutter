@@ -6,6 +6,8 @@ class PlayerStatsSint extends Equatable {
   final String lastName;
   final String photo;
   final String category;
+  final bool captain;
+  final bool reserve;
   final int bonus;
   final int malus;
   final int total;
@@ -16,6 +18,8 @@ class PlayerStatsSint extends Equatable {
     required this.lastName,
     required this.photo,
     required this.category,
+    required this.captain,
+    required this.reserve,
     required this.bonus,
     required this.malus,
     required this.total,
@@ -28,6 +32,8 @@ class PlayerStatsSint extends Equatable {
         lastName,
         photo,
         category,
+        captain,
+        reserve,
         bonus,
         malus,
         total,

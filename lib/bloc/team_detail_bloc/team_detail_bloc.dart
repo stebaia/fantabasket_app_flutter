@@ -46,6 +46,11 @@ class TeamDetailBloc extends Bloc<TeamDetailEvent, TeamDetailState> {
       var result = await teamRepository.getTeamDetail(e.teamId);
       if (result.response.statusCode == 200) {
         team = result.data;
+        for (var a in team.days) {
+          var res = a.players.firstWhere((p) => p.reserve);
+          a.players.remove(res);
+          a.players.add(res);
+        }
         if (team.days.isNotEmpty) {
           currentDay = team.days.map((day) => day.day).toList().last;
         }

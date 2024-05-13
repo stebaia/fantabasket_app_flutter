@@ -320,7 +320,8 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                                       builder: (context, state) {
                                         final List<Player> list =
                                             upstate.playersList.players!;
-                                        var pls = td.days.first.players
+                                        var plsSint = td.days.first.players;
+                                        var pls = plsSint
                                             .map((p) => Player(
                                                   id: p.id,
                                                   firstName: p.firstName,
