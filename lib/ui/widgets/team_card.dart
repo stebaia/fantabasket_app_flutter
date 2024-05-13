@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:fantabasket_app_flutter/bloc/view_team_bloc/view_team_bloc.dart';
 import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
 import 'package:fantabasket_app_flutter/model/team.dart';
 import 'package:fantabasket_app_flutter/routes/app_router.gr.dart';
@@ -19,16 +20,18 @@ class TeamCard extends StatelessWidget {
 
     return GestureDetector(
       onTap: () => team.stageStatus != "Aperta"
-          ? context.router.push(TeamDetailRoute(
+          ? context.pushRoute(TeamDetailRoute(
               teamId: team.id,
               teamName: team.teamName!,
             ))
-          : context.router.push(
-              SelectTeamRoute(
-                stageId: team.stageId!,
-                team: team,
-              ),
-            ),
+          : context
+              .pushRoute(
+                SelectTeamRoute(
+                  stageId: team.stageId!,
+                  team: team,
+                ),
+              )
+              .then((value) => context.read<ViewTeamBloc>().viewMyTeams()),
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
         child: Card(
@@ -36,7 +39,6 @@ class TeamCard extends StatelessWidget {
           elevation: 4,
           child: Container(
             width: MediaQuery.of(context).size.width,
-          
             padding: const EdgeInsets.all(20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
