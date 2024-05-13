@@ -43,3 +43,13 @@ class RegistrationEvent extends AuthEvent {
         surname,
       ];
 }
+
+class UploadPhotoEvent extends AuthEvent {
+  final File photo;
+  const UploadPhotoEvent({required this.photo});
+
+  @override
+  List<Object> get props => [
+        photo,
+      ];
+}

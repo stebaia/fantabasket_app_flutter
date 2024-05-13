@@ -48,7 +48,7 @@ class CreateTeamPage extends StatelessWidget with AutoRouteWrapper {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Ciao ${user.firstName}!',
+                      const Text('Sei pronto a giocare?',
                           style: const TextStyle(
                               color: Colors.white,
                               fontSize: 26,

@@ -82,13 +82,17 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                       Center(
+                         child: Image.asset('assets/images/onlyfanta_logo.png',
+                            height: size.width * 0.3,),
+                       ),
                       Center(
                         child: Container(
                           width: MediaQuery.of(context).size.width * 0.9,
                           padding: const EdgeInsets.only(
                             left: 20.0,
                             right: 20.0,
-                            top: 60.0,
+                            top: 30.0,
                             bottom: 2.0,
                           ),
                           child: const Text(
@@ -105,7 +109,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       Center(
                         child: Container(
                           padding: const EdgeInsets.symmetric(
-                            vertical: 40,
+                            vertical: 20,
                             horizontal: 20,
                           ),
                           width: MediaQuery.of(context).size.width * 0.9,
@@ -113,6 +117,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               borderRadius: BorderRadius.circular(16)),
                           child: Column(
                             children: [
+                              
                               Row(
                                 children: [
                                   Flexible(
@@ -181,7 +186,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                   textColor: Colors.white,
                                   backgroundColor:
                                       Theme.of(context).colorScheme.tertiary,
-                                  text: 'Registration',
+                                  text: 'Registrazione',
                                   loading: state is TryLogginInState,
                                   onPressed: () {
                                     if (_registrationPasswordConfirmController

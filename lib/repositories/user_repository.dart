@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:fantabasket_app_flutter/model/requests/login_request.dart';
 import 'package:fantabasket_app_flutter/model/requests/registration_request.dart';
@@ -29,6 +30,15 @@ class UserRepository {
     required this.userMapper,
     required this.userService,
   });
+
+  void uploadPhoto({required File file}) async {
+    try {
+      final response = await userService.uploadPhoto(file);
+      print(response);
+    } catch (ex) {
+      rethrow;
+    }
+  }
 
   Future<RegistrationResponse> registration({
     required String email,
@@ -68,6 +78,7 @@ class UserRepository {
           firstName: '',
           email: email,
           lastName: '',
+          foto: '',
           token: response.token!,
           tokenExpiration: '');
       await flutterSecureStorage.write(
