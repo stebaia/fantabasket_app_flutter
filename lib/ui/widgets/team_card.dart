@@ -55,6 +55,8 @@ class TeamCard extends StatelessWidget {
                 ),
                 Text(
                   team.teamName!,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                       color: darkMode.darkTheme ? Colors.white : Colors.black,
                       fontSize: 20,
@@ -70,7 +72,7 @@ class TeamCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '120',
+                      team.points!.toString(),
                       style: TextStyle(
                           color:
                               darkMode.darkTheme ? Colors.white : Colors.black,
@@ -82,25 +84,22 @@ class TeamCard extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                Row(
-                  children: [
-                    Text(
-                      'Tappa: ',
-                      style: TextStyle(
-                        color: darkMode.darkTheme ? Colors.white : Colors.black,
-                        fontSize: 18,
-                      ),
-                    ),
-                    Text(
-                      team.stageName!,
-                      style: TextStyle(
-                          color:
-                              darkMode.darkTheme ? Colors.white : Colors.black,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
-                    )
-                  ],
-                )
+                Text(
+                  'Tappa:',
+                  style: TextStyle(
+                    color: darkMode.darkTheme ? Colors.white : Colors.black,
+                    fontSize: 18,
+                  ),
+                ),
+                Text(
+                  team.stageName!,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                      color: darkMode.darkTheme ? Colors.white : Colors.black,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
+                ),
               ],
             ),
           ),

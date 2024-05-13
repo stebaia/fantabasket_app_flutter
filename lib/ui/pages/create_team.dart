@@ -114,7 +114,7 @@ class CreateTeamPage extends StatelessWidget with AutoRouteWrapper {
                                 options: CarouselOptions(
                                   enableInfiniteScroll: false,
                                   enlargeCenterPage: true,
-                                  aspectRatio: 1.8,
+                                  aspectRatio: 1.6,
                                 ),
                                 items: state.myTeams.map((i) {
                                   return Builder(
@@ -292,17 +292,16 @@ class CreateTeamPage extends StatelessWidget with AutoRouteWrapper {
           Positioned(
             bottom: 0,
             child: BlocBuilder<BannerBloc, BannerState>(
-            builder: (context, state) {
-              if(state is TryGetBannerState) {
-                return const SponsorsBannerBlank();
-              }else if(state is ResultBannerListState){
-                return SponsorsBanner(banner: state.bannerList.banners![0]);
-              }else {
-               return const SponsorsBannerBlank();
-              }
-              
-            },
-          ),
+              builder: (context, state) {
+                if (state is TryGetBannerState) {
+                  return const SponsorsBannerBlank();
+                } else if (state is ResultBannerListState) {
+                  return SponsorsBanner(banner: state.bannerList.banners![0]);
+                } else {
+                  return const SponsorsBannerBlank();
+                }
+              },
+            ),
           ),
         ],
       ),
