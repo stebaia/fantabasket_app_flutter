@@ -178,6 +178,9 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
                 )
               ],
             ),
+          ErrorPlayerDetailState(errorString: var errorString) => Center(
+              child: Text(errorString),
+            ),
           _ => Container(),
         };
       }),
