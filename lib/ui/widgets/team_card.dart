@@ -44,61 +44,80 @@ class TeamCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Image(
-                  width: 36,
-                  height: 36,
-                  image: const AssetImage('assets/images/basketballicon.png'),
-                  color: Theme.of(context).colorScheme.tertiary,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  team.teamName!,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                      color: darkMode.darkTheme ? Colors.white : Colors.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
-                ),
-                Row(
-                  children: [
-                    Text(
-                      'Punti guadagnati: ',
-                      style: TextStyle(
-                        color: darkMode.darkTheme ? Colors.white : Colors.black,
-                        fontSize: 18,
-                      ),
-                    ),
-                    Text(
-                      team.points!.toString(),
-                      style: TextStyle(
-                          color:
-                              darkMode.darkTheme ? Colors.white : Colors.black,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  'Tappa:',
-                  style: TextStyle(
-                    color: darkMode.darkTheme ? Colors.white : Colors.black,
-                    fontSize: 18,
+                Expanded(
+                  flex: 4,
+                  child: Image(
+                    width: 36,
+                    height: 36,
+                    image: const AssetImage('assets/images/basketballicon.png'),
+                    color: Theme.of(context).colorScheme.tertiary,
                   ),
                 ),
-                Text(
-                  team.stageName!,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
+                const Expanded(
+                  flex: 2,
+                  child: SizedBox(),
+                ),
+                Expanded(
+                  flex: 4,
+                  child: Text(
+                    team.teamName!,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        color: darkMode.darkTheme ? Colors.white : Colors.black,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Expanded(
+                  flex: 4,
+                  child: Row(
+                    children: [
+                      Text(
+                        'Punti guadagnati: ',
+                        style: TextStyle(
+                          color:
+                              darkMode.darkTheme ? Colors.white : Colors.black,
+                          fontSize: 18,
+                        ),
+                      ),
+                      Text(
+                        team.points!.toString(),
+                        style: TextStyle(
+                            color: darkMode.darkTheme
+                                ? Colors.white
+                                : Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
+                ),
+                const Expanded(
+                  flex: 3,
+                  child: SizedBox(),
+                ),
+                Expanded(
+                  flex: 4,
+                  child: Text(
+                    'Tappa:',
+                    style: TextStyle(
                       color: darkMode.darkTheme ? Colors.white : Colors.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 4,
+                  child: Text(
+                    team.stageName!,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        color: darkMode.darkTheme ? Colors.white : Colors.black,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               ],
             ),

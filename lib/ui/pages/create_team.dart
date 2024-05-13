@@ -114,7 +114,7 @@ class CreateTeamPage extends StatelessWidget with AutoRouteWrapper {
                                 options: CarouselOptions(
                                   enableInfiniteScroll: false,
                                   enlargeCenterPage: true,
-                                  aspectRatio: 1.6,
+                                  aspectRatio: 1.4,
                                 ),
                                 items: state.myTeams.map((i) {
                                   return Builder(
