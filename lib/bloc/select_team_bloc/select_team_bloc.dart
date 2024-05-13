@@ -14,6 +14,7 @@ part 'select_team_state.dart';
 class SelectTeamBloc extends Bloc<SelectTeamEvent, SelectTeamState> {
   final StagesRepository stagesRepository;
   final PlayerRepository playerRepository;
+  late PlayersList players;
 
   SelectTeamBloc(
       {required this.stagesRepository, required this.playerRepository})
@@ -33,10 +34,10 @@ class SelectTeamBloc extends Bloc<SelectTeamEvent, SelectTeamState> {
     emit(const TryGetPlayersState());
 
     try {
-      final players = await playerRepository.getPlayers(event.stage);
-      print("BUFE W: ${players.response.statusCode}");
-      if (players.response.statusCode == 200) {
-        emit(ResultGetPlayersState(players.data));
+      var pls = await playerRepository.getPlayers(event.stage);
+      if (pls.response.statusCode == 200) {
+        players = pls.data;
+        emit(ResultGetPlayersState(pls.data));
       } else {
         emit(const ErrorGetPlayersState('Giocatori non caricati'));
       }

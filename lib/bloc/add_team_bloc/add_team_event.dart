@@ -25,3 +25,24 @@ class AddNewTeamEvent extends AddTeamEvent {
   @override
   List<Object> get props => [];
 }
+
+class EditTeamEvent extends AddTeamEvent {
+  final String name;
+  final List<int> player;
+  final int cpt;
+  final int ris;
+  final int stage;
+  final int teamId;
+
+  const EditTeamEvent({
+    required this.name,
+    required this.player,
+    required this.cpt,
+    required this.ris,
+    required this.stage,
+    required this.teamId,
+  });
+
+  @override
+  List<Object> get props => [];
+}

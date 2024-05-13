@@ -52,3 +52,40 @@ class CreateTeamRequest extends DTO with EquatableMixin {
   @override
   List<Object?> get props => [name, player, cpt, ris, stageId];
 }
+
+class EditTeamRequest extends DTO with EquatableMixin {
+  static const _name = 'nome';
+  static const _player = "player";
+  static const _cpt = "cpt";
+  static const _ris = "ris";
+  static const _stageId = 'stage';
+  static const _teamId = 'fantateam';
+
+  final String name;
+  final List<int> player;
+  final int cpt;
+  final int ris;
+  final int stageId;
+  final int teamId;
+
+  EditTeamRequest({
+    required this.name,
+    required this.player,
+    required this.cpt,
+    required this.ris,
+    required this.stageId,
+    required this.teamId,
+  });
+
+  Map<String, dynamic> toJson() => {
+        _name: name,
+        _player: player,
+        _cpt: cpt,
+        _ris: ris,
+        _stageId: stageId,
+        _teamId: teamId,
+      };
+
+  @override
+  List<Object?> get props => [name, player, cpt, ris, stageId, teamId];
+}

@@ -1,13 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:fantabasket_app_flutter/bloc/add_team_bloc/add_team_bloc.dart';
-import 'package:fantabasket_app_flutter/bloc/create_team_bloc/create_team_bloc.dart';
 import 'package:fantabasket_app_flutter/bloc/cubit/captain_cubit.dart/captain_cubit.dart';
 import 'package:fantabasket_app_flutter/bloc/cubit/sixth_man_cubit/sixth_man_cubit.dart';
 import 'package:fantabasket_app_flutter/bloc/select_player_bloc/select_player_bloc.dart';
-import 'package:fantabasket_app_flutter/bloc/cubit/credits_cubit/credits_cubit.dart';
 import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
-import 'package:fantabasket_app_flutter/model/stage.dart';
+import 'package:fantabasket_app_flutter/model/team.dart';
 import 'package:fantabasket_app_flutter/routes/app_router.gr.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/captain_selection.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/completion_button.dart';
@@ -18,15 +16,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 class CompletionPage extends StatelessWidget with AutoRouteWrapper {
-  final List<Player> team;
+  final List<Player> players;
   final List<Player> side;
   final int stageId;
+  final Team? team;
 
   const CompletionPage({
     super.key,
-    required this.team,
+    required this.players,
     required this.side,
     required this.stageId,
+    required this.team,
   });
 
   @override
@@ -69,8 +69,9 @@ class CompletionPage extends StatelessWidget with AutoRouteWrapper {
             onTap: () {},
             child: CompletionButton(
               controller: controller,
-              team: team,
+              players: players,
               stageId: stageId,
+              team: team,
             ),
           )
         ],
@@ -155,7 +156,7 @@ class CompletionPage extends StatelessWidget with AutoRouteWrapper {
                     color: darkMode.darkTheme ? Colors.white : Colors.black,
                   ),
                 ),
-                SelectCaptain(team: team),
+                SelectCaptain(team: players),
                 const SizedBox(height: 20),
                 Text(
                   "Seleziona sesto uomo",
