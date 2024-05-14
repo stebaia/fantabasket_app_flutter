@@ -19,16 +19,16 @@ class _UserService implements UserService {
   String? baseUrl;
 
   @override
-  Future<EmptyResponse> uploadPhoto(File photo) async {
+  Future<EmptyResponse> uploadPhoto(File foto) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = FormData();
     _data.files.add(MapEntry(
-      'photo',
+      'foto',
       MultipartFile.fromFileSync(
-        photo.path,
-        filename: photo.path.split(Platform.pathSeparator).last,
+        foto.path,
+        filename: foto.path.split(Platform.pathSeparator).last,
       ),
     ));
     final _result = await _dio

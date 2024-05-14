@@ -18,7 +18,7 @@ abstract class UserService {
 
   @MultiPart()
   @POST('api/editProfile')
-  Future<EmptyResponse> uploadPhoto(@Part() File photo);
+  Future<EmptyResponse> uploadPhoto(@Part() File foto);
 
   @POST('api/takeToken')
   Future<LoginResponse> login(@Body() LoginRequest request);
