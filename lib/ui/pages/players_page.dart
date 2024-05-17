@@ -2,6 +2,7 @@ import 'package:fantabasket_app_flutter/bloc/all_players_bloc/all_players_bloc.d
 import 'package:fantabasket_app_flutter/bloc/banner_bloc/banner_bloc.dart';
 import 'package:fantabasket_app_flutter/bloc/select_team_bloc/select_team_bloc.dart';
 import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
+import 'package:fantabasket_app_flutter/ui/components/empty_component.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/double_spinner.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/sponsors_banner.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/tab_general.dart';
@@ -11,6 +12,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:fantabasket_app_flutter/bloc/create_team_bloc/create_team_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:lottie/lottie.dart';
 
 class PlayersPage extends StatelessWidget with AutoRouteWrapper {
   const PlayersPage({super.key});
@@ -60,23 +62,31 @@ class PlayersPage extends StatelessWidget with AutoRouteWrapper {
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
-              child: Text(
-                "Giocatori",
-                style: TextStyle(
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.bold,
-                  color: darkMode.darkTheme ? Colors.white : Colors.black,
-                  fontSize: 25,
-                ),
+              child: Row(
+                children: [
+                  Lottie.asset('assets/lottie/empty.json',
+                      width: 60, height: 60),
+                  Text(
+                    "Giocatori",
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.bold,
+                      color: darkMode.darkTheme ? Colors.white : Colors.black,
+                      fontSize: 20,
+                    ),
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: 10),
             TabBar(
-              labelColor: Theme.of(context).colorScheme.secondary,
+              labelColor: Theme.of(context).colorScheme.tertiary,
               indicatorColor: Theme.of(context).colorScheme.tertiary,
               indicatorSize: TabBarIndicatorSize.tab,
               tabs: const [
-                Tab(text: "Tappe"),
+                Tab(
+                  text: "Tappe",
+                ),
                 Tab(text: "Generale"),
               ],
             ),
@@ -97,9 +107,9 @@ class PlayersPage extends StatelessWidget with AutoRouteWrapper {
                       ErrorGetStagesState() => const Center(
                           child: Text("Errore nel caricamento delle tappe"),
                         ),
-                      EmptyGetStagesState() => const Center(
-                          child: Text("Nessuna tappa presente"),
-                        ),
+                      EmptyGetStagesState() => EmptyComponent(
+                          text:
+                              "Nessuna tappa presente, attendi che vengano caricate dal nostro team!"),
                       _ => Container()
                     };
                   }),

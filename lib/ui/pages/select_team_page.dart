@@ -67,8 +67,7 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
     final bool edit = team != null;
 
     return PopScope(
-        onPopInvokedWithResult: (value, obj) =>
-            context.read<CreditsCubit>().resetTotal(),
+        onPopInvoked: (value) => context.read<CreditsCubit>().resetTotal(),
         child: BlocBuilder<SelectTeamBloc, SelectTeamState>(
             builder: (context, upstate) {
           return Scaffold(

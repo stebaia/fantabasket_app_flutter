@@ -3,12 +3,14 @@ import 'package:fantabasket_app_flutter/bloc/banner_bloc/banner_bloc.dart';
 import 'package:fantabasket_app_flutter/bloc/create_team_bloc/create_team_bloc.dart';
 import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
 import 'package:fantabasket_app_flutter/model/stage.dart';
+import 'package:fantabasket_app_flutter/ui/components/empty_component.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/double_spinner.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/rank_card.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/sponsors_banner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:lottie/lottie.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class RankPage extends StatefulWidget with AutoRouteWrapper {
@@ -66,23 +68,28 @@ class _RankPageState extends State<RankPage> {
           const SizedBox(height: 10),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
-            child: Text(
-              "Classifiche",
-              style: TextStyle(
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.bold,
-                color: darkMode.darkTheme ? Colors.white : Colors.black,
-                fontSize: 25,
-              ),
+            child: Row(
+              children: [
+                Lottie.asset('assets/lottie/trophy.json',
+                    width: 60, height: 60),
+                Text(
+                  "Classifiche",
+                  style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.bold,
+                    color: darkMode.darkTheme ? Colors.white : Colors.black,
+                    fontSize: 20,
+                  ),
+                ),
+              ],
             ),
           ),
-          const SizedBox(height: 10),
           BlocBuilder<CreateTeamBloc, CreateTeamState>(
               builder: (context, state) {
             if (state is ResultGetStagesState) {
               return Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 12.0,
+                  horizontal: 20.0,
                   vertical: 2.0,
                 ),
                 child: TextField(
@@ -92,12 +99,12 @@ class _RankPageState extends State<RankPage> {
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: Theme.of(context).colorScheme.background,
-                        width: 2.0,
+                        width: 1.0,
                       ),
-                      borderRadius: const BorderRadius.all(Radius.circular(10)),
+                      borderRadius: const BorderRadius.all(Radius.circular(6)),
                     ),
                     border: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      borderRadius: BorderRadius.all(Radius.circular(6)),
                     ),
                     hintText: 'Inserisci nome...',
                     hintStyle: const TextStyle(
@@ -127,25 +134,9 @@ class _RankPageState extends State<RankPage> {
                     child: Text("Errore nel caricamento delle tappe"),
                   );
                 } else if (state is EmptyGetStagesState) {
-                  return Column(
-                    children: [
-                      BlocBuilder<BannerBloc, BannerState>(
-                        builder: (context, state) {
-                          if (state is TryGetBannerState) {
-                            return const SponsorsBannerBlank();
-                          } else if (state is ResultBannerListState) {
-                            return SponsorsBanner(
-                                banner: state.bannerList.banners![0]);
-                          } else {
-                            return const SponsorsBannerBlank();
-                          }
-                        },
-                      ),
-                      const Center(
-                        child: Text("Nessuna tappa presente"),
-                      ),
-                    ],
-                  );
+                  return const EmptyComponent(
+                      text:
+                          "Nessuna tappa presente, attendi che vengano caricate dal nostro team!");
                 } else {
                   _list = (state as ResultGetStagesState)
                       .stagesList
@@ -164,13 +155,19 @@ class _RankPageState extends State<RankPage> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                ListView.builder(
-                                  shrinkWrap: true,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  itemCount: _list.length,
-                                  itemBuilder: (context, index) =>
-                                      RankingCard(stage: _list[index]),
-                                ),
+                                RefreshIndicator(
+                                  onRefresh: () async {
+                                    context.read<CreateTeamBloc>().getStages();
+                                  },
+                                  child: ListView.builder(
+                                    shrinkWrap: true,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    itemCount: _list.length,
+                                    itemBuilder: (context, index) =>
+                                        RankingCard(stage: _list[index]),
+                                  ),
+                                )
                               ],
                             ),
                           ),

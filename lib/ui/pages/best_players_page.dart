@@ -114,15 +114,28 @@ class BestPlayersPage extends StatelessWidget with AutoRouteWrapper {
                                 ResultGetPlayersState(
                                   playersList: var players
                                 ) =>
-                                  ListView.builder(
-                                    shrinkWrap: true,
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    itemCount: players.count,
-                                    itemBuilder: (context, index) =>
-                                        BestPlayersCard(
-                                            player: players.players![index]),
-                                  ),
+                                  ListView.separated(
+                                      separatorBuilder: (context, index) =>
+                                          const Divider(
+                                            height: 1,
+                                            color: Colors.black,
+                                          ),
+                                      shrinkWrap: true,
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      itemCount: players.count,
+                                      itemBuilder: (context, index) => ListTile(
+                                            title: Text(
+                                              '${players.players![index].firstName} ${players.players![index].lastName}',
+                                              style: TextStyle(
+                                                  color: darkMode.darkTheme
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            subtitle: Container(),
+                                          )),
                                 _ => ListView.builder(
                                     shrinkWrap: true,
                                     itemCount: 4,

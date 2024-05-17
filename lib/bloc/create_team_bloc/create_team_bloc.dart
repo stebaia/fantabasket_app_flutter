@@ -33,7 +33,11 @@ class CreateTeamBloc extends Bloc<CreateTeamEvent, CreateTeamState> {
     try {
       final stages = await stagesRepository.getStages();
       stageList = stages.data.stages!;
-      emit(ResultGetStagesState(stages.data));
+      if (stageList.isNotEmpty) {
+        emit(ResultGetStagesState(stages.data));
+      } else {
+        emit(const EmptyGetStagesState());
+      }
     } catch (e) {
       emit(const ErrorGetStagesState('Tappe non caricate'));
     }

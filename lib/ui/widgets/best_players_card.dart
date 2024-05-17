@@ -17,22 +17,16 @@ class BestPlayersCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final darkMode = Provider.of<DarkThemeProvider>(context);
     return GestureDetector(
-      onTap: () => context.router.push(PlayerDetailRoute(
-        id: player.id,
-        firstName: player.firstName,
-        lastName: player.lastName,
-        photo: player.photo,
-        category: player.category,
-      )),
-      child: SizedBox(
-        width: double.infinity,
-        height: 80,
-        child: Card(
-          color: Theme.of(context).colorScheme.primary,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
-          ),
-          elevation: 2,
+        onTap: () => context.router.push(PlayerDetailRoute(
+              id: player.id,
+              firstName: player.firstName,
+              lastName: player.lastName,
+              photo: player.photo,
+              category: player.category,
+            )),
+        child: Container(
+          width: double.infinity,
+          height: 80,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -42,7 +36,6 @@ class BestPlayersCard extends StatelessWidget {
                       width: 80,
                       height: 100,
                       child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
                           child: player.photo != ''
                               ? Image.network(
                                   player.photo,
@@ -86,10 +79,6 @@ class BestPlayersCard extends StatelessWidget {
                 height: 100,
                 decoration: const BoxDecoration(
                   color: Colors.grey,
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(10),
-                    bottomRight: Radius.circular(10),
-                  ),
                 ),
                 child: Center(
                     child: Text(
@@ -102,8 +91,6 @@ class BestPlayersCard extends StatelessWidget {
               )
             ],
           ),
-        ),
-      ),
-    );
+        ));
   }
 }

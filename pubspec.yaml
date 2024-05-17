@@ -69,6 +69,8 @@ flutter:
     - assets/images/basketballicon_colored.png
     - assets/images/onlyfanta_logo.svg
     - assets/images/onlyfanta_logo.png
+    - assets/lottie/empty.json
+    - assets/lottie/trophy.json
   
   fonts:
     - family: Poppins
