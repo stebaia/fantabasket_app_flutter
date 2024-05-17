@@ -7,6 +7,7 @@ import 'package:fantabasket_app_flutter/ui/components/empty_component.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/double_spinner.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/rank_card.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/sponsors_banner.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -87,7 +88,8 @@ class _RankPageState extends State<RankPage> {
           BlocBuilder<CreateTeamBloc, CreateTeamState>(
               builder: (context, state) {
             if (state is ResultGetStagesState) {
-              return Padding(
+              return Container(
+                height: 40,
                 padding: const EdgeInsets.symmetric(
                   horizontal: 20.0,
                   vertical: 2.0,
@@ -95,6 +97,8 @@ class _RankPageState extends State<RankPage> {
                 child: TextField(
                   controller: _controller,
                   decoration: InputDecoration(
+                    prefixIcon: Icon(CupertinoIcons.search),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 4),
                     focusColor: Theme.of(context).colorScheme.background,
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(

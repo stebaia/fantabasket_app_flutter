@@ -3,6 +3,7 @@ import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:fantabasket_app_flutter/model/players_list.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/best_players_card.dart';
 import 'package:fantabasket_app_flutter/utils/constants.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -54,35 +55,40 @@ class _TabGeneralState extends State<TabGeneral> {
           padding: const EdgeInsets.symmetric(
             horizontal: 16.0,
           ),
-          child: TextField(
-            controller: _controller,
-            decoration: InputDecoration(
-              focusColor: const Color.fromARGB(137, 158, 158, 158),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Theme.of(context).colorScheme.background,
-                  width: 1.0,
+          child: Container(
+            height: 40,
+            child: TextField(
+              controller: _controller,
+              decoration: InputDecoration(
+                prefixIcon: Icon(CupertinoIcons.search),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 4),
+                focusColor: const Color.fromARGB(137, 158, 158, 158),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Theme.of(context).colorScheme.background,
+                    width: 1.0,
+                  ),
+                  borderRadius: const BorderRadius.all(Radius.circular(4)),
                 ),
-                borderRadius: const BorderRadius.all(Radius.circular(4)),
-              ),
-              border: const OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: const Color.fromARGB(137, 158, 158, 158),
-                  width: 1.0,
+                border: const OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: const Color.fromARGB(137, 158, 158, 158),
+                    width: 1.0,
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(4)),
                 ),
-                borderRadius: BorderRadius.all(Radius.circular(4)),
+                hintText: 'Cerca..',
+                hintStyle: const TextStyle(
+                  color: Color.fromARGB(255, 173, 173, 173),
+                ),
               ),
-              hintText: 'Cerca..',
-              hintStyle: const TextStyle(
-                color: Color.fromARGB(255, 173, 173, 173),
+              cursorColor: const Color.fromARGB(255, 173, 173, 173),
+              style: TextStyle(
+                color: widget.darkMode.darkTheme ? Colors.white : Colors.black,
               ),
+              textAlignVertical: TextAlignVertical.center,
+              onChanged: (value) => setState(() => _updateList()),
             ),
-            cursorColor: const Color.fromARGB(255, 173, 173, 173),
-            style: TextStyle(
-              color: widget.darkMode.darkTheme ? Colors.white : Colors.black,
-            ),
-            textAlignVertical: TextAlignVertical.center,
-            onChanged: (value) => setState(() => _updateList()),
           ),
         ),
         Expanded(
