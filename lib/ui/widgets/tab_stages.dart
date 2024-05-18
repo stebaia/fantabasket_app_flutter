@@ -6,6 +6,7 @@ import 'package:fantabasket_app_flutter/model/stages_list.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/double_spinner.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/players_list_card.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/sponsors_banner.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -51,31 +52,36 @@ class _TabStagesState extends State<TabStages> {
             horizontal: 12.0,
             vertical: 2.0,
           ),
-          child: TextField(
-            controller: _controller,
-            decoration: InputDecoration(
-              focusColor: Theme.of(context).colorScheme.background,
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Theme.of(context).colorScheme.background,
-                  width: 2.0,
+          child: Container(
+            height: 40,
+            child: TextField(
+              controller: _controller,
+              decoration: InputDecoration(
+                prefixIcon: Icon(CupertinoIcons.search),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 4),
+                focusColor: Theme.of(context).colorScheme.background,
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Theme.of(context).colorScheme.background,
+                    width: 2.0,
+                  ),
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
                 ),
-                borderRadius: const BorderRadius.all(Radius.circular(10)),
+                border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+                hintText: 'Inserisci nome...',
+                hintStyle: const TextStyle(
+                  color: Color.fromARGB(255, 173, 173, 173),
+                ),
               ),
-              border: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
+              cursorColor: const Color.fromARGB(255, 173, 173, 173),
+              style: TextStyle(
+                color: widget.darkMode.darkTheme ? Colors.white : Colors.black,
               ),
-              hintText: 'Inserisci nome...',
-              hintStyle: const TextStyle(
-                color: Color.fromARGB(255, 173, 173, 173),
-              ),
+              textAlignVertical: TextAlignVertical.center,
+              onChanged: (value) => setState(() => _updateList()),
             ),
-            cursorColor: const Color.fromARGB(255, 173, 173, 173),
-            style: TextStyle(
-              color: widget.darkMode.darkTheme ? Colors.white : Colors.black,
-            ),
-            textAlignVertical: TextAlignVertical.center,
-            onChanged: (value) => setState(() => _updateList()),
           ),
         ),
         Expanded(

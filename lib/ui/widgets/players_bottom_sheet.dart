@@ -6,6 +6,7 @@ import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/category_button.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/player_bar.dart';
 import 'package:fantabasket_app_flutter/utils/constants.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -103,31 +104,36 @@ class _PlayersBottomSheetState extends State<PlayersBottomSheet> {
             ),
           ),
           const SizedBox(height: 20),
-          TextField(
-            controller: _controller,
-            decoration: InputDecoration(
-              focusColor: Theme.of(context).colorScheme.background,
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Theme.of(context).colorScheme.background,
-                  width: 2.0,
+          Container(
+            height: 40,
+            child: TextField(
+              controller: _controller,
+              decoration: InputDecoration(
+                prefixIcon: Icon(CupertinoIcons.search),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 4),
+                focusColor: Theme.of(context).colorScheme.background,
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Theme.of(context).colorScheme.background,
+                    width: 2.0,
+                  ),
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
                 ),
-                borderRadius: const BorderRadius.all(Radius.circular(10)),
+                border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+                hintText: 'Cerca...',
+                hintStyle: const TextStyle(
+                  color: Color.fromARGB(255, 173, 173, 173),
+                ),
               ),
-              border: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
+              cursorColor: const Color.fromARGB(255, 173, 173, 173),
+              style: TextStyle(
+                color: darkMode.darkTheme ? Colors.white : Colors.black,
               ),
-              hintText: 'Inserisci nome...',
-              hintStyle: const TextStyle(
-                color: Color.fromARGB(255, 173, 173, 173),
-              ),
+              textAlignVertical: TextAlignVertical.center,
+              onChanged: (value) => setState(() => _updateList()),
             ),
-            cursorColor: const Color.fromARGB(255, 173, 173, 173),
-            style: TextStyle(
-              color: darkMode.darkTheme ? Colors.white : Colors.black,
-            ),
-            textAlignVertical: TextAlignVertical.center,
-            onChanged: (value) => setState(() => _updateList()),
           ),
           const SizedBox(height: 10),
           SingleChildScrollView(
@@ -160,10 +166,18 @@ class _PlayersBottomSheetState extends State<PlayersBottomSheet> {
                   context.read<RemoveFiltersCubit>().reset();
                 });
               },
-              child: const Row(
+              child: Row(
                 children: [
-                  Icon(Icons.delete_outline),
-                  Text("Rimuovi tutti i filtri"),
+                  Icon(
+                    Icons.delete_outline,
+                    color: darkMode.darkTheme ? Colors.white : Colors.black,
+                  ),
+                  Text(
+                    "Rimuovi tutti i filtri",
+                    style: TextStyle(
+                      color: darkMode.darkTheme ? Colors.white : Colors.black,
+                    ),
+                  ),
                 ],
               )),
           const SizedBox(height: 10),

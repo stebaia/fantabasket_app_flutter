@@ -9,6 +9,7 @@ import 'package:fantabasket_app_flutter/model/stage.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/best_players_card.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/double_spinner.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/sponsors_banner.dart';
+import 'package:fantabasket_app_flutter/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -38,6 +39,10 @@ class BestPlayersPage extends StatelessWidget with AutoRouteWrapper {
         ],
         child: this,
       );
+
+  Color getTransparentColor(Color color, double opacity) {
+    return color.withOpacity(opacity);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +108,6 @@ class BestPlayersPage extends StatelessWidget with AutoRouteWrapper {
                     ),
                     Expanded(
                       child: Container(
-                        alignment: Alignment.center,
                         child: SingleChildScrollView(
                           child: Column(
                             children: [
@@ -115,26 +119,102 @@ class BestPlayersPage extends StatelessWidget with AutoRouteWrapper {
                                   playersList: var players
                                 ) =>
                                   ListView.separated(
+                                      padding: EdgeInsets.zero,
                                       separatorBuilder: (context, index) =>
-                                          const Divider(
-                                            height: 1,
-                                            color: Colors.black,
-                                          ),
+                                          const Divider(),
                                       shrinkWrap: true,
                                       physics:
                                           const NeverScrollableScrollPhysics(),
                                       itemCount: players.count,
                                       itemBuilder: (context, index) => ListTile(
+                                            trailing: Container(
+                                              width: 60,
+                                              height: 30,
+                                              decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      width: 1,
+                                                      color:
+                                                          const Color.fromARGB(
+                                                              137,
+                                                              158,
+                                                              158,
+                                                              158)),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20)),
+                                              child: Center(
+                                                child: Text(
+                                                  players.players![index].value
+                                                      .toString(),
+                                                  style: TextStyle(
+                                                    color: darkMode.darkTheme
+                                                        ? Colors.white
+                                                        : Colors.black,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            visualDensity: const VisualDensity(
+                                                horizontal: 0, vertical: 0),
+                                            leading: Container(
+                                                width: 60,
+                                                height: 80,
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  child: Image.network(
+                                                    players
+                                                        .players![index].photo,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                )),
+                                            dense: true,
                                             title: Text(
                                               '${players.players![index].firstName} ${players.players![index].lastName}',
                                               style: TextStyle(
                                                   color: darkMode.darkTheme
                                                       ? Colors.white
                                                       : Colors.black,
-                                                  fontSize: 16,
+                                                  fontSize: 14,
                                                   fontWeight: FontWeight.bold),
                                             ),
-                                            subtitle: Container(),
+                                            subtitle: Row(
+                                              children: [
+                                                SizedBox(
+                                                    child: Container(
+                                                  height: 30,
+                                                  width: 80,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              2),
+                                                      color: getTransparentColor(
+                                                          Constants
+                                                                  .categoryColors[
+                                                              players
+                                                                  .players![
+                                                                      index]
+                                                                  .category]!,
+                                                          0.4)),
+                                                  child: Center(
+                                                      child: Text(
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    players.players![index]
+                                                        .category,
+                                                    style: TextStyle(
+                                                        color: Constants
+                                                                .categoryColors[
+                                                            players
+                                                                .players![index]
+                                                                .category],
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                                )),
+                                              ],
+                                            ),
                                           )),
                                 _ => ListView.builder(
                                     shrinkWrap: true,
