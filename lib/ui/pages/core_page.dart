@@ -24,13 +24,12 @@ class _CorePageState extends State<CorePage> {
         backgroundColor: Colors.white,
         //darkMode.darkTheme ? ThemeHelper.backgroundColorDark : Colors.white,
         routes: [
+          const CreateTeamRoute(),
           const RankRoute(),
           const PlayersRoute(),
-          const CreateTeamRoute(),
           ProfileRoute()
         ],
         bottomNavigationBuilder: (context, tabsRouter) {
-          
           return BottomNavigationBar(
               elevation: 0,
               type: BottomNavigationBarType.fixed,
@@ -41,16 +40,6 @@ class _CorePageState extends State<CorePage> {
               currentIndex: tabsRouter.activeIndex,
               onTap: tabsRouter.setActiveIndex,
               items: [
-                const BottomNavigationBarItem(
-                  icon: FaIcon(FontAwesomeIcons.rankingStar),
-                  activeIcon: FaIcon(FontAwesomeIcons.rankingStar),
-                  label: 'Ranking',
-                ),
-                const BottomNavigationBarItem(
-                  icon: FaIcon(FontAwesomeIcons.users),
-                  activeIcon: FaIcon(FontAwesomeIcons.users),
-                  label: 'Players',
-                ),
                 BottomNavigationBarItem(
                   icon: Image(
                     width: 36,
@@ -65,6 +54,16 @@ class _CorePageState extends State<CorePage> {
                     color: Theme.of(context).colorScheme.tertiary,
                   ),
                   label: 'My Team',
+                ),
+                const BottomNavigationBarItem(
+                  icon: FaIcon(FontAwesomeIcons.rankingStar),
+                  activeIcon: FaIcon(FontAwesomeIcons.rankingStar),
+                  label: 'Ranking',
+                ),
+                const BottomNavigationBarItem(
+                  icon: FaIcon(FontAwesomeIcons.users),
+                  activeIcon: FaIcon(FontAwesomeIcons.users),
+                  label: 'Players',
                 ),
                 const BottomNavigationBarItem(
                   icon: FaIcon(FontAwesomeIcons.user),

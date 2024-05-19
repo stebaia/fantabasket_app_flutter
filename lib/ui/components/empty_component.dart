@@ -24,7 +24,7 @@ class EmptyComponent extends StatelessWidget {
               child: Column(
                 children: [
                   Lottie.asset('assets/lottie/empty.json',
-                      width: 300, height: 300),
+                      width: 200, height: 200),
                   const SizedBox(
                     height: 20,
                   ),

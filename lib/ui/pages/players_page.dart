@@ -104,8 +104,8 @@ class PlayersPage extends StatelessWidget with AutoRouteWrapper {
                           darkMode: darkMode,
                           list: list,
                         ),
-                      ErrorGetStagesState() => const Center(
-                          child: Text("Errore nel caricamento delle tappe"),
+                      ErrorGetStagesState() => EmptyComponent(
+                          text: "Al momento non ci sono tappe...",
                         ),
                       EmptyGetStagesState() => EmptyComponent(
                           text:

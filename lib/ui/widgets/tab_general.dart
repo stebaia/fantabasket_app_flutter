@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:fantabasket_app_flutter/model/players_list.dart';
+import 'package:fantabasket_app_flutter/routes/app_router.gr.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/best_players_card.dart';
 import 'package:fantabasket_app_flutter/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
@@ -104,6 +106,15 @@ class _TabGeneralState extends State<TabGeneral> {
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: _list.length,
                       itemBuilder: (context, index) => ListTile(
+                            onTap: () => context.pushRoute(
+                              PlayerDetailRoute(
+                                id: _list[index].id,
+                                firstName: _list[index].firstName,
+                                lastName: _list[index].lastName,
+                                photo: _list[index].photo,
+                                category: _list[index].category,
+                              ),
+                            ),
                             trailing: Container(
                               width: 60,
                               height: 30,

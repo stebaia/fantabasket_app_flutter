@@ -6,6 +6,7 @@ import 'package:fantabasket_app_flutter/bloc/select_team_bloc/select_team_bloc.d
 import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
 import 'package:fantabasket_app_flutter/routes/app_router.gr.dart';
 import 'package:fantabasket_app_flutter/model/stage.dart';
+import 'package:fantabasket_app_flutter/ui/components/empty_component.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/double_spinner.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/load_stage_card.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/sponsors_banner.dart';
@@ -56,8 +57,8 @@ class _LoadStagesPageState extends State<LoadStagesPage> {
         listener: (context, state) {},
         builder: (context, state) {
           if (state is ErrorGetStagesState) {
-            return const Center(
-              child: Text("Errore nel caricamento delle tappe"),
+            return EmptyComponent(
+              text: "Al momento non ci sono tappe...",
             );
           } else if (state is EmptyGetStagesState) {
             return Column(
@@ -111,9 +112,14 @@ class _LoadStagesPageState extends State<LoadStagesPage> {
                                         .where((s) => s.position == 0)
                                         .toList()
                                         .isEmpty
-                                    ? const Center(
-                                        child: Text(
-                                            "Nessuna tappa a cui iscriversi"),
+                                    ? Container(
+                                        height: 280,
+                                        child: Center(
+                                          child: const EmptyComponent(
+                                            text:
+                                                "Nessuna tappa presente a cui iscriversi",
+                                          ),
+                                        ),
                                       )
                                     : ListView.builder(
                                         shrinkWrap: true,

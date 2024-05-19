@@ -134,8 +134,8 @@ class _RankPageState extends State<RankPage> {
                     child: DoubleSpinner(),
                   );
                 } else if (state is ErrorGetStagesState) {
-                  return const Center(
-                    child: Text("Errore nel caricamento delle tappe"),
+                  return EmptyComponent(
+                    text: "Al momento non ci sono tappe...",
                   );
                 } else if (state is EmptyGetStagesState) {
                   return const EmptyComponent(

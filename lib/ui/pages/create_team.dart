@@ -48,13 +48,13 @@ class CreateTeamPage extends StatelessWidget with AutoRouteWrapper {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Sei pronto a giocare?',
+                      Text('Ciao ${user.firstName}!',
                           style: const TextStyle(
                               color: Colors.white,
                               fontSize: 26,
                               fontWeight: FontWeight.bold)),
                       const Text(
-                        'Hai tempo fino al 15 maggio 2024 per creare il tuo fantateam!',
+                        'Sei pronto a giocare?',
                         style: TextStyle(
                           fontSize: 14,
                           color: Colors.white,
