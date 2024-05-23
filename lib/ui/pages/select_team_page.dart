@@ -10,6 +10,7 @@ import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:fantabasket_app_flutter/model/stage.dart';
 import 'package:fantabasket_app_flutter/model/team.dart';
 import 'package:fantabasket_app_flutter/routes/app_router.gr.dart';
+import 'package:fantabasket_app_flutter/ui/components/empty_component.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/double_spinner.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/player_icon.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/sponsors_banner.dart';
@@ -177,11 +178,8 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                           ResultGetPlayersState() => upstate
                                   .playersList.players!.isEmpty
                               ? const Center(
-                                  child: Text(
-                                    "Nessun giocatore disponibile",
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                )
+                                  child: EmptyComponent(
+                                      text: "Non ci sono giocatori"))
                               : BlocBuilder<SelectPlayerBloc,
                                   SelectPlayerState>(
                                   builder: (context, state) {
