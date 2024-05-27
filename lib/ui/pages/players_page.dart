@@ -53,7 +53,7 @@ class PlayersPage extends StatelessWidget with AutoRouteWrapper {
                 return switch (state) {
                   TryGetBannerState() => const SponsorsBannerBlank(),
                   ResultBannerListState() =>
-                    SponsorsBanner(banner: state.bannerList.banners![0]),
+                    SponsorsBanner(banner: state.bannerModel),
                   _ => const SponsorsBannerBlank(),
                 };
               },
@@ -67,7 +67,7 @@ class PlayersPage extends StatelessWidget with AutoRouteWrapper {
                   Lottie.asset('assets/lottie/empty.json',
                       width: 60, height: 60),
                   Text(
-                    "Giocatori",
+                    "Players",
                     style: TextStyle(
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.bold,

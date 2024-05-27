@@ -60,7 +60,7 @@ class _RankPageState extends State<RankPage> {
               if (state is TryGetBannerState) {
                 return const SponsorsBannerBlank();
               } else if (state is ResultBannerListState) {
-                return SponsorsBanner(banner: state.bannerList.banners![0]);
+                return SponsorsBanner(banner: state.bannerModel);
               } else {
                 return const SponsorsBannerBlank();
               }
@@ -74,7 +74,7 @@ class _RankPageState extends State<RankPage> {
                 Lottie.asset('assets/lottie/trophy.json',
                     width: 60, height: 60),
                 Text(
-                  "Classifiche",
+                  "Ranking",
                   style: TextStyle(
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.bold,
