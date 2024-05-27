@@ -65,14 +65,23 @@ class _RegistrationPageState extends State<RegistrationPage> {
               child: BlocConsumer<LoginBloc, LoginInState>(
                 listener: (context, state) {
                   if (state is RegistrationDoneState) {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Registrazione avvenuta con successo!',),backgroundColor: Colors.green,));
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text(
+                        'Contolla la mail per completare la registrazione!',
+                      ),
+                      backgroundColor: Colors.green,
+                    ));
                     /*Fluttertoast.showToast(
                             msg: AppLocalizations.of(context).registration_confirm,
                           );*/
                     context.popRoute();
-                    
                   } else if (state is ErrorLoginInState) {
-                                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Campi non completi, ricontrolla',),backgroundColor: Colors.red,));
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text(
+                        'Campi non completi, ricontrolla',
+                      ),
+                      backgroundColor: Colors.red,
+                    ));
 
                     //showErrorDialog
                   }
@@ -82,10 +91,12 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                       Center(
-                         child: Image.asset('assets/images/onlyfanta_logo.png',
-                            height: size.width * 0.3,),
-                       ),
+                      Center(
+                        child: Image.asset(
+                          'assets/images/onlyfanta_logo.png',
+                          height: size.width * 0.3,
+                        ),
+                      ),
                       Center(
                         child: Container(
                           width: MediaQuery.of(context).size.width * 0.9,
@@ -117,7 +128,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               borderRadius: BorderRadius.circular(16)),
                           child: Column(
                             children: [
-                              
                               Row(
                                 children: [
                                   Flexible(
@@ -216,7 +226,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                             name: name,
                                             surname: surname,
                                           );
-                                      
                                     } else {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(const SnackBar(
