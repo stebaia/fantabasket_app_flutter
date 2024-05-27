@@ -4,6 +4,7 @@ import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:fantabasket_app_flutter/model/players_list.dart';
 import 'package:fantabasket_app_flutter/routes/app_router.gr.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/best_players_card.dart';
+import 'package:fantabasket_app_flutter/ui/widgets/players_filters_dialog.dart';
 import 'package:fantabasket_app_flutter/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,17 @@ class TabGeneral extends StatefulWidget {
 
   @override
   State<TabGeneral> createState() => _TabGeneralState();
+}
+
+enum Bonuses {
+  nessuno,
+  puntoRealizzato,
+  assists,
+  stoppata,
+  ankle,
+  schiacciata,
+  rimbalzo,
+  abbigliamento,
 }
 
 class _TabGeneralState extends State<TabGeneral> {
@@ -80,7 +92,7 @@ class _TabGeneralState extends State<TabGeneral> {
                       ),
                       border: const OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: const Color.fromARGB(137, 158, 158, 158),
+                          color: Color.fromARGB(137, 158, 158, 158),
                           width: 1.0,
                         ),
                         borderRadius: BorderRadius.all(Radius.circular(4)),
@@ -103,9 +115,26 @@ class _TabGeneralState extends State<TabGeneral> {
               ),
               Expanded(
                 flex: 1,
-                child: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.filter_list),
+                child: Container(
+                  alignment: Alignment.centerRight,
+                  child: IconButton(
+                    onPressed: () async {
+                      var result = await showDialog(
+                          context: context,
+                          barrierDismissible: true,
+                          builder: (BuildContext context) {
+                            return PlayersFiltersDialog(
+                              actualFilter: _filterName,
+                            );
+                          }) as String;
+                      setState(() {
+                        _filterName = result;
+                        _list.sort((a, b) =>
+                            b.points!.pointMade.compareTo(a.points!.pointMade));
+                      });
+                    },
+                    icon: const Icon(Icons.filter_list),
+                  ),
                 ),
               ),
             ],
