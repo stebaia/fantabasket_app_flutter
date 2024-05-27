@@ -34,39 +34,42 @@ class PlayerDTO extends DTO with EquatableMixin {
 }
 
 class PlayerDetailDTO extends DTO with EquatableMixin {
-  final String? id;
-  final String? firstName;
-  final String? lastName;
-  final String? email;
-  final String? phone;
-  final String? photo;
-  final String? category;
-  final String? team;
-  final int? value;
+  String? id;
+  String? firstName;
+  String? lastName;
+  String? email;
+  String? phone;
+  String? photo;
+  String? category;
+  String? team;
+  int? value;
+  PlayerDetailPointsDTO? points;
 
-  PlayerDetailDTO(
-      {this.id,
-      this.firstName,
-      this.lastName,
-      this.email,
-      this.phone,
-      this.photo,
-      this.category,
-      this.team,
-      this.value});
+  PlayerDetailDTO({
+    this.id,
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.phone,
+    this.photo,
+    this.category,
+    this.team,
+    this.value,
+  });
 
-  factory PlayerDetailDTO.fromJson(Map<String, dynamic> json) {
-    return PlayerDetailDTO(
-      id: json['id'] as String?,
-      firstName: json['nome'] as String?,
-      lastName: json['cognome'] as String?,
-      email: json['email'] as String?,
-      phone: json['cellulare'] as String?,
-      photo: json['foto'] as String?,
-      category: json['categoria'] as String?,
-      team: json['squadra'] as String?,
-      value: json['punteggio'] == null ? 0 : json['punteggio'] as int,
-    );
+  PlayerDetailDTO.fromJson(Map<String, dynamic> json) {
+    id = json['id'] as String;
+    firstName = json['nome'] as String?;
+    lastName = json['cognome'] as String?;
+    email = json['email'] as String?;
+    phone = json['cellulare'] as String?;
+    photo = json['foto'] as String?;
+    category = json['categoria'] as String?;
+    team = json['squadra'] as String?;
+    value = json['punteggio'] == null ? 0 : json['punteggio'] as int;
+    if (json['dettaglioPunteggio'] != null) {
+      points = (PlayerDetailPointsDTO.fromJson(json['dettaglioPunteggio']));
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -94,5 +97,47 @@ class PlayerDetailDTO extends DTO with EquatableMixin {
         category,
         team,
         value,
+      ];
+}
+
+class PlayerDetailPointsDTO extends DTO with EquatableMixin {
+  final int? pointMade;
+  final int? assist;
+  final int? block;
+  final int? bounce;
+  final int? dunk;
+  final int? ankleBreaker;
+  final int? ignorantClothing;
+
+  PlayerDetailPointsDTO(
+      {this.pointMade,
+      this.assist,
+      this.block,
+      this.bounce,
+      this.dunk,
+      this.ankleBreaker,
+      this.ignorantClothing});
+
+  factory PlayerDetailPointsDTO.fromJson(Map<String, dynamic> json) {
+    return PlayerDetailPointsDTO(
+      pointMade: json['punto_realizzato'] as int?,
+      assist: json['assist'] as int?,
+      block: json['stoppata'] as int?,
+      bounce: json['rimbalzo'] as int?,
+      dunk: json['schiacciata'] as int?,
+      ankleBreaker: json['ankle_breaker'] as int?,
+      ignorantClothing: json['abbigliamento_ignorante'] as int?,
+    );
+  }
+
+  @override
+  List<Object?> get props => [
+        pointMade,
+        assist,
+        block,
+        bounce,
+        dunk,
+        ankleBreaker,
+        ignorantClothing,
       ];
 }
