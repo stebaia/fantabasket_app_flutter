@@ -20,7 +20,6 @@ class _PlayersFiltersDialogState extends State<PlayersFiltersDialog> {
   void initState() {
     super.initState();
     _filterName = switch (widget.actualFilter) {
-      "Nessun filtro selezionato" => Bonuses.nessuno,
       "Abbigliamento ignorante" => Bonuses.abbigliamento,
       "Ankle breaker" => Bonuses.ankle,
       "Assists" => Bonuses.assists,
@@ -63,17 +62,6 @@ class _PlayersFiltersDialogState extends State<PlayersFiltersDialog> {
               scrollDirection: Axis.vertical,
               child: Column(
                 children: [
-                  RadioListTile<Bonuses>(
-                    title: const Text('Nessuno'),
-                    value: Bonuses.nessuno,
-                    groupValue: _filterName,
-                    activeColor: Colors.blue,
-                    onChanged: (Bonuses? value) {
-                      setState(() {
-                        _filterName = value!;
-                      });
-                    },
-                  ),
                   RadioListTile<Bonuses>(
                     title: const Text('Punti realizzati'),
                     value: Bonuses.puntoRealizzato,
