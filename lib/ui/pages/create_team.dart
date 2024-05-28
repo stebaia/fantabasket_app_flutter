@@ -296,7 +296,7 @@ class CreateTeamPage extends StatelessWidget with AutoRouteWrapper {
                 if (state is TryGetBannerState) {
                   return const SponsorsBannerBlank();
                 } else if (state is ResultBannerListState) {
-                  return SponsorsBanner(banner: state.bannerList.banners![0]);
+                  return SponsorsBanner(banner: state.bannerModel);
                 } else {
                   return const SponsorsBannerBlank();
                 }
