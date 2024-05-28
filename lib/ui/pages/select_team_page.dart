@@ -329,6 +329,7 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                                                   phone: "",
                                                   category: p.category,
                                                   email: "",
+                                                  points: null,
                                                 ))
                                             .toList();
                                         return Container(

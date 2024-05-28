@@ -4,6 +4,7 @@ import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:fantabasket_app_flutter/model/players_list.dart';
 import 'package:fantabasket_app_flutter/routes/app_router.gr.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/best_players_card.dart';
+import 'package:fantabasket_app_flutter/ui/widgets/players_filters_dialog.dart';
 import 'package:fantabasket_app_flutter/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -23,9 +24,21 @@ class TabGeneral extends StatefulWidget {
   State<TabGeneral> createState() => _TabGeneralState();
 }
 
+enum Bonuses {
+  nessuno,
+  puntoRealizzato,
+  assists,
+  stoppata,
+  ankle,
+  schiacciata,
+  rimbalzo,
+  abbigliamento,
+}
+
 class _TabGeneralState extends State<TabGeneral> {
   late List<Player> _list;
   late TextEditingController _controller;
+  late String _filterName;
 
   _updateList() {
     _list = widget.list.players!
@@ -42,6 +55,7 @@ class _TabGeneralState extends State<TabGeneral> {
     super.initState();
     _list = widget.list.players!;
     _controller = TextEditingController();
+    _filterName = "Nessun filtro selezionato";
   }
 
   Color getTransparentColor(Color color, double opacity) {
@@ -52,45 +66,106 @@ class _TabGeneralState extends State<TabGeneral> {
   Widget build(BuildContext context) {
     final darkMode = Provider.of<DarkThemeProvider>(context);
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Row(
+            children: [
+              Expanded(
+                flex: 8,
+                child: SizedBox(
+                  height: 40,
+                  child: TextField(
+                    controller: _controller,
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(CupertinoIcons.search),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 4),
+                      focusColor: const Color.fromARGB(137, 158, 158, 158),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Theme.of(context).colorScheme.background,
+                          width: 1.0,
+                        ),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(4)),
+                      ),
+                      border: const OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color.fromARGB(137, 158, 158, 158),
+                          width: 1.0,
+                        ),
+                        borderRadius: BorderRadius.all(Radius.circular(4)),
+                      ),
+                      hintText: 'Cerca..',
+                      hintStyle: const TextStyle(
+                        color: Color.fromARGB(255, 173, 173, 173),
+                      ),
+                    ),
+                    cursorColor: const Color.fromARGB(255, 173, 173, 173),
+                    style: TextStyle(
+                      color: widget.darkMode.darkTheme
+                          ? Colors.white
+                          : Colors.black,
+                    ),
+                    textAlignVertical: TextAlignVertical.center,
+                    onChanged: (value) => setState(() => _updateList()),
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: Container(
+                  alignment: Alignment.centerRight,
+                  child: IconButton(
+                    onPressed: () async {
+                      var result = await showDialog(
+                          context: context,
+                          barrierDismissible: true,
+                          builder: (BuildContext context) {
+                            return PlayersFiltersDialog(
+                              actualFilter: _filterName,
+                            );
+                          }) as String;
+                      setState(() {
+                        _filterName = result;
+                        _list.sort((b, a) {
+                          return switch (_filterName) {
+                            "Punti realizzati" => a.points!.pointMade
+                                .compareTo(b.points!.pointMade),
+                            "Assist" =>
+                              a.points!.assist.compareTo(b.points!.assist),
+                            "Stoppate" =>
+                              a.points!.block.compareTo(b.points!.block),
+                            "Rimbalzi" =>
+                              a.points!.bounce.compareTo(b.points!.bounce),
+                            "Schiacciate" =>
+                              a.points!.dunk.compareTo(b.points!.dunk),
+                            "Ankle breaker" => a.points!.ankleBreaker
+                                .compareTo(b.points!.ankleBreaker),
+                            "Abbigliamento ignorante" => a
+                                .points!.ignorantClothing
+                                .compareTo(b.points!.ignorantClothing),
+                            _ => -1,
+                          };
+                        });
+                      });
+                    },
+                    icon: const Icon(Icons.filter_list),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Container(
           padding: const EdgeInsets.symmetric(
             horizontal: 16.0,
+            vertical: 12.0,
           ),
-          child: Container(
-            height: 40,
-            child: TextField(
-              controller: _controller,
-              decoration: InputDecoration(
-                prefixIcon: Icon(CupertinoIcons.search),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 4),
-                focusColor: const Color.fromARGB(137, 158, 158, 158),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Theme.of(context).colorScheme.background,
-                    width: 1.0,
-                  ),
-                  borderRadius: const BorderRadius.all(Radius.circular(4)),
-                ),
-                border: const OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: const Color.fromARGB(137, 158, 158, 158),
-                    width: 1.0,
-                  ),
-                  borderRadius: BorderRadius.all(Radius.circular(4)),
-                ),
-                hintText: 'Cerca..',
-                hintStyle: const TextStyle(
-                  color: Color.fromARGB(255, 173, 173, 173),
-                ),
-              ),
-              cursorColor: const Color.fromARGB(255, 173, 173, 173),
-              style: TextStyle(
-                color: widget.darkMode.darkTheme ? Colors.white : Colors.black,
-              ),
-              textAlignVertical: TextAlignVertical.center,
-              onChanged: (value) => setState(() => _updateList()),
-            ),
+          child: Text(
+            _filterName,
+            textAlign: TextAlign.start,
           ),
         ),
         Expanded(

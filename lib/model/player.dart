@@ -1,4 +1,6 @@
 import 'package:equatable/equatable.dart';
+import 'package:fantabasket_app_flutter/model/bonus.dart';
+import 'package:fantabasket_app_flutter/model/bonus_short.dart';
 
 class Player extends Equatable {
   final int id;
@@ -10,19 +12,32 @@ class Player extends Equatable {
   final String category;
   final String team;
   final int value;
+  final BonusShort? points;
 
-  const Player(
-      {required this.id,
-      required this.firstName,
-      required this.lastName,
-      required this.value,
-      required this.team,
-      required this.photo,
-      required this.phone,
-      required this.category,
-      required this.email});
+  const Player({
+    required this.id,
+    required this.firstName,
+    required this.lastName,
+    required this.value,
+    required this.team,
+    required this.photo,
+    required this.phone,
+    required this.category,
+    required this.email,
+    required this.points,
+  });
 
   @override
-  List<Object?> get props =>
-      [id, firstName, lastName, value, team, phone, category, email, photo];
+  List<Object?> get props => [
+        id,
+        firstName,
+        lastName,
+        value,
+        team,
+        photo,
+        phone,
+        category,
+        email,
+        points,
+      ];
 }

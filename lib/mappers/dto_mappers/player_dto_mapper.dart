@@ -1,3 +1,5 @@
+import 'package:fantabasket_app_flutter/model/bonus.dart';
+import 'package:fantabasket_app_flutter/model/bonus_short.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:fantabasket_app_flutter/model/players_list.dart';
 import 'package:fantabasket_app_flutter/services/dto/player_dto.dart';
@@ -19,14 +21,27 @@ class PlayerListMapper extends DTOMapper<PlayerDTO, PlayersList> {
 
   @override
   PlayerDTO toDTO(PlayersList model) {
-    // TODO: implement toDTO
     throw UnimplementedError();
   }
 }
 
 class PlayerMapper extends DTOMapper<PlayerDetailDTO, Player> {
   @override
-  Player fromDTO(PlayerDetailDTO dto) => Player(
+  Player fromDTO(PlayerDetailDTO dto) {
+    var points = dto.points;
+    BonusShort? bonus;
+    if (points != null) {
+      bonus = BonusShort(
+        pointMade: points.pointMade!,
+        assist: points.assist!,
+        block: points.block!,
+        bounce: points.bounce!,
+        dunk: points.dunk!,
+        ankleBreaker: points.ankleBreaker!,
+        ignorantClothing: points.ignorantClothing!,
+      );
+    }
+    return Player(
       id: int.parse(dto.id ?? '0'),
       firstName: dto.firstName ?? '',
       lastName: dto.lastName ?? '',
@@ -35,11 +50,13 @@ class PlayerMapper extends DTOMapper<PlayerDetailDTO, Player> {
       photo: dto.photo ?? '',
       phone: dto.phone ?? '',
       category: dto.category ?? '',
-      email: dto.email ?? '');
+      email: dto.email ?? '',
+      points: bonus,
+    );
+  }
 
   @override
   PlayerDetailDTO toDTO(Player model) {
-    // TODO: implement toDTO
     throw UnimplementedError();
   }
 }

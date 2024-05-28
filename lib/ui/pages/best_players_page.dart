@@ -1,5 +1,3 @@
-
-
 import 'package:auto_route/auto_route.dart';
 import 'package:fantabasket_app_flutter/bloc/banner_bloc/banner_bloc.dart';
 import 'package:fantabasket_app_flutter/bloc/select_team_bloc/select_team_bloc.dart';
@@ -233,6 +231,7 @@ class BestPlayersPage extends StatelessWidget with AutoRouteWrapper {
                                           photo: "",
                                           team: "",
                                           value: 0,
+                                          points: null,
                                         ),
                                       );
                                     },
