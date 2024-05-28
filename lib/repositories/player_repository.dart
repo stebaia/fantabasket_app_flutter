@@ -36,6 +36,8 @@ class PlayerRepository {
     try {
       final response = await playerService.getAllPlayers();
       PlayersList playersList = playerDTOMapper.fromDTO(response.data);
+      playersList.players!
+          .sort((b, a) => a.points!.pointMade.compareTo(b.points!.pointMade));
       return HttpResponse(playersList, response.response);
     } catch (error, stackTrace) {
       logger.e('Error getting list of player',

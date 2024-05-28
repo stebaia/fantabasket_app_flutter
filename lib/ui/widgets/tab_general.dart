@@ -55,7 +55,7 @@ class _TabGeneralState extends State<TabGeneral> {
     super.initState();
     _list = widget.list.players!;
     _controller = TextEditingController();
-    _filterName = "Nessun filtro selezionato";
+    _filterName = "Punti realizzati";
   }
 
   Color getTransparentColor(Color color, double opacity) {
