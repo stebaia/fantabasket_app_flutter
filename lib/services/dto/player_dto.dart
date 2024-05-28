@@ -67,8 +67,19 @@ class PlayerDetailDTO extends DTO with EquatableMixin {
     category = json['categoria'] as String?;
     team = json['squadra'] as String?;
     value = json['punteggio'] == null ? 0 : json['punteggio'] as int;
-    if (json['dettaglioPunteggio'] != null) {
+    if (json['dettaglioPunteggio'] != null &&
+        json['dettaglioPunteggio'] is Map<String, dynamic>) {
       points = (PlayerDetailPointsDTO.fromJson(json['dettaglioPunteggio']));
+    } else {
+      points = PlayerDetailPointsDTO(
+        ankleBreaker: 0,
+        assist: 0,
+        block: 0,
+        bounce: 0,
+        dunk: 0,
+        ignorantClothing: 0,
+        pointMade: 0,
+      );
     }
   }
 
