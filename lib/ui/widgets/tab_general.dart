@@ -129,8 +129,26 @@ class _TabGeneralState extends State<TabGeneral> {
                           }) as String;
                       setState(() {
                         _filterName = result;
-                        _list.sort((a, b) =>
-                            b.points!.pointMade.compareTo(a.points!.pointMade));
+                        _list.sort((b, a) {
+                          return switch (_filterName) {
+                            "Punti realizzati" => a.points!.pointMade
+                                .compareTo(b.points!.pointMade),
+                            "Assist" =>
+                              a.points!.assist.compareTo(b.points!.assist),
+                            "Stoppate" =>
+                              a.points!.block.compareTo(b.points!.block),
+                            "Rimbalzi" =>
+                              a.points!.bounce.compareTo(b.points!.bounce),
+                            "Schiacciate" =>
+                              a.points!.dunk.compareTo(b.points!.dunk),
+                            "Ankle breaker" => a.points!.ankleBreaker
+                                .compareTo(b.points!.ankleBreaker),
+                            "Abbigliamento ignorante" => a
+                                .points!.ignorantClothing
+                                .compareTo(b.points!.ignorantClothing),
+                            _ => -1,
+                          };
+                        });
                       });
                     },
                     icon: const Icon(Icons.filter_list),
