@@ -3,6 +3,7 @@ import 'package:fantabasket_app_flutter/bloc/team_detail_bloc/team_detail_bloc.d
 import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
 import 'package:fantabasket_app_flutter/model/team_detail.dart';
 import 'package:fantabasket_app_flutter/routes/app_router.gr.dart';
+import 'package:fantabasket_app_flutter/ui/components/empty_component.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/double_spinner.dart';
 import 'package:fantabasket_app_flutter/utils/color_utils.dart';
 import 'package:flutter/material.dart';
@@ -286,10 +287,9 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
                           child: Text("Nessuna giornata caricata"),
                         )
                       : td.days.first.players.length < 6
-                          ? const Center(
-                              child:
-                                  Text("Errore nel caricamento dei giocatori"),
-                            )
+                          ? const EmptyComponent(
+                              text:
+                                  'Al momento non è possibile visualizzare la squadra')
                           : Container(
                               padding: const EdgeInsets.all(10),
                               alignment: Alignment.center,
