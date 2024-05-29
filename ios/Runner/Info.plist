@@ -24,11 +24,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.6</string>
+	<string>1.7</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>12</string>
+	<string>13</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Questa app richiede l'accesso per la libreria delle foto per farti aggiungere l'immagine di profilo</string>
 	<key>NSPhotoLibraryUsageDescription</key>
