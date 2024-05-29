@@ -30,9 +30,9 @@
 	<key>CFBundleVersion</key>
 	<string>12</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>This app requires read and write access to the photo library.</string>
+	<string>Questa app richiede l'accesso per la libreria delle foto per farti aggiungere l'immagine di profilo</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app requires access to the photo library.</string>
+	<string>Questa app richiede l'accesso per la libreria delle foto per farti scegliere l'immagine di profilo</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
