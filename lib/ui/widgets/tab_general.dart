@@ -223,14 +223,29 @@ class _TabGeneralState extends State<TabGeneral> {
                                   ),
                                 )),
                             dense: true,
-                            title: Text(
-                              '${_list[index].firstName} ${_list[index].lastName}',
-                              style: TextStyle(
-                                  color: darkMode.darkTheme
-                                      ? Colors.white
-                                      : Colors.black,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold),
+                            title: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  '${_list[index].firstName} ${_list[index].lastName}',
+                                  style: TextStyle(
+                                      color: darkMode.darkTheme
+                                          ? Colors.white
+                                          : Colors.black,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  _list[index].team,
+                                  style: TextStyle(
+                                    color: darkMode.darkTheme
+                                        ? Colors.white
+                                        : Colors.black,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                              ],
                             ),
                             subtitle: Row(
                               children: [

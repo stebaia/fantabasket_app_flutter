@@ -36,9 +36,15 @@ class PlayerRepository {
     try {
       final response = await playerService.getAllPlayers();
       PlayersList playersList = playerDTOMapper.fromDTO(response.data);
-      playersList.players!
+      final set = <int>{};
+      set.addAll(playersList.players!.map((p) => p.id));
+      var players = set
+          .map((id) => playersList.players!.firstWhere((p) => p.id == id))
+          .toList();
+      PlayersList list = PlayersList(count: set.length, players: players);
+      list.players!
           .sort((b, a) => a.points!.pointMade.compareTo(b.points!.pointMade));
-      return HttpResponse(playersList, response.response);
+      return HttpResponse(list, response.response);
     } catch (error, stackTrace) {
       logger.e('Error getting list of player',
           error: error, stackTrace: stackTrace);
