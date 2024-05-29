@@ -332,68 +332,74 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                                                   points: null,
                                                 ))
                                             .toList();
-                                        return Container(
-                                          alignment: Alignment.center,
-                                          width: double.infinity,
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Expanded(
-                                                flex: 1,
-                                                child: Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
+                                        return pls.length != 6
+                                            ? Center(
+                                                child: Text(
+                                                    "Errore nel caricamento dei giocatori"),
+                                              )
+                                            : Container(
+                                                alignment: Alignment.center,
+                                                width: double.infinity,
+                                                child: Column(
                                                   mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceAround,
+                                                      MainAxisAlignment.center,
                                                   children: [
-                                                    PlayerIcon(
-                                                      players: list,
-                                                      mContext: context,
-                                                      selected: pls[0],
+                                                    Expanded(
+                                                      flex: 1,
+                                                      child: Row(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceAround,
+                                                        children: [
+                                                          PlayerIcon(
+                                                            players: list,
+                                                            mContext: context,
+                                                            selected: pls[0],
+                                                          ),
+                                                          PlayerIcon(
+                                                            players: list,
+                                                            mContext: context,
+                                                            selected: pls[1],
+                                                          ),
+                                                          PlayerIcon(
+                                                            players: list,
+                                                            mContext: context,
+                                                            selected: pls[2],
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ),
-                                                    PlayerIcon(
-                                                      players: list,
-                                                      mContext: context,
-                                                      selected: pls[1],
-                                                    ),
-                                                    PlayerIcon(
-                                                      players: list,
-                                                      mContext: context,
-                                                      selected: pls[2],
+                                                    Expanded(
+                                                      flex: 1,
+                                                      child: SizedBox(
+                                                        child: Row(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .center,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceEvenly,
+                                                          children: [
+                                                            PlayerIcon(
+                                                              players: list,
+                                                              mContext: context,
+                                                              selected: pls[3],
+                                                            ),
+                                                            PlayerIcon(
+                                                              players: list,
+                                                              mContext: context,
+                                                              selected: pls[4],
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
                                                     ),
                                                   ],
                                                 ),
-                                              ),
-                                              Expanded(
-                                                flex: 1,
-                                                child: SizedBox(
-                                                  child: Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceEvenly,
-                                                    children: [
-                                                      PlayerIcon(
-                                                        players: list,
-                                                        mContext: context,
-                                                        selected: pls[3],
-                                                      ),
-                                                      PlayerIcon(
-                                                        players: list,
-                                                        mContext: context,
-                                                        selected: pls[4],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        );
+                                              );
                                       },
                                     ),
                               _ => const Text("No matching"),
