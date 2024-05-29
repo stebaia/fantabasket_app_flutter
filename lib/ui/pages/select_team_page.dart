@@ -402,7 +402,9 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                                               );
                                       },
                                     ),
-                              _ => const Text("No matching"),
+                              _ => const EmptyComponent(
+                                  text:
+                                      'Al momento non è possibile visualizzare la squadra')
                             }),
                             BlocBuilder<BannerBloc, BannerState>(
                               builder: (context, state) {
