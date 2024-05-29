@@ -142,9 +142,9 @@ class _PlayersBottomSheetState extends State<PlayersBottomSheet> {
               children: [
                 CategoryButton(onClick: onCategorySelected, category: "A1"),
                 CategoryButton(onClick: onCategorySelected, category: "A2"),
-                CategoryButton(onClick: onCategorySelected, category: "B"),
-                CategoryButton(onClick: onCategorySelected, category: "C1"),
-                CategoryButton(onClick: onCategorySelected, category: "C2"),
+                CategoryButton(onClick: onCategorySelected, category: "B1"),
+                CategoryButton(onClick: onCategorySelected, category: "B2"),
+                CategoryButton(onClick: onCategorySelected, category: "C"),
                 CategoryButton(onClick: onCategorySelected, category: "D"),
                 CategoryButton(onClick: onCategorySelected, category: "PROMO"),
                 CategoryButton(

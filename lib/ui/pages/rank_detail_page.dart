@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
 import 'package:fantabasket_app_flutter/bloc/rank_detail_bloc/rank_detail_bloc.dart';
 import 'package:fantabasket_app_flutter/model/stage.dart';
+import 'package:fantabasket_app_flutter/ui/components/empty_component.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/double_spinner.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/rank_detail_card.dart';
 import 'package:flutter/material.dart';
@@ -76,7 +77,9 @@ class RankDetailPage extends StatelessWidget with AutoRouteWrapper {
                       );
                     },
                   ),
-                _ => Container(),
+                _ => const EmptyComponent(
+                    text: "Al momento non ci sono squadre...",
+                  )
               };
             }),
           )

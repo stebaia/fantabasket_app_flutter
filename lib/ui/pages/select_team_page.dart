@@ -247,7 +247,8 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                                     );
                                   },
                                 ),
-                          _ => const Text("No matching"),
+                          _ => const EmptyComponent(
+                              text: 'Nessun giocatore presente nella tappa')
                         }),
                         BlocBuilder<BannerBloc, BannerState>(
                           builder: (context, state) {

@@ -22,9 +22,11 @@ class EmptyComponent extends StatelessWidget {
             height: MediaQuery.of(context).size.height,
             child: Center(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Lottie.asset('assets/lottie/empty.json',
-                      width: 200, height: 200),
+                      width: 250, height: 250),
                   const SizedBox(
                     height: 20,
                   ),
@@ -37,6 +39,9 @@ class EmptyComponent extends StatelessWidget {
                           color: Colors.black, fontWeight: FontWeight.bold),
                     ),
                   ),
+                  const SizedBox(
+                    height: 50,
+                  )
                 ],
               ),
             ),

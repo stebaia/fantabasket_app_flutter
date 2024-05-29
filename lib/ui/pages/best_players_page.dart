@@ -4,6 +4,7 @@ import 'package:fantabasket_app_flutter/bloc/select_team_bloc/select_team_bloc.d
 import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:fantabasket_app_flutter/model/stage.dart';
+import 'package:fantabasket_app_flutter/ui/components/empty_component.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/best_players_card.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/double_spinner.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/sponsors_banner.dart';
@@ -60,11 +61,9 @@ class BestPlayersPage extends StatelessWidget with AutoRouteWrapper {
         listener: (context, state) {},
         builder: (context, state) {
           return switch (state) {
-            ErrorGetPlayersState(errorString: var errorString) => Center(
-                child: Text(
-                  errorString,
-                  style: const TextStyle(color: Colors.white),
-                ),
+            ErrorGetPlayersState(errorString: var errorString) =>
+              const EmptyComponent(
+                text: "Al momento non ci sono giocatori...",
               ),
             EmptyGetPlayersState() => Column(
                 children: [
@@ -79,10 +78,12 @@ class BestPlayersPage extends StatelessWidget with AutoRouteWrapper {
                       }
                     },
                   ),
-                  const Center(
+                  Center(
                     child: Text(
                       "Nessun giocatore presente",
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(
+                        color: darkMode.darkTheme ? Colors.white : Colors.black,
+                      ),
                     ),
                   ),
                 ],

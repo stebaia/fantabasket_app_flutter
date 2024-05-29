@@ -6,12 +6,7 @@ class SponsorsBannerBlank extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.grey,
-      height: MediaQuery.of(context).size.height * 0.09,
-      alignment: Alignment.center,
-      width: MediaQuery.of(context).size.width,
-    );
+    return Container();
   }
 }
 
@@ -21,11 +16,12 @@ class SponsorsBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      
       height: MediaQuery.of(context).size.height * 0.09,
-      
       width: MediaQuery.of(context).size.width,
-      child: Image.network(banner.foto, fit: BoxFit.cover,),
+      child: Image.network(
+        banner.foto,
+        fit: BoxFit.cover,
+      ),
     );
   }
 }

@@ -27,9 +27,13 @@ class RankDetailBloc extends Bloc<RankDetailEvent, RankDetailState> {
         if (result.data != null) {
           var list = result.data.teams;
           if (list != null) {
-            list.sort(((b, a) => a.points!.compareTo(b.points!)));
+            if (list.isNotEmpty) {
+              list.sort(((b, a) => a.points!.compareTo(b.points!)));
+              emit(ResultRankingState(result.data));
+            } else {
+              emit(const NoRankingState());
+            }
           }
-          emit(ResultRankingState(result.data));
         } else {
           emit(const NoRankingState());
         }

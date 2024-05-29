@@ -37,7 +37,11 @@ class SelectTeamBloc extends Bloc<SelectTeamEvent, SelectTeamState> {
       var pls = await playerRepository.getPlayers(event.stage);
       if (pls.response.statusCode == 200) {
         players = pls.data;
-        emit(ResultGetPlayersState(pls.data));
+        if (players.players!.isNotEmpty) {
+          emit(ResultGetPlayersState(pls.data));
+        } else {
+          emit((EmptyGetPlayersState()));
+        }
       } else {
         emit(const ErrorGetPlayersState('Giocatori non caricati'));
       }
