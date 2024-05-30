@@ -3,6 +3,7 @@ import 'package:fantabasket_app_flutter/bloc/team_detail_bloc/team_detail_bloc.d
 import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
 import 'package:fantabasket_app_flutter/model/team_detail.dart';
 import 'package:fantabasket_app_flutter/routes/app_router.gr.dart';
+import 'package:fantabasket_app_flutter/ui/components/empty_component.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/double_spinner.dart';
 import 'package:fantabasket_app_flutter/utils/color_utils.dart';
 import 'package:flutter/material.dart';
@@ -285,51 +286,56 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
                       ? const Center(
                           child: Text("Nessuna giornata caricata"),
                         )
-                      : Container(
-                        padding: EdgeInsets.all(10),
-                          alignment: Alignment.center,
-                          width: double.infinity,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                flex: 1,
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    _getPlayerCard(context, td, 0, currentDay,
-                                        darkMode.darkTheme),
-                                    _getPlayerCard(context, td, 1, currentDay,
-                                        darkMode.darkTheme),
-                                    _getPlayerCard(context, td, 2, currentDay,
-                                        darkMode.darkTheme),
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: SizedBox(
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      _getPlayerCard(context, td, 3, currentDay,
-                                          darkMode.darkTheme),
-                                      _getPlayerCard(context, td, 4, currentDay,
-                                          darkMode.darkTheme),
-                                      _getPlayerCard(context, td, 5, currentDay,
-                                          darkMode.darkTheme),
-                                    ],
+                      : td.days.first.players.length < 6
+                          ? const EmptyComponent(
+                              text:
+                                  'Al momento non è possibile visualizzare la squadra')
+                          : Container(
+                              padding: const EdgeInsets.all(10),
+                              alignment: Alignment.center,
+                              width: double.infinity,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Expanded(
+                                    flex: 1,
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        _getPlayerCard(context, td, 0,
+                                            currentDay, darkMode.darkTheme),
+                                        _getPlayerCard(context, td, 1,
+                                            currentDay, darkMode.darkTheme),
+                                        _getPlayerCard(context, td, 2,
+                                            currentDay, darkMode.darkTheme),
+                                      ],
+                                    ),
                                   ),
-                                ),
+                                  Expanded(
+                                    flex: 1,
+                                    child: SizedBox(
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          _getPlayerCard(context, td, 3,
+                                              currentDay, darkMode.darkTheme),
+                                          _getPlayerCard(context, td, 4,
+                                              currentDay, darkMode.darkTheme),
+                                          _getPlayerCard(context, td, 5,
+                                              currentDay, darkMode.darkTheme),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                        ),
+                            ),
                 _ => Container(),
               },
             )
