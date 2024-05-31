@@ -39,6 +39,11 @@ class StageStatsMapper extends DTOMapper<StageStatsDTO, StageStats> {
       points: dto.points ?? 0,
       stageName: dto.stageName ?? '',
       matches: matches,
+      category: dto.category ?? '',
+      name: dto.name ?? '',
+      photo: dto.photo ?? '',
+      surname: dto.surname ?? '',
+      team: dto.team ?? '',
     );
   }
 

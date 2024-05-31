@@ -98,11 +98,15 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
                     ],
                   ),
                 ),
+                const SizedBox(height: 10),
                 Row(
                   children: [
                     Expanded(
                       child: Container(
-                        padding: const EdgeInsets.all(20.0),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20.0,
+                          vertical: 10,
+                        ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -133,7 +137,10 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
                     ),
                     Expanded(
                       child: Container(
-                        padding: const EdgeInsets.all(20.0),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20.0,
+                          vertical: 10,
+                        ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -169,6 +176,35 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
                       ),
                     ),
                   ],
+                ),
+                Container(
+                  alignment: Alignment.centerLeft,
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Squadra",
+                        style: TextStyle(
+                          color:
+                              darkMode.darkTheme ? Colors.white : Colors.black,
+                          fontFamily: 'Nunito Sans',
+                          fontSize: 16,
+                        ),
+                      ),
+                      Text(
+                        pd.stages!.first.team ?? "Squadra non disponibile...",
+                        style: TextStyle(
+                          color:
+                              darkMode.darkTheme ? Colors.white : Colors.black,
+                          fontFamily: 'Nunito Sans',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 Expanded(
                   child: Padding(
