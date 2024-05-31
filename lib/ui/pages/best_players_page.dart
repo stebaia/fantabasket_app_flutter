@@ -4,6 +4,7 @@ import 'package:fantabasket_app_flutter/bloc/select_team_bloc/select_team_bloc.d
 import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
 import 'package:fantabasket_app_flutter/model/stage.dart';
+import 'package:fantabasket_app_flutter/routes/app_router.gr.dart';
 import 'package:fantabasket_app_flutter/ui/components/empty_component.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/best_players_card.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/double_spinner.dart';
@@ -124,6 +125,19 @@ class BestPlayersPage extends StatelessWidget with AutoRouteWrapper {
                                           const NeverScrollableScrollPhysics(),
                                       itemCount: players.count,
                                       itemBuilder: (context, index) => ListTile(
+                                            onTap: () => context.pushRoute(
+                                              PlayerDetailRoute(
+                                                id: players.players![index].id,
+                                                firstName: players
+                                                    .players![index].firstName,
+                                                lastName: players
+                                                    .players![index].lastName,
+                                                photo: players
+                                                    .players![index].photo,
+                                                category: players
+                                                    .players![index].category,
+                                              ),
+                                            ),
                                             trailing: Container(
                                               width: 60,
                                               height: 30,
