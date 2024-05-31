@@ -421,7 +421,8 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                           ],
                         ),
                       ),
-                    _ => Container(),
+                    _ => const EmptyComponent(
+                        text: 'Errore nel caricamento dei giocatori'),
                   };
                 }
               }));
