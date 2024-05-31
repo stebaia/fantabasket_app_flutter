@@ -118,17 +118,7 @@ class _PlayerStagesCarouselState extends State<PlayerStagesCarousel> {
       padding: const EdgeInsets.only(bottom: 10.0),
       child: Row(
         children: [
-          SizedBox(
-            width: 70,
-            height: 70,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(50),
-              child: Image.network(
-                  'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/LeBron_James_%2851959977144%29_%28cropped2%29.jpg/640px-LeBron_James_%2851959977144%29_%28cropped2%29.jpg',
-                  fit: BoxFit.cover),
-            ),
-          ),
-          const SizedBox(width: 20),
+          
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
