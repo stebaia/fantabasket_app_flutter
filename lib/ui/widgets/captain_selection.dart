@@ -78,6 +78,7 @@ class CaptainCard extends StatelessWidget {
               Expanded(
                 flex: 6,
                 child: SizedBox(
+                    width: double.infinity,
                     child: ClipRRect(
                         borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(20),
