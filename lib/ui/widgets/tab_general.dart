@@ -97,7 +97,7 @@ class _TabGeneralState extends State<TabGeneral> {
                         ),
                         borderRadius: BorderRadius.all(Radius.circular(4)),
                       ),
-                      hintText: 'Cerca..',
+                      hintText: 'Statistiche..',
                       hintStyle: const TextStyle(
                         color: Color.fromARGB(255, 173, 173, 173),
                       ),

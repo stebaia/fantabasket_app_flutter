@@ -30,6 +30,11 @@ class StageStatsDTO extends DTO with EquatableMixin {
   int? stageId;
   String? stageName;
   int? points;
+  String? name;
+  String? surname;
+  String? photo;
+  String? category;
+  String? team;
 
   StageStatsDTO({
     this.playerDays,
@@ -42,6 +47,11 @@ class StageStatsDTO extends DTO with EquatableMixin {
     stageId = json['id_tappa'] as int?;
     stageName = json['nome_tappa'] as String?;
     points = json['punteggio'] as int?;
+    name = json['nome'] as String?;
+    surname = json['cognome'] as String?;
+    photo = json['foto'] as String?;
+    category = json['categoria'] as String?;
+    team = json['squadra'] as String?;
     if (json['giornate'] != null &&
         (json['giornate'] as List<dynamic>).isNotEmpty) {
       playerDays = [];

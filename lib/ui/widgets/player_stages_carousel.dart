@@ -5,6 +5,7 @@ import 'package:fantabasket_app_flutter/model/match_day.dart';
 import 'package:fantabasket_app_flutter/model/player_match.dart';
 import 'package:fantabasket_app_flutter/model/players_stats_list.dart';
 import 'package:fantabasket_app_flutter/model/stage_stats.dart';
+import 'package:fantabasket_app_flutter/ui/components/empty_component.dart';
 import 'package:page_view_dot_indicator/page_view_dot_indicator.dart';
 import 'package:fantabasket_app_flutter/model/player_detail.dart';
 import 'package:fantabasket_app_flutter/model/player_stage.dart';
@@ -109,6 +110,38 @@ class _PlayerStagesCarouselState extends State<PlayerStagesCarousel> {
     );
   }
 
+  Widget _getStageTitle(
+    StageStats stage,
+    DarkThemeProvider darkMode,
+  ) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10.0),
+      child: Row(
+        children: [
+          
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  stage.stageName,
+                  style: TextStyle(
+                    color: darkMode.darkTheme ? Colors.white : Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                  maxLines: 3,
+                  textAlign: TextAlign.start,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   void initState() {
     super.initState();
@@ -118,145 +151,130 @@ class _PlayerStagesCarouselState extends State<PlayerStagesCarousel> {
   @override
   Widget build(BuildContext context) {
     final darkMode = Provider.of<DarkThemeProvider>(context);
-
-    return Column(
-      children: [
-        Expanded(
-          flex: 10,
-          child: CarouselSlider(
-            carouselController: _controller,
-            options: CarouselOptions(
-              height: double.infinity,
-              enableInfiniteScroll: false,
-              viewportFraction: 1,
-              onPageChanged: (index, reason) =>
-                  setState(() => _current = index),
-            ),
-            items: widget.playerDetail.stages!.map((stage) {
-              return Builder(
-                builder: (BuildContext context) {
-                  return SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: Card(
-                      color: Theme.of(context).colorScheme.primary,
-                      elevation: 2,
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        padding: const EdgeInsets.all(20),
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: stage.matches.length + 1,
-                          itemBuilder: (context, index) {
-                            final PlayerMatch? playerMatch = index == 0
-                                ? null
-                                : stage.matches
-                                    .asMap()
-                                    .entries
-                                    .firstWhere(
-                                        (entry) => entry.key == index - 1)
-                                    .value;
-                            final Bonus? bonus = playerMatch?.bonus;
-                            final Malus? malus = playerMatch?.malus;
-                            return index == 0
-                                ? Padding(
-                                    padding:
-                                        const EdgeInsets.only(bottom: 10.0),
-                                    child: Row(
+    final bool isThereStage = widget.playerDetail.stages != null &&
+        widget.playerDetail.stages!.isNotEmpty;
+    return !isThereStage
+        ? const EmptyComponent(text: "Nessuna tappa disponibile")
+        : Column(
+            children: [
+              Expanded(
+                flex: 10,
+                child: CarouselSlider(
+                  carouselController: _controller,
+                  options: CarouselOptions(
+                    height: double.infinity,
+                    enableInfiniteScroll: false,
+                    viewportFraction: 1,
+                    onPageChanged: (index, reason) =>
+                        setState(() => _current = index),
+                  ),
+                  items: widget.playerDetail.stages!.map((stage) {
+                    final areThereMatches = stage.matches.isNotEmpty;
+                    return Builder(
+                      builder: (BuildContext context) {
+                        return SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          child: Card(
+                            color: Theme.of(context).colorScheme.primary,
+                            elevation: 2,
+                            child: Container(
+                              width: MediaQuery.of(context).size.width,
+                              padding: const EdgeInsets.all(20),
+                              child: !areThereMatches
+                                  ? Column(
                                       children: [
-                                        SizedBox(
-                                          width: 70,
-                                          height: 70,
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(50),
-                                            child: Image.network(
-                                                'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/LeBron_James_%2851959977144%29_%28cropped2%29.jpg/640px-LeBron_James_%2851959977144%29_%28cropped2%29.jpg',
-                                                fit: BoxFit.cover),
+                                        _getStageTitle(stage, darkMode),
+                                        const Expanded(
+                                          child: Center(
+                                            child: Text(
+                                                "Nessuna giornata caricata"),
                                           ),
-                                        ),
-                                        const SizedBox(width: 20),
-                                        Expanded(
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                stage.stageName,
-                                                style: TextStyle(
-                                                  color: darkMode.darkTheme
+                                        )
+                                      ],
+                                    )
+                                  : ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount: areThereMatches
+                                          ? stage.matches.length + 1
+                                          : 2,
+                                      itemBuilder: (context, index) {
+                                        final PlayerMatch? playerMatch =
+                                            index == 0
+                                                ? null
+                                                : areThereMatches
+                                                    ? stage.matches
+                                                        .asMap()
+                                                        .entries
+                                                        .firstWhere((entry) =>
+                                                            entry.key ==
+                                                            index - 1)
+                                                        .value
+                                                    : null;
+                                        final Bonus? bonus = playerMatch?.bonus;
+                                        final Malus? malus = playerMatch?.malus;
+                                        return index == 0
+                                            ? _getStageTitle(stage, darkMode)
+                                            : Card(
+                                                elevation: 4,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .primary,
+                                                child: ExpansionTile(
+                                                  shape: const Border(),
+                                                  title: Text(
+                                                    playerMatch!.day,
+                                                    style: TextStyle(
+                                                        color:
+                                                            darkMode.darkTheme
+                                                                ? Colors.white
+                                                                : Colors.black),
+                                                  ),
+                                                  iconColor: darkMode.darkTheme
                                                       ? Colors.white
                                                       : Colors.black,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 18,
+                                                  collapsedIconColor:
+                                                      darkMode.darkTheme
+                                                          ? Colors.white
+                                                          : Colors.black,
+                                                  children: [
+                                                    _getBonusMalus(
+                                                      true,
+                                                      bonus!.props,
+                                                      playerMatch!.points,
+                                                    ),
+                                                    _getBonusMalus(
+                                                      false,
+                                                      malus!.props,
+                                                      playerMatch.points,
+                                                    ),
+                                                  ],
                                                 ),
-                                                maxLines: 3,
-                                                textAlign: TextAlign.start,
-                                                overflow: TextOverflow.ellipsis,
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
+                                              );
+                                      },
                                     ),
-                                  )
-                                : Card(
-                                    elevation: 4,
-                                    color:
-                                        Theme.of(context).colorScheme.primary,
-                                    child: ExpansionTile(
-                                      shape: const Border(),
-                                      title: Text(
-                                        playerMatch!.day,
-                                        style: TextStyle(
-                                            color: darkMode.darkTheme
-                                                ? Colors.white
-                                                : Colors.black),
-                                      ),
-                                      iconColor: darkMode.darkTheme
-                                          ? Colors.white
-                                          : Colors.black,
-                                      collapsedIconColor: darkMode.darkTheme
-                                          ? Colors.white
-                                          : Colors.black,
-                                      children: [
-                                        _getBonusMalus(
-                                          true,
-                                          bonus!.props,
-                                          playerMatch!.points,
-                                        ),
-                                        _getBonusMalus(
-                                          false,
-                                          malus!.props,
-                                          playerMatch.points,
-                                        ),
-                                      ],
-                                    ),
-                                  );
-                          },
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              );
-            }).toList(),
-          ),
-        ),
-        Expanded(
-          flex: 1,
-          child: SizedBox(
-            width: MediaQuery.of(context).size.width * 0.3,
-            child: PageViewDotIndicator(
-              currentItem: _current,
-              count: indicators.length,
-              unselectedColor: Colors.grey.withOpacity(0.4),
-              selectedColor: Theme.of(context).colorScheme.background,
-              size: const Size(12, 12),
-              unselectedSize: const Size(9, 9),
-            ),
-          ),
-        ),
-      ],
-    );
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  }).toList(),
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.3,
+                  child: PageViewDotIndicator(
+                    currentItem: _current,
+                    count: indicators.length,
+                    unselectedColor: Colors.grey.withOpacity(0.4),
+                    selectedColor: Theme.of(context).colorScheme.background,
+                    size: const Size(12, 12),
+                    unselectedSize: const Size(9, 9),
+                  ),
+                ),
+              ),
+            ],
+          );
   }
 }

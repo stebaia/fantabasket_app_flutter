@@ -42,14 +42,14 @@ class _CorePageState extends State<CorePage> {
               items: [
                 BottomNavigationBarItem(
                   icon: Image(
-                    width: 36,
-                    height: 36,
+                    width:28,
+                    height: 28,
                     image: const AssetImage('assets/images/basketballicon.png'),
                     color: darkMode.darkTheme ? Colors.white : Colors.black,
                   ),
                   activeIcon: Image(
-                    width: 36,
-                    height: 36,
+                    width: 28,
+                    height: 28,
                     image: const AssetImage('assets/images/basketballicon.png'),
                     color: Theme.of(context).colorScheme.tertiary,
                   ),
@@ -58,7 +58,7 @@ class _CorePageState extends State<CorePage> {
                 const BottomNavigationBarItem(
                   icon: FaIcon(FontAwesomeIcons.rankingStar),
                   activeIcon: FaIcon(FontAwesomeIcons.rankingStar),
-                  label: 'Ranking',
+                  label: 'Fanta Teams',
                 ),
                 const BottomNavigationBarItem(
                   icon: FaIcon(FontAwesomeIcons.users),
