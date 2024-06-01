@@ -58,8 +58,7 @@ class BestPlayersPage extends StatelessWidget with AutoRouteWrapper {
         ),
         automaticallyImplyLeading: true,
       ),
-      body: BlocConsumer<SelectTeamBloc, SelectTeamState>(
-        listener: (context, state) {},
+      body: BlocBuilder<SelectTeamBloc, SelectTeamState>(
         builder: (context, state) {
           return switch (state) {
             ErrorGetPlayersState(errorString: var errorString) =>
@@ -79,12 +78,9 @@ class BestPlayersPage extends StatelessWidget with AutoRouteWrapper {
                       }
                     },
                   ),
-                  Center(
-                    child: Text(
-                      "Nessun giocatore presente",
-                      style: TextStyle(
-                        color: darkMode.darkTheme ? Colors.white : Colors.black,
-                      ),
+                  const Expanded(
+                    child: Center(
+                      child: EmptyComponent(text: "Nessun giocatore presente"),
                     ),
                   ),
                 ],
@@ -106,6 +102,7 @@ class BestPlayersPage extends StatelessWidget with AutoRouteWrapper {
                     ),
                     Expanded(
                       child: Container(
+                        alignment: Alignment.center,
                         child: SingleChildScrollView(
                           child: Column(
                             children: [

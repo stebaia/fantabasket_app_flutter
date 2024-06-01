@@ -98,6 +98,7 @@ class _LoadStagesPageState extends State<LoadStagesPage> {
                   Expanded(
                     child: Container(
                       padding: const EdgeInsets.symmetric(vertical: 20),
+                      alignment: Alignment.center,
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
