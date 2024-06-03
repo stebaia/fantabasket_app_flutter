@@ -324,7 +324,15 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
                                                   fontWeight: FontWeight.bold),
                                             ),
                                             GestureDetector(
-                                              onTap: () {},
+                                              onTap: () => showModalBottomSheet(
+                                                context: context,
+                                                builder: (context) => Container(
+                                                  height: 400,
+                                                  child: PlayerStagesCarousel(
+                                                      playerDetail: state
+                                                          .playerStatsList),
+                                                ),
+                                              ),
                                               child: const Row(
                                                 children: [
                                                   Text(

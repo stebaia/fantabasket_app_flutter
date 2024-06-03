@@ -118,7 +118,6 @@ class _PlayerStagesCarouselState extends State<PlayerStagesCarousel> {
       padding: const EdgeInsets.only(bottom: 10.0),
       child: Row(
         children: [
-          
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -174,85 +173,79 @@ class _PlayerStagesCarouselState extends State<PlayerStagesCarousel> {
                       builder: (BuildContext context) {
                         return SizedBox(
                           width: MediaQuery.of(context).size.width,
-                          child: Card(
-                            color: Theme.of(context).colorScheme.primary,
-                            elevation: 2,
-                            child: Container(
-                              width: MediaQuery.of(context).size.width,
-                              padding: const EdgeInsets.all(20),
-                              child: !areThereMatches
-                                  ? Column(
-                                      children: [
-                                        _getStageTitle(stage, darkMode),
-                                        const Expanded(
-                                          child: Center(
-                                            child: Text(
-                                                "Nessuna giornata caricata"),
-                                          ),
-                                        )
-                                      ],
-                                    )
-                                  : ListView.builder(
-                                      shrinkWrap: true,
-                                      itemCount: areThereMatches
-                                          ? stage.matches.length + 1
-                                          : 2,
-                                      itemBuilder: (context, index) {
-                                        final PlayerMatch? playerMatch =
-                                            index == 0
-                                                ? null
-                                                : areThereMatches
-                                                    ? stage.matches
-                                                        .asMap()
-                                                        .entries
-                                                        .firstWhere((entry) =>
-                                                            entry.key ==
-                                                            index - 1)
-                                                        .value
-                                                    : null;
-                                        final Bonus? bonus = playerMatch?.bonus;
-                                        final Malus? malus = playerMatch?.malus;
-                                        return index == 0
-                                            ? _getStageTitle(stage, darkMode)
-                                            : Card(
-                                                elevation: 4,
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .primary,
-                                                child: ExpansionTile(
-                                                  shape: const Border(),
-                                                  title: Text(
-                                                    playerMatch!.day,
-                                                    style: TextStyle(
-                                                        color:
-                                                            darkMode.darkTheme
-                                                                ? Colors.white
-                                                                : Colors.black),
-                                                  ),
-                                                  iconColor: darkMode.darkTheme
-                                                      ? Colors.white
-                                                      : Colors.black,
-                                                  collapsedIconColor:
-                                                      darkMode.darkTheme
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            padding: const EdgeInsets.all(20),
+                            child: !areThereMatches
+                                ? Column(
+                                    children: [
+                                      _getStageTitle(stage, darkMode),
+                                      const Expanded(
+                                        child: Center(
+                                          child:
+                                              Text("Nessuna giornata caricata"),
+                                        ),
+                                      )
+                                    ],
+                                  )
+                                : ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: areThereMatches
+                                        ? stage.matches.length + 1
+                                        : 2,
+                                    itemBuilder: (context, index) {
+                                      final PlayerMatch? playerMatch = index ==
+                                              0
+                                          ? null
+                                          : areThereMatches
+                                              ? stage.matches
+                                                  .asMap()
+                                                  .entries
+                                                  .firstWhere((entry) =>
+                                                      entry.key == index - 1)
+                                                  .value
+                                              : null;
+                                      final Bonus? bonus = playerMatch?.bonus;
+                                      final Malus? malus = playerMatch?.malus;
+                                      return index == 0
+                                          ? _getStageTitle(stage, darkMode)
+                                          : Card(
+                                              elevation: 4,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary,
+                                              child: ExpansionTile(
+                                                shape: const Border(),
+                                                title: Text(
+                                                  playerMatch!.day,
+                                                  style: TextStyle(
+                                                      color: darkMode.darkTheme
                                                           ? Colors.white
-                                                          : Colors.black,
-                                                  children: [
-                                                    _getBonusMalus(
-                                                      true,
-                                                      bonus!.props,
-                                                      playerMatch!.points,
-                                                    ),
-                                                    _getBonusMalus(
-                                                      false,
-                                                      malus!.props,
-                                                      playerMatch.points,
-                                                    ),
-                                                  ],
+                                                          : Colors.black),
                                                 ),
-                                              );
-                                      },
-                                    ),
-                            ),
+                                                iconColor: darkMode.darkTheme
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                                collapsedIconColor:
+                                                    darkMode.darkTheme
+                                                        ? Colors.white
+                                                        : Colors.black,
+                                                children: [
+                                                  _getBonusMalus(
+                                                    true,
+                                                    bonus!.props,
+                                                    playerMatch!.points,
+                                                  ),
+                                                  _getBonusMalus(
+                                                    false,
+                                                    malus!.props,
+                                                    playerMatch.points,
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+                                    },
+                                  ),
                           ),
                         );
                       },
