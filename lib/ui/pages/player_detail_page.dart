@@ -305,7 +305,7 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
                                   height: 16,
                                 ),
                                 Container(
-                                    padding: const EdgeInsets.all(10),
+                                    padding: const EdgeInsets.all(20),
                                     child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
@@ -336,7 +336,7 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
                                               child: const Row(
                                                 children: [
                                                   Text(
-                                                    'vedi tutte',
+                                                    'dettagli',
                                                     style: TextStyle(
                                                         fontSize: 12,
                                                         fontWeight:
@@ -346,7 +346,7 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
                                                     width: 4,
                                                   ),
                                                   Icon(
-                                                    FontAwesomeIcons.arrowRight,
+                                                    FontAwesomeIcons.arrowUp,
                                                     size: 12,
                                                   )
                                                 ],

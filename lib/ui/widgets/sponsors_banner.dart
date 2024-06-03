@@ -47,6 +47,8 @@ class _SponsorsBannerState extends State<SponsorsBanner> {
 
   @override
   Widget build(BuildContext context) {
+    print(MediaQuery.of(context).size.height * 0.09);
+    print(MediaQuery.of(context).size.width);
     return Container(
       height: MediaQuery.of(context).size.height * 0.09,
       width: MediaQuery.of(context).size.width,
