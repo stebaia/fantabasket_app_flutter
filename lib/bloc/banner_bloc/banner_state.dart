@@ -14,7 +14,7 @@ class TryGetBannerState extends BannerState {
 }
 
 class ResultBannerListState extends BannerState {
-  final BannerModel bannerModel;
+  final List<BannerModel> bannerModel;
   const ResultBannerListState(this.bannerModel);
 }
 

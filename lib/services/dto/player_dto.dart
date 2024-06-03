@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:fantabasket_app_flutter/model/player_stats.dart';
 import 'package:pine/pine.dart';
 
 class PlayerDTO extends DTO with EquatableMixin {
@@ -44,6 +45,7 @@ class PlayerDetailDTO extends DTO with EquatableMixin {
   String? team;
   int? value;
   PlayerDetailPointsDTO? points;
+  PlayerStats? playerStats;
 
   PlayerDetailDTO({
     this.id,
@@ -55,6 +57,7 @@ class PlayerDetailDTO extends DTO with EquatableMixin {
     this.category,
     this.team,
     this.value,
+    this.playerStats,
   });
 
   PlayerDetailDTO.fromJson(Map<String, dynamic> json) {
@@ -80,6 +83,18 @@ class PlayerDetailDTO extends DTO with EquatableMixin {
         ignorantClothing: 0,
         pointMade: 0,
       );
+    }
+    if (json['statistiche'] != null) {
+      playerStats = json['statistiche'];
+    } else {
+      playerStats = PlayerStats(
+          abbigliamentoIgnorante: 0,
+          ankleBreaker: 0,
+          assist: 0,
+          puntoRealizzato: 0,
+          rimbalzo: 0,
+          schiacciata: 0,
+          stoppata: 0);
     }
   }
 

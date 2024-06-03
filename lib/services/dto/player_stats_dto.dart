@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:fantabasket_app_flutter/model/player_stats.dart';
 import 'package:pine/pine.dart';
 
 class PlayerStatsDTO extends DTO with EquatableMixin {
@@ -35,12 +36,14 @@ class StageStatsDTO extends DTO with EquatableMixin {
   String? photo;
   String? category;
   String? team;
+  PlayerStats? playerStats;
 
   StageStatsDTO({
     this.playerDays,
     this.stageId,
     this.stageName,
     this.points,
+    this.playerStats,
   });
 
   StageStatsDTO.fromJson(Map<String, dynamic> json) {
@@ -58,6 +61,19 @@ class StageStatsDTO extends DTO with EquatableMixin {
       for (var v in (json['giornate'] as List<dynamic>)) {
         playerDays!.add(PlayerDayDTO.fromJson(v as Map<String, dynamic>));
       }
+    }
+    if (json['statistiche'] != null) {
+      playerStats =
+          PlayerStats.fromJson(json['statistiche'] as Map<String, dynamic>);
+    } else {
+      playerStats = PlayerStats(
+          abbigliamentoIgnorante: 0,
+          ankleBreaker: 0,
+          assist: 0,
+          puntoRealizzato: 0,
+          rimbalzo: 0,
+          schiacciata: 0,
+          stoppata: 0);
     }
   }
 

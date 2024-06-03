@@ -6,7 +6,6 @@ import 'package:fantabasket_app_flutter/routes/app_router.gr.dart';
 import 'package:fantabasket_app_flutter/ui/components/function_button.dart';
 import 'package:fantabasket_app_flutter/ui/components/text_form_fields.dart';
 import 'package:fantabasket_app_flutter/ui/widgets/login_wave_clipper.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -185,7 +184,7 @@ class _LoginPageState extends State<LoginPage> {
                                   backgroundColor:
                                       Theme.of(context).colorScheme.tertiary,
                                   textColor: Colors.white,
-                                  text: AppLocalizations.of(context)!.enter,
+                                  text: 'Entra',
                                   loading: state is TryLogginInState,
                                   onPressed: () {
                                     //context.pushRoute(CoreRoute());

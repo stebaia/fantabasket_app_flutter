@@ -17,7 +17,10 @@ class PlayerStatsMapper extends DTOMapper<PlayerStatsDTO, PlayersStatsList> {
         players.add(stageStatsMapper.fromDTO(element));
       }
     }
-    return PlayersStatsList(count: dto.data?.length ?? 0, stages: players);
+    return PlayersStatsList(
+      count: dto.data?.length ?? 0,
+      stages: players,
+    );
   }
 
   @override
@@ -36,15 +39,15 @@ class StageStatsMapper extends DTOMapper<StageStatsDTO, StageStats> {
       }
     }
     return StageStats(
-      points: dto.points ?? 0,
-      stageName: dto.stageName ?? '',
-      matches: matches,
-      category: dto.category ?? '',
-      name: dto.name ?? '',
-      photo: dto.photo ?? '',
-      surname: dto.surname ?? '',
-      team: dto.team ?? '',
-    );
+        points: dto.points ?? 0,
+        stageName: dto.stageName ?? '',
+        matches: matches,
+        category: dto.category ?? '',
+        name: dto.name ?? '',
+        photo: dto.photo ?? '',
+        surname: dto.surname ?? '',
+        team: dto.team ?? '',
+        playerStats: dto.playerStats!);
   }
 
   @override

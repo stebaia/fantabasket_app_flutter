@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 class App extends StatefulWidget {
@@ -49,7 +48,6 @@ class _AppState extends State<App> {
                 ? Styles.darkMode(true, context)
                 : Styles.lightMode(false, context),
             localizationsDelegates: const [
-              AppLocalizations.delegate, // Add this line
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,

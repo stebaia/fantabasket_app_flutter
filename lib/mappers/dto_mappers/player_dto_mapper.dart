@@ -42,17 +42,17 @@ class PlayerMapper extends DTOMapper<PlayerDetailDTO, Player> {
       );
     }
     return Player(
-      id: int.parse(dto.id ?? '0'),
-      firstName: dto.firstName ?? '',
-      lastName: dto.lastName ?? '',
-      value: dto.value ?? 0,
-      team: dto.team ?? '',
-      photo: dto.photo ?? '',
-      phone: dto.phone ?? '',
-      category: dto.category ?? '',
-      email: dto.email ?? '',
-      points: bonus,
-    );
+        id: int.parse(dto.id ?? '0'),
+        firstName: dto.firstName ?? '',
+        lastName: dto.lastName ?? '',
+        value: dto.value ?? 0,
+        team: dto.team ?? '',
+        photo: dto.photo ?? '',
+        phone: dto.phone ?? '',
+        category: dto.category ?? '',
+        email: dto.email ?? '',
+        points: bonus,
+        playerStats: dto.playerStats!);
   }
 
   @override

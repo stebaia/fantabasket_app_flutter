@@ -29,7 +29,7 @@ class BannerBloc extends Bloc<BannerEvent, BannerState> {
 // and use it to retrieve the element
           BannerModel element = result
               .data.banners![_random.nextInt(result.data.banners!.length)];
-          emit(ResultBannerListState(element));
+          emit(ResultBannerListState(result.data.banners!));
         }
       } else {
         emit(const ErrorBannerListState('error'));

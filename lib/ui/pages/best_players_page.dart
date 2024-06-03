@@ -3,6 +3,7 @@ import 'package:fantabasket_app_flutter/bloc/banner_bloc/banner_bloc.dart';
 import 'package:fantabasket_app_flutter/bloc/select_team_bloc/select_team_bloc.dart';
 import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
+import 'package:fantabasket_app_flutter/model/player_stats.dart';
 import 'package:fantabasket_app_flutter/model/stage.dart';
 import 'package:fantabasket_app_flutter/routes/app_router.gr.dart';
 import 'package:fantabasket_app_flutter/ui/components/empty_component.dart';
@@ -230,8 +231,16 @@ class BestPlayersPage extends StatelessWidget with AutoRouteWrapper {
                                     physics:
                                         const NeverScrollableScrollPhysics(),
                                     itemBuilder: (context, index) {
-                                      return const BestPlayersCard(
+                                      return BestPlayersCard(
                                         player: Player(
+                                          playerStats: PlayerStats(
+                                              abbigliamentoIgnorante: 0,
+                                              ankleBreaker: 0,
+                                              assist: 0,
+                                              puntoRealizzato: 0,
+                                              rimbalzo: 0,
+                                              schiacciata: 0,
+                                              stoppata: 0),
                                           id: 0,
                                           category: "",
                                           email: "",

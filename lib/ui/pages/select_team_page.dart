@@ -7,6 +7,7 @@ import 'package:fantabasket_app_flutter/bloc/select_player_bloc/select_player_bl
 import 'package:fantabasket_app_flutter/bloc/team_detail_bloc/team_detail_bloc.dart';
 import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
+import 'package:fantabasket_app_flutter/model/player_stats.dart';
 import 'package:fantabasket_app_flutter/model/stage.dart';
 import 'package:fantabasket_app_flutter/model/team.dart';
 import 'package:fantabasket_app_flutter/routes/app_router.gr.dart';
@@ -320,17 +321,24 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                                         var plsSint = td.days.first.players;
                                         var pls = plsSint
                                             .map((p) => Player(
-                                                  id: p.id,
-                                                  firstName: p.firstName,
-                                                  lastName: p.lastName,
-                                                  value: p.total,
-                                                  team: "",
-                                                  photo: p.photo,
-                                                  phone: "",
-                                                  category: p.category,
-                                                  email: "",
-                                                  points: null,
-                                                ))
+                                                id: p.id,
+                                                firstName: p.firstName,
+                                                lastName: p.lastName,
+                                                value: p.total,
+                                                team: "",
+                                                photo: p.photo,
+                                                phone: "",
+                                                category: p.category,
+                                                email: "",
+                                                points: null,
+                                                playerStats: PlayerStats(
+                                                    abbigliamentoIgnorante: 0,
+                                                    ankleBreaker: 0,
+                                                    assist: 0,
+                                                    puntoRealizzato: 0,
+                                                    rimbalzo: 0,
+                                                    schiacciata: 0,
+                                                    stoppata: 0)))
                                             .toList();
                                         return pls.length != 6
                                             ? Center(
