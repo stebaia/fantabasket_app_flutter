@@ -336,7 +336,10 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
                                 ],
                               ),
                             ),
-                _ => Container(),
+                _ => Expanded(
+                    child: EmptyComponent(
+                        text: "Dettagli squadra non disponibili..."),
+                  ),
               },
             )
           ],

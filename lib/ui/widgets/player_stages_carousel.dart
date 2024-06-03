@@ -86,7 +86,7 @@ class _PlayerStagesCarouselState extends State<PlayerStagesCarousel> {
                         Expanded(
                           flex: 2,
                           child: Text(
-                            pair.value,
+                            pair.value.isEmpty ? "0" : pair.value,
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.end,
                             style: TextStyle(
@@ -231,16 +231,18 @@ class _PlayerStagesCarouselState extends State<PlayerStagesCarousel> {
                                                         ? Colors.white
                                                         : Colors.black,
                                                 children: [
-                                                  _getBonusMalus(
-                                                    true,
-                                                    bonus!.props,
-                                                    playerMatch!.points,
-                                                  ),
-                                                  _getBonusMalus(
-                                                    false,
-                                                    malus!.props,
-                                                    playerMatch.points,
-                                                  ),
+                                                  if (bonus != null)
+                                                    _getBonusMalus(
+                                                      true,
+                                                      bonus.props,
+                                                      playerMatch.points,
+                                                    ),
+                                                  if (malus != null)
+                                                    _getBonusMalus(
+                                                      false,
+                                                      malus.props,
+                                                      playerMatch.points,
+                                                    ),
                                                 ],
                                               ),
                                             );
