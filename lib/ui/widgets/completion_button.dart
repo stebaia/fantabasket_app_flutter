@@ -27,13 +27,14 @@ class CompletionButton extends StatefulWidget {
 }
 
 class _CompletionButtonState extends State<CompletionButton> {
-  bool hasName = false;
+  late bool hasName;
   late bool edit;
 
   @override
   void initState() {
     super.initState();
     edit = widget.team != null;
+    hasName = widget.controller.text != "";
   }
 
   @override

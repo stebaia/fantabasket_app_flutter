@@ -96,30 +96,34 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                           shape: BoxShape.circle,
                         ),
                         child: GestureDetector(
-                          onTap: () => edit
-                              ? context.router.push(CompletionRoute(
+                          onTap: () {
+                            var allPlayers =
+                                context.read<SelectTeamBloc>().players.players!;
+                            var side = allPlayers
+                                .where((p) => !players
+                                    .map((pl) => pl.id)
+                                    .toList()
+                                    .contains(p.id))
+                                .toList();
+                            if (edit) {
+                              context.router.push(CompletionRoute(
+                                players: players,
+                                side: side,
+                                stageId: stageId,
+                                team: team,
+                              ));
+                            } else {
+                              if (upstate is ResultGetPlayersState &&
+                                  size == 5) {
+                                context.router.push(CompletionRoute(
                                   players: players,
-                                  side: context
-                                      .read<SelectTeamBloc>()
-                                      .players
-                                      .players!
-                                      .toSet()
-                                      .difference(players.toSet())
-                                      .toList(),
+                                  side: side,
                                   stageId: stageId,
                                   team: team,
-                                ))
-                              : upstate is ResultGetPlayersState && size == 5
-                                  ? context.router.push(CompletionRoute(
-                                      players: players,
-                                      side: upstate.playersList.players!
-                                          .toSet()
-                                          .difference(players.toSet())
-                                          .toList(),
-                                      stageId: stageId,
-                                      team: team,
-                                    ))
-                                  : null,
+                                ));
+                              }
+                            }
+                          },
                           child: Icon(
                             Icons.arrow_forward_ios_rounded,
                             color: size != 5 && !edit
