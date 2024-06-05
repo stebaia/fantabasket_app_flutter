@@ -73,8 +73,9 @@ class _PlayersBottomSheetState extends State<PlayersBottomSheet> {
     int currentValue = widget.selected == null
         ? 0
         : Constants.categoryValues[widget.selected!.category]!;
-    final List<Player> list =
-        List.from(Set.from(_players).difference(Set.from(checkedPlayers)));
+    final List<Player> list = List.from(_players);
+    list.removeWhere(
+        (p) => checkedPlayers.map((pl) => pl.id).toList().contains(p.id));
     list.sort((b, a) => Constants.categoryValues[a.category]!
         .compareTo(Constants.categoryValues[b.category]!));
     return Container(
