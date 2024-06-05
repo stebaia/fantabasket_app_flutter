@@ -52,7 +52,8 @@ class CompletionPage extends StatelessWidget with AutoRouteWrapper {
   Widget build(BuildContext context) {
     final darkMode = Provider.of<DarkThemeProvider>(context);
 
-    final controller = TextEditingController();
+    final controller = TextEditingController()
+      ..text = team == null ? "" : team!.teamName!;
     side.removeWhere((player) =>
         player.category == "A1" ||
         player.category == "A2" ||
