@@ -29,7 +29,7 @@ class Constants {
   static Map<String, int> categoryValues = {
     'A1': 25,
     'A2': 25,
-    'B': 20,
+    'B1': 20,
     'B2': 15,
     'ESTERO': 15,
     'C': 10,
