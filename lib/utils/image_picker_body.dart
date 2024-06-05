@@ -1,10 +1,12 @@
 import 'dart:io';
 
+import 'package:fantabasket_app_flutter/bloc/cubit/auth_cubit/auth_cubit.dart';
 import 'package:fantabasket_app_flutter/bloc/cubit/image_picker_cubit/image_picker_cubit.dart';
 import 'package:fantabasket_app_flutter/bloc/login_bloc/login_bloc.dart';
 import 'package:fantabasket_app_flutter/utils/dotted_border_painer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ImagePickerBody extends StatelessWidget {
   String? photo;
@@ -12,9 +14,14 @@ class ImagePickerBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final imagePickerCubit = context.read<ImagePickerCubit>();
-
+    final user = context.watch<AuthCubit>();
     return BlocListener<LoginBloc, LoginInState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if(state is UploadedPhotoState) {
+          print('upload');
+     
+        }
+      },
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -32,7 +39,12 @@ class ImagePickerBody extends StatelessWidget {
                   child: ClipOval(
                     child: SizedBox.fromSize(
                       size: Size.fromRadius(60),
-                      child: BlocBuilder<ImagePickerCubit, File?>(
+                      child: BlocConsumer<ImagePickerCubit, File?>(
+                        listener: (context, state) {
+                          if (state is XFile){
+                            
+                          }
+                        },
                         builder: (context, imageFile) {
                           if (imageFile == null &&
                               photo!.contains('noimage.jpg')) {
@@ -53,6 +65,7 @@ class ImagePickerBody extends StatelessWidget {
                             context
                                 .read<LoginBloc>()
                                 .uploadPhoto(file: imageFile);
+                            
                             return Stack(children: [
                               Image.file(
                                 imageFile,

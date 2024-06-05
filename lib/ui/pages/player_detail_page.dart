@@ -325,9 +325,10 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
                                             ),
                                             GestureDetector(
                                               onTap: () => showModalBottomSheet(
+                                                isScrollControlled: true,
                                                 context: context,
                                                 builder: (context) => Container(
-                                                  height: 400,
+                                                  height: MediaQuery.of(context).size.height * 0.75,
                                                   child: PlayerStagesCarousel(
                                                       playerDetail: state
                                                           .playerStatsList),
@@ -354,46 +355,51 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
                                             )
                                           ],
                                         ),
-                                        Container(
-                                          margin: const EdgeInsets.symmetric(
-                                              vertical: 4),
-                                          height: 70,
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              border: Border.all(
-                                                  color: darkMode.darkTheme
-                                                      ? Colors.white70
-                                                      : Color.fromARGB(
-                                                          197, 208, 203, 203))),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              const Text(
-                                                'Punti realizzati',
-                                                style: TextStyle(
-                                                    fontFamily: 'Poppins',
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                              Text(playerStatsSum
-                                                  .puntoRealizzato
-                                                  .toString()),
-                                            ],
-                                          ),
-                                        ),
+                                        const SizedBox(height: 10,),
                                         Row(
                                           children: [
                                             Expanded(
                                                 child: Container(
                                               padding: const EdgeInsets.all(4),
-                                              height: 70,
+                                              height: 100,
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  border: Border.all(
+                                                      color: darkMode.darkTheme
+                                                          ? Colors.white70
+                                                          : Color.fromARGB(197,
+                                                              208, 203, 203))),
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  const Text(
+                                                    'punti',
+                                                    style: TextStyle(
+                                                        fontFamily: 'Poppins',
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                  Text(playerStatsSum
+                                                      .puntoRealizzato
+                                                      .toString()),
+                                                ],
+                                              ),
+                                            )),
+                                            const SizedBox(
+                                              width: 4,
+                                            ),
+                                            Expanded(
+                                                child: Container(
+                                              padding: const EdgeInsets.all(4),
+                                              height: 100,
                                               width: MediaQuery.of(context)
                                                   .size
                                                   .width,
@@ -415,12 +421,12 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
                                                     'assist',
                                                     style: TextStyle(
                                                         fontFamily: 'Poppins',
-                                                        fontSize: 12,
+                                                        fontSize: 16,
                                                         fontWeight:
                                                             FontWeight.bold),
                                                   ),
                                                   Text(playerStatsSum
-                                                      .puntoRealizzato
+                                                      .assist
                                                       .toString()),
                                                 ],
                                               ),
@@ -428,10 +434,19 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
                                             const SizedBox(
                                               width: 4,
                                             ),
+                                            
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 4,
+                                        ),
+                                        Row(
+                                          children: [
+
                                             Expanded(
                                                 child: Container(
                                               padding: const EdgeInsets.all(4),
-                                              height: 70,
+                                              height: 100,
                                               width: MediaQuery.of(context)
                                                   .size
                                                   .width,
@@ -453,12 +468,12 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
                                                     'stoppate',
                                                     style: TextStyle(
                                                         fontFamily: 'Poppins',
-                                                        fontSize: 12,
+                                                        fontSize: 16,
                                                         fontWeight:
                                                             FontWeight.bold),
                                                   ),
                                                   Text(playerStatsSum
-                                                      .puntoRealizzato
+                                                      .stoppata
                                                       .toString()),
                                                 ],
                                               ),
@@ -468,7 +483,7 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
                                             ),
                                             Expanded(
                                                 child: Container(
-                                              height: 70,
+                                              height: 100,
                                               decoration: BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.circular(10),
@@ -487,138 +502,19 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
                                                     'rimbalzi',
                                                     style: TextStyle(
                                                         fontFamily: 'Poppins',
-                                                        fontSize: 12,
+                                                        fontSize: 16,
                                                         fontWeight:
                                                             FontWeight.bold),
                                                   ),
                                                   Text(playerStatsSum
-                                                      .puntoRealizzato
+                                                      .rimbalzo
                                                       .toString()),
                                                 ],
                                               ),
                                             ))
                                           ],
-                                        ),
-                                        const SizedBox(
-                                          height: 4,
-                                        ),
-                                        Row(
-                                          children: [
-                                            Expanded(
-                                                child: Container(
-                                              padding: const EdgeInsets.all(4),
-                                              height: 70,
-                                              width: MediaQuery.of(context)
-                                                  .size
-                                                  .width,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  border: Border.all(
-                                                      color: darkMode.darkTheme
-                                                          ? Colors.white70
-                                                          : Color.fromARGB(197,
-                                                              208, 203, 203))),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: [
-                                                  const Text(
-                                                    'schiacciate',
-                                                    style: TextStyle(
-                                                        fontFamily: 'Poppins',
-                                                        fontSize: 12,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                  Text(playerStatsSum
-                                                      .puntoRealizzato
-                                                      .toString()),
-                                                ],
-                                              ),
-                                            )),
-                                            const SizedBox(
-                                              width: 4,
-                                            ),
-                                            Expanded(
-                                                child: Container(
-                                              padding: const EdgeInsets.all(4),
-                                              height: 70,
-                                              width: MediaQuery.of(context)
-                                                  .size
-                                                  .width,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  border: Border.all(
-                                                      color: darkMode.darkTheme
-                                                          ? Colors.white70
-                                                          : Color.fromARGB(197,
-                                                              208, 203, 203))),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: [
-                                                  const Text(
-                                                    'ankle breaker',
-                                                    style: TextStyle(
-                                                        fontFamily: 'Poppins',
-                                                        fontSize: 12,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                  Text(playerStatsSum
-                                                      .puntoRealizzato
-                                                      .toString()),
-                                                ],
-                                              ),
-                                            )),
-                                            const SizedBox(
-                                              width: 4,
-                                            ),
-                                            Expanded(
-                                                child: Container(
-                                              height: 70,
-                                              width: MediaQuery.of(context)
-                                                  .size
-                                                  .width,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  border: Border.all(
-                                                      color: darkMode.darkTheme
-                                                          ? Colors.white70
-                                                          : Color.fromARGB(197,
-                                                              208, 203, 203))),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: [
-                                                  const Text(
-                                                    'abb. ignorante',
-                                                    textAlign: TextAlign.center,
-                                                    style: TextStyle(
-                                                        fontFamily: 'Poppins',
-                                                        fontSize: 12,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                  Text(
-                                                    playerStatsSum
-                                                        .puntoRealizzato
-                                                        .toString(),
-                                                  ),
-                                                ],
-                                              ),
-                                            ))
-                                          ],
-                                        ),
+                                        )
+                                        
                                       ],
                                     )),
                               ],

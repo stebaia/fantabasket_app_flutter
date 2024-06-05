@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:fantabasket_app_flutter/bloc/banner_bloc/banner_bloc.dart';
 import 'package:fantabasket_app_flutter/bloc/create_team_bloc/create_team_bloc.dart';
+import 'package:fantabasket_app_flutter/bloc/cubit/auth_cubit/auth_cubit.dart';
 import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
 import 'package:fantabasket_app_flutter/model/stage.dart';
 import 'package:fantabasket_app_flutter/ui/components/empty_component.dart';
@@ -49,7 +50,7 @@ class _RankPageState extends State<RankPage> {
   @override
   Widget build(BuildContext context) {
     final darkMode = Provider.of<DarkThemeProvider>(context);
-
+    final user = context.watch<AuthCubit>().state;
     return Container(
       color: Theme.of(context).colorScheme.primary,
       child: Column(

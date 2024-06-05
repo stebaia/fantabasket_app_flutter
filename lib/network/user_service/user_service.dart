@@ -29,6 +29,9 @@ abstract class UserService {
   @POST('api/takeToken')
   Future<UserDTO> takeToken(@Body() LoginRequest request);
 
+  @POST('api/takeToken')
+  Future<UserDTO> updatedUser();
+
   @POST('api/regUser')
   Future<RegistrationResponse> registration(
       @Body() RegistrationRequest request);

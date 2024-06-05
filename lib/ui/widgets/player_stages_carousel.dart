@@ -6,6 +6,8 @@ import 'package:fantabasket_app_flutter/model/player_match.dart';
 import 'package:fantabasket_app_flutter/model/players_stats_list.dart';
 import 'package:fantabasket_app_flutter/model/stage_stats.dart';
 import 'package:fantabasket_app_flutter/ui/components/empty_component.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:page_view_dot_indicator/page_view_dot_indicator.dart';
 import 'package:fantabasket_app_flutter/model/player_detail.dart';
 import 'package:fantabasket_app_flutter/model/player_stage.dart';
@@ -43,25 +45,14 @@ class _PlayerStagesCarouselState extends State<PlayerStagesCarousel> {
       padding: const EdgeInsets.all(14.0),
       child: Container(
         padding: const EdgeInsets.all(6.0),
-        decoration: BoxDecoration(
-            color: bonus
-                ? const Color.fromARGB(255, 63, 160, 66)
-                : const Color.fromARGB(255, 210, 43, 31)),
+
         child: Column(
           children: [
-            Container(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                bonus ? "Bonus" : "Malus",
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Nunito Sans',
-                  color: Colors.white,
-                ),
-              ),
-            ),
+            
             ...props.map(
-              (pair) => Container(
+              (pair){
+                if(pair.key == "Punto realizzato" || pair.key == "Assist" || pair.key == "Stoppata" || pair.key == "Rimbalzi"){
+                  return Container(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
@@ -79,7 +70,7 @@ class _PlayerStagesCarouselState extends State<PlayerStagesCarousel> {
                                   ? FontWeight.bold
                                   : FontWeight.normal,
                               fontFamily: 'Nunito Sans',
-                              color: Colors.white,
+                              
                             ),
                           ),
                         ),
@@ -94,7 +85,7 @@ class _PlayerStagesCarouselState extends State<PlayerStagesCarousel> {
                                   ? FontWeight.bold
                                   : FontWeight.normal,
                               fontFamily: 'Nunito Sans',
-                              color: Colors.white,
+                             
                             ),
                           ),
                         ),
@@ -102,7 +93,11 @@ class _PlayerStagesCarouselState extends State<PlayerStagesCarousel> {
                     ),
                   ],
                 ),
-              ),
+              );
+                }else {
+                  return Container();
+                }
+              }
             ),
           ],
         ),
@@ -136,6 +131,9 @@ class _PlayerStagesCarouselState extends State<PlayerStagesCarousel> {
               ],
             ),
           ),
+          IconButton(onPressed: (){
+            Navigator.pop(context);
+          }, icon: Icon(CupertinoIcons.chevron_down))
         ],
       ),
     );

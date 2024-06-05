@@ -35,6 +35,9 @@ class LoginBloc extends Bloc<AuthEvent, LoginInState> {
     }
   }
 
+  
+ 
+
   void loginIn(
           {required String email,
           required String password,

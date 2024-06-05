@@ -29,6 +29,8 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
+
+
   Future<bool> check() async {
     try {
       final user = await userRepository.currentUser;
@@ -43,6 +45,8 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   void authenticated(User user) => emit(AuthenticatedState(user));
+
+  
 
   void manualLogout() async {
     await userRepository.logout();

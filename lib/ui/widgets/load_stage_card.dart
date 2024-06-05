@@ -20,13 +20,16 @@ class LoadStageCard extends StatelessWidget {
     final darkMode = Provider.of<DarkThemeProvider>(context);
     return GestureDetector(
       onTap: () => {
-        if(DateTime.now().isAfter(DateFormat("dd/MM/yyyy").parse(stage.openingDate!))) {
-          context.router.push(SelectTeamRoute(stageId: stage.id))
-        }else {
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Keep Calm! La tappa ancora non è aperta!'), backgroundColor: Colors.red,))
-        }
-        
-      } , 
+        if (stage.status == "Chiusa")
+          {
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: Text('Keep Calm! La tappa ancora non è aperta!'),
+              backgroundColor: Colors.red,
+            ))
+          }
+        else
+          {context.router.push(SelectTeamRoute(stageId: stage.id))}
+      },
       child: Card(
         margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         color: Theme.of(context).colorScheme.primary,

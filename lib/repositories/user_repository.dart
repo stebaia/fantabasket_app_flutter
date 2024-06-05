@@ -7,6 +7,7 @@ import 'package:fantabasket_app_flutter/model/responses/login_response.dart';
 import 'package:fantabasket_app_flutter/model/responses/registration_response.dart';
 import 'package:fantabasket_app_flutter/model/user.dart';
 import 'package:fantabasket_app_flutter/network/user_service/user_service.dart';
+import 'package:fantabasket_app_flutter/services/dto/profile_dto.dart';
 import 'package:fantabasket_app_flutter/services/dto/user_dto.dart';
 import 'package:fantabasket_app_flutter/utils/constants.dart';
 import 'package:fantabasket_app_flutter/utils/date_converter.dart';
@@ -34,6 +35,7 @@ class UserRepository {
   void uploadPhoto({required File file}) async {
     try {
       final response = await userService.uploadPhoto(file);
+      updateUser();
       print(response);
     } catch (ex) {
       rethrow;
@@ -92,6 +94,20 @@ class UserRepository {
       rethrow;
     }
   }
+
+  void updateUser() async {
+    final response = await userService.viewProfile();
+    ProfileDTO userProfile = response;
+    User? user = await currentUser;
+    if(user != null) {
+        User newUser = User(userId: user.userId, firstName: user.firstName, email: user.email, lastName: user.lastName, token: user.token, foto: userProfile.dettagli!.foto!, tokenExpiration: user.tokenExpiration);
+       await flutterSecureStorage.write(
+        key: Constants.userKey, value: userMapper.from(newUser));
+    }
+   
+    
+  }
+
 
   Future<User> takeUser(
       {required String email,
