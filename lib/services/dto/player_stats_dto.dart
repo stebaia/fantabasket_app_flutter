@@ -149,20 +149,20 @@ class BonusDTO extends DTO with EquatableMixin {
 
   factory BonusDTO.fromJson(Map<String, dynamic> json) {
     return BonusDTO(
-      pointMade: json['punto_realizzato'] as String?,
-      assist: json['assist'] as String?,
-      block: json['stoppata'] as String?,
-      bounce: json['rimbalzo'] as String?,
-      buzzerBeater: json['buzzer_beater'] as String?,
-      dunk: json['schiacciata'] as String?,
-      ankleBreaker: json['ankle_breaker'] as String?,
-      postAnd1Exultation: json['esultanza_post_and_1'] as String?,
-      pregameRitual: json['rituale_pre_partita'] as String?,
-      teamVictory: json['vittoria_squadra'] as String?,
-      ignorantClothing: json['abbigliamento_ignorante'] as String?,
-      speakerKiss: json['bacio_bocca_speaker'] as String?,
-      victory51: json['vinta_ai_51'] as String?,
-      mostLoved: json['most_loved'] as String?,
+      pointMade: json['punto_realizzato'].toString(),
+      assist: json['assist'].toString(),
+      block: json['stoppata'].toString(),
+      bounce: json['rimbalzo'].toString(),
+      buzzerBeater: json['buzzer_beater'].toString(),
+      dunk: json['schiacciata'].toString(),
+      ankleBreaker: json['ankle_breaker'].toString(),
+      postAnd1Exultation: json['esultanza_post_and_1'].toString(),
+      pregameRitual: json['rituale_pre_partita'].toString(),
+      teamVictory: json['vittoria_squadra'].toString(),
+      ignorantClothing: json['abbigliamento_ignorante'].toString(),
+      speakerKiss: json['bacio_bocca_speaker'].toString(),
+      victory51: json['vinta_ai_51'].toString(),
+      mostLoved: json['most_loved'].toString(),
     );
   }
 
@@ -216,19 +216,19 @@ class MalusDTO extends DTO with EquatableMixin {
 
   factory MalusDTO.fromJson(Map<String, dynamic> json) {
     return MalusDTO(
-      airball: json['airball'] as String?,
-      fouls: json['fallo'] as String?,
-      tacticalFouls: json['fallo_tattico'] as String?,
-      teamDefeat: json['perdita_squadra'] as String?,
-      reverseClothing: json['abbigliamento_al_contrario'] as String?,
-      worstTeam: json['squadra_peggiore_della_giornata'] as String?,
-      concededDunk: json['schiacciata_subita_squadra'] as String?,
-      lost51: json['persa_ai_51'] as String?,
+      airball: json['airball'].toString(),
+      fouls: json['fallo'].toString(),
+      tacticalFouls: json['fallo_tattico'].toString(),
+      teamDefeat: json['perdita_squadra'].toString(),
+      reverseClothing: json['abbigliamento_al_contrario'].toString(),
+      worstTeam: json['squadra_peggiore_della_giornata'].toString(),
+      concededDunk: json['schiacciata_subita_squadra'].toString(),
+      lost51: json['persa_ai_51'].toString(),
       basketConcededBuzzerBeater:
-          json['canestro_subito_buzzer_beater'] as String?,
-      shaqtinAFool: json['shaqtin_a_fool'] as String?,
-      invisibleNumber: json['numero_giocatore_non_visibile'] as String?,
-      worstTeamName: json['nome_squadra_più_brutto'] as String?,
+          json['canestro_subito_buzzer_beater'].toString(),
+      shaqtinAFool: json['shaqtin_a_fool'].toString(),
+      invisibleNumber: json['numero_giocatore_non_visibile'].toString(),
+      worstTeamName: json['nome_squadra_più_brutto'].toString(),
     );
   }
 

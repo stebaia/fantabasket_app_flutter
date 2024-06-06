@@ -67,7 +67,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   if (state is RegistrationDoneState) {
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text(
-                        'Contolla la mail per completare la registrazione!',
+                        'Controlla la mail per completare la registrazione!',
                       ),
                       backgroundColor: Colors.green,
                     ));
