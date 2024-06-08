@@ -25,6 +25,7 @@ class TabGeneral extends StatefulWidget {
 }
 
 enum Bonuses {
+  puntiTotali,
   nessuno,
   puntoRealizzato,
   assists,
@@ -55,7 +56,7 @@ class _TabGeneralState extends State<TabGeneral> {
     super.initState();
     _list = widget.list.players!;
     _controller = TextEditingController();
-    _filterName = "Punti realizzati";
+    _filterName = "Punti totali";
   }
 
   Color getTransparentColor(Color color, double opacity) {
@@ -131,6 +132,7 @@ class _TabGeneralState extends State<TabGeneral> {
                         _filterName = result;
                         _list.sort((b, a) {
                           return switch (_filterName) {
+                            "Punti totali" => a.value.compareTo(b.value),
                             "Punti realizzati" => a.points!.pointMade
                                 .compareTo(b.points!.pointMade),
                             "Assist" =>

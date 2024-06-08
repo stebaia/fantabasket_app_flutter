@@ -45,64 +45,82 @@ class _PlayerStagesCarouselState extends State<PlayerStagesCarousel> {
       padding: const EdgeInsets.all(14.0),
       child: Container(
         padding: const EdgeInsets.all(6.0),
-
         child: Column(
           children: [
-            
-            ...props.map(
-              (pair){
-                if(pair.key == "Punto realizzato" || pair.key == "Assist" || pair.key == "Stoppata" || pair.key == "Rimbalzi"){
-                  return Container(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    if (pair.key == "Totale") const Divider(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          flex: 11,
-                          child: Text(
-                            pair.key,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              fontWeight: pair.key == "Totale"
-                                  ? FontWeight.bold
-                                  : FontWeight.normal,
-                              fontFamily: 'Nunito Sans',
-                              
+            ...props.map((pair) {
+              if (pair.key == "Punto realizzato" ||
+                  pair.key == "Assist" ||
+                  pair.key == "Stoppata" ||
+                  pair.key == "Rimbalzi") {
+                return Container(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      if (pair.key == "Totale") const Divider(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            flex: 11,
+                            child: Text(
+                              pair.key,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontWeight: pair.key == "Totale"
+                                    ? FontWeight.bold
+                                    : FontWeight.normal,
+                                fontFamily: 'Nunito Sans',
+                              ),
                             ),
                           ),
-                        ),
-                        Expanded(
-                          flex: 2,
-                          child: Text(
-                            pair.value.isEmpty ? "0" : pair.value,
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.end,
-                            style: TextStyle(
-                              fontWeight: pair.key == "Totale"
-                                  ? FontWeight.bold
-                                  : FontWeight.normal,
-                              fontFamily: 'Nunito Sans',
-                             
+                          Expanded(
+                            flex: 2,
+                            child: Text(
+                              _getFormattedValue(pair),
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.end,
+                              style: TextStyle(
+                                fontWeight: pair.key == "Totale"
+                                    ? FontWeight.bold
+                                    : FontWeight.normal,
+                                fontFamily: 'Nunito Sans',
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              );
-                }else {
-                  return Container();
-                }
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              } else {
+                return Container();
               }
-            ),
+            }),
           ],
         ),
       ),
     );
+  }
+
+  String _getFormattedValue(Pair<String, String> pair) {
+    if (pair.value.isEmpty) {
+      return "0";
+    }
+
+    double value = double.tryParse(pair.value) ?? 0;
+
+    switch (pair.key) {
+      case "Punto realizzato":
+        return (value / 1).round().toString();
+      case "Assist":
+        return (value / 2).round().toString();
+      case "Stoppata":
+        return (value / 5).round().toString();
+      case "Rimbalzi":
+        return (value / 3).round().toString();
+      default:
+        return pair.value;
+    }
   }
 
   Widget _getStageTitle(
@@ -131,9 +149,11 @@ class _PlayerStagesCarouselState extends State<PlayerStagesCarousel> {
               ],
             ),
           ),
-          IconButton(onPressed: (){
-            Navigator.pop(context);
-          }, icon: Icon(CupertinoIcons.chevron_down))
+          IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: Icon(CupertinoIcons.chevron_down))
         ],
       ),
     );

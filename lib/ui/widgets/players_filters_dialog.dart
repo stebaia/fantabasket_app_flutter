@@ -27,6 +27,7 @@ class _PlayersFiltersDialogState extends State<PlayersFiltersDialog> {
       "Stoppate" => Bonuses.stoppata,
       "Schiacciate" => Bonuses.schiacciata,
       "Rimbalzi" => Bonuses.rimbalzo,
+      "Punti totali" => Bonuses.puntiTotali,
       _ => Bonuses.nessuno,
     };
   }
@@ -62,6 +63,17 @@ class _PlayersFiltersDialogState extends State<PlayersFiltersDialog> {
               scrollDirection: Axis.vertical,
               child: Column(
                 children: [
+                  RadioListTile<Bonuses>(
+                    title: const Text('Punti totali'),
+                    value: Bonuses.puntiTotali,
+                    groupValue: _filterName,
+                    activeColor: Colors.blue,
+                    onChanged: (Bonuses? value) {
+                      setState(() {
+                        _filterName = value!;
+                      });
+                    },
+                  ),
                   RadioListTile<Bonuses>(
                     title: const Text('Punti realizzati'),
                     value: Bonuses.puntoRealizzato,
@@ -149,6 +161,7 @@ class _PlayersFiltersDialogState extends State<PlayersFiltersDialog> {
               child: ElevatedButton(
                 onPressed: () {
                   var s = switch (_filterName) {
+                    Bonuses.puntiTotali => "Punti totali",
                     Bonuses.nessuno => "Nessun filtro selezionato",
                     Bonuses.abbigliamento => "Abbigliamento ignorante",
                     Bonuses.ankle => "Ankle breaker",

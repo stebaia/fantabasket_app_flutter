@@ -44,6 +44,8 @@ class PlayerRepository {
       PlayersList list = PlayersList(count: set.length, players: players);
       list.players!
           .sort((b, a) => a.points!.pointMade.compareTo(b.points!.pointMade));
+
+      list.players!.sort((b, a) => a.value.compareTo(b.value));
       return HttpResponse(list, response.response);
     } catch (error, stackTrace) {
       logger.e('Error getting list of player',

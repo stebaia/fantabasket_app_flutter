@@ -328,7 +328,10 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
                                                 isScrollControlled: true,
                                                 context: context,
                                                 builder: (context) => Container(
-                                                  height: MediaQuery.of(context).size.height * 0.75,
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.75,
                                                   child: PlayerStagesCarousel(
                                                       playerDetail: state
                                                           .playerStatsList),
@@ -355,7 +358,9 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
                                             )
                                           ],
                                         ),
-                                        const SizedBox(height: 10,),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
                                         Row(
                                           children: [
                                             Expanded(
@@ -425,8 +430,9 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
                                                         fontWeight:
                                                             FontWeight.bold),
                                                   ),
-                                                  Text(playerStatsSum
-                                                      .assist
+                                                  Text((playerStatsSum.assist! /
+                                                          2)
+                                                      .round()
                                                       .toString()),
                                                 ],
                                               ),
@@ -434,7 +440,6 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
                                             const SizedBox(
                                               width: 4,
                                             ),
-                                            
                                           ],
                                         ),
                                         SizedBox(
@@ -442,7 +447,6 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
                                         ),
                                         Row(
                                           children: [
-
                                             Expanded(
                                                 child: Container(
                                               padding: const EdgeInsets.all(4),
@@ -472,8 +476,10 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
                                                         fontWeight:
                                                             FontWeight.bold),
                                                   ),
-                                                  Text(playerStatsSum
-                                                      .stoppata
+                                                  Text((playerStatsSum
+                                                              .stoppata! /
+                                                          5)
+                                                      .round()
                                                       .toString()),
                                                 ],
                                               ),
@@ -506,15 +512,16 @@ class PlayerDetailPage extends StatelessWidget with AutoRouteWrapper {
                                                         fontWeight:
                                                             FontWeight.bold),
                                                   ),
-                                                  Text(playerStatsSum
-                                                      .rimbalzo
+                                                  Text((playerStatsSum
+                                                              .rimbalzo! /
+                                                          3)
+                                                      .round()
                                                       .toString()),
                                                 ],
                                               ),
                                             ))
                                           ],
                                         )
-                                        
                                       ],
                                     )),
                               ],

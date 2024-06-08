@@ -57,7 +57,7 @@ class CompletionPage extends StatelessWidget with AutoRouteWrapper {
     side.removeWhere((player) =>
         player.category == "A1" ||
         player.category == "A2" ||
-        player.category == "B" ||
+        player.category == "B2" ||
         player.category == "C1");
     side.sort((b, a) => Constants.categoryValues[a.category]!
         .compareTo(Constants.categoryValues[b.category]!));
