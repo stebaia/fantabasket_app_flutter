@@ -9,11 +9,13 @@ class RankDetailCard extends StatelessWidget {
   final PlayerInRank player;
   final int position;
   final bool owner;
+  final bool status;
 
   const RankDetailCard({
     required this.player,
     required this.position,
     required this.owner,
+    required this.status,
     super.key,
   });
 
@@ -21,10 +23,19 @@ class RankDetailCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final darkMode = Provider.of<DarkThemeProvider>(context);
     return GestureDetector(
-      onTap: () => context.router.push(TeamDetailRoute(
-        teamId: player.id,
-        teamName: player.teamName!,
-      )),
+      onTap: () {
+        if (!status || owner) {
+          context.router.push(TeamDetailRoute(
+            teamId: player.id,
+            teamName: player.teamName!,
+          ));
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text('Hey! non sbirciare! ancora la tappa non è aperta!'),
+            backgroundColor: Colors.red,
+          ));
+        }
+      },
       child: ListTile(
         title: Text(
           player.teamName ?? "Nome non disponibile",

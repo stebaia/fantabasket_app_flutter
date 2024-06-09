@@ -117,8 +117,9 @@ class CompletionPage extends StatelessWidget with AutoRouteWrapper {
                 Text(
                   "Nome squadra",
                   style: TextStyle(
-                    color: darkMode.darkTheme ? Colors.white : Colors.black,
-                  ),
+                      color: darkMode.darkTheme ? Colors.white : Colors.black,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(
                   height: 20,
@@ -154,16 +155,18 @@ class CompletionPage extends StatelessWidget with AutoRouteWrapper {
                 Text(
                   "Seleziona capitano",
                   style: TextStyle(
-                    color: darkMode.darkTheme ? Colors.white : Colors.black,
-                  ),
+                      color: darkMode.darkTheme ? Colors.white : Colors.black,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
                 ),
                 SelectCaptain(team: players),
                 const SizedBox(height: 20),
                 Text(
                   "Seleziona sesto uomo",
                   style: TextStyle(
-                    color: darkMode.darkTheme ? Colors.white : Colors.black,
-                  ),
+                      color: darkMode.darkTheme ? Colors.white : Colors.black,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 20),
                 BlocBuilder<SixthManCubit, SixthManState>(

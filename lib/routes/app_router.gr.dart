@@ -117,6 +117,7 @@ class AppRouter extends _i19.RootStackRouter {
         child: _i19.WrappedRoute(
             child: _i10.RankDetailPage(
           stage: args.stage,
+          status: args.status,
           key: args.key,
         )),
       );
@@ -483,12 +484,14 @@ class CompletionRouteArgs {
 class RankDetailRoute extends _i19.PageRouteInfo<RankDetailRouteArgs> {
   RankDetailRoute({
     required _i23.Stage stage,
+    required bool status,
     _i20.Key? key,
   }) : super(
           RankDetailRoute.name,
           path: 'rank_detail_page',
           args: RankDetailRouteArgs(
             stage: stage,
+            status: status,
             key: key,
           ),
         );
@@ -499,16 +502,19 @@ class RankDetailRoute extends _i19.PageRouteInfo<RankDetailRouteArgs> {
 class RankDetailRouteArgs {
   const RankDetailRouteArgs({
     required this.stage,
+    required this.status,
     this.key,
   });
 
   final _i23.Stage stage;
 
+  final bool status;
+
   final _i20.Key? key;
 
   @override
   String toString() {
-    return 'RankDetailRouteArgs{stage: $stage, key: $key}';
+    return 'RankDetailRouteArgs{stage: $stage, status: $status, key: $key}';
   }
 }
 

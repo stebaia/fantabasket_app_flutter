@@ -11,9 +11,11 @@ import 'package:provider/provider.dart';
 
 class RankDetailPage extends StatelessWidget with AutoRouteWrapper {
   final Stage stage;
+  final bool status;
 
   const RankDetailPage({
     required this.stage,
+    required this.status,
     super.key,
   });
 
@@ -71,6 +73,7 @@ class RankDetailPage extends StatelessWidget with AutoRouteWrapper {
                     itemCount: state.players.count,
                     itemBuilder: (context, index) {
                       return RankDetailCard(
+                        status: status,
                         player: state.players.teams![index],
                         position: index + 1,
                         owner: state.players.teams![index].owner!,
