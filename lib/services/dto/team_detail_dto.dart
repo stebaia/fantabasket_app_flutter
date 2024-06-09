@@ -62,6 +62,7 @@ class PlayerSintDTO extends DTO with EquatableMixin {
   final String? lastName;
   final String? photo;
   final String? category;
+  final String? team;
   final bool? captain;
   final bool? reserve;
   final int? bonus;
@@ -74,6 +75,7 @@ class PlayerSintDTO extends DTO with EquatableMixin {
     this.lastName,
     this.photo,
     this.category,
+    this.team,
     this.captain,
     this.reserve,
     this.bonus,
@@ -88,6 +90,7 @@ class PlayerSintDTO extends DTO with EquatableMixin {
       lastName: json['cognome'] as String?,
       photo: json['foto'] as String?,
       category: json['categoria'] as String?,
+      team: json['squadra'] as String?,
       captain: json['cpt'] as bool?,
       reserve: json['ris'] as bool?,
       bonus: json['bonus'] as int?,
@@ -103,6 +106,7 @@ class PlayerSintDTO extends DTO with EquatableMixin {
         lastName,
         photo,
         category,
+        team,
         captain,
         reserve,
         bonus,

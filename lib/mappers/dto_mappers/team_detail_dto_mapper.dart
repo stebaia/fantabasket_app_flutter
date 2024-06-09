@@ -55,6 +55,7 @@ class PlayerSintMapper extends DTOMapper<PlayerSintDTO, PlayerStatsSint> {
         lastName: dto.lastName ?? '',
         photo: dto.photo ?? '',
         category: dto.category ?? '',
+        team: dto.team ?? '',
         captain: dto.captain!,
         reserve: dto.reserve!,
         bonus: dto.bonus ?? 0,

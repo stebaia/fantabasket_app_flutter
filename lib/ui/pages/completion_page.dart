@@ -48,6 +48,10 @@ class CompletionPage extends StatelessWidget with AutoRouteWrapper {
         child: this,
       );
 
+  bool canBeSixthMan(Player sm) {
+    return players.where((p) => p.team == sm.team).length < 2;
+  }
+
   @override
   Widget build(BuildContext context) {
     final darkMode = Provider.of<DarkThemeProvider>(context);
@@ -182,7 +186,7 @@ class CompletionPage extends StatelessWidget with AutoRouteWrapper {
                           .selectSixthMan(side[index]),
                       child: PlayerBar(
                         player: side[index],
-                        enabled: true,
+                        enabled: canBeSixthMan(side[index]),
                         sixth: sixthMan != null && sixthMan.id == side[index].id
                             ? sixthMan
                             : null,

@@ -329,7 +329,7 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
                                                 firstName: p.firstName,
                                                 lastName: p.lastName,
                                                 value: p.total,
-                                                team: "",
+                                                team: p.team,
                                                 photo: p.photo,
                                                 phone: "",
                                                 category: p.category,

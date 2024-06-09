@@ -194,10 +194,19 @@ class _PlayersBottomSheetState extends State<PlayersBottomSheet> {
                   ),
                   ...list.map(
                     (player) {
-                      var enabled = total -
-                              currentValue +
-                              Constants.categoryValues[player.category]! <=
-                          65;
+                      var enabled = (total -
+                                  currentValue +
+                                  Constants.categoryValues[player.category]! <=
+                              65) &&
+                          checkedPlayers
+                                  .where((p) => p.team == player.team)
+                                  .toList()
+                                  .length <
+                              3;
+                      if (player.team == "I Richardini") {
+                        print(
+                            "Length: ${checkedPlayers.where((p) => p.team == player.team).toList().length}");
+                      }
                       return GestureDetector(
                         onTap: enabled
                             ? () {
