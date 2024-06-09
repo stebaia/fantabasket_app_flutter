@@ -1,7 +1,9 @@
 import 'package:fantabasket_app_flutter/di/dependency_injector.dart';
 import 'package:fantabasket_app_flutter/model/player.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fantabasket_app_flutter/utils/constants.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 class PlayerBar extends StatelessWidget {
@@ -86,14 +88,51 @@ class PlayerBar extends StatelessWidget {
                             fontSize: 16,
                             fontWeight: FontWeight.bold),
                       ),
-                      Text(
-                        player.category,
-                        style: TextStyle(
-                          color:
-                              darkMode.darkTheme ? Colors.white : Colors.black,
-                          fontSize: 14,
-                        ),
-                      )
+                      Row(
+                        children: [
+                          const Icon(
+                            CupertinoIcons.person_3_fill,
+                            size: 20,
+                          ),
+                          const SizedBox(
+                            width: 6,
+                          ),
+                          Text(
+                            player.team,
+                            style: TextStyle(
+                              color: darkMode.darkTheme
+                                  ? Colors.white
+                                  : Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 6,
+                      ),
+                      Row(
+                        children: [
+                          const Icon(
+                            FontAwesomeIcons.layerGroup,
+                            size: 14,
+                          ),
+                          const SizedBox(
+                            width: 6,
+                          ),
+                          Text(
+                            player.category,
+                            style: TextStyle(
+                              color: darkMode.darkTheme
+                                  ? Colors.white
+                                  : Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 )
