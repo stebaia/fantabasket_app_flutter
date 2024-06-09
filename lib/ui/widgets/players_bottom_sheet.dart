@@ -202,7 +202,7 @@ class _PlayersBottomSheetState extends State<PlayersBottomSheet> {
                                   .where((p) => p.team == player.team)
                                   .toList()
                                   .length <
-                              3;
+                              2;
                       if (player.team == "I Richardini") {
                         print(
                             "Length: ${checkedPlayers.where((p) => p.team == player.team).toList().length}");

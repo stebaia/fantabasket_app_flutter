@@ -175,105 +175,77 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
               ),
             ),
             const SizedBox(height: 5),
-            switch (state) {
-              TryTeamDetailState() => Container(),
-              ResultTeamDetailState(teamDetail: var td) ||
-              ResultUpdateDayState(teamDetail: var td) ||
-              TryUpdateDayState(teamDetail: var td) =>
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
-                  child: Text(
-                    "Punti totali: ${td.totalPoints}",
-                    style: TextStyle(
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.bold,
-                      color: darkMode.darkTheme ? Colors.white : Colors.black,
-                      fontSize: 18,
+            BlocBuilder<TeamDetailBloc, TeamDetailState>(
+              builder: (context, state) {
+                if (state is TryTeamDetailState) {
+                  return Container();
+                } else if (state is ErrorTeamDetailState) {
+                  return EmptyComponent(text: 'Nessun dettaglio disponibile');
+                } else if (state is ResultTeamDetailState) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20.0, vertical: 8),
+                    child: Text(
+                      "Punti totali: ${state.teamDetail.totalPoints}",
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.bold,
+                        color: darkMode.darkTheme ? Colors.white : Colors.black,
+                        fontSize: 18,
+                      ),
                     ),
-                  ),
-                ),
-              _ => Container(),
-            },
+                  );
+                } else if (state is ResultUpdateDayState) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20.0, vertical: 8),
+                    child: Text(
+                      "Punti totali: ${state.teamDetail.totalPoints}",
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.bold,
+                        color: darkMode.darkTheme ? Colors.white : Colors.black,
+                        fontSize: 18,
+                      ),
+                    ),
+                  );
+                } else if (state is TryUpdateDayState) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20.0, vertical: 8),
+                    child: Text(
+                      "Punti totali: ${state.teamDetail.totalPoints}",
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.bold,
+                        color: darkMode.darkTheme ? Colors.white : Colors.black,
+                        fontSize: 18,
+                      ),
+                    ),
+                  );
+                } else {
+                  return Container();
+                }
+              },
+            ),
             const SizedBox(height: 20),
-            switch (state) {
-              TryTeamDetailState() => Container(),
-              ResultTeamDetailState(teamDetail: var td) ||
-              ResultUpdateDayState(teamDetail: var td) ||
-              TryUpdateDayState(teamDetail: var td) =>
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  reverse: true,
-                  child: Row(
-                    children: [
-                      ...td.days.map((matchDay) => GestureDetector(
-                            onTap: () => context
-                                .read<TeamDetailBloc>()
-                                .updateDay(matchDay.day),
-                            child: Container(
-                              padding: EdgeInsets.only(left: 10),
-                              height: 80,
-                              child: Card(
-                                color: matchDay.day ==
-                                        context
-                                            .read<TeamDetailBloc>()
-                                            .getCurrentDay()
-                                    ? Theme.of(context).colorScheme.background
-                                    : Colors.transparent,
-                                shape: RoundedRectangleBorder(
-                                  side: BorderSide(
-                                    color: matchDay.day ==
-                                            context
-                                                .read<TeamDetailBloc>()
-                                                .getCurrentDay()
-                                        ? Theme.of(context)
-                                            .colorScheme
-                                            .background
-                                        : Colors.white,
-                                    width: 2,
-                                  ),
-                                  borderRadius: const BorderRadius.all(
-                                    Radius.circular(15),
-                                  ),
-                                ),
-                                child: Container(
-                                  constraints: const BoxConstraints(
-                                    minWidth: 120,
-                                    maxWidth: 120,
-                                  ),
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 12.0,
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        matchDay.day,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      Text(
-                                        "Punti: ${matchDay.points}",
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ))
-                    ],
-                  ),
-                ),
-              _ => Container(),
-            },
+            BlocBuilder<TeamDetailBloc, TeamDetailState>(
+              builder: (context, state) {
+                if (state is TryTeamDetailState) {
+                  return Container();
+                } else if (state is ErrorTeamDetailState) {
+                  return EmptyComponent(text: 'Nessun dettaglio disponibile');
+                } else if (state is ResultTeamDetailState) {
+                  return dayListComponent(context, state.teamDetail);
+                } else if (state is ResultUpdateDayState) {
+                  return dayListComponent(context, state.teamDetail);
+                } else if (state is TryUpdateDayState) {
+                  return dayListComponent(context, state.teamDetail);
+                } else {
+                  return Container();
+                }
+              },
+            ),
             const SizedBox(height: 10),
             Expanded(
               child: switch (state) {
@@ -346,5 +318,144 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
         );
       }),
     );
+  }
+
+  Widget dayListComponent(BuildContext context, TeamDetail td) {
+    try {
+      final sortedDays = td.days.toList()
+        ..sort((a, b) {
+          final aDayNumber = int.parse(a.day.split(' ')[1]);
+          final bDayNumber = int.parse(b.day.split(' ')[1]);
+          return aDayNumber.compareTo(bDayNumber);
+        });
+
+      return SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        reverse: true,
+        child: Row(
+          children: [
+            ...sortedDays.reversed.map((matchDay) => GestureDetector(
+                  onTap: () =>
+                      context.read<TeamDetailBloc>().updateDay(matchDay.day),
+                  child: Container(
+                    padding: EdgeInsets.only(left: 10),
+                    height: 80,
+                    child: Card(
+                      color: matchDay.day ==
+                              context.read<TeamDetailBloc>().getCurrentDay()
+                          ? Theme.of(context).colorScheme.background
+                          : Colors.transparent,
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                          color: matchDay.day ==
+                                  context.read<TeamDetailBloc>().getCurrentDay()
+                              ? Theme.of(context).colorScheme.background
+                              : Colors.white,
+                          width: 2,
+                        ),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(15),
+                        ),
+                      ),
+                      child: Container(
+                        constraints: const BoxConstraints(
+                          minWidth: 120,
+                          maxWidth: 120,
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12.0,
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              matchDay.day,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              "Punti: ${matchDay.points}",
+                              style: const TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ))
+          ],
+        ),
+      );
+    } catch (e) {
+      return SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        reverse: true,
+        child: Row(
+          children: [
+            ...td.days.map((matchDay) => GestureDetector(
+                  onTap: () =>
+                      context.read<TeamDetailBloc>().updateDay(matchDay.day),
+                  child: Container(
+                    padding: EdgeInsets.only(left: 10),
+                    height: 80,
+                    child: Card(
+                      color: matchDay.day ==
+                              context.read<TeamDetailBloc>().getCurrentDay()
+                          ? Theme.of(context).colorScheme.background
+                          : Colors.transparent,
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                          color: matchDay.day ==
+                                  context.read<TeamDetailBloc>().getCurrentDay()
+                              ? Theme.of(context).colorScheme.background
+                              : Colors.white,
+                          width: 2,
+                        ),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(15),
+                        ),
+                      ),
+                      child: Container(
+                        constraints: const BoxConstraints(
+                          minWidth: 120,
+                          maxWidth: 120,
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12.0,
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              matchDay.day,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              "Punti: ${matchDay.points}",
+                              style: const TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ))
+          ],
+        ),
+      );
+    }
   }
 }
