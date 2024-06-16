@@ -38,9 +38,10 @@ class TeamRepository {
     }
   }
 
-  Future<HttpResponse<TeamDetail>> getTeamDetail(int teamId) async {
+  Future<HttpResponse<TeamDetail>> getTeamDetail(
+      int teamId, int stageId) async {
     try {
-      final response = await teamService.getTeamDetail(teamId);
+      final response = await teamService.getTeamDetail(teamId, stageId);
       TeamDetail teamDetail = teamDetailDTOMapper.fromDTO(response.data);
       return HttpResponse(teamDetail, response.response);
     } catch (error, stackTrace) {

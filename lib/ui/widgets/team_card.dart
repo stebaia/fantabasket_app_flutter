@@ -23,7 +23,7 @@ class TeamCard extends StatelessWidget {
           ? context.pushRoute(TeamDetailRoute(
               teamId: team.id,
               teamName: team.teamName!,
-            ))
+              stageId: team.stageId!))
           : context
               .pushRoute(
                 SelectTeamRoute(

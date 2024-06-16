@@ -54,7 +54,7 @@ class SelectTeamPage extends StatelessWidget with AutoRouteWrapper {
             create: ((context) {
               if (team != null) {
                 return TeamDetailBloc(teamRepository: context.read())
-                  ..getTeamDetail(team!.id);
+                  ..getTeamDetail(team!.id, team!.stageId!);
               }
               return TeamDetailBloc(teamRepository: context.read());
             }),

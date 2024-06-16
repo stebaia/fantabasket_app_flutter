@@ -9,7 +9,8 @@ abstract class TeamDetailEvent extends Equatable {
 
 class GetTeamDetailEvent extends TeamDetailEvent {
   final int teamId;
-  const GetTeamDetailEvent({required this.teamId});
+  final int stageId;
+  const GetTeamDetailEvent({required this.teamId, required this.stageId});
 
   @override
   List<Object> get props => [];

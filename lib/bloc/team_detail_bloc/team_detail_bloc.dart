@@ -22,7 +22,8 @@ class TeamDetailBloc extends Bloc<TeamDetailEvent, TeamDetailState> {
 
   void updateDay(String day) => add(UpdateDayEvent(day));
 
-  void getTeamDetail(int teamId) => add(GetTeamDetailEvent(teamId: teamId));
+  void getTeamDetail(int teamId, int stageId) =>
+      add(GetTeamDetailEvent(teamId: teamId, stageId: stageId));
 
   String getCurrentDay() => currentDay;
 
@@ -43,7 +44,7 @@ class TeamDetailBloc extends Bloc<TeamDetailEvent, TeamDetailState> {
     emit(const TryTeamDetailState());
     try {
       var e = event as GetTeamDetailEvent;
-      var result = await teamRepository.getTeamDetail(e.teamId);
+      var result = await teamRepository.getTeamDetail(e.teamId, e.stageId);
       if (result.response.statusCode == 200) {
         team = result.data;
         for (var a in team.days) {

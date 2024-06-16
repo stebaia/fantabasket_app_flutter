@@ -74,6 +74,7 @@ class RankDetailPage extends StatelessWidget with AutoRouteWrapper {
                     itemBuilder: (context, index) {
                       return RankDetailCard(
                         status: status,
+                        stageId: stage.id,
                         player: state.players.teams![index],
                         position: index + 1,
                         owner: state.players.teams![index].owner!,

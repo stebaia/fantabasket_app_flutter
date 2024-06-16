@@ -47,9 +47,15 @@ class _TeamService implements TeamService {
   }
 
   @override
-  Future<HttpResponse<TeamDetailDTO>> getTeamDetail(int teamId) async {
+  Future<HttpResponse<TeamDetailDTO>> getTeamDetail(
+    int teamId,
+    int stageId,
+  ) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'idTeam': teamId};
+    final queryParameters = <String, dynamic>{
+      r'idTeam': teamId,
+      r'idStage': stageId,
+    };
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(

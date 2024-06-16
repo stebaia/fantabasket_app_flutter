@@ -13,10 +13,12 @@ import 'package:provider/provider.dart';
 class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
   final int teamId;
   final String teamName;
+  final int stageId;
 
   const TeamDetailPage({
     required this.teamId,
     required this.teamName,
+    required this.stageId,
     super.key,
   });
 
@@ -25,7 +27,7 @@ class TeamDetailPage extends StatelessWidget with AutoRouteWrapper {
         providers: [
           BlocProvider<TeamDetailBloc>(
             create: ((context) => TeamDetailBloc(teamRepository: context.read())
-              ..getTeamDetail(teamId)),
+              ..getTeamDetail(teamId, stageId)),
           ),
         ],
         child: this,

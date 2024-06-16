@@ -130,6 +130,7 @@ class AppRouter extends _i19.RootStackRouter {
             child: _i11.TeamDetailPage(
           teamId: args.teamId,
           teamName: args.teamName,
+          stageId: args.stageId,
           key: args.key,
         )),
       );
@@ -524,6 +525,7 @@ class TeamDetailRoute extends _i19.PageRouteInfo<TeamDetailRouteArgs> {
   TeamDetailRoute({
     required int teamId,
     required String teamName,
+    required int stageId,
     _i20.Key? key,
   }) : super(
           TeamDetailRoute.name,
@@ -531,6 +533,7 @@ class TeamDetailRoute extends _i19.PageRouteInfo<TeamDetailRouteArgs> {
           args: TeamDetailRouteArgs(
             teamId: teamId,
             teamName: teamName,
+            stageId: stageId,
             key: key,
           ),
         );
@@ -542,6 +545,7 @@ class TeamDetailRouteArgs {
   const TeamDetailRouteArgs({
     required this.teamId,
     required this.teamName,
+    required this.stageId,
     this.key,
   });
 
@@ -549,11 +553,13 @@ class TeamDetailRouteArgs {
 
   final String teamName;
 
+  final int stageId;
+
   final _i20.Key? key;
 
   @override
   String toString() {
-    return 'TeamDetailRouteArgs{teamId: $teamId, teamName: $teamName, key: $key}';
+    return 'TeamDetailRouteArgs{teamId: $teamId, teamName: $teamName, stageId: $stageId, key: $key}';
   }
 }
 

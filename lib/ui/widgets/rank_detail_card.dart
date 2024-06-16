@@ -10,12 +10,14 @@ class RankDetailCard extends StatelessWidget {
   final int position;
   final bool owner;
   final bool status;
+  final int stageId;
 
   const RankDetailCard({
     required this.player,
     required this.position,
     required this.owner,
     required this.status,
+    required this.stageId,
     super.key,
   });
 
@@ -26,9 +28,7 @@ class RankDetailCard extends StatelessWidget {
       onTap: () {
         if (!status || owner) {
           context.router.push(TeamDetailRoute(
-            teamId: player.id,
-            teamName: player.teamName!,
-          ));
+              teamId: player.id, teamName: player.teamName!, stageId: stageId));
         } else {
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text('Hey! non sbirciare! ancora la tappa non è aperta!'),

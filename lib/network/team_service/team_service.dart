@@ -25,7 +25,7 @@ abstract class TeamService {
 
   @GET('api/detailFantaTeam')
   Future<HttpResponse<TeamDetailDTO>> getTeamDetail(
-      @Query("idTeam") int teamId);
+      @Query("idTeam") int teamId, @Query("idStage") int stageId);
 
   @GET('api/viewFantaTeams')
   Future<HttpResponse<RankTeamsDTO>> getTeamsRanked(@Query("stage") int stage);
