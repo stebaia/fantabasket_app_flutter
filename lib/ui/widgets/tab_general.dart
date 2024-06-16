@@ -128,30 +128,32 @@ class _TabGeneralState extends State<TabGeneral> {
                               actualFilter: _filterName,
                             );
                           }) as String;
-                      setState(() {
-                        _filterName = result;
-                        _list.sort((b, a) {
-                          return switch (_filterName) {
-                            "Punti totali" => a.value.compareTo(b.value),
-                            "Punti realizzati" => a.points!.pointMade
-                                .compareTo(b.points!.pointMade),
-                            "Assist" =>
-                              a.points!.assist.compareTo(b.points!.assist),
-                            "Stoppate" =>
-                              a.points!.block.compareTo(b.points!.block),
-                            "Rimbalzi" =>
-                              a.points!.bounce.compareTo(b.points!.bounce),
-                            "Schiacciate" =>
-                              a.points!.dunk.compareTo(b.points!.dunk),
-                            "Ankle breaker" => a.points!.ankleBreaker
-                                .compareTo(b.points!.ankleBreaker),
-                            "Abbigliamento ignorante" => a
-                                .points!.ignorantClothing
-                                .compareTo(b.points!.ignorantClothing),
-                            _ => -1,
-                          };
-                        });
-                      });
+                      setState(
+                        () {
+                          _filterName = result;
+                          _list.sort((b, a) {
+                            return switch (_filterName) {
+                              "Punti totali" => a.value.compareTo(b.value),
+                              "Punti realizzati" => a.points!.pointMade
+                                  .compareTo(b.points!.pointMade),
+                              "Assists" =>
+                                a.points!.assist.compareTo(b.points!.assist),
+                              "Stoppate" =>
+                                a.points!.block.compareTo(b.points!.block),
+                              "Rimbalzi" =>
+                                a.points!.bounce.compareTo(b.points!.bounce),
+                              "Schiacciate" =>
+                                a.points!.dunk.compareTo(b.points!.dunk),
+                              "Ankle breaker" => a.points!.ankleBreaker
+                                  .compareTo(b.points!.ankleBreaker),
+                              "Abbigliamento ignorante" => a
+                                  .points!.ignorantClothing
+                                  .compareTo(b.points!.ignorantClothing),
+                              _ => -1,
+                            };
+                          });
+                        },
+                      );
                     },
                     icon: const Icon(Icons.filter_list),
                   ),
@@ -203,7 +205,30 @@ class _TabGeneralState extends State<TabGeneral> {
                                   borderRadius: BorderRadius.circular(20)),
                               child: Center(
                                 child: Text(
-                                  _list[index].value.toString(),
+                                  switch (_filterName) {
+                                    "Punti totali" =>
+                                      _list[index].value.toString(),
+                                    "Punti realizzati" =>
+                                      _list[index].points!.pointMade.toString(),
+                                    "Assists" =>
+                                      _list[index].points!.assist.toString(),
+                                    "Stoppate" =>
+                                      _list[index].points!.block.toString(),
+                                    "Rimbalzi" =>
+                                      _list[index].points!.bounce.toString(),
+                                    "Schiacciate" =>
+                                      _list[index].points!.dunk.toString(),
+                                    "Ankle breaker" => _list[index]
+                                        .points!
+                                        .ankleBreaker
+                                        .toString(),
+                                    "Abbigliamento ignorante" => _list[index]
+                                        .points!
+                                        .ignorantClothing
+                                        .toString(),
+                                    _ => "",
+                                  },
+                                  //_list[index].value.toString(),
                                   style: TextStyle(
                                     color: darkMode.darkTheme
                                         ? Colors.white
