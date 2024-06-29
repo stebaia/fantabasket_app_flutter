@@ -17,6 +17,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pdfx/pdfx.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProfilePage extends StatelessWidget with AutoRouteWrapper {
   @override
@@ -114,6 +115,54 @@ class ProfilePage extends StatelessWidget with AutoRouteWrapper {
                             },
                           ),
                         ],
+                      ),
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () async {
+                    final Uri url = Uri.parse(
+                        'https://admin.onlyfantapp.it/user/privacy_policy');
+                    if (!await launchUrl(url)) {
+                      throw Exception('Could not launch $url');
+                    }
+                  },
+                  child: SizedBox(
+                    height: 54,
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        left: 20,
+                        right: 20,
+                        top: 16,
+                        bottom: 16,
+                      ),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Row(
+                          children: [
+                            Icon(CupertinoIcons.shield,
+                                color: darkMode.darkTheme
+                                    ? CupertinoColors.white
+                                    : CupertinoColors.black),
+                            const SizedBox(width: 10),
+                            Text(
+                              'Privacy policy',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16,
+                                  color: darkMode.darkTheme
+                                      ? CupertinoColors.white
+                                      : CupertinoColors.black),
+                            ),
+                            const Spacer(),
+                            Icon(
+                              CupertinoIcons.chevron_right,
+                              color: darkMode.darkTheme
+                                  ? CupertinoColors.white
+                                  : CupertinoColors.black,
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
